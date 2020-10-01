@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc class NetworkingConstants: NSObject {
+@objc class BlitzNetworkingConstants: NSObject {
     static let INTERNET_ERROR_TITLE = "Connection Issue"
     static let INTERNET_ERROR_MESSAGE = "Whoops! Looks like there’s an issue with your connection. If the issue persists, please contact us at help@onjoyride.com"
     static let AUTH_ERROR_TITLE = "Uh oh! You’ve been logged out"
