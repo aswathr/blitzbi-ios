@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CommonConstant.h>
+#import "CommonConstant.h"
 
 
 @class Config;
