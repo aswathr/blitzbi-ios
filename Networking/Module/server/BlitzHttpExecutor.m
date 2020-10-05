@@ -14,80 +14,80 @@
 
 @implementation BlitzHttpExecutor
 
-+ (AFURLSessionManager *)getSessionManager {
-    static AFURLSessionManager *manager = nil;
++ (NSURLSession *)getSessionManager {
+    static NSURLSession *manager = nil;
     @synchronized(self) {
         if (manager == nil) {
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
             configuration.HTTPMaximumConnectionsPerHost = 1;
             [configuration setTimeoutIntervalForRequest:30];
-    
-            manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            manager = [NSURLSession sessionWithConfiguration:configuration];
+
             [BlitzHttpExecutor applyPinningToSessionManager:manager];
-            [manager setCompletionQueue:dispatch_queue_create("HttpExecutorQueue",
-                                                              DISPATCH_QUEUE_SERIAL)];
+//            [manager setCompletionQueue:dispatch_queue_create("HttpExecutorQueue",
+//                                                              DISPATCH_QUEUE_SERIAL)];
         }
     }
     return manager;
 }
 
-+ (void)applyPinningToSessionManager:(AFURLSessionManager *)manager {
-    NSString *cerPath = [[NSBundle bundleForClass:self] pathForResource:@"onsequel" ofType:@"cer"];
-    //[[NSBundle mainBundle] pathForResource:@"onsequel" ofType:@"cer"];
-    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
-    NSString *certPathAmazon = [[NSBundle bundleForClass:self] pathForResource:@"onsequel-am" ofType:@"cer"];
-    NSData *certAmazonData = [NSData dataWithContentsOfFile:certPathAmazon];
-    
-    AFSecurityPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-    policy.validatesDomainName = NO;
-    
-    policy.pinnedCertificates = @[certData, certAmazonData];
-    [policy setAllowInvalidCertificates:YES];
-    manager.securityPolicy = policy;
++ (void)applyPinningToSessionManager:(NSURLSession *)manager {
+//    NSString *cerPath = [[NSBundle bundleForClass:self] pathForResource:@"onsequel" ofType:@"cer"];
+//    //[[NSBundle mainBundle] pathForResource:@"onsequel" ofType:@"cer"];
+//    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+//    NSString *certPathAmazon = [[NSBundle bundleForClass:self] pathForResource:@"onsequel-am" ofType:@"cer"];
+//    NSData *certAmazonData = [NSData dataWithContentsOfFile:certPathAmazon];
+//
+//    NSPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
+//    policy.validatesDomainName = NO;
+//
+//    policy.pinnedCertificates = @[certData, certAmazonData];
+//    [policy setAllowInvalidCertificates:YES];
+//    manager.securityPolicy = policy;
 }
 
-+ (AFURLSessionManager *)getSessionManagerWithNoConnectionLimit {
-    static AFURLSessionManager *manager = nil;
++ (NSURLSession *)getSessionManagerWithNoConnectionLimit {
+    static NSURLSession *manager = nil;
     @synchronized(self) {
         if (manager == nil) {
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
             [configuration setTimeoutIntervalForRequest:30];
-            manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            manager = [NSURLSession sessionWithConfiguration:configuration];
             [BlitzHttpExecutor applyPinningToSessionManager:manager];
-            [manager setCompletionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+//            [manager setCompletionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         }
     }
     return manager;
 }
 
-+ (AFURLSessionManager *)getBISessionManager {
-    static AFURLSessionManager *biManager = nil;
++ (NSURLSession *)getBISessionManager {
+    static NSURLSession *biManager = nil;
     @synchronized(self) {
         if (biManager == nil) {
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
             configuration.HTTPMaximumConnectionsPerHost = 1;
             [configuration setTimeoutIntervalForRequest:60];
-            biManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            biManager = [NSURLSession sessionWithConfiguration:configuration];
             
             [BlitzHttpExecutor applyPinningToSessionManager:biManager];
-            [biManager setCompletionQueue:dispatch_queue_create("HttpExecutorBIQueue",
-                                                              DISPATCH_QUEUE_SERIAL)];
+//            [biManager setCompletionQueue:dispatch_queue_create("HttpExecutorBIQueue",
+//                                                              DISPATCH_QUEUE_SERIAL)];
         }
     }
     return biManager;
 }
 
-+ (AFURLSessionManager *)getLogSessionManager {
-    static AFURLSessionManager *logManager = nil;
++ (NSURLSession *)getLogSessionManager {
+    static NSURLSession *logManager = nil;
     @synchronized(self) {
         if (logManager == nil) {
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
             configuration.HTTPMaximumConnectionsPerHost = 1;
             [configuration setTimeoutIntervalForRequest:60];
-            logManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            logManager = [NSURLSession sessionWithConfiguration:configuration];
             [BlitzHttpExecutor applyPinningToSessionManager:logManager];
-            [logManager setCompletionQueue:dispatch_queue_create("HttpExecutorLogQueue",
-                                                                DISPATCH_QUEUE_SERIAL)];
+//            [logManager setCompletionQueue:dispatch_queue_create("HttpExecutorLogQueue",
+//                                                                DISPATCH_QUEUE_SERIAL)];
         }
     }
     return logManager;
@@ -128,7 +128,7 @@
 
 + (void)executeParallelRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
 
-    AFURLSessionManager *manager = [self getSessionManagerWithNoConnectionLimit];
+    NSURLSession *manager = [self getSessionManagerWithNoConnectionLimit];
     [BlitzHttpExecutor fire:manager withRequest:requestBuilder listener:listener];
 }
 
@@ -140,22 +140,22 @@
         NSLog(@"Caught exception = %@", ex);
     }
 
-    AFURLSessionManager *manager = [self getSessionManager];
+    NSURLSession *manager = [self getSessionManager];
     
     [BlitzHttpExecutor fire:manager withRequest:requestBuilder listener:listener];
 }
 
 + (void)executeBIRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
-    AFURLSessionManager *biManager = [self getBISessionManager];
+    NSURLSession *biManager = [self getBISessionManager];
     [BlitzHttpExecutor fire:biManager withRequest:requestBuilder listener:listener];
 }
 
 + (void)executeLogRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
-    AFURLSessionManager *logManager = [self getLogSessionManager];
+    NSURLSession *logManager = [self getLogSessionManager];
     [BlitzHttpExecutor fire:logManager withRequest:requestBuilder listener:listener];
 }
 
-+ (void)fire:(AFURLSessionManager *)manager withRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
++ (void)fire:(NSURLSession *)manager withRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
     NSMutableURLRequest *request = requestBuilder.generateRequest;
 
     // Send request id to track each and every request.
@@ -177,15 +177,17 @@
     }
 
     [requestBuilder setStartTime:[[NSDate date] timeIntervalSince1970]];
+    
+//    - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
     [[manager dataTaskWithRequest:request
-                completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     
                     NSInteger statusCode = 0;
                     if ([response isKindOfClass:NSHTTPURLResponse.class]) {
                         statusCode = ((NSHTTPURLResponse *)response).statusCode;
                     }
                     [requestBuilder setRequestTotalTime:([[NSDate date] timeIntervalSince1970] - requestBuilder.startTime)];
-                    NSObject *responseObjectToSubmit = [self getParsedData:response withRequest:requestBuilder withResponseObject:responseObject andError:error];
+                    NSObject *responseObjectToSubmit = [self getParsedData:response withRequest:requestBuilder withResponseObject:data andError:error];
                     [listener onHttpResponse:responseObjectToSubmit forRequestBuilder:requestBuilder error:error withStatusCode:statusCode];
                 }] resume];
 }

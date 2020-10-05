@@ -15,10 +15,7 @@ struct Environment {
 }
 
 @objc public class BlitzEnvConfig : NSObject {
-    
     @objc public class func environment() -> BlitzEnvType {
         return Environment.INITIAL_ENVIRONMENT
     }
 }
-
-

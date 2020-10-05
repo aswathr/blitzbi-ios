@@ -10,12 +10,9 @@
 
 #import "BlitzCommon.h"
 #import "BlitzFileHelper.h"
-#import "BlitzUserDefaultsUtil.h"
 #import "BlitzStringConstant.h"
 #import "BlitzCommonConstant.h"
 #import <BI/BI-Swift.h>
-
-//#import "BI-Swift.h"
 
 @interface BlitzConfig () {
     BOOL isDebugEnabled;
@@ -32,11 +29,6 @@ BlitzConfig *config;
 
 - (id)init {
     if (self = [super init]) {
-//        _DROPBOX_APP_KEY = @"99w6ldshfswgt7c";
-//        _DROPBOX_APP_SECRET = @"zrpc0zll1466slx";
-        //_DROPBOX_ACCESS_TYPE = kDBRootDropbox;
-//        _TEST_APP_VERSION = @"DEBUG_VERSION";
-
         _ENV_TYPE_TO_ENV_STRING = @{
             [NSNumber numberWithInt:BlitzEnvTypeQa]: @"qa",
             [NSNumber numberWithInt:BlitzEnvTypeProd]: @"prod",
@@ -65,29 +57,9 @@ BlitzConfig *config;
         _TAPLYTICS_KEY = @"d0c73c0769443388d16ae2012495cb696508cb7f";//@"5bfa37e929e8dba2075c72d6df7d3576df2b4515";
 
         _ITUNES_APPLICATION_ID = @"1185835397";
-//        if ([[CIConfig sharedInstance] isSetInCI] && ![[[CIConfig sharedInstance] getEnvironment] isEqualToString:@"buildEnv"]) {
-//            _INITIAL_ENVIRONMENT = [self getEnvTypeFor:[[[CIConfig sharedInstance] getEnvironment] lowercaseString]];
-//        }
-//        else {
-//            _INITIAL_ENVIRONMENT = [EnvConfig environment];
-//        }
-        
-        NSString *environmentString = [[BlitzUserDefaultsUtil sharedInstance] valueForCommonKey:ENVIRONMENT_KEY];
-        if (environmentString != nil) {
-            NSUInteger environment = [environmentString integerValue];
-            _ENVIRONMENT = environment;
-        }
-        else {
-            _ENVIRONMENT = _INITIAL_ENVIRONMENT;
-        }
 
-        //[[TaplyticsHandler sharedInstance] appendCustomData:@{ @"env": [self stringForEnvironment:_ENVIRONMENT] }];
-
-        [self updateChatMode:YES];
-        self.IS_TRIVIA_GAME_ENABLED = [[BlitzUserDefaultsUtil sharedInstance] boolForKey:IS_TRIVIA_GAME_ENABLED];
-
-        BOOL logToFile = [[BlitzUserDefaultsUtil sharedInstance] boolForKey:LOG_TO_FILE_KEY];
-        [self updateFileLogging:logToFile];
+//        BOOL logToFile = [[BlitzUserDefaultsUtil sharedInstance] boolForKey:LOG_TO_FILE_KEY];
+//        [self updateFileLogging:logToFile];
         
         _IS_APP_CONTENT_PACKED = YES;
         
@@ -124,17 +96,13 @@ BlitzConfig *config;
     return string;
 }
 
-- (void)shouldEnableTrivia:(BOOL)enabled {
-    [[BlitzUserDefaultsUtil sharedInstance] setBool:enabled forKey:IS_TRIVIA_GAME_ENABLED];
-}
-
 - (void)updateChatMode:(BOOL)isSinglePlayer {
     _IS_SINGLE_PLAYER_GAME = NO;
 }
 
 - (void)updateFileLogging:(BOOL)enableFileLogging {
     _LOG_TO_FILE = enableFileLogging;
-    [[BlitzUserDefaultsUtil sharedInstance] setBool:enableFileLogging forKey:LOG_TO_FILE_KEY];
+//    [[BlitzUserDefaultsUtil sharedInstance] setBool:enableFileLogging forKey:LOG_TO_FILE_KEY];
 }
 
 - (void)setDebugEnabled:(BOOL)value {

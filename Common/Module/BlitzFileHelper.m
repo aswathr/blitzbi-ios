@@ -11,39 +11,6 @@
 
 @implementation BlitzFileHelper
 
-//+ (NSString *)getGameEnvPath:(GameType)gameType withEnvType:(EnvType)envType {
-//    NSString *gameBaseDir = [GameManager gameTypeToAssetPathDirectoryName:gameType];
-//    NSString *envDir = [config.ENV_TYPE_TO_ENV_STRING objectForKey:[NSNumber numberWithInt:envType]];
-//    return [NSString stringWithFormat:@"%@/%@/", envDir, gameBaseDir];
-//}
-
-//+ (void)createDirectories:(GameType)gameType withEnvType:(EnvType)envType {
-//    [FileHelper createGameEnvDirectoriesInDocuments:gameType withEnvType:envType];
-//    [FileHelper createGameEnvDirectoriesInLibrary:gameType withEnvType:envType];
-//}
-
-//+ (void)createGameEnvDirectoriesInDocuments:(GameType)gameType withEnvType:(EnvType)envType {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *gameEnvPath = [FileHelper getGameEnvPath:gameType withEnvType:envType];
-//    NSString *basePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, gameEnvPath];
-//    NSError *error;
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:basePath]) {
-//        [[NSFileManager defaultManager] createDirectoryAtPath:basePath withIntermediateDirectories:YES attributes:nil error:&error];
-//    }
-//}
-
-//+ (void)createGameEnvDirectoriesInLibrary:(GameType)gameType withEnvType:(EnvType)envType {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-//    NSString *libraryDirectory = [paths objectAtIndex:0];
-//    NSString *gameEnvPath = [FileHelper getGameEnvPath:gameType withEnvType:envType];
-//    NSString *basePath = [NSString stringWithFormat:@"%@/%@", libraryDirectory, gameEnvPath];
-//    NSError *error;
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:basePath]) {
-//        [[NSFileManager defaultManager] createDirectoryAtPath:basePath withIntermediateDirectories:YES attributes:nil error:&error];
-//    }
-//}
-
 + (NSString *)fullFilePathInCacheDirectoryForFileName:(NSString *)fileName {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachesDir = [paths objectAtIndex:0];
@@ -70,19 +37,6 @@
     NSURL *documentsDirectoryURL = [BlitzFileHelper getDirectoryURLFor:NSDocumentDirectory andShouldCreateIfNot:NO];
     return [documentsDirectoryURL URLByAppendingPathComponent:fileName];
 }
-
-//+ (NSURL *)fullFileURLIndownloadedAssetsDirectoryForFileName:(NSString *)fileName withGameType:(GameType)gameType withEnvType:(EnvType)envType {
-//    NSURL *documentsDirectoryURL = [FileHelper getDirectoryURLFor:NSDocumentDirectory andShouldCreateIfNot:NO];
-//    NSString *gameEnvPath = [FileHelper getGameEnvPath:gameType withEnvType:envType];
-//    documentsDirectoryURL = [documentsDirectoryURL URLByAppendingPathComponent:gameEnvPath];
-//    return [documentsDirectoryURL URLByAppendingPathComponent:fileName];
-//}
-
-//+ (NSURL *)downloadedAssetsDirectoryBaseURL:(GameType)gameType withEnvType:(EnvType)envType {
-//    NSURL *documentsDirectoryURL = [FileHelper getDirectoryURLFor:NSDocumentDirectory andShouldCreateIfNot:NO];
-//    NSString *gameEnvPath = [FileHelper getGameEnvPath:gameType withEnvType:envType];
-//    return [documentsDirectoryURL URLByAppendingPathComponent:gameEnvPath];
-//}
 
 + (NSString *)fullFilePathInBundleForFileName:(NSString *)fileName {
     return [[NSBundle mainBundle] pathForResource:fileName ofType:nil];

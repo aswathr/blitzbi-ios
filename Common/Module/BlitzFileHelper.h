@@ -19,12 +19,8 @@
 + (void)deleteFilesMatching:(NSRegularExpression *)regex inPath:(NSString *)path;
 + (void)deleteFilesInDirectory:(NSString *)fullDirectoryPath;
 + (void)clearAppDirectoriesOnFreshInstall;
-//+ (void)createDirectories:(GameType)gameType withEnvType:(EnvType)envType;
 + (void)deleteFile:(NSURL *)fileURL;
 + (void)deleteFileWithPath:(NSString *)filePath;
-//+ (NSURL *)fullFileURLIndownloadedAssetsDirectoryForFileName:(NSString *)fileName withGameType:(GameType)gameType withEnvType:(EnvType)envType;
-//+ (NSString *)getGameEnvPath:(GameType)gameType withEnvType:(EnvType)envType;
-//+ (NSURL *)downloadedAssetsDirectoryBaseURL:(GameType)gameType withEnvType:(EnvType)envType;
 + (NSURL *)fullFileURLInDocumentsDirectoryForFileName:(NSString *)fileName;
 + (NSString *)fullFilePathInCacheDirectoryForFileName:(NSString *)fileName;
 + (NSString *)fullFilePathInDocumentsDirectoryForFileName:(NSString *)fileName;

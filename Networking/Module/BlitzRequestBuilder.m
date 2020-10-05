@@ -10,7 +10,6 @@
 #import "BlitzRequestBuilder.h"
 #import "BlitzStringConstant.h"
 #import "BlitzCommonConstant.h"
-#import "BlitzUserDefaultsUtil.h"
 #import "BlitzStringUtils.h"
 #import "BlitzKiwiParser.h"
 
@@ -74,25 +73,6 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 }
 
 - (NSString *)getBaseUrl {
-//    if (self.baseUrl == nil) {
-//        self.baseUrl = serverConfig.BASE_URL;
-//    }
-//    if (ERROR_FREE_REQUEST == self.reqType || PARALLEL_ERROR_FREE_REQUEST == self.reqType) {
-//        self.baseUrl = [self.baseUrl stringByReplacingOccurrencesOfString:serverConfig.BASE_URL
-//                                                               withString:serverConfig.ERROR_FREE_REQUEST_BASE_URL];
-//    }
-//    if (SECONDARY_APP_REQUEST == self.reqType) {
-//        self.baseUrl = [self.baseUrl stringByReplacingOccurrencesOfString:serverConfig.BASE_URL
-//                                                               withString:serverConfig.SECONDARY_APP_REQUEST_BASE_URL];
-//    }
-//    if (MINI_GAME_REQUEST == self.reqType) {
-//        self.baseUrl = [self.baseUrl stringByReplacingOccurrencesOfString:serverConfig.BASE_URL
-//                                                               withString:serverConfig.MINI_GAME_BASE_URL];
-//    }
-//    if (FACE_SWAP_REQUEST == self.reqType) {
-//        self.baseUrl = [self.baseUrl stringByReplacingOccurrencesOfString:serverConfig.BASE_URL
-//        withString:serverConfig.FACE_SWAP_BASE_URL];
-//    }
     return self.baseUrl;
 }
 
@@ -162,40 +142,11 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
         [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
     }
 
-//    NSString *sessionId = [[BiEventManager biEventManager] getPreviousSessionId].stringValue;
-//    [request setValue:sessionId forHTTPHeaderField:@"kiwiSessionIdForBi"];
-
-   // NSString *appVersion = [DeviceUtils getAppVersion];
-   // [request setValue:appVersion forHTTPHeaderField:@"appVersion"];
-
-   // NSString *kiwiDeviceId = [DeviceUtils getKiwiDeviceId];
-   // [request setValue:kiwiDeviceId forHTTPHeaderField:@"kiwiDeviceId"];
-
-//    [AppTime initialize];
-//    NSString *serverEpochTime = [NSString stringWithFormat:@"%lld", [appTime getEpochTimeOnServerAtStart]];
-//    [request setValue:serverEpochTime forHTTPHeaderField:@"serverEpochTime"];
-    
-
-//    UserModel *uModel = [[UserService sharedInstance] retrieveUser];
-//    NSInteger userId = -1;
-//    if (uModel) {
-//        userId = uModel.userId;
-//    }
     [request setValue:[NSString stringWithFormat:@"%ld", 1] forHTTPHeaderField:USER_ID];
     
-    BOOL isAdminModeDisabled = [[BlitzUserDefaultsUtil sharedInstance] boolForKey:IS_ADMIN_MODE_DISABLED];
-    NSString *isAdminMode = isAdminModeDisabled?@"true":@"false";
-    [request setValue:isAdminMode forHTTPHeaderField:IS_ADMIN_MODE_DISABLED];
-    
-//    NSString *userLangGroup = [[AppManager sharedInstance].languageManager getUserSelectedLanguageGroupOrAssignDefault];
-//    [request setValue:userLangGroup forHTTPHeaderField:@"countryGroup"];
-
     if ([self isWhitelisted:urlPath]
         || [urlPath containsString:LOCAL_IP_PREFIX] || [urlPath containsString:LOCAL_IP_PREFIX2]) {
-        NSString *jwtToken = [[BlitzUserDefaultsUtil sharedInstance] stringForKey:JWT];
-        if (jwtToken.length > 0) {
-            [request setValue:jwtToken forHTTPHeaderField:AUTH_TOKEN_V2];
-        }
+
         NSString *authToken = [self getAuthHeaderForUserId:1];
         if (authToken) {
             [request setValue:authToken forHTTPHeaderField:AUTH_TOKEN];
@@ -207,11 +158,6 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
         NSString *log = [NSString stringWithFormat:@"AuthDebug:: %@ not in kiwi domain for user %ld", urlPath, 1];
        // [Utility sendLogToBI:log];
     }
-
-//    [request setValue:[DeviceUtils getPlatformCode] forHTTPHeaderField:PLATFORM_CODE];
-    
-//    [request setValue:[[AppManager sharedInstance].languageManager getUserSelectedLanguageGroupOrAssignDefault] forHTTPHeaderField:COUNTRY_GROUP];
-
     return request;
 }
 
@@ -232,17 +178,17 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     NSString *idNonce = [NSString stringWithFormat:@"%ld|%@|%lld", userId, [[NSUUID UUID] UUIDString], timeInMilliSeconds];
     NSString *base64Nonce = [[idNonce dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
 
-    NSString * salt = [[BlitzUserDefaultsUtil sharedInstance] stringForKey:HASH_KEY];
-    if(salt){
-        NSString * base64Hash = [BlitzStringUtils MD5Base64String:[NSString stringWithFormat:@"%@|%@",idNonce, salt]];
-
-        base64Hash = [base64Hash stringByReplacingOccurrencesOfString:@"/"
-                                                               withString:@"_"];
-
-        base64Hash = [base64Hash stringByReplacingOccurrencesOfString:@"+"
-                                                               withString:@"-"];
-        return [NSString stringWithFormat:@"%@.%@", base64Nonce, base64Hash];
-    }
+//    NSString * salt = [[BlitzUserDefaultsUtil sharedInstance] stringForKey:HASH_KEY];
+//    if(salt){
+//        NSString * base64Hash = [BlitzStringUtils MD5Base64String:[NSString stringWithFormat:@"%@|%@",idNonce, salt]];
+//
+//        base64Hash = [base64Hash stringByReplacingOccurrencesOfString:@"/"
+//                                                               withString:@"_"];
+//
+//        base64Hash = [base64Hash stringByReplacingOccurrencesOfString:@"+"
+//                                                               withString:@"-"];
+//        return [NSString stringWithFormat:@"%@.%@", base64Nonce, base64Hash];
+//    }
     return @"";
 }
 

@@ -7,19 +7,11 @@
 //
 
 #import "BlitzServerHandler.h"
-//#import "NSNotificationHelper.h"
-//#import "NotificationNameConstant.h"
-//#import "AppManager.h"
-//#import "ErrorType.h"
 #import "BlitzRequestBuilder.h"
 #import "BlitzHttpExecutor.h"
-//#import "ErrorHandler.h"
-//#import "BiConstants.h"
-//#import "DiffService.h"
 #import "BlitzKWConcurrentDictionary.h"
 #import <BlitzCommonConstant.h>
 #import <BlitzStringConstant.h>
-//#import "UserService.h"
 
 @implementation BlitzServerHandler
 
@@ -60,12 +52,6 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
 - (NSString *)getUniqueRequestId {
     return @"";
-//    UserModel *userModel = [UserService.sharedInstance retrieveUser];
-//    NSInteger currentTime = [[NSDate date] timeIntervalSince1970];
-//    if (userModel) {
-//        return [[@(userModel.userId)stringValue] stringByAppendingString:[@(currentTime)stringValue]];
-//    }
-//    return [@(currentTime)stringValue];
 }
 
 - (void)serverCall:(BlitzRequestBuilder *)requestBuilder withCompletionBlock:(void(^)(NSObject *, NSError *))completionBlock {
@@ -79,28 +65,12 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
         };
     });
 }
-//- (void)serverCall:(RequestBuilder *)requestBuilder {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *requestId = [self getUniqueRequestId];
-//        [requestBuilder setRequestId:requestId];
-//        [requestRetry setObject:[NSNumber numberWithInteger:0] forKey:requestId];
-//        [HttpExecutor executeRequest:requestBuilder listener:self];
-//    });
-//}
 
 - (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withStatusCode:(NSInteger)statusCode {
     BOOL isDownTime = statusCode == KIWI_DOWN_TIME_STATUS_CODE;
     [self onHttpResponse:response forRequestBuilder:request error:err withAlertVisibility:!isDownTime];
     if (isDownTime) {
-//        NSString *url = [[AppParamModel getSharedInstance] getDownTimeUrl];
-//        if (response && [response isKindOfClass:NSDictionary.class]) {
-//            NSDictionary *responseDict = (NSDictionary *)response;
-//            NSObject *htmlView = [responseDict valueForKey:@"html_view"];
-//            if (htmlView && [htmlView isKindOfClass:NSString.class]) {
-//                url = (NSString *)htmlView;
-//            }
-//        }
-       // [[AppManager sharedInstance] showDownTimeUX:url];//
+
     }
     else {
 //[[AppManager sharedInstance] hideDownTimeUX];
@@ -234,54 +204,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
 /*show connection error dialog*/
 - (BOOL)callShowAlert:(NSError *)err forRequest:(BlitzRequestBuilder *)request forResponseCode:(NSString *) responseCode withResponse:(NSDictionary*) response withAlertVisibility:(BOOL)showAlert {
-//    NSNumber *errorCode = [NSNumber numberWithInteger:[err code]];
-//    ErrorHandler *errorHandler = [[ErrorHandler alloc] init];
-//    if (request.reqType == USER_PROFILE_REQUEST) {
-//        //400 error code, user name taken
-//        if ([self arrayContains:BAD_REQUEST_ERROR_CODES num:errorCode]) {
-//            return NO;
-//        }
-//    }
-//
-//    if ([responseCode isEqualToString:@"401"]) {
-//        if (showAlert) {
-//            [errorHandler showErrorAlert:ErrorTypeAuth withError:err withResponse:response];
-//        }
-//        return NO;
-//    }
-//    if ([responseCode isEqualToString:@"451"]) {
-//        if (showAlert) {
-//          //  [ErrorHandler.sharedInstance showErrorAlert:ErrorTypeUnavailable withError:err withResponse:response];
-//        }
-//        return NO;
-//    }
-//    else if ([responseCode isEqualToString:FORBIDDED_ERROR_CODE]) {
-//        if (showAlert) {
-//          //  [ErrorHandler.sharedInstance showErrorAlert:ErrorTypeForbidded withError:err withResponse:response];
-//        }
-//        return NO;
-//    } else if ([responseCode isEqualToString:@"412"]) {
-//        if (showAlert) {
-//            if (response != nil) {
-//                NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:err.userInfo];
-//                userInfo[API_RESPONSE] = response;
-//                NSError *error = [NSError errorWithDomain:err.domain code:err.code userInfo:userInfo];
-//                err = error;
-//            }
-//          //  [ErrorHandler.sharedInstance showErrorAlert:ErrorTypeMultipleUsersLogin withError:err];
-//        }
-//    }
-//    else if (showAlert) {
-//        if ([self arrayContains:INTERNET_ERROR_CODES num:errorCode]) {
-//            [errorHandler showErrorAlert:ErrorTypeInternet withError:err withResponse:response];
-//        }
-//        else if ([self arrayContains:RECOVERABLE_ERROR_CODES num:errorCode]) {
-//            [errorHandler showErrorAlert:ErrorTypeServerTimeout withError:err withResponse:response];
-//        }
-//        else {
-//           // [ErrorHandler.sharedInstance showErrorAlert:ErrorTypeServer withError:err withResponse:response];
-//        }
-//    }
+
     return YES;
 }
 
@@ -306,17 +229,6 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
     }
 
     NSString *errorStr = [[error.localizedDescription stringByAppendingString:@", code: "] stringByAppendingString:[@(error.code)stringValue]];
-
-//    NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-//    [userInfo setValue:isRetry ? @"Retry" : @"Failure" forKey:SERVER_REQUEST_FAILURE_TYPE];
-//    [userInfo setValue:requestBuilder.requestId forKey:SERVER_REQUEST_ID];
-//    [userInfo setValue:[requestBuilder.baseUrl stringByAppendingString:requestBuilder.path] forKey:SERVER_REQUEST_PATH];
-//    [userInfo setValue:errorStr forKey:SERVER_REQUEST_ERROR];
-//    NSInteger requestTotalTime = round(requestBuilder.requestTotalTime);
-//    [userInfo setValue:[NSString stringWithFormat:@"%ld", (long)requestTotalTime] forKey:SERVER_REQUEST_TIME];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-//    //    [NSNotificationHelper sendNotification:NOTIFICATION_SERVER_RETRY_FAILUE withUserInfo:userInfo withObject:nil];
-//    });
 }
 
 @end

@@ -43,7 +43,6 @@ extern BlitzConfig *config;
 
 + (void)initConfig;
 
-//- (NSString *)getDownloadBaseUrl:(GameType)gameType withEnvType:(EnvType)envType;
 - (NSArray<NSString *> *)getSupportedEnviornments;
 - (void)updateChatMode:(BOOL)isSinglePlayer;
 - (void)updateFileLogging:(BOOL)enableFileLogging;

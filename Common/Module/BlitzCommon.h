@@ -13,9 +13,5 @@
 #import "BlitzConfig.h"
 #import "BlitzFileHelper.h"
 #import "BlitzFileCacheHelper.h"
-#import "BlitzUserDefaultsUtil.h"
-#import "BlitzServerUserPropertiesUtil.h"
-#import "BlitzUserPropertyModel.h"
-#import "BlitzServerUserPropertiesFetchedListener.h"
 
-#endif /* JrxCommon_h */
+#endif
