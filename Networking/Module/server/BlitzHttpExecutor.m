@@ -178,7 +178,6 @@
 
     [requestBuilder setStartTime:[[NSDate date] timeIntervalSince1970]];
     
-//    - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
     [[manager dataTaskWithRequest:request
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     
