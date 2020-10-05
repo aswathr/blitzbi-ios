@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B11CDFF228C92C91999E706 /* libPods-BI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 042BC3253B802E8669A29507 /* libPods-BI.a */; };
 		843BB7C125245195007272D9 /* BI.h in Headers */ = {isa = PBXBuildFile; fileRef = 843BB7BF25245195007272D9 /* BI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0E86252467C300D8529B /* BlitzBIEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0E7E252467C300D8529B /* BlitzBIEventRepository.swift */; };
 		844A0E87252467C300D8529B /* BlitzBiEventData.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0E7F252467C300D8529B /* BlitzBiEventData.m */; };
@@ -136,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B11CDFF228C92C91999E706 /* libPods-BI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,8 +53,36 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     }
     
     private func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(startRepeatedTimerToAttemptFlush), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(invalidateTimer), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onStart), name:
+            UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onPause), name:
+            UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onResume), name:
+            UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onStop),name:
+            UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDestroy),name:
+            UIApplication.willTerminateNotification, object: nil)
+    }
+    
+    @objc func onStart() {
+        
+    }
+    
+    @objc func onPause() {
+        startRepeatedTimerToAttemptFlush();
+    }
+
+    @objc func onResume() {
+        invalidateTimer();
+    }
+    
+    @objc func onStop() {
+        
+    }
+    
+    @objc func onDestroy() {
+        
     }
 
     @objc private func startRepeatedTimerToAttemptFlush() {
