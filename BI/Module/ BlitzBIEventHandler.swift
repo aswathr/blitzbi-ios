@@ -141,7 +141,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     private func sendEvents(_ events: [[String : Any]]?, withForcedFlush isForced: Bool) {
         var eventsCopy: [[String:Any]] = []
         for event in events ?? [] {
-            let eventName = event[EVENT_NAME_TAG] as? String
+            let eventName = event[BLITZ_EVENT_NAME_TAG] as? String
             if eventName == nil || (eventName?.count ?? 0) == 0 {
                 if config?.isDebugEnabled() == true {
                     assert(false, "Event name is absent.")
@@ -306,7 +306,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         }
 
         //Recording crashlytics error
-        let defectiveEventsNames = (defectiveEvents as? NSMutableArray)?.value(forKeyPath: EVENT_NAME_TAG) as? [String]
+        let defectiveEventsNames = (defectiveEvents as? NSMutableArray)?.value(forKeyPath: BLITZ_EVENT_NAME_TAG) as? [String]
         let commaSeparatedNames = defectiveEventsNames?.joined(separator: ", ")
         print(String(format: "[BI] defective events with names: %@, and total defective count: %lu, removed from pending events.", commaSeparatedNames ?? "", defectiveEvents.count))
         BlitzBiEventSendHandler.sendCrashlyticsError(

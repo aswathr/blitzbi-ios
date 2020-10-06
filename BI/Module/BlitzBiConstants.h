@@ -9,7 +9,7 @@
 #ifndef BiConstants_h
 #define BiConstants_h
 
-static NSString *const EVENT_NAME_TAG = @"eventName";
+static NSString *const BLITZ_EVENT_NAME_TAG = @"eventName";
 static NSString *const EXCEPTION_NAME = @"exceptionName";
 static NSString *const EXCEPTION_REASON = @"exceptionReason";
 
