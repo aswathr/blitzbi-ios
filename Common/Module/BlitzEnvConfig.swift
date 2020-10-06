@@ -11,7 +11,6 @@ import Foundation
 
 struct Environment {
     static let INITIAL_ENVIRONMENT = BlitzEnvType.qa
-    
 }
 
 @objc public class BlitzEnvConfig : NSObject {

@@ -7,17 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BlitzServerHandler.h>
+#import "BlitzServerHandler.h"
 
 typedef enum {
     APP_REQUEST,
-    SECONDARY_APP_REQUEST,
-    MINI_GAME_REQUEST,
-    FACE_SWAP_REQUEST,
     BI_REQUEST,
     ERROR_FREE_REQUEST,
-    LOG_REQUEST,
-    USER_PROFILE_REQUEST,
     PARALLEL_REQUEST,
     PARALLEL_ERROR_FREE_REQUEST
 } RequestType;
@@ -42,7 +37,6 @@ typedef void (^HTTPRequestResponseBlock)(NSObject *response, NSError *error);
 
 @property (nonatomic, assign) RequestType reqType;
 @property (weak) id<ResponseListener> responseListener;
-//@property NSStringEncoding encoding;
 @property HTTPRequestResponseBlock responseBlock;
 
 @property NSTimeInterval startTime;

@@ -32,7 +32,6 @@
 		844A0EE325246A3300D8529B /* BlitzServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0ED725246A3200D8529B /* BlitzServerConfig.swift */; };
 		844A0EE525246A3300D8529B /* BlitzError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0ED925246A3300D8529B /* BlitzError.swift */; };
 		844A0EE625246A3300D8529B /* BlitzServerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0EDA25246A3300D8529B /* BlitzServerHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		844A0EE825246A3300D8529B /* NetworkingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDC25246A3300D8529B /* NetworkingConstant.swift */; };
 		844A0EE925246A3300D8529B /* BlitzRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */; };
 		844A0EEA25246A3300D8529B /* onsequel-am.cer in Resources */ = {isa = PBXBuildFile; fileRef = 844A0EDE25246A3300D8529B /* onsequel-am.cer */; };
 		844A0EEB25246A3300D8529B /* PBlitzDataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */; };
@@ -76,7 +75,6 @@
 		844A0ED725246A3200D8529B /* BlitzServerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzServerConfig.swift; path = Module/BlitzServerConfig.swift; sourceTree = "<group>"; };
 		844A0ED925246A3300D8529B /* BlitzError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzError.swift; path = Module/BlitzError.swift; sourceTree = "<group>"; };
 		844A0EDA25246A3300D8529B /* BlitzServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzServerHandler.h; path = Module/BlitzServerHandler.h; sourceTree = "<group>"; };
-		844A0EDC25246A3300D8529B /* NetworkingConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkingConstant.swift; path = Module/NetworkingConstant.swift; sourceTree = "<group>"; };
 		844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzRequestBuilder.m; path = Module/BlitzRequestBuilder.m; sourceTree = "<group>"; };
 		844A0EDE25246A3300D8529B /* onsequel-am.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onsequel-am.cer"; path = "Module/onsequel-am.cer"; sourceTree = "<group>"; };
 		844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PBlitzDataTransferService.swift; path = Module/PBlitzDataTransferService.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 			children = (
 				844A0F18252473AF00D8529B /* server */,
 				844A0ED925246A3300D8529B /* BlitzError.swift */,
-				844A0EDC25246A3300D8529B /* NetworkingConstant.swift */,
 				844A0EDE25246A3300D8529B /* onsequel-am.cer */,
 				844A0EE025246A3300D8529B /* onsequel.cer */,
 				844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */,
@@ -298,7 +295,6 @@
 				844A0EBA252469F300D8529B /* BlitzKWConcurrentDictionary.m in Sources */,
 				844A0E86252467C300D8529B /* BlitzBIEventRepository.swift in Sources */,
 				844A0EED25246A3300D8529B /* BlitzServerHandler.m in Sources */,
-				844A0EE825246A3300D8529B /* NetworkingConstant.swift in Sources */,
 				844A0EE325246A3300D8529B /* BlitzServerConfig.swift in Sources */,
 				844A0EEB25246A3300D8529B /* PBlitzDataTransferService.swift in Sources */,
 				844A0EC0252469F300D8529B /* BlitzFileHelper.m in Sources */,

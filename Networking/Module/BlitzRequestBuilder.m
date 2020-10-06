@@ -6,7 +6,6 @@
 //  Copyright © 2016 Twilio, Inc. All rights reserved.
 //
 
-
 #import "BlitzRequestBuilder.h"
 #import "BlitzStringConstant.h"
 #import "BlitzCommonConstant.h"
@@ -119,13 +118,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     
     [request setAllHTTPHeaderFields:[self getHeaders]];
 
-    if ([self.getContentType isEqual:@"multipart/form-data"]) {
-        NSString *boundary = [self generateBoundaryString];
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-        [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:[self createBodyWithBoundary:boundary]];
-    }
-    else if (![self.getMethod isEqual:@"GET"]) {
+    if (![self.getMethod isEqual:@"GET"]) {
         NSData *httpBodyToSet = [self getHttpBody];
         NSString *contentType = [self getContentType];
         if (_shouldEncryptRequestBody) {
@@ -143,21 +136,6 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     }
 
     [request setValue:[NSString stringWithFormat:@"%ld", 1] forHTTPHeaderField:USER_ID];
-    
-    if ([self isWhitelisted:urlPath]
-        || [urlPath containsString:LOCAL_IP_PREFIX] || [urlPath containsString:LOCAL_IP_PREFIX2]) {
-
-        NSString *authToken = [self getAuthHeaderForUserId:1];
-        if (authToken) {
-            [request setValue:authToken forHTTPHeaderField:AUTH_TOKEN];
-        } else {
-            NSString *log = [NSString stringWithFormat:@"AuthDebug:: Empty token for user %ld for url %@", 1, urlPath];
-          //  [Utility sendLogToBI:log];
-        }
-    } else {
-        NSString *log = [NSString stringWithFormat:@"AuthDebug:: %@ not in kiwi domain for user %ld", urlPath, 1];
-       // [Utility sendLogToBI:log];
-    }
     return request;
 }
 
@@ -169,27 +147,6 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
             return YES;
     }
     return NO;
-}
-
-- (NSString *)getAuthHeaderForUserId:(NSInteger) userId {
-    
-    long long timeInMilliSeconds = (long long) [[NSDate date] timeIntervalSince1970] * 1000;
-
-    NSString *idNonce = [NSString stringWithFormat:@"%ld|%@|%lld", userId, [[NSUUID UUID] UUIDString], timeInMilliSeconds];
-    NSString *base64Nonce = [[idNonce dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
-
-//    NSString * salt = [[BlitzUserDefaultsUtil sharedInstance] stringForKey:HASH_KEY];
-//    if(salt){
-//        NSString * base64Hash = [BlitzStringUtils MD5Base64String:[NSString stringWithFormat:@"%@|%@",idNonce, salt]];
-//
-//        base64Hash = [base64Hash stringByReplacingOccurrencesOfString:@"/"
-//                                                               withString:@"_"];
-//
-//        base64Hash = [base64Hash stringByReplacingOccurrencesOfString:@"+"
-//                                                               withString:@"-"];
-//        return [NSString stringWithFormat:@"%@.%@", base64Nonce, base64Hash];
-//    }
-    return @"";
 }
 
 - (NSData *)createBodyWithBoundary:(NSString *)boundary {

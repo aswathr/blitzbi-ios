@@ -14,6 +14,6 @@
 + (void)executeRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener;
 + (void)executeAppRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener;
 + (void)executeBIRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener;
-+ (NSURLSession *)getSessionManager;
++ (NSURLSession *)getNSURLSession;
 
 @end
