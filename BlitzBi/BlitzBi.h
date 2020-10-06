@@ -14,9 +14,9 @@ FOUNDATION_EXPORT double BIVersionNumber;
 FOUNDATION_EXPORT const unsigned char BIVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like
-#import <BI/BlitzRequestBuilder.h>
-#import <BI/BlitzBiConfig.h>
-#import <BI/BlitzBiConstants.h>
-#import <BI/BlitzBiEventData.h>
-#import <BI/BlitzFileHelper.h>
-#import <BI/BlitzConfig.h>
+#import <BlitzBi/BlitzRequestBuilder.h>
+#import <BlitzBi/BlitzBiConfig.h>
+#import <BlitzBi/BlitzBiConstants.h>
+#import <BlitzBi/BlitzBiEventData.h>
+#import <BlitzBi/BlitzFileHelper.h>
+#import <BlitzBi/BlitzConfig.h>

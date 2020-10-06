@@ -12,7 +12,7 @@
 #import "BlitzFileHelper.h"
 #import "BlitzStringConstant.h"
 #import "BlitzCommonConstant.h"
-#import <BI/BI-Swift.h>
+#import <BlitzBi/BlitzBi-Swift.h>
 
 @interface BlitzConfig () {
     BOOL isDebugEnabled;

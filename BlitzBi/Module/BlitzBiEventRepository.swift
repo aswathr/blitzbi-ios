@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol IBlitzBIEventRepository {
+protocol IBlitzBiEventRepository {
     func processJsonRequestWithoutResponse(url:String, body:Data?, isEmergency:Bool)
     func processJsonRequest(url:String, data:Data?, completionHandler:@escaping(BiResponse?,Error?) -> Void)
 }
 
-class BlitzBIEventRepository:IBlitzBIEventRepository {
+class BlitzBiEventRepository:IBlitzBiEventRepository {
     
     private var networkService:PBlitzDataTransferService
     

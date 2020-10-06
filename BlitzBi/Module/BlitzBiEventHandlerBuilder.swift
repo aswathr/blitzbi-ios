@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class BlitzBIEventHandlerBuilder {
+public class BlitzBiEventHandlerBuilder {
     
     private var batchSize:Int?
     private var baseUrl:String?
@@ -16,8 +16,8 @@ public class BlitzBIEventHandlerBuilder {
     private var networkService:PBlitzDataTransferService!
     
     
-    public static func setParams(batchSize:Int, baseUrl: String?, eventsUrl: String?, biEventsDirectUrl: String?,networkService:PBlitzDataTransferService) -> BlitzBIEventHandlerBuilder {
-        let builder = BlitzBIEventHandlerBuilder()
+    public static func setParams(batchSize:Int, baseUrl: String?, eventsUrl: String?, biEventsDirectUrl: String?,networkService:PBlitzDataTransferService) -> BlitzBiEventHandlerBuilder {
+        let builder = BlitzBiEventHandlerBuilder()
         builder.batchSize = batchSize
         builder.baseUrl = baseUrl
         builder.eventsUrl = eventsUrl
@@ -27,6 +27,6 @@ public class BlitzBIEventHandlerBuilder {
     }
     
     public func build() -> PBlitzBiEventSendHandler {
-        return BlitzBiEventSendHandler(batchSize: batchSize ?? 60, baseUrl: baseUrl, eventsUrl: eventsUrl, biEventsDirectUrl: biEventsDirectUrl, eventRepository: BlitzBIEventRepository(networkService: networkService))
+        return BlitzBiEventSendHandler(batchSize: batchSize ?? 60, baseUrl: baseUrl, eventsUrl: eventsUrl, biEventsDirectUrl: biEventsDirectUrl, eventRepository: BlitzBiEventRepository(networkService: networkService))
     }
 }

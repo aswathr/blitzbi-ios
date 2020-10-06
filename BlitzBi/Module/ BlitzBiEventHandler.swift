@@ -29,9 +29,9 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     private var biEventFireTimer: Timer?
     private var nextFlushTime: TimeInterval = 0.0
     private var isBlockSubmittedToNetworkQueue = false
-    private var eventRepository:IBlitzBIEventRepository
+    private var eventRepository:IBlitzBiEventRepository
     
-    public init(batchSize:Int, baseUrl: String?, eventsUrl: String?, biEventsDirectUrl: String?,eventRepository:IBlitzBIEventRepository ) {
+    public init(batchSize:Int, baseUrl: String?, eventsUrl: String?, biEventsDirectUrl: String?,eventRepository:IBlitzBiEventRepository ) {
         self.eventRepository = eventRepository
         super.init()
         self.setBatchSize(batchSize)
