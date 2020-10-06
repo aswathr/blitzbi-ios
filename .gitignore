@@ -1,0 +1,10 @@
+Pods/
+Podfile.lock
+ObjCVideoQuickstart.xcworkspace
+.DS_Store
+*/.DS_Store
+.DS_Store?
+xcuserdata/
+*.xcuserstate
+ArVideoDemo/gameShow/GameShowTestViewController.m
+dump.rdb
