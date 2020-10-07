@@ -433,8 +433,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         }
         let isPendingEventsCrossedMaxLimit = pendingEventsCount >= maxPendingCount
         let hasTimeCrossedCooldown = Date().timeIntervalSince1970 > nextFlushTime
-//        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
-        return true
+        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
     }
     
     private func isAppIdAvailable() -> Bool {
