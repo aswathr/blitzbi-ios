@@ -37,7 +37,6 @@ class BlitzBiService {
         let encoder = JSONEncoder()
         
         if let data = try? encoder.encode(deviceRequest) {
-            print(data)
             self.checkForDeviceId(appId: appId, appToken: appToken, data: data) { (response: BiDeviceResponse?, err: Error?) in
                 if (err == nil && response?.blitzDeviceId != nil) {
                     UserDefaults.standard.set(response?.blitzDeviceId, forKey: self.BLITZ_DEVICE_ID_KEY)
