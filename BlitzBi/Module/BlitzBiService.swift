@@ -47,7 +47,7 @@ class BlitzBiService {
         }
     }
     
-    func checkForDeviceId(appId: Int, appToken: String, data: Data, completionHandler:@escaping(BiDeviceResponse?,Error?) -> Void) {
+    private func checkForDeviceId(appId: Int, appToken: String, data: Data, completionHandler:@escaping(BiDeviceResponse?,Error?) -> Void) {
         let headers = NSMutableDictionary()
         headers["blitzAppId"] = String(appId)
         headers["blitzAppToken"] = appToken
@@ -82,13 +82,6 @@ class BlitzBiService {
             biBuilder.sendEvents(events)
         }
     }
-    
-//    Start, Crash, Pause.
-//    Resume,
-//
-//    func flushEmergency() {
-//        biBuilder.flushEmergency()
-//    }
 }
 
 public struct BiDeviceRequest: Codable {

@@ -33,9 +33,7 @@
 		844A0EE525246A3300D8529B /* BlitzError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0ED925246A3300D8529B /* BlitzError.swift */; };
 		844A0EE625246A3300D8529B /* BlitzServerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0EDA25246A3300D8529B /* BlitzServerHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0EE925246A3300D8529B /* BlitzRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */; };
-		844A0EEA25246A3300D8529B /* onsequel-am.cer in Resources */ = {isa = PBXBuildFile; fileRef = 844A0EDE25246A3300D8529B /* onsequel-am.cer */; };
 		844A0EEB25246A3300D8529B /* PBlitzDataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */; };
-		844A0EEC25246A3300D8529B /* onsequel.cer in Resources */ = {isa = PBXBuildFile; fileRef = 844A0EE025246A3300D8529B /* onsequel.cer */; };
 		844A0EED25246A3300D8529B /* BlitzServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EE125246A3300D8529B /* BlitzServerHandler.m */; };
 		844A0F1C252473C500D8529B /* BlitzHttpResponseListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F19252473C500D8529B /* BlitzHttpResponseListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0F1D252473C500D8529B /* BlitzHttpExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0F1A252473C500D8529B /* BlitzHttpExecutor.m */; };
@@ -218,7 +216,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				844A0E8B252467C300D8529B /* BlitzBiEventData.h in Headers */,
-				84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */,
 				844A0EE625246A3300D8529B /* BlitzServerHandler.h in Headers */,
 				844A0EE225246A3300D8529B /* BlitzRequestBuilder.h in Headers */,
 				84CE9C05252B052900D0E48F /* BlitzCommonConstant.h in Headers */,
@@ -231,6 +228,7 @@
 				844A0E8C252467C300D8529B /* BlitzBiConfig.h in Headers */,
 				843BB7C125245195007272D9 /* BlitzBi.h in Headers */,
 				844A0E8A252467C300D8529B /* BlitzBiConstants.h in Headers */,
+				84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */,
 				844A0ECB252469F300D8529B /* BlitzFileHelper.h in Headers */,
 				84B31121252DCB6E0051016E /* BlitzDeviceUtils.h in Headers */,
 				84CE9C06252B052900D0E48F /* BlitzStringUtils.h in Headers */,
@@ -297,8 +295,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844A0EEA25246A3300D8529B /* onsequel-am.cer in Resources */,
-				844A0EEC25246A3300D8529B /* onsequel.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +460,7 @@
 		843BB7C525245195007272D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -493,6 +490,7 @@
 		843BB7C625245195007272D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
