@@ -40,7 +40,6 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
     if (error) {
         NSString *errorString = [error description];
-   //     [Utility sendLogToBI:[NSString stringWithFormat:@"Cache save Content response invalid: %@", errorString]];
         return NO;
     }
     NSString *dataStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -74,7 +73,6 @@
             cachedContent = (NSArray *)[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
             if (error) {
                 NSString *errorString = [error description];
-         //       [Utility sendLogToBI:[NSString stringWithFormat:@"Cache save Content parsing from cache failed: %@", errorString]];
                 cachedContent = nil;
             }
         }

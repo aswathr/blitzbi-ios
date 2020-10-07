@@ -6,10 +6,14 @@
 //  Copyright © 2018 Kiwi, Inc. All rights reserved.
 //
 
+import Foundation
+import UIKit
+
 public protocol PBlitzBiEventSendHandler {
-    func flush(onEmergency eventDict: [String : Any]?)
-    func sendEvent(_ eventDict: [String : Any]?, withForcedFlush isForced: Bool)
+    func flushEmergency()
+    func sendEvent(_ eventDict: [String : Any]?)
     func sendEvents(_ events: [[String : Any]]?)
+    func setBlitzdeviceId(_ appId: Int, _ deviceId: String)
 }
 
 class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
@@ -21,34 +25,38 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     var maxPendingCount = 200
     var forceSendAfterSeconds = 30
     let EVENTS_FILE_PATH = "bi-events.plist"
-    var biConfig: BlitzBiConfig?
-
+    var biConfig: BlitzBiConfig!
+    
     private var serialQueue: DispatchQueue?
     private var networkQueue: DispatchQueue?
     var pendingEvents: [[String : Any]]?
     private var biEventFireTimer: Timer?
     private var nextFlushTime: TimeInterval = 0.0
     private var isBlockSubmittedToNetworkQueue = false
-    private var eventRepository:IBlitzBiEventRepository
+    private var eventRepository:IBlitzBIEventRepository
+    private var isAppIdValidated: Bool = false
+    private var blitzDeviceId: String?
+    private var blitzAppId: Int?
+    private var blitzSessionId: String!
     
-    public init(batchSize:Int, baseUrl: String?, eventsUrl: String?, biEventsDirectUrl: String?,eventRepository:IBlitzBiEventRepository ) {
+    public init(batchSize:Int, baseUrl: String?,eventRepository:IBlitzBIEventRepository ) {
         self.eventRepository = eventRepository
         super.init()
+        
         self.setBatchSize(batchSize)
-        biConfig = BlitzBiConfig()
-        biConfig?.base_URL = baseUrl
-        biConfig?.events_SERVER_URL = eventsUrl
-        biConfig?.bi_EVENTS_SERVER_DIRECT_URL = biEventsDirectUrl
-        let serialLabel = "bi_events_sender_serial"
-        serialQueue = DispatchQueue(label: serialLabel)
-        let networkLabel = "bi_events_sender_network"
-        networkQueue = DispatchQueue(label: networkLabel)
-        isBlockSubmittedToNetworkQueue = false
+        self.biConfig = BlitzBiConfig()
+        self.biConfig.base_URL = baseUrl
+        self.blitzSessionId = BlitzDeviceUtils.getSessionId()
+        
+        self.serialQueue = DispatchQueue(label: "bi_events_sender_serial")
+        
+        self.networkQueue = DispatchQueue(label: "bi_events_sender_network")
+        self.isBlockSubmittedToNetworkQueue = false
 
-        pendingEvents = []
-        let nextDate = Date(timeIntervalSinceNow: TimeInterval(forceSendAfterSeconds))
-        nextFlushTime = nextDate.timeIntervalSince1970
-        unarchiveEvents()
+        self.pendingEvents = []
+        self.nextFlushTime = Date(timeIntervalSinceNow: TimeInterval(forceSendAfterSeconds)).timeIntervalSince1970
+        
+        self.unarchiveEvents()
         self.addNotification()
     }
     
@@ -66,23 +74,25 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     }
     
     @objc func onStart() {
-        
+        print("BlitzBiEventSendHandler::onStart")
     }
     
     @objc func onPause() {
+        print("BlitzBiEventSendHandler::onPause")
         startRepeatedTimerToAttemptFlush();
     }
 
     @objc func onResume() {
+        print("BlitzBiEventSendHandler::onResume")
         invalidateTimer();
     }
     
     @objc func onStop() {
-        
+        print("BlitzBiEventSendHandler::onStop")
     }
     
     @objc func onDestroy() {
-        
+        print("BlitzBiEventSendHandler::onDestroy")
     }
 
     @objc private func startRepeatedTimerToAttemptFlush() {
@@ -100,21 +110,14 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
 
     @objc private func timerTicked() {
         print("[BI] timer ticked")
-        flush(withIsForced: true)
+        flush()
     }
 
-    public func flush(onEmergency eventDict: [String : Any]?) {
-        let eventDict = eventDict
+    public func flushEmergency() {
         print("[BI] flushing all the events immediately without any response tracking")
-        if eventDict != nil {
-            //eventDict = eventDict    // Skipping redundant initializing to itself
-        }
         var eventsCopy: [[String:Any]]?
         let lockQueue = DispatchQueue(label: "self")
         lockQueue.sync {
-            if let eventDict = eventDict {
-                pendingEvents?.append(eventDict)
-            }
             eventsCopy = pendingEvents
         }
         while (eventsCopy?.count ?? 0) > 0 {
@@ -123,22 +126,18 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
             //(eventsCopy as NSArray?)?.subarray(with: NSRange(location: 0, length: batchSize))
 
             let jsonData = getJSONData(forBatch: batch)
-            let url = biConfig?.events_SERVER_URL
+            let url: String! = biConfig.base_URL
 
-            eventRepository.processJsonRequestWithoutResponse(url:url ?? "", body: jsonData, isEmergency: true)
+            eventRepository.processJsonRequestWithoutResponse(url: url, body: jsonData, isEmergency: true)
             eventsCopy = self.removeFromOneArrayIfPresentInOther(first: eventsCopy ?? [[:]], second: batch)
         }
     }
 
+    public func sendEvent(_ eventDict: [String : Any]?) {
+        sendEvents([(eventDict ?? [:])])
+    }
+
     public func sendEvents(_ events: [[String : Any]]?) {
-        sendEvents(events, withForcedFlush: false)
-    }
-
-    public func sendEvent(_ eventDict: [String : Any]?, withForcedFlush isForced: Bool) {
-        sendEvents([(eventDict ?? [:])], withForcedFlush: isForced)
-    }
-
-    private func sendEvents(_ events: [[String : Any]]?, withForcedFlush isForced: Bool) {
         var eventsCopy: [[String:Any]] = []
         for event in events ?? [] {
             let eventName = event[BLITZ_EVENT_NAME_TAG] as? String
@@ -158,41 +157,41 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
                // pendingEvents?.addObjects(fromArray: eventsCopy)
             }
             self.archiveEvents()
-            let shouldFlush = self.shouldFlushEvents() || isForced
+            let shouldFlush = self.shouldFlushEvents() && self.isAppIdAvailable()
             if shouldFlush {
                 if !self.isBlockSubmittedToNetworkQueue {
                     self.isBlockSubmittedToNetworkQueue = true
-                    self.networkQueue?.async(execute: self.checkAndFlushAndArchiveBlock(isForced))
+                    self.networkQueue?.async(execute: self.checkAndFlushAndArchiveBlock())
                 }
             }
         })
     }
 
-    private func checkAndFlushAndArchiveBlock(_ isForced: Bool) -> () -> Void {
+    private func checkAndFlushAndArchiveBlock() -> () -> Void {
         return { [self] in
-            let shouldArchive = self.checkAndFlush(withIsForced: isForced)
+            let shouldArchive = self.checkAndFlush()
             if shouldArchive {
                 self.archiveEvents()
             }
         }
     }
 
-    private func flush(withIsForced isForced: Bool) {
+    private func flush() {
         serialQueue?.async(execute: { [self] in
-            let shouldFlush = self.shouldFlushEvents() || isForced
+            let shouldFlush = self.shouldFlushEvents() && self.isAppIdAvailable()
             if shouldFlush {
                 if !self.isBlockSubmittedToNetworkQueue {
                     self.isBlockSubmittedToNetworkQueue = true
-                    self.networkQueue?.async(execute: self.checkAndFlushAndArchiveBlock(isForced))
+                    self.networkQueue?.async(execute: self.checkAndFlushAndArchiveBlock())
                 }
             }
         })
     }
 
-    private func checkAndFlush(withIsForced isForced: Bool) -> Bool {
+    private func checkAndFlush() -> Bool {
         do {
             let shouldFlush = try shouldFlushEvents()
-            if !isForced && !shouldFlush {
+            if !shouldFlush && isAppIdAvailable() {
                 return false
             }
             updateNextFlushTime()
@@ -208,16 +207,12 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
                 var didFail = false
                     if JSONSerialization.isValidJSONObject(batch) {
                         let jsonData = getJSONData(forBatch: batch)
-                        let url = biConfig?.events_SERVER_URL
+                        let url: String! = biConfig.base_URL
 
                         let semaphore = DispatchSemaphore(value: 0)
 
-                        eventRepository.processJsonRequest(url:url ?? "", data: jsonData, completionHandler: { [self] response, err in
-                            var success = false
-                            if let data = response {
-                                success = data.status.uppercased() == "SUCCESS"
-                            }
-                            if err != nil || !success {
+                        eventRepository.processJsonRequest(url:url, data: jsonData, completionHandler: { [self] response, err in
+                            if err != nil {
                                 didFail = true
                                 //Send error to crashlytics
                                 if let jsonData = jsonData, let err = err {
@@ -258,7 +253,6 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         }
         return true
     }
-
 
     private func handleNetworkResponse(_ response: NSObject?, withError error: Error?) -> Bool {
         //No need to retry in case of failure as bi events are sent every minute forcefully
@@ -318,7 +312,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
             ])
 
         //as now defective events has been filetered, we can force flush.
-        flush(withIsForced: true)
+        flush()
     }
 
     private func archiveObject(_ object: Any?, withFilePath filePath: String?) -> Bool {
@@ -329,7 +323,6 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
                     return false
                 }
             }
-            
         }
         
         catch {
@@ -440,7 +433,18 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         }
         let isPendingEventsCrossedMaxLimit = pendingEventsCount >= maxPendingCount
         let hasTimeCrossedCooldown = Date().timeIntervalSince1970 > nextFlushTime
-        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
+//        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
+        return true
+    }
+    
+    private func isAppIdAvailable() -> Bool {
+        return self.isAppIdValidated && self.blitzDeviceId != nil
+    }
+    
+    internal func setBlitzdeviceId(_ appId: Int, _ deviceId: String) {
+        self.blitzDeviceId = deviceId
+        self.blitzAppId = appId
+        self.isAppIdValidated = true
     }
 
     private func updateNextFlushTime() {
@@ -451,11 +455,34 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     private func setBatchSize(_ size: Int) {
         maxPendingCount = size
     }
+    
+    private func getCommonParams() -> [AnyHashable:Any] {
+        var biCommonParams: [AnyHashable : Any] = [:]
+        biCommonParams["blitzAppId"] = self.blitzAppId
+        biCommonParams["blitzDeviceId"] = self.blitzDeviceId
+        biCommonParams["platformCode"] = BlitzDeviceUtils.getPlatformCode()
+        biCommonParams["blitzSessionId"] = self.blitzSessionId
+        biCommonParams["appVersion"] = BlitzDeviceUtils.getAppVersion()
+        biCommonParams["timeZone"] = BlitzDeviceUtils.getTimeZone()
+        biCommonParams["ifa"] = BlitzDeviceUtils.getIDFA()
+        biCommonParams["ifv"] = BlitzDeviceUtils.getIFV()
+        biCommonParams["osId"] = BlitzDeviceUtils.getOSId()
+        biCommonParams["connDetails"] = BlitzDeviceUtils.getConnDetails()
+        biCommonParams["manufacturer"] = BlitzDeviceUtils.getManufacturer()
+        biCommonParams["deviceModel"] = BlitzDeviceUtils.getDeviceModel()
+        biCommonParams["carrierName"] = BlitzDeviceUtils.getCarrierName()
+        biCommonParams["adTrackingEnabled"] = BlitzDeviceUtils.getAdTrackingEnabled()
+        biCommonParams["appTrackingEnabled"] = BlitzDeviceUtils.getAppTrackingEnabled()
+        biCommonParams["userAgent"] = BlitzDeviceUtils.getUserAgent()
+        return biCommonParams
+    }
 
     private func getJSONData(forBatch batch: [[AnyHashable:Any]]?) -> Data? {
         var error: Error?
         var biDictionary: [AnyHashable : Any] = [:]
         biDictionary["events"] = batch
+        biDictionary["commonParams"] = self.getCommonParams()
+        
         var jsonData: Data? = nil
         do {
             jsonData = try JSONSerialization.data(withJSONObject: biDictionary, options: [])
@@ -468,14 +495,12 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
             }
             BlitzBiEventSendHandler.sendCrashlyticsError(withCode: BI_JSON_DATA_ERROR_CODE, withDescription: BI_JSON_DATA_ERROR, withUserInfo: (error as NSError?)?.userInfo)
         }
+        
+        let string1 = String(data: jsonData!, encoding: String.Encoding.utf8) ?? "Data could not be printed"
+        print(string1)
         return jsonData
     }
 
-    private func onDiffReceived() {
-        // check if app params are configured for this
-        //  forceSendAfterSeconds = [[AppParamModel getSharedInstance] getFloatValueWithKey:FLUSH_AFTER_APP_PARAM_KEY defaultValue:30];
-        //   maxPendingCount = [[AppParamModel getSharedInstance] getIntValueWithKey:MAX_BATCH_SIZE_APP_PARAM_KEY defaultValue:200];
-    }
 
     private class func sendCrashlyticsError(withCode code: Int, withDescription description: String?, withUserInfo userInfo: [AnyHashable : Any]?) {
         //  [Utility sendCrashlyticsErrorWithDomain:BUNDLE_IDENTIFIER withCode:code withDescription:description withUserInfo:userInfo];
@@ -498,5 +523,5 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
 
 
 struct BiResponse:Codable {
-    var status:String
+    
 }

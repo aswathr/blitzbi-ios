@@ -37,14 +37,4 @@ static NSInteger const BI_FILE_NOT_EXISTS_ERROR_CODE = 10006;
 static NSInteger const BI_UNARCHIVE_DATA_ERROR_CODE = 10007;
 static NSInteger const BI_FILE_REMOVAL_FAILURE_CODE = 10008;
 
-typedef NS_ENUM(NSInteger, ShowTypeSubtype) {
-    HostedDefault = 100,
-    HostedWithGuest = 110,
-    HostedWithChallenger = 120,
-    AutomatedDefault = 200,
-    AutomatedWithGuest = 210,
-    AutomatedWithChallenger = 220,
-    UserCreatedWithChallenger = 320
-};
-
 #endif /* BiConstants_h */

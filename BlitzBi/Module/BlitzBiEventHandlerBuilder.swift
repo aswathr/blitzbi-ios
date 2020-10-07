@@ -7,26 +7,25 @@
 
 import Foundation
 
-public class BlitzBiEventHandlerBuilder {
-    
-    private var batchSize:Int?
-    private var baseUrl:String?
-    private var eventsUrl:String?
-    private var biEventsDirectUrl:String?
+public class BlitzBIEventHandlerBuilder {
+    private var batchSize:Int!
+    private var baseUrl:String!
     private var networkService:PBlitzDataTransferService!
+    private var appId: Int!
+    private var appToken: String!
     
-    
-    public static func setParams(batchSize:Int, baseUrl: String?, eventsUrl: String?, biEventsDirectUrl: String?,networkService:PBlitzDataTransferService) -> BlitzBiEventHandlerBuilder {
-        let builder = BlitzBiEventHandlerBuilder()
+    public static func setParams(batchSize:Int, baseUrl: String, networkService:PBlitzDataTransferService, appId: Int, appToken: String) -> BlitzBIEventHandlerBuilder {
+        let builder = BlitzBIEventHandlerBuilder()
         builder.batchSize = batchSize
         builder.baseUrl = baseUrl
-        builder.eventsUrl = eventsUrl
-        builder.biEventsDirectUrl = biEventsDirectUrl
         builder.networkService = networkService
+        builder.appId = appId
+        builder.appToken = appToken
         return builder
     }
     
     public func build() -> PBlitzBiEventSendHandler {
-        return BlitzBiEventSendHandler(batchSize: batchSize ?? 60, baseUrl: baseUrl, eventsUrl: eventsUrl, biEventsDirectUrl: biEventsDirectUrl, eventRepository: BlitzBiEventRepository(networkService: networkService))
+        return BlitzBiEventSendHandler(batchSize: batchSize, baseUrl: baseUrl, eventRepository: BlitzBIEventRepository(networkService: networkService, appId: appId, appToken: appToken))
     }
 }
+
