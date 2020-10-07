@@ -8,24 +8,28 @@
 import Foundation
 
 class BlitzBiService {
-    private let baseUrls: BaseUrls
-    private let biNetworkService: PBlitzDataTransferService
-    private let biBuilder: PBlitzBiEventSendHandler
+    public static let shared = BlitzBiService()
+    
+    private var baseUrls: BaseUrls?
+    private var biNetworkService: PBlitzDataTransferService?
+    private var biBuilder: PBlitzBiEventSendHandler?
     private let baseUrl: String = "https://blitzbi-dev.useblitz.com/"
     
     private let BLITZ_DEVICE_ID_KEY: String = "BLITZ_DEVICE_ID_KEY"
     
-    init(appId: Int, appToken: String) {
+    private init(){}
+    
+    public func setUp(appId: Int, appToken: String) {
         self.baseUrls = BaseUrls(_BASE_URL: baseUrl)
-        self.biNetworkService = BlitzNetworkModuleBuilder.setParams(baseUrls:baseUrls).build()
-        self.biBuilder = BlitzBIEventHandlerBuilder.setParams(batchSize: 60, baseUrl: baseUrl, networkService: biNetworkService, appId: appId, appToken: appToken).build()
+        self.biNetworkService = BlitzNetworkModuleBuilder.setParams(baseUrls:baseUrls!).build()
+        self.biBuilder = BlitzBIEventHandlerBuilder.setParams(batchSize: 60, baseUrl: baseUrl, networkService: biNetworkService as! PBlitzDataTransferService, appId: appId, appToken: appToken).build()
         
         self.checkForDeviceId(appId: appId, appToken: appToken)
     }
     
     private func checkForDeviceId(appId: Int, appToken: String) {
         if let deviceId = UserDefaults.standard.string(forKey: BLITZ_DEVICE_ID_KEY) {
-            biBuilder.setBlitzdeviceId(appId, deviceId)
+            biBuilder?.setBlitzdeviceId(appId, deviceId)
         }  else {
             initialize(appId: appId, appToken: appToken)
         }
@@ -37,10 +41,11 @@ class BlitzBiService {
         let encoder = JSONEncoder()
         
         if let data = try? encoder.encode(deviceRequest) {
+            print(data)
             self.checkForDeviceId(appId: appId, appToken: appToken, data: data) { (response: BiDeviceResponse?, err: Error?) in
                 if (err == nil && response?.blitzDeviceId != nil) {
                     UserDefaults.standard.set(response?.blitzDeviceId, forKey: self.BLITZ_DEVICE_ID_KEY)
-                    self.biBuilder.setBlitzdeviceId(appId, deviceId)
+                    self.biBuilder?.setBlitzdeviceId(appId, deviceId)
                 }
             }
         }
@@ -60,7 +65,7 @@ class BlitzBiService {
         requestBuilder.reqType = BI_REQUEST
         requestBuilder.headers = headers
 
-        biNetworkService.executeServerCall(requestBuilder: requestBuilder, type: BiDeviceResponse.self, completionBlock: {result in
+        biNetworkService?.executeServerCall(requestBuilder: requestBuilder, type: BiDeviceResponse.self, completionBlock: {result in
           switch(result) {
           case .success(let result):
               completionHandler(result,nil)
@@ -70,15 +75,15 @@ class BlitzBiService {
         })
     }
     
-    func sendEvent(eventDict: [String : Any]?) {
+    public func sendEvent(eventDict: [String : Any]?) {
         if (eventDict != nil) {
-            biBuilder.sendEvent(eventDict)
+            biBuilder?.sendEvent(eventDict)
         }
     }
     
-    func sendEvents(_ events: [[String : Any]]?) {
+    public func sendEvents(_ events: [[String : Any]]?) {
         if (events != nil) {
-            biBuilder.sendEvents(events)
+            biBuilder?.sendEvents(events)
         }
     }
 }

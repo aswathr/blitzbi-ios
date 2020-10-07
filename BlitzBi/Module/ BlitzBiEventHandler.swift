@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 public protocol PBlitzBiEventSendHandler {
+    func flushEmergency()
     func sendEvent(_ eventDict: [String : Any]?)
     func sendEvents(_ events: [[String : Any]]?)
     func setBlitzdeviceId(_ appId: Int, _ deviceId: String)
@@ -23,7 +24,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     let MAX_BATCH_SIZE_APP_PARAM_KEY = "bi_max_batch_size"
     var maxPendingCount = 200
     var forceSendAfterSeconds = 30
-    let EVENTS_FILE_PATH = "bi-events.plist"
+    let EVENTS_FILE_PATH = "blitzbi-events.plist"
     var biConfig: BlitzBiConfig!
     
     private var serialQueue: DispatchQueue?
@@ -37,6 +38,8 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     private var blitzDeviceId: String?
     private var blitzAppId: Int?
     private var blitzSessionId: String!
+    
+    private var currentTimestamp: CLongLong = 0;
     
     public init(batchSize:Int, baseUrl: String?,eventRepository:IBlitzBIEventRepository ) {
         self.eventRepository = eventRepository
@@ -60,35 +63,55 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     }
     
     private func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onStart), name:
-            UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPause), name:
             UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onResume), name:
             UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onStop),name:
-            UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDestroy),name:
             UIApplication.willTerminateNotification, object: nil)
     }
     
-    @objc func onStart() {
-    }
-    
     @objc func onPause() {
+        print("BlitzBiEventSendHandler::onPause")
+        fireSessionLengthEvent()
+        fireSessionPauseEvent()
         startRepeatedTimerToAttemptFlush();
     }
 
     @objc func onResume() {
+        print("BlitzBiEventSendHandler::onResume")
+        currentTimestamp = getCurrentEpochTime()
+        fireSessionStartEvent()
         invalidateTimer();
     }
     
-    @objc func onStop() {
-        
+    @objc func onDestroy() {
+        print("BlitzBiEventSendHandler::onDestroy")
+        fireSessionLengthEvent()
+        fireSessionPauseEvent()
     }
     
-    @objc func onDestroy() {
-        
+    private func getCurrentEpochTime() -> CLongLong{
+        return CLongLong(Date().timeIntervalSince1970)
+    }
+    
+    private func fireSessionLengthEvent() {
+        var event: [String : Any] = [String : Any]()
+        event["eventName"] = "session_length"
+        event["session_length"] = getCurrentEpochTime() - currentTimestamp;
+        sendEvent(event)
+    }
+    
+    private func fireSessionStartEvent() {
+        var event: [String : Any] = [String : Any]()
+        event["eventName"] = "session_start"
+        sendEvent(event)
+    }
+    
+    private func fireSessionPauseEvent() {
+        var event: [String : Any] = [String : Any]()
+        event["eventName"] = "session_pause"
+        sendEvent(event)
     }
 
     @objc private func startRepeatedTimerToAttemptFlush() {
@@ -105,12 +128,12 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     }
 
     @objc private func timerTicked() {
-        printLogs(items: "[BI] timer ticked")
+        print("[BI] timer ticked")
         flush()
     }
 
-    private func flushEmergency() {
-        printLogs(items: "[BI] flushing all the events immediately without any response tracking")
+    public func flushEmergency() {
+        print("[BI] flushing all the events immediately without any response tracking")
         var eventsCopy: [[String:Any]]?
         let lockQueue = DispatchQueue(label: "self")
         lockQueue.sync {
@@ -196,7 +219,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
             lockQueue.sync {
                 eventsCopy = pendingEvents
             }
-            printLogs(items: String(format: "[BI] sending all the events with count %lu with blocking response tracking", eventsCopy?.count ?? 0))
+            print(String(format: "[BI] sending all the events with count %lu with blocking response tracking", eventsCopy?.count ?? 0))
             while (eventsCopy?.count ?? 0) > 0 {
                 let batchSize = Int(min(eventsCopy?.count ?? 0, maxPendingCount))
                 let batch = Array<[String:Any]>(eventsCopy?[0..<batchSize] ?? [])
@@ -212,7 +235,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
                                 didFail = true
                                 //Send error to crashlytics
                                 if let jsonData = jsonData, let err = err {
-                                    printLogs(items: "Error in getting response from server for jsondata \(jsonData) with error \(err)")
+                                    print("Error in getting response from server for jsondata \(jsonData) with error \(err)")
                                 }
                                 BlitzBiEventSendHandler.sendCrashlyticsError(withCode: BI_SERVER_ERROR_CODE, withDescription: BI_SERVER_ERROR, withUserInfo: (err as NSError?)?.userInfo)
                             }
@@ -224,7 +247,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
                             break
                         }
 
-                        printLogs(items: String(format: "[BI] the batch containing %lu events sent successfully, going to remove it from pending events", batch.count ))
+                        print(String(format: "[BI] the batch containing %lu events sent successfully, going to remove it from pending events", batch.count ))
                         eventsCopy = self.removeFromOneArrayIfPresentInOther(first: eventsCopy ?? [[:]], second: batch)
                         let lockQueue = DispatchQueue(label: "self")
                         lockQueue.sync {
@@ -242,7 +265,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
             }
         }
         catch {
-            printLogs(items: error)
+            print(error)
         }
         defer {
             isBlockSubmittedToNetworkQueue = false
@@ -266,7 +289,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         lockQueue.sync {
             let filePath = eventsFilePath()
             if !archiveObject(pendingEvents, withFilePath: filePath) {
-                printLogs(items: "[BI] could not archive pending events")
+                print("[BI] could not archive pending events")
             }
         }
     }
@@ -291,12 +314,14 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
 
         lockQueue.sync {
             pendingEvents = self.removeFromOneArrayIfPresentInOther(first: pendingEvents ?? [[:]], second:   defectiveEvents)
+                //pendingEvents?.filter({ !defectiveEvents.contains($0)})
+                //[] pendingEvents?.removeObjects(inArray: defectiveEvents)
         }
 
         //Recording crashlytics error
         let defectiveEventsNames = (defectiveEvents as? NSMutableArray)?.value(forKeyPath: BLITZ_EVENT_NAME_TAG) as? [String]
         let commaSeparatedNames = defectiveEventsNames?.joined(separator: ", ")
-        printLogs(items: String(format: "[BI] defective events with names: %@, and total defective count: %lu, removed from pending events.", commaSeparatedNames ?? "", defectiveEvents.count))
+        print(String(format: "[BI] defective events with names: %@, and total defective count: %lu, removed from pending events.", commaSeparatedNames ?? "", defectiveEvents.count))
         BlitzBiEventSendHandler.sendCrashlyticsError(
             withCode: BI_JSON_DATA_ERROR_CODE,
             withDescription: BI_JSON_DATA_ERROR,
@@ -347,7 +372,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
                 try (url as NSURL).setResourceValue(NSNumber(value: true), forKey: .isExcludedFromBackupKey)
                 success = true
             } catch {
-                printLogs(items: "[BI] Error in excluding \(url.lastPathComponent) from backup \(error)")
+                print("[BI] Error in excluding \(url.lastPathComponent) from backup \(error)")
                 var userInfo = (error as NSError?)?.userInfo
                 userInfo?[FILE_NAME] = url.lastPathComponent
                 BlitzBiEventSendHandler.sendCrashlyticsError(withCode: BI_EXCLUDING_FROM_BACKUP_ERROR_CODE, withDescription: BI_EXCLUDING_FROM_BACKUP_ERROR, withUserInfo: userInfo)
@@ -427,7 +452,8 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         }
         let isPendingEventsCrossedMaxLimit = pendingEventsCount >= maxPendingCount
         let hasTimeCrossedCooldown = Date().timeIntervalSince1970 > nextFlushTime
-        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
+//        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
+        return true
     }
     
     private func isAppIdAvailable() -> Bool {
@@ -484,19 +510,19 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
 
         if jsonData == nil || error != nil {
             if let error = error {
-                printLogs(items: "Error in getting json data for batch \(batch ?? []) with error \(error)")
+                print("Error in getting json data for batch \(batch ?? []) with error \(error)")
             }
             BlitzBiEventSendHandler.sendCrashlyticsError(withCode: BI_JSON_DATA_ERROR_CODE, withDescription: BI_JSON_DATA_ERROR, withUserInfo: (error as NSError?)?.userInfo)
         }
         
-        let string1 = String(data: jsonData!, encoding: String.Encoding.utf8) ?? "Data could not be printLogsed"
-        printLogs(items: string1)
+        let string1 = String(data: jsonData!, encoding: String.Encoding.utf8) ?? "Data could not be printed"
+        print(string1)
         return jsonData
     }
 
 
     private class func sendCrashlyticsError(withCode code: Int, withDescription description: String?, withUserInfo userInfo: [AnyHashable : Any]?) {
-        
+        //  [Utility sendCrashlyticsErrorWithDomain:BUNDLE_IDENTIFIER withCode:code withDescription:description withUserInfo:userInfo];
     }
     
     private func removeFromOneArrayIfPresentInOther(first:[[String:Any]], second:[[String:Any]]) -> [[String:Any]] {
@@ -511,10 +537,6 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
             i = i+1
         }
         return result
-    }
-    
-    private func printLogs(items: Any...){
-        print(items)
     }
 }
 
