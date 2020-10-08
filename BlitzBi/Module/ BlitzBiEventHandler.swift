@@ -17,7 +17,6 @@ public protocol PBlitzBiEventSendHandler {
 }
 
 class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
-    let COMMON_FIELD_3 = "common_field_3"
     let FILE_NAME = "filename"
 
     let FLUSH_AFTER_APP_PARAM_KEY = "bi_flush_after_secs"
@@ -389,9 +388,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         pendingEvents = BlitzBiEventSendHandler.unarchiveOrDefault(fromFile: eventsFilePath(), as: NSMutableArray.self) as? [[String:Any]]
         var newPendingEvents: [[String:Any]] = [[:]]
         for event in pendingEvents ?? [[:]] {
-            var eventDict = event
-            eventDict[COMMON_FIELD_3] = "1"
-            newPendingEvents.append(eventDict)
+            newPendingEvents.append(event)
         }
         pendingEvents = newPendingEvents
     }
@@ -452,8 +449,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         }
         let isPendingEventsCrossedMaxLimit = pendingEventsCount >= maxPendingCount
         let hasTimeCrossedCooldown = Date().timeIntervalSince1970 > nextFlushTime
-//        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
-        return true
+        return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown
     }
     
     private func isAppIdAvailable() -> Bool {
@@ -519,7 +515,6 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         print(string1)
         return jsonData
     }
-
 
     private class func sendCrashlyticsError(withCode code: Int, withDescription description: String?, withUserInfo userInfo: [AnyHashable : Any]?) {
         //  [Utility sendCrashlyticsErrorWithDomain:BUNDLE_IDENTIFIER withCode:code withDescription:description withUserInfo:userInfo];
