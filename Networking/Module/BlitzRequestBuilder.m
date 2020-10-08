@@ -10,7 +10,7 @@
 #import "BlitzStringConstant.h"
 #import "BlitzCommonConstant.h"
 #import "BlitzStringUtils.h"
-#import "BlitzKiwiParser.h"
+#import "BlitzParser.h"
 
 @implementation BlitzRequestBuilder
 
@@ -123,11 +123,11 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
         NSString *contentType = [self getContentType];
         if (_shouldEncryptRequestBody) {
             NSString *str = [[NSString alloc] initWithData:httpBodyToSet encoding:NSUTF8StringEncoding];
-            NSData *wrappedBody = [BlitzKiwiParser wrap:str withDetailsOne:[self detailsOne] andDetailsTwo:[self detailsTwo]];
+            NSData *wrappedBody = [BlitzParser wrap:str withDetailsOne:[self detailsOne] andDetailsTwo:[self detailsTwo]];
             if (wrappedBody) {
                 str = [wrappedBody base64EncodedStringWithOptions:0];
                 httpBodyToSet = [str dataUsingEncoding:NSUTF8StringEncoding];
-                [request addValue:@"enabled" forHTTPHeaderField:@"Kiwi-Decryption"];
+                [request addValue:@"enabled" forHTTPHeaderField:@"Blitz-Decryption"];
                 contentType = @"text/plain";
             }
         }
@@ -140,7 +140,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 }
 
 - (BOOL)isWhitelisted:(NSString *)url {
-    NSArray<NSString *> *whiteListedDomains = @[KIWI_DOMAIN, RUMMY_DOMAIN];
+    NSArray<NSString *> *whiteListedDomains = @[];
     
     for (NSString *domain in whiteListedDomains) {
         if ([url rangeOfString:domain].location != NSNotFound)
@@ -189,7 +189,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 
 //The following can vary with request to request, so adding them as class methods
 - (NSString *)detailsOne {
-    NSString *detail = KIWI_P_D1_C1;
+    NSString *detail = BLITZ_P_D1_C1;
     detail = [[detail stringByAppendingString:K_PARSER_D1_C2] stringByAppendingFormat:@"%@%@",K_P_DETAILS1_C3,K_P_D1_CHUNK4];
     detail = [[detail stringByAppendingFormat:@"%@",KIWI2_P_D1_C1] stringByAppendingString:K2_PARSER_D1_C2];
     detail = [[detail stringByAppendingString:K2_P_DETAILS1_C3] stringByAppendingString:K2_P_D1_CHUNK4];
@@ -197,7 +197,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 }
 
 - (NSString *)detailsTwo {
-    NSString *detail = KIWI_P_D2_C1;
+    NSString *detail = BLITZ_P_D2_C1;
     detail = [[detail stringByAppendingString:K_PARSER_D2_C2] stringByAppendingFormat:@"%@%@",K_P_DETAILS2_C3,K_P_D2_CHUNK4];
     detail = [[detail stringByAppendingFormat:@"%@",KIWI2_P_D2_C1] stringByAppendingString:K2_PARSER_D2_C2];
     detail = [[detail stringByAppendingString:K2_P_DETAILS2_C3] stringByAppendingString:K2_P_D2_CHUNK4];

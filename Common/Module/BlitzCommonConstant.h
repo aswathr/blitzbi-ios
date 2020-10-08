@@ -32,11 +32,9 @@ static NSString * _Nonnull const IS_ADMIN_MODE_DISABLED = @"isAdminModeDisabled"
 static NSString * _Nonnull const HASH_KEY = @"hashKey";
 static NSString * _Nonnull const JWT = @"jwt";
 
-static NSString * _Nonnull const KIWI_DEVICE_ID_KEY = @"kiwiDeviceId";
-
 ////Will Add up these details
-static NSString * _Nonnull const KIWI_P_D1_C1 = @"NuW9";
-static NSString * _Nonnull const KIWI_P_D2_C1 = @"6N";
+static NSString * _Nonnull const BLITZ_P_D1_C1 = @"NuW9";
+static NSString * _Nonnull const BLITZ_P_D2_C1 = @"6N";
 static NSString * _Nonnull const K_PARSER_D1_C2= @"cG5C";
 static NSString * _Nonnull const K_PARSER_D2_C2= @"uz";
 static NSString * _Nonnull const K_P_DETAILS1_C3= @"dd7c";
@@ -46,7 +44,7 @@ static NSString * _Nonnull const K_P_D2_CHUNK4= @"tr";
 
 static NSString * _Nonnull const USER_DEFAULTS_APPENDER = @",";
 
-static NSInteger const KIWI_DOWN_TIME_STATUS_CODE = 459;
+static NSInteger const BLITZ_DOWN_TIME_STATUS_CODE = 459;
 
 static NSString * _Nonnull const SERVER_CALL_SENT_NOTIFICATION = @"SERVER_CALL_SENT_NOTIFICATION";
 

@@ -9,7 +9,7 @@ import Foundation
 
 public protocol PBlitzDataTransferService {
     var serverConfig:PBlitzServerConfig { get set }
-    func executeServerCall<T:Decodable>(requestBuilder:BlitzRequestBuilder,type:T.Type, completionBlock:@escaping(Result<T, BlitzKiwiError>) -> Void);
+    func executeServerCall<T:Decodable>(requestBuilder:BlitzRequestBuilder,type:T.Type, completionBlock:@escaping(Result<T, BlitzError>) -> Void);
     func executeServerCallWithNoCallBack(requestBuilder:BlitzRequestBuilder)
 }
 
@@ -40,7 +40,7 @@ class BlitzNetworkDataTransferService:NSObject,PBlitzDataTransferService {
     }
     
     public func executeServerCall<T:Decodable>(requestBuilder: BlitzRequestBuilder,type:T.Type,
-                                               completionBlock: @escaping(Result<T, BlitzKiwiError>) -> Void) {
+                                               completionBlock: @escaping(Result<T, BlitzError>) -> Void) {
         serverHandler.serverCall(requestBuilder, withCompletionBlock: {(data,error) -> Void in
             var isBlockReturned = false
             if error == nil && data != nil {
@@ -51,14 +51,14 @@ class BlitzNetworkDataTransferService:NSObject,PBlitzDataTransferService {
             }
             else {
                 if data != nil {
-                    if let error:BlitzKiwiError = try? self.getDecodedObject(data: data!) {
+                    if let error:BlitzError = try? self.getDecodedObject(data: data!) {
                         completionBlock(Result.failure(error))
                          isBlockReturned = true
                     }
                 }
             }
             if (!isBlockReturned) {
-                completionBlock(Result.failure(BlitzKiwiError(httpStatusCode:500)))
+                completionBlock(Result.failure(BlitzError(httpStatusCode:500)))
             }
         })
     }

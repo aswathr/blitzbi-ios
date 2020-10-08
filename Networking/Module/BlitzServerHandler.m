@@ -67,7 +67,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 }
 
 - (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withStatusCode:(NSInteger)statusCode {
-    BOOL isDownTime = statusCode == KIWI_DOWN_TIME_STATUS_CODE;
+    BOOL isDownTime = statusCode == BLITZ_DOWN_TIME_STATUS_CODE;
     [self onHttpResponse:response forRequestBuilder:request error:err withAlertVisibility:!isDownTime];
 }
 
@@ -133,7 +133,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
         // If the request is a BI REQUEST, we have done enough retries and processing, return here
         // No need to add to pendingrequests, ignoring this request is the best case we can do
-        if ((/*([request.baseUrl hasPrefix: serverConfig.BASE_URL] || request.isShowForbiddenError) &&*/ httpResponseCode != nil && ([httpResponseCode isEqualToString: @"401"] || [httpResponseCode isEqualToString: @"451"] || [httpResponseCode isEqualToString:FORBIDDED_ERROR_CODE])) || (request.reqType != BI_REQUEST && request.reqType != ERROR_FREE_REQUEST && request.reqType != PARALLEL_ERROR_FREE_REQUEST)) {
+        if ((httpResponseCode != nil && ([httpResponseCode isEqualToString: @"401"] || [httpResponseCode isEqualToString: @"451"] || [httpResponseCode isEqualToString:FORBIDDED_ERROR_CODE])) || (request.reqType != BI_REQUEST && request.reqType != ERROR_FREE_REQUEST && request.reqType != PARALLEL_ERROR_FREE_REQUEST)) {
 
             /*show connection error dialog*/
             

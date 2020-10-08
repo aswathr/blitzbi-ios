@@ -33,7 +33,6 @@ typedef void (^HTTPRequestResponseBlock)(NSObject *response, NSError *error);
 @property NSMutableDictionary *multipartParameters;
 @property NSMutableDictionary *multipartData;
 @property BOOL shouldEncryptRequestBody;
-@property BOOL isShowForbiddenError; // This is for error free requests to show 4xx generic response popup
 
 @property (nonatomic, assign) RequestType reqType;
 @property (weak) id<ResponseListener> responseListener;

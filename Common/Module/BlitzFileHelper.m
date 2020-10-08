@@ -252,8 +252,6 @@
     static NSURL *documentsDirectoryURL;
     static dispatch_once_t onceInput;
     dispatch_once(&onceInput, ^{
-        //https://fabric.io/kiwi110/ios/apps/com.kiwi.joyride/issues/33df722093fe5dc44290177c4588fc1e/sessions/2c7a60a1bada4962a7701a06edfcaaa0_DNE_0_v2?
-        //https://fabric.io/kiwi110/ios/apps/com.kiwi.joyride/issues/c70319f06fa2555fa2effb6476a40e1d/sessions/latest
         documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:directory inDomain:NSUserDomainMask appropriateForURL:nil create:shouldCreate error:nil];
     });
     

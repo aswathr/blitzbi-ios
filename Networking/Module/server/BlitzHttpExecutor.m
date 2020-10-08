@@ -9,7 +9,7 @@
 #import "BlitzHttpExecutor.h"
 #import "BlitzRequestBuilder.h"
 #import "BlitzConfig.h"
-#import "BlitzKiwiParser.h"
+#import "BlitzParser.h"
 
 @implementation BlitzHttpExecutor
 
@@ -118,7 +118,7 @@
     }
     
     [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    [request setValue:@"v1" forHTTPHeaderField:@"Kiwi-Encoding"];
+    [request setValue:@"v1" forHTTPHeaderField:@"Blitz-Encoding"];
 
     if (requestBuilder.headers) {
         for (NSString *key in requestBuilder.headers) {
@@ -157,15 +157,15 @@
     }
 
     //check if the response body is encrypted using response headers
-    NSString *kiwiEncryptionHeader = (NSString *)[headers objectForKey:@"Kiwi-Encryption"];
+    NSString *blitzEncryptionHeader = (NSString *)[headers objectForKey:@"Blitz-Encryption"];
     if (error == nil
-        && kiwiEncryptionHeader
-        && [kiwiEncryptionHeader isEqualToString:@"enabled"]
+        && blitzEncryptionHeader
+        && [blitzEncryptionHeader isEqualToString:@"enabled"]
         && [responseObject isKindOfClass:NSArray.class] && [(NSArray *)responseObject count] > 0) {
 
         //Decrypt the body
         NSString *encryptedResponseObjectStr = (NSString *)[(NSArray *)responseObject objectAtIndex:0];
-        NSData *responseData = [BlitzKiwiParser parse:encryptedResponseObjectStr withDetailsOne:[requestBuilder detailsOne] andDetailsTwo:[requestBuilder detailsTwo]];
+        NSData *responseData = [BlitzParser parse:encryptedResponseObjectStr withDetailsOne:[requestBuilder detailsOne] andDetailsTwo:[requestBuilder detailsTwo]];
         responseObjectToSubmit = [NSJSONSerialization JSONObjectWithData:responseData
                                                                  options:kNilOptions
                                                                    error:&error];

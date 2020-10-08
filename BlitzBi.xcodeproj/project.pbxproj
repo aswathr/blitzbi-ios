@@ -38,8 +38,8 @@
 		844A0F1C252473C500D8529B /* BlitzHttpResponseListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F19252473C500D8529B /* BlitzHttpResponseListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0F1D252473C500D8529B /* BlitzHttpExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0F1A252473C500D8529B /* BlitzHttpExecutor.m */; };
 		844A0F1E252473C500D8529B /* BlitzHttpExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F1B252473C500D8529B /* BlitzHttpExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		844A0F24252473FC00D8529B /* BlitzKiwiParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F22252473FC00D8529B /* BlitzKiwiParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		844A0F25252473FC00D8529B /* BlitzKiwiParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0F23252473FC00D8529B /* BlitzKiwiParser.m */; };
+		844A0F24252473FC00D8529B /* BlitzParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F22252473FC00D8529B /* BlitzParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		844A0F25252473FC00D8529B /* BlitzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0F23252473FC00D8529B /* BlitzParser.m */; };
 		84B3111E252DCB6E0051016E /* BlitzDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */; };
 		84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111B252DCB6E0051016E /* BlitzReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111C252DCB6E0051016E /* BlitzReachability.m */; };
@@ -79,15 +79,13 @@
 		844A0ED925246A3300D8529B /* BlitzError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzError.swift; path = Module/BlitzError.swift; sourceTree = "<group>"; };
 		844A0EDA25246A3300D8529B /* BlitzServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzServerHandler.h; path = Module/BlitzServerHandler.h; sourceTree = "<group>"; };
 		844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzRequestBuilder.m; path = Module/BlitzRequestBuilder.m; sourceTree = "<group>"; };
-		844A0EDE25246A3300D8529B /* onsequel-am.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onsequel-am.cer"; path = "Module/onsequel-am.cer"; sourceTree = "<group>"; };
 		844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PBlitzDataTransferService.swift; path = Module/PBlitzDataTransferService.swift; sourceTree = "<group>"; };
-		844A0EE025246A3300D8529B /* onsequel.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = onsequel.cer; path = Module/onsequel.cer; sourceTree = "<group>"; };
 		844A0EE125246A3300D8529B /* BlitzServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzServerHandler.m; path = Module/BlitzServerHandler.m; sourceTree = "<group>"; };
 		844A0F19252473C500D8529B /* BlitzHttpResponseListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzHttpResponseListener.h; path = Networking/Module/server/BlitzHttpResponseListener.h; sourceTree = SOURCE_ROOT; };
 		844A0F1A252473C500D8529B /* BlitzHttpExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzHttpExecutor.m; path = Networking/Module/server/BlitzHttpExecutor.m; sourceTree = SOURCE_ROOT; };
 		844A0F1B252473C500D8529B /* BlitzHttpExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzHttpExecutor.h; path = Networking/Module/server/BlitzHttpExecutor.h; sourceTree = SOURCE_ROOT; };
-		844A0F22252473FC00D8529B /* BlitzKiwiParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzKiwiParser.h; path = Networking/Module/server/security/BlitzKiwiParser.h; sourceTree = SOURCE_ROOT; };
-		844A0F23252473FC00D8529B /* BlitzKiwiParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzKiwiParser.m; path = Networking/Module/server/security/BlitzKiwiParser.m; sourceTree = SOURCE_ROOT; };
+		844A0F22252473FC00D8529B /* BlitzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzParser.h; path = Networking/Module/server/security/BlitzParser.h; sourceTree = SOURCE_ROOT; };
+		844A0F23252473FC00D8529B /* BlitzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzParser.m; path = Networking/Module/server/security/BlitzParser.m; sourceTree = SOURCE_ROOT; };
 		84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzDeviceUtils.m; path = Module/BlitzDeviceUtils.m; sourceTree = "<group>"; };
 		84B3111B252DCB6E0051016E /* BlitzReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzReachability.h; path = Module/BlitzReachability.h; sourceTree = "<group>"; };
 		84B3111C252DCB6E0051016E /* BlitzReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzReachability.m; path = Module/BlitzReachability.m; sourceTree = "<group>"; };
@@ -150,8 +148,6 @@
 			children = (
 				844A0F18252473AF00D8529B /* server */,
 				844A0ED925246A3300D8529B /* BlitzError.swift */,
-				844A0EDE25246A3300D8529B /* onsequel-am.cer */,
-				844A0EE025246A3300D8529B /* onsequel.cer */,
 				844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */,
 				844A0ED625246A3200D8529B /* BlitzRequestBuilder.h */,
 				844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */,
@@ -202,8 +198,8 @@
 		844A0F21252473EE00D8529B /* security */ = {
 			isa = PBXGroup;
 			children = (
-				844A0F22252473FC00D8529B /* BlitzKiwiParser.h */,
-				844A0F23252473FC00D8529B /* BlitzKiwiParser.m */,
+				844A0F22252473FC00D8529B /* BlitzParser.h */,
+				844A0F23252473FC00D8529B /* BlitzParser.m */,
 			);
 			path = security;
 			sourceTree = "<group>";
@@ -222,7 +218,7 @@
 				844A0F1C252473C500D8529B /* BlitzHttpResponseListener.h in Headers */,
 				844A0EB8252469F300D8529B /* BlitzFileCacheHelper.h in Headers */,
 				844A0F1E252473C500D8529B /* BlitzHttpExecutor.h in Headers */,
-				844A0F24252473FC00D8529B /* BlitzKiwiParser.h in Headers */,
+				844A0F24252473FC00D8529B /* BlitzParser.h in Headers */,
 				844A0EC8252469F300D8529B /* BlitzStringConstant.h in Headers */,
 				844A0EBD252469F300D8529B /* BlitzKWConcurrentDictionary.h in Headers */,
 				844A0E8C252467C300D8529B /* BlitzBiConfig.h in Headers */,
@@ -323,7 +319,7 @@
 				844A0EE525246A3300D8529B /* BlitzError.swift in Sources */,
 				844A0ECE252469F300D8529B /* BlitzConfig.m in Sources */,
 				844A0ECA252469F300D8529B /* BlitzFileCacheHelper.m in Sources */,
-				844A0F25252473FC00D8529B /* BlitzKiwiParser.m in Sources */,
+				844A0F25252473FC00D8529B /* BlitzParser.m in Sources */,
 				844A0E88252467C300D8529B /* BlitzBiConfig.m in Sources */,
 				844A0E8D252467C300D8529B /* BlitzBiEventHandlerBuilder.swift in Sources */,
 				844A0EC4252469F300D8529B /* BlitzEnvType.swift in Sources */,

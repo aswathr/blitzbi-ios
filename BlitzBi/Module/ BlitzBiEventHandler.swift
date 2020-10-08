@@ -19,8 +19,6 @@ public protocol PBlitzBiEventSendHandler {
 class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     let FILE_NAME = "filename"
 
-    let FLUSH_AFTER_APP_PARAM_KEY = "bi_flush_after_secs"
-    let MAX_BATCH_SIZE_APP_PARAM_KEY = "bi_max_batch_size"
     var maxPendingCount = 200
     var forceSendAfterSeconds = 30
     let EVENTS_FILE_PATH = "blitzbi-events.plist"
@@ -28,7 +26,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     
     private var serialQueue: DispatchQueue?
     private var networkQueue: DispatchQueue?
-    var pendingEvents: [[String : Any]]?
+    private var pendingEvents: [[String : Any]]?
     private var biEventFireTimer: Timer?
     private var nextFlushTime: TimeInterval = 0.0
     private var isBlockSubmittedToNetworkQueue = false
@@ -313,8 +311,6 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
 
         lockQueue.sync {
             pendingEvents = self.removeFromOneArrayIfPresentInOther(first: pendingEvents ?? [[:]], second:   defectiveEvents)
-                //pendingEvents?.filter({ !defectiveEvents.contains($0)})
-                //[] pendingEvents?.removeObjects(inArray: defectiveEvents)
         }
 
         //Recording crashlytics error

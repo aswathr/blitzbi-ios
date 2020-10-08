@@ -6,10 +6,10 @@
 //  Copyright © 2019 Kiwi, Inc. All rights reserved.
 //
 
-#import "BlitzKiwiParser.h"
+#import "BlitzParser.h"
 #import <CommonCrypto/CommonCrypto.h>
 
-@implementation BlitzKiwiParser
+@implementation BlitzParser
 
 //Taken from - https://github.com/skavinvarnan/Cross-Platform-AES/blob/master/iOS/CryptLib.m
 + (NSData *)parse:(NSString *)encryptedStr withDetailsOne:(NSString *)key andDetailsTwo:(NSString *)iv {

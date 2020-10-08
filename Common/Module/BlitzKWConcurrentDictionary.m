@@ -23,7 +23,7 @@
 
 - (instancetype)initWithCapacity:(NSUInteger)capacity {
     if (self = [super init]) {
-        accessQueue = dispatch_queue_create("com.kiwi.concurrentDictQueue", DISPATCH_QUEUE_CONCURRENT);
+        accessQueue = dispatch_queue_create("com.blitz.concurrentDictQueue", DISPATCH_QUEUE_CONCURRENT);
         underlyingDict = [[NSMutableDictionary alloc] initWithCapacity:capacity];
     }
     return self;
@@ -31,7 +31,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     if (self = [super init]) {
-        accessQueue = dispatch_queue_create("com.kiwi.concurrentDictQueue", DISPATCH_QUEUE_CONCURRENT);
+        accessQueue = dispatch_queue_create("com.blitz.concurrentDictQueue", DISPATCH_QUEUE_CONCURRENT);
         underlyingDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
     }
     return self;
