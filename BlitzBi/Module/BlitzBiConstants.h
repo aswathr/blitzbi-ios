@@ -13,6 +13,8 @@ static NSString *const BLITZ_EVENT_NAME_TAG = @"eventName";
 static NSString *const EXCEPTION_NAME = @"exceptionName";
 static NSString *const EXCEPTION_REASON = @"exceptionReason";
 
+static NSString *const BLITZ_DEVICE_ID_KEY = @"BLITZ_DEVICE_ID_KEY";
+
 static NSString *const FILE_NAME_TAG = @"filename";
 
 static NSString *const BI_JSON_DATA_ERROR = @"bi_json_data_error";
@@ -23,6 +25,7 @@ static NSString *const BI_UNARCHIVE_DATA_ERROR = @"bi_unarchive_data_error";
 static NSString *const BI_EXCLUDING_FROM_BACKUP_ERROR = @"bi_excluding_from_backup_error";
 static NSString *const BI_FILE_NOT_EXISTS_ERROR = @"bi_file_not_exists_error";
 static NSString *const BI_FILE_REMOVAL_FAILURE = @"bi_file_removal_failure";
+
 
 static NSString *const BAD_EVENTS_NAMES = @"bad_events_names";
 static NSString *const BAD_EVENTS_COUNT = @"bad_events_count";

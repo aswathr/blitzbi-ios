@@ -14,9 +14,7 @@ class BlitzBiService {
     private var biNetworkService: PBlitzDataTransferService?
     private var biBuilder: PBlitzBiEventSendHandler?
     private let baseUrl: String = "https://blitzbi-dev.useblitz.com/"
-    
-    private let BLITZ_DEVICE_ID_KEY: String = "BLITZ_DEVICE_ID_KEY"
-    
+        
     private init(){}
     
     public func setUp(appId: Int, appToken: String) {
@@ -44,7 +42,7 @@ class BlitzBiService {
             print(data)
             self.checkForDeviceId(appId: appId, appToken: appToken, data: data) { (response: BiDeviceResponse?, err: Error?) in
                 if (err == nil && response?.blitzDeviceId != nil) {
-                    UserDefaults.standard.set(response?.blitzDeviceId, forKey: self.BLITZ_DEVICE_ID_KEY)
+                    UserDefaults.standard.set(response?.blitzDeviceId, forKey: BLITZ_DEVICE_ID_KEY)
                     self.biBuilder?.setBlitzdeviceId(appId, deviceId)
                 }
             }
