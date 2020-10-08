@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 public protocol PBlitzBiEventSendHandler {
-    func flushEmergency()
     func sendEvent(_ eventDict: [String : Any]?)
     func sendEvents(_ events: [[String : Any]]?)
     func setBlitzdeviceId(_ appId: Int, _ deviceId: String)
@@ -84,6 +83,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
     
     @objc func onDestroy() {
         print("BlitzBiEventSendHandler::onDestroy")
+        flushEmergency()
         fireSessionLengthEvent()
         fireSessionPauseEvent()
     }
@@ -129,7 +129,7 @@ class BlitzBiEventSendHandler:NSObject, PBlitzBiEventSendHandler {
         flush()
     }
 
-    public func flushEmergency() {
+    private func flushEmergency() {
         print("[BI] flushing all the events immediately without any response tracking")
         var eventsCopy: [[String:Any]]?
         let lockQueue = DispatchQueue(label: "self")

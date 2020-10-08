@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8421669E252C816000E2017C /*  BlitzBiEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421669D252C816000E2017C /*  BlitzBiEventHandler.swift */; };
+		8421669E252C816000E2017C /* BlitzBiEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421669D252C816000E2017C /* BlitzBiEventHandler.swift */; };
 		843BB7C125245195007272D9 /* BlitzBi.h in Headers */ = {isa = PBXBuildFile; fileRef = 843BB7BF25245195007272D9 /* BlitzBi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0E86252467C300D8529B /* BlitzBiEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0E7E252467C300D8529B /* BlitzBiEventRepository.swift */; };
 		844A0E87252467C300D8529B /* BlitzBiEventData.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0E7F252467C300D8529B /* BlitzBiEventData.m */; };
@@ -51,7 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8421669D252C816000E2017C /*  BlitzBiEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = " BlitzBiEventHandler.swift"; path = "Module/ BlitzBiEventHandler.swift"; sourceTree = "<group>"; };
+		8421669D252C816000E2017C /* BlitzBiEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzBiEventHandler.swift; path = Module/BlitzBiEventHandler.swift; sourceTree = "<group>"; };
 		843BB7BC25245195007272D9 /* BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843BB7BF25245195007272D9 /* BlitzBi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlitzBi.h; sourceTree = "<group>"; };
 		843BB7C025245195007272D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				84B31125252DCBF20051016E /* BlitzBiService.swift */,
-				8421669D252C816000E2017C /*  BlitzBiEventHandler.swift */,
+				8421669D252C816000E2017C /* BlitzBiEventHandler.swift */,
 				844A0E84252467C300D8529B /* BlitzBiConfig.h */,
 				844A0E80252467C300D8529B /* BlitzBiConfig.m */,
 				844A0E82252467C300D8529B /* BlitzBiConstants.h */,
@@ -306,7 +306,7 @@
 				844A0EED25246A3300D8529B /* BlitzServerHandler.m in Sources */,
 				844A0EE325246A3300D8529B /* BlitzServerConfig.swift in Sources */,
 				844A0EEB25246A3300D8529B /* PBlitzDataTransferService.swift in Sources */,
-				8421669E252C816000E2017C /*  BlitzBiEventHandler.swift in Sources */,
+				8421669E252C816000E2017C /* BlitzBiEventHandler.swift in Sources */,
 				844A0EC0252469F300D8529B /* BlitzFileHelper.m in Sources */,
 				84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */,
 				84B31126252DCBF20051016E /* BlitzBiService.swift in Sources */,
@@ -472,7 +472,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.BlitzBi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -502,7 +502,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.BlitzBi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
