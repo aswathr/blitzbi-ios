@@ -36,7 +36,9 @@ Pod::Spec.new do |spec|
   }
   spec.author       		= "Akash Chetty"
   spec.platform     		= :ios, "11.0"
-  spec.source     		= { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version}" }
+  spec.source     		= { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
   spec.swift_version 		= "5.0"
-  spec.source_files  		= "BlitzBi/**/*.{h,m,swift}"
+  spec.source_files  		= "**/**/*.{h,m,swift}"
+  spec.public_header_files 	= "**/**/*.h"
+  spec.exclude_files 		= "BlitzBi/BlitzBi/*.plist"
 end
