@@ -4,7 +4,4 @@
    <FileRef
       location = "group:/Users/admin/IOS Projects/BI/BlitzBi.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
 </Workspace>

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,6 +40,8 @@
 		844A0F1E252473C500D8529B /* BlitzHttpExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F1B252473C500D8529B /* BlitzHttpExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0F24252473FC00D8529B /* BlitzParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 844A0F22252473FC00D8529B /* BlitzParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		844A0F25252473FC00D8529B /* BlitzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0F23252473FC00D8529B /* BlitzParser.m */; };
+		849B7A13252F173D00A0D63C /* BlitzBiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A12252F173D00A0D63C /* BlitzBiTests.swift */; };
+		849B7A15252F173D00A0D63C /* BlitzBi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BB7BC25245195007272D9 /* BlitzBi.framework */; platformFilter = ios; };
 		84B3111E252DCB6E0051016E /* BlitzDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */; };
 		84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111B252DCB6E0051016E /* BlitzReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111C252DCB6E0051016E /* BlitzReachability.m */; };
@@ -49,6 +51,16 @@
 		84CE9C05252B052900D0E48F /* BlitzCommonConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CE9C02252B052900D0E48F /* BlitzCommonConstant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CE9C06252B052900D0E48F /* BlitzStringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CE9C03252B052900D0E48F /* BlitzStringUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		849B7A16252F173D00A0D63C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 843BB7B325245195007272D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 843BB7BB25245195007272D9;
+			remoteInfo = BlitzBi;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8421669D252C816000E2017C /* BlitzBiEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzBiEventHandler.swift; path = Module/BlitzBiEventHandler.swift; sourceTree = "<group>"; };
@@ -86,6 +98,9 @@
 		844A0F1B252473C500D8529B /* BlitzHttpExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzHttpExecutor.h; path = Networking/Module/server/BlitzHttpExecutor.h; sourceTree = SOURCE_ROOT; };
 		844A0F22252473FC00D8529B /* BlitzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzParser.h; path = Networking/Module/server/security/BlitzParser.h; sourceTree = SOURCE_ROOT; };
 		844A0F23252473FC00D8529B /* BlitzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzParser.m; path = Networking/Module/server/security/BlitzParser.m; sourceTree = SOURCE_ROOT; };
+		849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlitzBiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		849B7A12252F173D00A0D63C /* BlitzBiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzBiTests.swift; sourceTree = "<group>"; };
+		849B7A14252F173D00A0D63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzDeviceUtils.m; path = Module/BlitzDeviceUtils.m; sourceTree = "<group>"; };
 		84B3111B252DCB6E0051016E /* BlitzReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzReachability.h; path = Module/BlitzReachability.h; sourceTree = "<group>"; };
 		84B3111C252DCB6E0051016E /* BlitzReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzReachability.m; path = Module/BlitzReachability.m; sourceTree = "<group>"; };
@@ -104,6 +119,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		849B7A0D252F173D00A0D63C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849B7A15252F173D00A0D63C /* BlitzBi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -113,6 +136,7 @@
 				844A0E90252467D600D8529B /* Common */,
 				844A0E8F252467CE00D8529B /* Networking */,
 				843BB7BE25245195007272D9 /* BlitzBi */,
+				849B7A11252F173D00A0D63C /* BlitzBiTests */,
 				843BB7BD25245195007272D9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				843BB7BC25245195007272D9 /* BlitzBi.framework */,
+				849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +229,15 @@
 			path = security;
 			sourceTree = "<group>";
 		};
+		849B7A11252F173D00A0D63C /* BlitzBiTests */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A12252F173D00A0D63C /* BlitzBiTests.swift */,
+				849B7A14252F173D00A0D63C /* Info.plist */,
+			);
+			path = BlitzBiTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -254,17 +288,39 @@
 			productReference = 843BB7BC25245195007272D9 /* BlitzBi.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		849B7A0F252F173D00A0D63C /* BlitzBiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849B7A1A252F173D00A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiTests" */;
+			buildPhases = (
+				849B7A0C252F173D00A0D63C /* Sources */,
+				849B7A0D252F173D00A0D63C /* Frameworks */,
+				849B7A0E252F173D00A0D63C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				849B7A17252F173D00A0D63C /* PBXTargetDependency */,
+			);
+			name = BlitzBiTests;
+			productName = BlitzBiTests;
+			productReference = 849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		843BB7B325245195007272D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					843BB7BB25245195007272D9 = {
 						CreatedOnToolsVersion = 12.0.1;
 						LastSwiftMigration = 1200;
+					};
+					849B7A0F252F173D00A0D63C = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -282,12 +338,20 @@
 			projectRoot = "";
 			targets = (
 				843BB7BB25245195007272D9 /* BlitzBi */,
+				849B7A0F252F173D00A0D63C /* BlitzBiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		843BB7BA25245195007272D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849B7A0E252F173D00A0D63C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -326,7 +390,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		849B7A0C252F173D00A0D63C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849B7A13252F173D00A0D63C /* BlitzBiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		849B7A17252F173D00A0D63C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 843BB7BB25245195007272D9 /* BlitzBi */;
+			targetProxy = 849B7A16252F173D00A0D63C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		843BB7C225245195007272D9 /* Debug */ = {
@@ -512,6 +593,44 @@
 			};
 			name = Release;
 		};
+		849B7A18252F173D00A0D63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6B3N73X9SX;
+				INFOPLIST_FILE = BlitzBiTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		849B7A19252F173D00A0D63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6B3N73X9SX;
+				INFOPLIST_FILE = BlitzBiTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -529,6 +648,15 @@
 			buildConfigurations = (
 				843BB7C525245195007272D9 /* Debug */,
 				843BB7C625245195007272D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849B7A1A252F173D00A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849B7A18252F173D00A0D63C /* Debug */,
+				849B7A19252F173D00A0D63C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
