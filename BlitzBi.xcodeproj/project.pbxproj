@@ -42,6 +42,62 @@
 		844A0F25252473FC00D8529B /* BlitzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0F23252473FC00D8529B /* BlitzParser.m */; };
 		849B7A13252F173D00A0D63C /* BlitzBiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A12252F173D00A0D63C /* BlitzBiTests.swift */; };
 		849B7A15252F173D00A0D63C /* BlitzBi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BB7BC25245195007272D9 /* BlitzBi.framework */; platformFilter = ios; };
+		849B7A30252F2B6400A0D63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A2F252F2B6400A0D63C /* AppDelegate.swift */; };
+		849B7A32252F2B6400A0D63C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A31252F2B6400A0D63C /* SceneDelegate.swift */; };
+		849B7A34252F2B6400A0D63C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A33252F2B6400A0D63C /* ViewController.swift */; };
+		849B7A37252F2B6400A0D63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A35252F2B6400A0D63C /* Main.storyboard */; };
+		849B7A39252F2B6800A0D63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A38252F2B6800A0D63C /* Assets.xcassets */; };
+		849B7A3C252F2B6800A0D63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A3A252F2B6800A0D63C /* LaunchScreen.storyboard */; };
+		849B7A8A252F2B9D00A0D63C /* BlitzBiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A46252F2B9D00A0D63C /* BlitzBiTests.swift */; };
+		849B7A8C252F2B9D00A0D63C /* BlitzBiEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A4A252F2B9D00A0D63C /* BlitzBiEventHandler.swift */; };
+		849B7A8D252F2B9D00A0D63C /* BlitzBiEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A4B252F2B9D00A0D63C /* BlitzBiEventRepository.swift */; };
+		849B7A8E252F2B9D00A0D63C /* BlitzBiEventHandlerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A4C252F2B9D00A0D63C /* BlitzBiEventHandlerBuilder.swift */; };
+		849B7A8F252F2B9D00A0D63C /* BlitzBiEventData.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A4D252F2B9D00A0D63C /* BlitzBiEventData.m */; };
+		849B7A90252F2B9D00A0D63C /* BlitzBiConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A4E252F2B9D00A0D63C /* BlitzBiConstants.h */; };
+		849B7A91252F2B9D00A0D63C /* BlitzBiConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A4F252F2B9D00A0D63C /* BlitzBiConfig.h */; };
+		849B7A92252F2B9D00A0D63C /* BlitzBiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A50252F2B9D00A0D63C /* BlitzBiService.swift */; };
+		849B7A93252F2B9D00A0D63C /* BlitzBiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A51252F2B9D00A0D63C /* BlitzBiConfig.m */; };
+		849B7A94252F2B9D00A0D63C /* BlitzBiEventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A52252F2B9D00A0D63C /* BlitzBiEventData.h */; };
+		849B7A95252F2B9D00A0D63C /* BlitzBi.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A53252F2B9D00A0D63C /* BlitzBi.h */; };
+		849B7A98252F2B9D00A0D63C /* BlitzError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A58252F2B9D00A0D63C /* BlitzError.swift */; };
+		849B7A99252F2B9D00A0D63C /* BlitzServerHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A59252F2B9D00A0D63C /* BlitzServerHandler.h */; };
+		849B7A9A252F2B9D00A0D63C /* BlitzRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A5A252F2B9D00A0D63C /* BlitzRequestBuilder.h */; };
+		849B7A9B252F2B9D00A0D63C /* BlitzHttpExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A5C252F2B9D00A0D63C /* BlitzHttpExecutor.h */; };
+		849B7A9C252F2B9D00A0D63C /* BlitzParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A5E252F2B9D00A0D63C /* BlitzParser.m */; };
+		849B7A9D252F2B9D00A0D63C /* BlitzParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A5F252F2B9D00A0D63C /* BlitzParser.h */; };
+		849B7A9E252F2B9D00A0D63C /* BlitzHttpExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A60252F2B9D00A0D63C /* BlitzHttpExecutor.m */; };
+		849B7A9F252F2B9D00A0D63C /* BlitzHttpResponseListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A61252F2B9D00A0D63C /* BlitzHttpResponseListener.h */; };
+		849B7AA0252F2B9D00A0D63C /* PBlitzDataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A62252F2B9D00A0D63C /* PBlitzDataTransferService.swift */; };
+		849B7AA1252F2B9D00A0D63C /* BlitzServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A63252F2B9D00A0D63C /* BlitzServerConfig.swift */; };
+		849B7AA2252F2B9D00A0D63C /* BlitzServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A64252F2B9D00A0D63C /* BlitzServerHandler.m */; };
+		849B7AA3252F2B9D00A0D63C /* BlitzRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A65252F2B9D00A0D63C /* BlitzRequestBuilder.m */; };
+		849B7AA4252F2B9D00A0D63C /* BlitzStringConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A68252F2B9D00A0D63C /* BlitzStringConstant.h */; };
+		849B7AA5252F2B9D00A0D63C /* BlitzCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A69252F2B9D00A0D63C /* BlitzCommon.h */; };
+		849B7AA6252F2B9D00A0D63C /* BlitzEnvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A6A252F2B9D00A0D63C /* BlitzEnvConfig.swift */; };
+		849B7AA7252F2B9D00A0D63C /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A6B252F2B9D00A0D63C /* BlitzReachability.m */; };
+		849B7AA8252F2B9D00A0D63C /* BlitzConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A6C252F2B9D00A0D63C /* BlitzConfig.m */; };
+		849B7AA9252F2B9D00A0D63C /* BlitzStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A6D252F2B9D00A0D63C /* BlitzStringUtils.m */; };
+		849B7AAA252F2B9D00A0D63C /* BlitzCommonConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A6E252F2B9D00A0D63C /* BlitzCommonConstant.h */; };
+		849B7AAB252F2B9D00A0D63C /* BlitzEnvType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A6F252F2B9D00A0D63C /* BlitzEnvType.swift */; };
+		849B7AAC252F2B9D00A0D63C /* BlitzDeviceUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A70252F2B9D00A0D63C /* BlitzDeviceUtils.h */; };
+		849B7AAD252F2B9D00A0D63C /* BlitzFileCacheHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A71252F2B9D00A0D63C /* BlitzFileCacheHelper.h */; };
+		849B7AAE252F2B9D00A0D63C /* BlitzFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A72252F2B9D00A0D63C /* BlitzFileHelper.m */; };
+		849B7AAF252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A73252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.m */; };
+		849B7AB0252F2B9D00A0D63C /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A74252F2B9D00A0D63C /* BlitzReachability.h */; };
+		849B7AB1252F2B9D00A0D63C /* BlitzConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A75252F2B9D00A0D63C /* BlitzConfig.h */; };
+		849B7AB2252F2B9D00A0D63C /* BlitzStringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A76252F2B9D00A0D63C /* BlitzStringUtils.h */; };
+		849B7AB3252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A77252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.h */; };
+		849B7AB4252F2B9D00A0D63C /* BlitzFileHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 849B7A78252F2B9D00A0D63C /* BlitzFileHelper.h */; };
+		849B7AB5252F2B9D00A0D63C /* BlitzFileCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A79252F2B9D00A0D63C /* BlitzFileCacheHelper.m */; };
+		849B7AB6252F2B9D00A0D63C /* BlitzDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A7A252F2B9D00A0D63C /* BlitzDeviceUtils.m */; };
+		849B7AB7252F2B9D00A0D63C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A7E252F2B9D00A0D63C /* .gitignore */; };
+		849B7AB8252F2B9D00A0D63C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A80252F2B9D00A0D63C /* ViewController.swift */; };
+		849B7AB9252F2B9D00A0D63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A81252F2B9D00A0D63C /* Assets.xcassets */; };
+		849B7ABA252F2B9D00A0D63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A82252F2B9D00A0D63C /* LaunchScreen.storyboard */; };
+		849B7ABB252F2B9D00A0D63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A84252F2B9D00A0D63C /* Main.storyboard */; };
+		849B7ABC252F2B9D00A0D63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A86252F2B9D00A0D63C /* AppDelegate.swift */; };
+		849B7ABE252F2B9D00A0D63C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A88252F2B9D00A0D63C /* SceneDelegate.swift */; };
+		849B7ABF252F2B9D00A0D63C /* BlitzBi.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A89252F2B9D00A0D63C /* BlitzBi.podspec */; };
 		84B3111E252DCB6E0051016E /* BlitzDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */; };
 		84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111B252DCB6E0051016E /* BlitzReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111C252DCB6E0051016E /* BlitzReachability.m */; };
@@ -50,6 +106,9 @@
 		84CE9C04252B052900D0E48F /* BlitzStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CE9C01252B052900D0E48F /* BlitzStringUtils.m */; };
 		84CE9C05252B052900D0E48F /* BlitzCommonConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CE9C02252B052900D0E48F /* BlitzCommonConstant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CE9C06252B052900D0E48F /* BlitzStringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CE9C03252B052900D0E48F /* BlitzStringUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3AA29FF6A44FDD5EB971BA6 /* Pods_BlitzBiDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF4B8630947470CF34A7F69 /* Pods_BlitzBiDemo.framework */; };
+		B5D8245D812703739FB84B65 /* Pods_BlitzBiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC65201A71A041639D952FD2 /* Pods_BlitzBiTests.framework */; };
+		C6A8A56FC7A275FF8589C11D /* Pods_BlitzBi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A515ADF2AA67782AEF2F4F7 /* Pods_BlitzBi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +122,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1951CC7E291BF6D914C6571B /* Pods-BlitzBiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiTests.release.xcconfig"; path = "Target Support Files/Pods-BlitzBiTests/Pods-BlitzBiTests.release.xcconfig"; sourceTree = "<group>"; };
+		1BF4B8630947470CF34A7F69 /* Pods_BlitzBiDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBiDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D246B0FC7F616B9CEF3F7D0 /* Pods-BlitzBi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBi.debug.xcconfig"; path = "Target Support Files/Pods-BlitzBi/Pods-BlitzBi.debug.xcconfig"; sourceTree = "<group>"; };
+		7A515ADF2AA67782AEF2F4F7 /* Pods_BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8421669D252C816000E2017C /* BlitzBiEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzBiEventHandler.swift; path = Module/BlitzBiEventHandler.swift; sourceTree = "<group>"; };
 		843BB7BC25245195007272D9 /* BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843BB7BF25245195007272D9 /* BlitzBi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlitzBi.h; sourceTree = "<group>"; };
@@ -101,6 +164,69 @@
 		849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlitzBiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		849B7A12252F173D00A0D63C /* BlitzBiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzBiTests.swift; sourceTree = "<group>"; };
 		849B7A14252F173D00A0D63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849B7A2D252F2B6400A0D63C /* BlitzBiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlitzBiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		849B7A2F252F2B6400A0D63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		849B7A31252F2B6400A0D63C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		849B7A33252F2B6400A0D63C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		849B7A36252F2B6400A0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		849B7A38252F2B6800A0D63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		849B7A3B252F2B6800A0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		849B7A3D252F2B6800A0D63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849B7A46252F2B9D00A0D63C /* BlitzBiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzBiTests.swift; sourceTree = "<group>"; };
+		849B7A47252F2B9D00A0D63C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849B7A4A252F2B9D00A0D63C /* BlitzBiEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzBiEventHandler.swift; sourceTree = "<group>"; };
+		849B7A4B252F2B9D00A0D63C /* BlitzBiEventRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzBiEventRepository.swift; sourceTree = "<group>"; };
+		849B7A4C252F2B9D00A0D63C /* BlitzBiEventHandlerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzBiEventHandlerBuilder.swift; sourceTree = "<group>"; };
+		849B7A4D252F2B9D00A0D63C /* BlitzBiEventData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzBiEventData.m; sourceTree = "<group>"; };
+		849B7A4E252F2B9D00A0D63C /* BlitzBiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzBiConstants.h; sourceTree = "<group>"; };
+		849B7A4F252F2B9D00A0D63C /* BlitzBiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzBiConfig.h; sourceTree = "<group>"; };
+		849B7A50252F2B9D00A0D63C /* BlitzBiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzBiService.swift; sourceTree = "<group>"; };
+		849B7A51252F2B9D00A0D63C /* BlitzBiConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzBiConfig.m; sourceTree = "<group>"; };
+		849B7A52252F2B9D00A0D63C /* BlitzBiEventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzBiEventData.h; sourceTree = "<group>"; };
+		849B7A53252F2B9D00A0D63C /* BlitzBi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzBi.h; sourceTree = "<group>"; };
+		849B7A54252F2B9D00A0D63C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849B7A55252F2B9D00A0D63C /* BI.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = BI.xcworkspace; sourceTree = "<group>"; };
+		849B7A58252F2B9D00A0D63C /* BlitzError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzError.swift; sourceTree = "<group>"; };
+		849B7A59252F2B9D00A0D63C /* BlitzServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzServerHandler.h; sourceTree = "<group>"; };
+		849B7A5A252F2B9D00A0D63C /* BlitzRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzRequestBuilder.h; sourceTree = "<group>"; };
+		849B7A5C252F2B9D00A0D63C /* BlitzHttpExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzHttpExecutor.h; sourceTree = "<group>"; };
+		849B7A5E252F2B9D00A0D63C /* BlitzParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzParser.m; sourceTree = "<group>"; };
+		849B7A5F252F2B9D00A0D63C /* BlitzParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzParser.h; sourceTree = "<group>"; };
+		849B7A60252F2B9D00A0D63C /* BlitzHttpExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzHttpExecutor.m; sourceTree = "<group>"; };
+		849B7A61252F2B9D00A0D63C /* BlitzHttpResponseListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzHttpResponseListener.h; sourceTree = "<group>"; };
+		849B7A62252F2B9D00A0D63C /* PBlitzDataTransferService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PBlitzDataTransferService.swift; sourceTree = "<group>"; };
+		849B7A63252F2B9D00A0D63C /* BlitzServerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzServerConfig.swift; sourceTree = "<group>"; };
+		849B7A64252F2B9D00A0D63C /* BlitzServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzServerHandler.m; sourceTree = "<group>"; };
+		849B7A65252F2B9D00A0D63C /* BlitzRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzRequestBuilder.m; sourceTree = "<group>"; };
+		849B7A68252F2B9D00A0D63C /* BlitzStringConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzStringConstant.h; sourceTree = "<group>"; };
+		849B7A69252F2B9D00A0D63C /* BlitzCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzCommon.h; sourceTree = "<group>"; };
+		849B7A6A252F2B9D00A0D63C /* BlitzEnvConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzEnvConfig.swift; sourceTree = "<group>"; };
+		849B7A6B252F2B9D00A0D63C /* BlitzReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzReachability.m; sourceTree = "<group>"; };
+		849B7A6C252F2B9D00A0D63C /* BlitzConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzConfig.m; sourceTree = "<group>"; };
+		849B7A6D252F2B9D00A0D63C /* BlitzStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzStringUtils.m; sourceTree = "<group>"; };
+		849B7A6E252F2B9D00A0D63C /* BlitzCommonConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzCommonConstant.h; sourceTree = "<group>"; };
+		849B7A6F252F2B9D00A0D63C /* BlitzEnvType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzEnvType.swift; sourceTree = "<group>"; };
+		849B7A70252F2B9D00A0D63C /* BlitzDeviceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzDeviceUtils.h; sourceTree = "<group>"; };
+		849B7A71252F2B9D00A0D63C /* BlitzFileCacheHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzFileCacheHelper.h; sourceTree = "<group>"; };
+		849B7A72252F2B9D00A0D63C /* BlitzFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzFileHelper.m; sourceTree = "<group>"; };
+		849B7A73252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzKWConcurrentDictionary.m; sourceTree = "<group>"; };
+		849B7A74252F2B9D00A0D63C /* BlitzReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzReachability.h; sourceTree = "<group>"; };
+		849B7A75252F2B9D00A0D63C /* BlitzConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzConfig.h; sourceTree = "<group>"; };
+		849B7A76252F2B9D00A0D63C /* BlitzStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzStringUtils.h; sourceTree = "<group>"; };
+		849B7A77252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzKWConcurrentDictionary.h; sourceTree = "<group>"; };
+		849B7A78252F2B9D00A0D63C /* BlitzFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlitzFileHelper.h; sourceTree = "<group>"; };
+		849B7A79252F2B9D00A0D63C /* BlitzFileCacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzFileCacheHelper.m; sourceTree = "<group>"; };
+		849B7A7A252F2B9D00A0D63C /* BlitzDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzDeviceUtils.m; sourceTree = "<group>"; };
+		849B7A7B252F2B9D00A0D63C /* BlitzBi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = BlitzBi.xcodeproj; sourceTree = "<group>"; };
+		849B7A7E252F2B9D00A0D63C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		849B7A80252F2B9D00A0D63C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		849B7A81252F2B9D00A0D63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		849B7A83252F2B9D00A0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		849B7A85252F2B9D00A0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		849B7A86252F2B9D00A0D63C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		849B7A87252F2B9D00A0D63C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849B7A88252F2B9D00A0D63C /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		849B7A89252F2B9D00A0D63C /* BlitzBi.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlitzBi.podspec; sourceTree = "<group>"; };
 		84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzDeviceUtils.m; path = Module/BlitzDeviceUtils.m; sourceTree = "<group>"; };
 		84B3111B252DCB6E0051016E /* BlitzReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzReachability.h; path = Module/BlitzReachability.h; sourceTree = "<group>"; };
 		84B3111C252DCB6E0051016E /* BlitzReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzReachability.m; path = Module/BlitzReachability.m; sourceTree = "<group>"; };
@@ -109,6 +235,11 @@
 		84CE9C01252B052900D0E48F /* BlitzStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzStringUtils.m; path = Module/BlitzStringUtils.m; sourceTree = "<group>"; };
 		84CE9C02252B052900D0E48F /* BlitzCommonConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzCommonConstant.h; path = Module/BlitzCommonConstant.h; sourceTree = "<group>"; };
 		84CE9C03252B052900D0E48F /* BlitzStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzStringUtils.h; path = Module/BlitzStringUtils.h; sourceTree = "<group>"; };
+		8FD325A9A75C929266CF824F /* Pods-BlitzBiDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiDemo.debug.xcconfig"; path = "Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9214E7F451570EA2E2EF9A1C /* Pods-BlitzBi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBi.release.xcconfig"; path = "Target Support Files/Pods-BlitzBi/Pods-BlitzBi.release.xcconfig"; sourceTree = "<group>"; };
+		C9ABDCACA705FFC6BA581CDE /* Pods-BlitzBiDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiDemo.release.xcconfig"; path = "Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo.release.xcconfig"; sourceTree = "<group>"; };
+		CBBB5BEF14BB07055F59811B /* Pods-BlitzBiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiTests.debug.xcconfig"; path = "Target Support Files/Pods-BlitzBiTests/Pods-BlitzBiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CC65201A71A041639D952FD2 /* Pods_BlitzBiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6A8A56FC7A275FF8589C11D /* Pods_BlitzBi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,20 +256,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				849B7A15252F173D00A0D63C /* BlitzBi.framework in Frameworks */,
+				B5D8245D812703739FB84B65 /* Pods_BlitzBiTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849B7A2A252F2B6400A0D63C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3AA29FF6A44FDD5EB971BA6 /* Pods_BlitzBiDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		64D59D549AD311BA00496B64 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BF4B8630947470CF34A7F69 /* Pods_BlitzBiDemo.framework */,
+				7A515ADF2AA67782AEF2F4F7 /* Pods_BlitzBi.framework */,
+				CC65201A71A041639D952FD2 /* Pods_BlitzBiTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		790B3B4A8EB06365AADD10C0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8FD325A9A75C929266CF824F /* Pods-BlitzBiDemo.debug.xcconfig */,
+				C9ABDCACA705FFC6BA581CDE /* Pods-BlitzBiDemo.release.xcconfig */,
+				2D246B0FC7F616B9CEF3F7D0 /* Pods-BlitzBi.debug.xcconfig */,
+				9214E7F451570EA2E2EF9A1C /* Pods-BlitzBi.release.xcconfig */,
+				CBBB5BEF14BB07055F59811B /* Pods-BlitzBiTests.debug.xcconfig */,
+				1951CC7E291BF6D914C6571B /* Pods-BlitzBiTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		843BB7B225245195007272D9 = {
 			isa = PBXGroup;
 			children = (
+				849B7A44252F2B9D00A0D63C /* BI */,
 				844A0E90252467D600D8529B /* Common */,
 				844A0E8F252467CE00D8529B /* Networking */,
 				843BB7BE25245195007272D9 /* BlitzBi */,
 				849B7A11252F173D00A0D63C /* BlitzBiTests */,
+				849B7A2E252F2B6400A0D63C /* BlitzBiDemo */,
 				843BB7BD25245195007272D9 /* Products */,
+				790B3B4A8EB06365AADD10C0 /* Pods */,
+				64D59D549AD311BA00496B64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +314,7 @@
 			children = (
 				843BB7BC25245195007272D9 /* BlitzBi.framework */,
 				849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */,
+				849B7A2D252F2B6400A0D63C /* BlitzBiDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +407,169 @@
 			path = BlitzBiTests;
 			sourceTree = "<group>";
 		};
+		849B7A2E252F2B6400A0D63C /* BlitzBiDemo */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A2F252F2B6400A0D63C /* AppDelegate.swift */,
+				849B7A31252F2B6400A0D63C /* SceneDelegate.swift */,
+				849B7A33252F2B6400A0D63C /* ViewController.swift */,
+				849B7A35252F2B6400A0D63C /* Main.storyboard */,
+				849B7A38252F2B6800A0D63C /* Assets.xcassets */,
+				849B7A3A252F2B6800A0D63C /* LaunchScreen.storyboard */,
+				849B7A3D252F2B6800A0D63C /* Info.plist */,
+			);
+			path = BlitzBiDemo;
+			sourceTree = "<group>";
+		};
+		849B7A44252F2B9D00A0D63C /* BI */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A45252F2B9D00A0D63C /* BlitzBiTests */,
+				849B7A48252F2B9D00A0D63C /* BlitzBi */,
+				849B7A55252F2B9D00A0D63C /* BI.xcworkspace */,
+				849B7A56252F2B9D00A0D63C /* Networking */,
+				849B7A66252F2B9D00A0D63C /* Common */,
+				849B7A7B252F2B9D00A0D63C /* BlitzBi.xcodeproj */,
+				849B7A7E252F2B9D00A0D63C /* .gitignore */,
+				849B7A7F252F2B9D00A0D63C /* BlitzBiDemo */,
+				849B7A89252F2B9D00A0D63C /* BlitzBi.podspec */,
+			);
+			name = BI;
+			sourceTree = "<group>";
+		};
+		849B7A45252F2B9D00A0D63C /* BlitzBiTests */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A46252F2B9D00A0D63C /* BlitzBiTests.swift */,
+				849B7A47252F2B9D00A0D63C /* Info.plist */,
+			);
+			path = BlitzBiTests;
+			sourceTree = "<group>";
+		};
+		849B7A48252F2B9D00A0D63C /* BlitzBi */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A49252F2B9D00A0D63C /* Module */,
+				849B7A53252F2B9D00A0D63C /* BlitzBi.h */,
+				849B7A54252F2B9D00A0D63C /* Info.plist */,
+			);
+			path = BlitzBi;
+			sourceTree = "<group>";
+		};
+		849B7A49252F2B9D00A0D63C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A4A252F2B9D00A0D63C /* BlitzBiEventHandler.swift */,
+				849B7A4B252F2B9D00A0D63C /* BlitzBiEventRepository.swift */,
+				849B7A4C252F2B9D00A0D63C /* BlitzBiEventHandlerBuilder.swift */,
+				849B7A4D252F2B9D00A0D63C /* BlitzBiEventData.m */,
+				849B7A4E252F2B9D00A0D63C /* BlitzBiConstants.h */,
+				849B7A4F252F2B9D00A0D63C /* BlitzBiConfig.h */,
+				849B7A50252F2B9D00A0D63C /* BlitzBiService.swift */,
+				849B7A51252F2B9D00A0D63C /* BlitzBiConfig.m */,
+				849B7A52252F2B9D00A0D63C /* BlitzBiEventData.h */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		849B7A56252F2B9D00A0D63C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A57252F2B9D00A0D63C /* Module */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		849B7A57252F2B9D00A0D63C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A58252F2B9D00A0D63C /* BlitzError.swift */,
+				849B7A59252F2B9D00A0D63C /* BlitzServerHandler.h */,
+				849B7A5A252F2B9D00A0D63C /* BlitzRequestBuilder.h */,
+				849B7A5B252F2B9D00A0D63C /* server */,
+				849B7A62252F2B9D00A0D63C /* PBlitzDataTransferService.swift */,
+				849B7A63252F2B9D00A0D63C /* BlitzServerConfig.swift */,
+				849B7A64252F2B9D00A0D63C /* BlitzServerHandler.m */,
+				849B7A65252F2B9D00A0D63C /* BlitzRequestBuilder.m */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		849B7A5B252F2B9D00A0D63C /* server */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A5C252F2B9D00A0D63C /* BlitzHttpExecutor.h */,
+				849B7A5D252F2B9D00A0D63C /* security */,
+				849B7A60252F2B9D00A0D63C /* BlitzHttpExecutor.m */,
+				849B7A61252F2B9D00A0D63C /* BlitzHttpResponseListener.h */,
+			);
+			path = server;
+			sourceTree = "<group>";
+		};
+		849B7A5D252F2B9D00A0D63C /* security */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A5E252F2B9D00A0D63C /* BlitzParser.m */,
+				849B7A5F252F2B9D00A0D63C /* BlitzParser.h */,
+			);
+			path = security;
+			sourceTree = "<group>";
+		};
+		849B7A66252F2B9D00A0D63C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A67252F2B9D00A0D63C /* Module */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		849B7A67252F2B9D00A0D63C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A68252F2B9D00A0D63C /* BlitzStringConstant.h */,
+				849B7A69252F2B9D00A0D63C /* BlitzCommon.h */,
+				849B7A6A252F2B9D00A0D63C /* BlitzEnvConfig.swift */,
+				849B7A6B252F2B9D00A0D63C /* BlitzReachability.m */,
+				849B7A6C252F2B9D00A0D63C /* BlitzConfig.m */,
+				849B7A6D252F2B9D00A0D63C /* BlitzStringUtils.m */,
+				849B7A6E252F2B9D00A0D63C /* BlitzCommonConstant.h */,
+				849B7A6F252F2B9D00A0D63C /* BlitzEnvType.swift */,
+				849B7A70252F2B9D00A0D63C /* BlitzDeviceUtils.h */,
+				849B7A71252F2B9D00A0D63C /* BlitzFileCacheHelper.h */,
+				849B7A72252F2B9D00A0D63C /* BlitzFileHelper.m */,
+				849B7A73252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.m */,
+				849B7A74252F2B9D00A0D63C /* BlitzReachability.h */,
+				849B7A75252F2B9D00A0D63C /* BlitzConfig.h */,
+				849B7A76252F2B9D00A0D63C /* BlitzStringUtils.h */,
+				849B7A77252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.h */,
+				849B7A78252F2B9D00A0D63C /* BlitzFileHelper.h */,
+				849B7A79252F2B9D00A0D63C /* BlitzFileCacheHelper.m */,
+				849B7A7A252F2B9D00A0D63C /* BlitzDeviceUtils.m */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		849B7A7C252F2B9D00A0D63C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		849B7A7F252F2B9D00A0D63C /* BlitzBiDemo */ = {
+			isa = PBXGroup;
+			children = (
+				849B7A80252F2B9D00A0D63C /* ViewController.swift */,
+				849B7A81252F2B9D00A0D63C /* Assets.xcassets */,
+				849B7A82252F2B9D00A0D63C /* LaunchScreen.storyboard */,
+				849B7A84252F2B9D00A0D63C /* Main.storyboard */,
+				849B7A86252F2B9D00A0D63C /* AppDelegate.swift */,
+				849B7A87252F2B9D00A0D63C /* Info.plist */,
+				849B7A88252F2B9D00A0D63C /* SceneDelegate.swift */,
+			);
+			path = BlitzBiDemo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -245,25 +577,44 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849B7AB3252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.h in Headers */,
 				844A0E8B252467C300D8529B /* BlitzBiEventData.h in Headers */,
 				844A0EE625246A3300D8529B /* BlitzServerHandler.h in Headers */,
 				844A0EE225246A3300D8529B /* BlitzRequestBuilder.h in Headers */,
+				849B7A9B252F2B9D00A0D63C /* BlitzHttpExecutor.h in Headers */,
+				849B7A9D252F2B9D00A0D63C /* BlitzParser.h in Headers */,
+				849B7AB4252F2B9D00A0D63C /* BlitzFileHelper.h in Headers */,
+				849B7AB0252F2B9D00A0D63C /* BlitzReachability.h in Headers */,
+				849B7A95252F2B9D00A0D63C /* BlitzBi.h in Headers */,
+				849B7AAA252F2B9D00A0D63C /* BlitzCommonConstant.h in Headers */,
+				849B7A99252F2B9D00A0D63C /* BlitzServerHandler.h in Headers */,
 				84CE9C05252B052900D0E48F /* BlitzCommonConstant.h in Headers */,
 				844A0F1C252473C500D8529B /* BlitzHttpResponseListener.h in Headers */,
 				844A0EB8252469F300D8529B /* BlitzFileCacheHelper.h in Headers */,
+				849B7A9A252F2B9D00A0D63C /* BlitzRequestBuilder.h in Headers */,
 				844A0F1E252473C500D8529B /* BlitzHttpExecutor.h in Headers */,
 				844A0F24252473FC00D8529B /* BlitzParser.h in Headers */,
+				849B7AAC252F2B9D00A0D63C /* BlitzDeviceUtils.h in Headers */,
+				849B7A94252F2B9D00A0D63C /* BlitzBiEventData.h in Headers */,
 				844A0EC8252469F300D8529B /* BlitzStringConstant.h in Headers */,
+				849B7AAD252F2B9D00A0D63C /* BlitzFileCacheHelper.h in Headers */,
 				844A0EBD252469F300D8529B /* BlitzKWConcurrentDictionary.h in Headers */,
 				844A0E8C252467C300D8529B /* BlitzBiConfig.h in Headers */,
 				843BB7C125245195007272D9 /* BlitzBi.h in Headers */,
 				844A0E8A252467C300D8529B /* BlitzBiConstants.h in Headers */,
+				849B7AA4252F2B9D00A0D63C /* BlitzStringConstant.h in Headers */,
+				849B7A91252F2B9D00A0D63C /* BlitzBiConfig.h in Headers */,
+				849B7AB1252F2B9D00A0D63C /* BlitzConfig.h in Headers */,
 				84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */,
 				844A0ECB252469F300D8529B /* BlitzFileHelper.h in Headers */,
 				84B31121252DCB6E0051016E /* BlitzDeviceUtils.h in Headers */,
+				849B7AB2252F2B9D00A0D63C /* BlitzStringUtils.h in Headers */,
 				84CE9C06252B052900D0E48F /* BlitzStringUtils.h in Headers */,
+				849B7A90252F2B9D00A0D63C /* BlitzBiConstants.h in Headers */,
 				844A0EBB252469F300D8529B /* BlitzConfig.h in Headers */,
 				844A0ED3252469F300D8529B /* BlitzCommon.h in Headers */,
+				849B7A9F252F2B9D00A0D63C /* BlitzHttpResponseListener.h in Headers */,
+				849B7AA5252F2B9D00A0D63C /* BlitzCommon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +625,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843BB7C425245195007272D9 /* Build configuration list for PBXNativeTarget "BlitzBi" */;
 			buildPhases = (
+				3C33144BBA826DEFC9B443F4 /* [CP] Check Pods Manifest.lock */,
 				843BB7B725245195007272D9 /* Headers */,
 				843BB7B825245195007272D9 /* Sources */,
 				843BB7B925245195007272D9 /* Frameworks */,
@@ -292,6 +644,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 849B7A1A252F173D00A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiTests" */;
 			buildPhases = (
+				1FF740D8714E826CA9BB5249 /* [CP] Check Pods Manifest.lock */,
 				849B7A0C252F173D00A0D63C /* Sources */,
 				849B7A0D252F173D00A0D63C /* Frameworks */,
 				849B7A0E252F173D00A0D63C /* Resources */,
@@ -305,6 +658,25 @@
 			productName = BlitzBiTests;
 			productReference = 849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		849B7A2C252F2B6400A0D63C /* BlitzBiDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849B7A3E252F2B6800A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiDemo" */;
+			buildPhases = (
+				A736BFC13DABE295A0F6435A /* [CP] Check Pods Manifest.lock */,
+				849B7A29252F2B6400A0D63C /* Sources */,
+				849B7A2A252F2B6400A0D63C /* Frameworks */,
+				849B7A2B252F2B6400A0D63C /* Resources */,
+				B528651FD38123CBA0B40C9B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlitzBiDemo;
+			productName = BlitzBiDemo;
+			productReference = 849B7A2D252F2B6400A0D63C /* BlitzBiDemo.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -322,6 +694,9 @@
 					849B7A0F252F173D00A0D63C = {
 						CreatedOnToolsVersion = 12.0.1;
 					};
+					849B7A2C252F2B6400A0D63C = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 				};
 			};
 			buildConfigurationList = 843BB7B625245195007272D9 /* Build configuration list for PBXProject "BlitzBi" */;
@@ -335,10 +710,17 @@
 			mainGroup = 843BB7B225245195007272D9;
 			productRefGroup = 843BB7BD25245195007272D9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 849B7A7C252F2B9D00A0D63C /* Products */;
+					ProjectRef = 849B7A7B252F2B9D00A0D63C /* BlitzBi.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				843BB7BB25245195007272D9 /* BlitzBi */,
 				849B7A0F252F173D00A0D63C /* BlitzBiTests */,
+				849B7A2C252F2B6400A0D63C /* BlitzBiDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -348,6 +730,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849B7ABF252F2B9D00A0D63C /* BlitzBi.podspec in Resources */,
+				849B7ABB252F2B9D00A0D63C /* Main.storyboard in Resources */,
+				849B7AB7252F2B9D00A0D63C /* .gitignore in Resources */,
+				849B7ABA252F2B9D00A0D63C /* LaunchScreen.storyboard in Resources */,
+				849B7AB9252F2B9D00A0D63C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +745,108 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		849B7A2B252F2B6400A0D63C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849B7A3C252F2B6800A0D63C /* LaunchScreen.storyboard in Resources */,
+				849B7A39252F2B6800A0D63C /* Assets.xcassets in Resources */,
+				849B7A37252F2B6400A0D63C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FF740D8714E826CA9BB5249 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlitzBiTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C33144BBA826DEFC9B443F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlitzBi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A736BFC13DABE295A0F6435A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlitzBiDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B528651FD38123CBA0B40C9B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BlitzBi/BlitzBi.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BlitzBi.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		843BB7B825245195007272D9 /* Sources */ = {
@@ -367,25 +855,51 @@
 			files = (
 				844A0EBA252469F300D8529B /* BlitzKWConcurrentDictionary.m in Sources */,
 				844A0E86252467C300D8529B /* BlitzBiEventRepository.swift in Sources */,
+				849B7AB6252F2B9D00A0D63C /* BlitzDeviceUtils.m in Sources */,
+				849B7A9E252F2B9D00A0D63C /* BlitzHttpExecutor.m in Sources */,
 				844A0EED25246A3300D8529B /* BlitzServerHandler.m in Sources */,
 				844A0EE325246A3300D8529B /* BlitzServerConfig.swift in Sources */,
+				849B7A98252F2B9D00A0D63C /* BlitzError.swift in Sources */,
+				849B7A92252F2B9D00A0D63C /* BlitzBiService.swift in Sources */,
+				849B7A8D252F2B9D00A0D63C /* BlitzBiEventRepository.swift in Sources */,
+				849B7AA7252F2B9D00A0D63C /* BlitzReachability.m in Sources */,
 				844A0EEB25246A3300D8529B /* PBlitzDataTransferService.swift in Sources */,
+				849B7AA9252F2B9D00A0D63C /* BlitzStringUtils.m in Sources */,
+				849B7ABC252F2B9D00A0D63C /* AppDelegate.swift in Sources */,
 				8421669E252C816000E2017C /* BlitzBiEventHandler.swift in Sources */,
+				849B7AA0252F2B9D00A0D63C /* PBlitzDataTransferService.swift in Sources */,
 				844A0EC0252469F300D8529B /* BlitzFileHelper.m in Sources */,
+				849B7AA2252F2B9D00A0D63C /* BlitzServerHandler.m in Sources */,
+				849B7AAE252F2B9D00A0D63C /* BlitzFileHelper.m in Sources */,
+				849B7AA3252F2B9D00A0D63C /* BlitzRequestBuilder.m in Sources */,
 				84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */,
+				849B7A8A252F2B9D00A0D63C /* BlitzBiTests.swift in Sources */,
+				849B7AA6252F2B9D00A0D63C /* BlitzEnvConfig.swift in Sources */,
+				849B7AA1252F2B9D00A0D63C /* BlitzServerConfig.swift in Sources */,
+				849B7ABE252F2B9D00A0D63C /* SceneDelegate.swift in Sources */,
+				849B7A8F252F2B9D00A0D63C /* BlitzBiEventData.m in Sources */,
 				84B31126252DCBF20051016E /* BlitzBiService.swift in Sources */,
 				84B3111E252DCB6E0051016E /* BlitzDeviceUtils.m in Sources */,
+				849B7AAB252F2B9D00A0D63C /* BlitzEnvType.swift in Sources */,
 				844A0E87252467C300D8529B /* BlitzBiEventData.m in Sources */,
+				849B7AA8252F2B9D00A0D63C /* BlitzConfig.m in Sources */,
+				849B7A8C252F2B9D00A0D63C /* BlitzBiEventHandler.swift in Sources */,
 				844A0EE925246A3300D8529B /* BlitzRequestBuilder.m in Sources */,
+				849B7AB8252F2B9D00A0D63C /* ViewController.swift in Sources */,
 				844A0F1D252473C500D8529B /* BlitzHttpExecutor.m in Sources */,
+				849B7A9C252F2B9D00A0D63C /* BlitzParser.m in Sources */,
 				84CE9C04252B052900D0E48F /* BlitzStringUtils.m in Sources */,
 				844A0EC1252469F300D8529B /* BlitzEnvConfig.swift in Sources */,
 				844A0EE525246A3300D8529B /* BlitzError.swift in Sources */,
+				849B7AAF252F2B9D00A0D63C /* BlitzKWConcurrentDictionary.m in Sources */,
+				849B7A93252F2B9D00A0D63C /* BlitzBiConfig.m in Sources */,
 				844A0ECE252469F300D8529B /* BlitzConfig.m in Sources */,
+				849B7A8E252F2B9D00A0D63C /* BlitzBiEventHandlerBuilder.swift in Sources */,
 				844A0ECA252469F300D8529B /* BlitzFileCacheHelper.m in Sources */,
 				844A0F25252473FC00D8529B /* BlitzParser.m in Sources */,
 				844A0E88252467C300D8529B /* BlitzBiConfig.m in Sources */,
 				844A0E8D252467C300D8529B /* BlitzBiEventHandlerBuilder.swift in Sources */,
+				849B7AB5252F2B9D00A0D63C /* BlitzFileCacheHelper.m in Sources */,
 				844A0EC4252469F300D8529B /* BlitzEnvType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +909,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				849B7A13252F173D00A0D63C /* BlitzBiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849B7A29252F2B6400A0D63C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849B7A34252F2B6400A0D63C /* ViewController.swift in Sources */,
+				849B7A30252F2B6400A0D63C /* AppDelegate.swift in Sources */,
+				849B7A32252F2B6400A0D63C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +932,41 @@
 			targetProxy = 849B7A16252F173D00A0D63C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		849B7A35252F2B6400A0D63C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849B7A36252F2B6400A0D63C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		849B7A3A252F2B6800A0D63C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849B7A3B252F2B6800A0D63C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		849B7A82252F2B9D00A0D63C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849B7A83252F2B9D00A0D63C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		849B7A84252F2B9D00A0D63C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849B7A85252F2B9D00A0D63C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		843BB7C225245195007272D9 /* Debug */ = {
@@ -536,6 +1095,7 @@
 		};
 		843BB7C525245195007272D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D246B0FC7F616B9CEF3F7D0 /* Pods-BlitzBi.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -566,6 +1126,7 @@
 		};
 		843BB7C625245195007272D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9214E7F451570EA2E2EF9A1C /* Pods-BlitzBi.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -595,6 +1156,7 @@
 		};
 		849B7A18252F173D00A0D63C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBBB5BEF14BB07055F59811B /* Pods-BlitzBiTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6B3N73X9SX;
@@ -614,6 +1176,7 @@
 		};
 		849B7A19252F173D00A0D63C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1951CC7E291BF6D914C6571B /* Pods-BlitzBiTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6B3N73X9SX;
@@ -625,6 +1188,48 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		849B7A3F252F2B6800A0D63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FD325A9A75C929266CF824F /* Pods-BlitzBiDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6B3N73X9SX;
+				INFOPLIST_FILE = BlitzBiDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		849B7A40252F2B6800A0D63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9ABDCACA705FFC6BA581CDE /* Pods-BlitzBiDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6B3N73X9SX;
+				INFOPLIST_FILE = BlitzBiDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -657,6 +1262,15 @@
 			buildConfigurations = (
 				849B7A18252F173D00A0D63C /* Debug */,
 				849B7A19252F173D00A0D63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849B7A3E252F2B6800A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849B7A3F252F2B6800A0D63C /* Debug */,
+				849B7A40252F2B6800A0D63C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
