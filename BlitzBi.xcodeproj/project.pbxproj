@@ -576,16 +576,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BlitzBi/BlitzBi.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BlitzBi.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
