@@ -3,7 +3,7 @@
 
 target 'BlitzBi' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
 
   # Pods for BlitzBi
 
@@ -16,7 +16,7 @@ end
 
 target 'BlitzBiDemo' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
 
   # Pods for BlitzBiDemo
   platform :ios, '12.1'
