@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BlitzBiService {
+public class BlitzBiService {
     public static let shared = BlitzBiService()
     
     private var baseUrls: BaseUrls?
