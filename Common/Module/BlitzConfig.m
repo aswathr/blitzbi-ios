@@ -12,7 +12,6 @@
 #import "BlitzFileHelper.h"
 #import "BlitzStringConstant.h"
 #import "BlitzCommonConstant.h"
-#import <BlitzBi/BlitzBi-Swift.h>
 
 @interface BlitzConfig () {
     BOOL isDebugEnabled;
@@ -29,42 +28,42 @@ BlitzConfig *config;
 
 - (id)init {
     if (self = [super init]) {
-        _ENV_TYPE_TO_ENV_STRING = @{
-            [NSNumber numberWithInt:BlitzEnvTypeQa]: @"qa",
-            [NSNumber numberWithInt:BlitzEnvTypeProd]: @"prod",
-            [NSNumber numberWithInt:BlitzEnvTypeDev]: @"dev",
-            [NSNumber numberWithInt:BlitzEnvTypeStage]: @"stage",
-            [NSNumber numberWithInt:BlitzEnvTypeLocal]: @"local"
-        };
-
-        _TAPLYTICS_KEY = @"d0c73c0769443388d16ae2012495cb696508cb7f";//@"5bfa37e929e8dba2075c72d6df7d3576df2b4515";
-
-        _IS_APP_CONTENT_PACKED = YES;
-        
-        if (_INITIAL_ENVIRONMENT == BlitzEnvTypeProd) {
-            isDebugEnabled = NO;
-        }
-        else {
-            isDebugEnabled = YES;
-        }
-        return self;
+//        _ENV_TYPE_TO_ENV_STRING = @{
+//            [NSNumber numberWithInt:BlitzEnvTypeQa]: @"qa",
+//            [NSNumber numberWithInt:BlitzEnvTypeProd]: @"prod",
+//            [NSNumber numberWithInt:BlitzEnvTypeDev]: @"dev",
+//            [NSNumber numberWithInt:BlitzEnvTypeStage]: @"stage",
+//            [NSNumber numberWithInt:BlitzEnvTypeLocal]: @"local"
+//        };
+//
+//        _TAPLYTICS_KEY = @"d0c73c0769443388d16ae2012495cb696508cb7f";//@"5bfa37e929e8dba2075c72d6df7d3576df2b4515";
+//
+//        _IS_APP_CONTENT_PACKED = YES;
+//
+//        if (_INITIAL_ENVIRONMENT == BlitzEnvTypeProd) {
+//            isDebugEnabled = NO;
+//        }
+//        else {
+//            isDebugEnabled = YES;
+//        }
+//        return self;
     }
     return nil;
 }
 
-- (BlitzEnvType)getEnvTypeFor:(NSString *)env {
-    for (NSNumber *eType in[_ENV_TYPE_TO_ENV_STRING keyEnumerator]) {
-        if ([env isEqualToString:[_ENV_TYPE_TO_ENV_STRING objectForKey:eType]]) {
-            return [eType integerValue];
-        }
-    }
-    return -1;
-}
-
-- (NSString *)stringForEnvironment:(BlitzEnvType)envType {
-    NSString *string = _ENV_TYPE_TO_ENV_STRING[[NSNumber numberWithInt:envType]];
-    return string;
-}
+//- (BlitzEnvType)getEnvTypeFor:(NSString *)env {
+//    for (NSNumber *eType in[_ENV_TYPE_TO_ENV_STRING keyEnumerator]) {
+//        if ([env isEqualToString:[_ENV_TYPE_TO_ENV_STRING objectForKey:eType]]) {
+//            return [eType integerValue];
+//        }
+//    }
+//    return -1;
+//}
+//
+//- (NSString *)stringForEnvironment:(BlitzEnvType)envType {
+//    NSString *string = _ENV_TYPE_TO_ENV_STRING[[NSNumber numberWithInt:envType]];
+//    return string;
+//}
 
 - (void)updateFileLogging:(BOOL)enableFileLogging {
     _LOG_TO_FILE = enableFileLogging;

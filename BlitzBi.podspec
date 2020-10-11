@@ -15,12 +15,12 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         		= "BlitzBi"
-  spec.version      		= "0.0.8"
-  spec.summary      		= "Blitz Bi Module."
-  spec.description  		= "Blitz Bi Module: Used for integration blitz-bi services"
-  spec.homepage     		= "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"
-  spec.license      		= { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
+  spec.name                 = "BlitzBi"
+  spec.version              = "0.0.8"
+  spec.summary              = "Blitz Bi Module."
+  spec.description          = "Blitz Bi Module: Used for integration blitz-bi services"
+  spec.homepage             = "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"
+  spec.license              = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
@@ -34,11 +34,11 @@ Pod::Spec.new do |spec|
     limitations under the License.
     LICENSE
   }
-  spec.author       		= "Akash Chetty"
-  spec.platform     		= :ios, "9.0"
-  spec.source     		= { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
-  spec.swift_version 		= "4.2"
-  spec.source_files  		= "**/**/*.{h,m,swift}"
-  spec.public_header_files 	= "**/**/*.h"
-  spec.exclude_files 		= "BlitzBi/BlitzBi/*.plist"
+  spec.author               = "Akash Chetty"
+  spec.platform             = :ios, "9.0"
+  spec.source             = { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
+  spec.swift_version         = "4.2"
+  spec.source_files          = "**/**/*.{h,m,swift}"
+  spec.public_header_files     = "**/**/*.h"
+  spec.exclude_files         = "BlitzBi/BlitzBi/*.plist"
 end

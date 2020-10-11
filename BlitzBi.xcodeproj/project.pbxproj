@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -47,14 +47,6 @@
 		844A0EE925246A3300D8529B /* BlitzRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */; };
 		844A0EEB25246A3300D8529B /* PBlitzDataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */; };
 		844A0EED25246A3300D8529B /* BlitzServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A0EE125246A3300D8529B /* BlitzServerHandler.m */; };
-		849B7A13252F173D00A0D63C /* BlitzBiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A12252F173D00A0D63C /* BlitzBiTests.swift */; };
-		849B7A15252F173D00A0D63C /* BlitzBi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843BB7BC25245195007272D9 /* BlitzBi.framework */; platformFilter = ios; };
-		849B7A30252F2B6400A0D63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A2F252F2B6400A0D63C /* AppDelegate.swift */; };
-		849B7A32252F2B6400A0D63C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A31252F2B6400A0D63C /* SceneDelegate.swift */; };
-		849B7A34252F2B6400A0D63C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B7A33252F2B6400A0D63C /* ViewController.swift */; };
-		849B7A37252F2B6400A0D63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A35252F2B6400A0D63C /* Main.storyboard */; };
-		849B7A39252F2B6800A0D63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A38252F2B6800A0D63C /* Assets.xcassets */; };
-		849B7A3C252F2B6800A0D63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849B7A3A252F2B6800A0D63C /* LaunchScreen.storyboard */; };
 		84B3111E252DCB6E0051016E /* BlitzDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */; };
 		84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111B252DCB6E0051016E /* BlitzReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111C252DCB6E0051016E /* BlitzReachability.m */; };
@@ -63,20 +55,8 @@
 		84CE9C04252B052900D0E48F /* BlitzStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CE9C01252B052900D0E48F /* BlitzStringUtils.m */; };
 		84CE9C05252B052900D0E48F /* BlitzCommonConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CE9C02252B052900D0E48F /* BlitzCommonConstant.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CE9C06252B052900D0E48F /* BlitzStringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CE9C03252B052900D0E48F /* BlitzStringUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B3AA29FF6A44FDD5EB971BA6 /* Pods_BlitzBiDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF4B8630947470CF34A7F69 /* Pods_BlitzBiDemo.framework */; };
-		B5D8245D812703739FB84B65 /* Pods_BlitzBiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC65201A71A041639D952FD2 /* Pods_BlitzBiTests.framework */; };
-		C6A8A56FC7A275FF8589C11D /* Pods_BlitzBi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A515ADF2AA67782AEF2F4F7 /* Pods_BlitzBi.framework */; };
+		84EEAA3D2533A73500851468 /* BlitzBi.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 84EEAA3C2533A73500851468 /* BlitzBi.podspec */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		849B7A16252F173D00A0D63C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 843BB7B325245195007272D9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 843BB7BB25245195007272D9;
-			remoteInfo = BlitzBi;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0194E69B2530764A00257D29 /* BlitzError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzError.swift; sourceTree = "<group>"; };
@@ -91,10 +71,6 @@
 		0194E6A62530764A00257D29 /* BlitzServerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlitzServerConfig.swift; sourceTree = "<group>"; };
 		0194E6A72530764A00257D29 /* BlitzServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzServerHandler.m; sourceTree = "<group>"; };
 		0194E6A82530764A00257D29 /* BlitzRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlitzRequestBuilder.m; sourceTree = "<group>"; };
-		1951CC7E291BF6D914C6571B /* Pods-BlitzBiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiTests.release.xcconfig"; path = "Target Support Files/Pods-BlitzBiTests/Pods-BlitzBiTests.release.xcconfig"; sourceTree = "<group>"; };
-		1BF4B8630947470CF34A7F69 /* Pods_BlitzBiDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBiDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D246B0FC7F616B9CEF3F7D0 /* Pods-BlitzBi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBi.debug.xcconfig"; path = "Target Support Files/Pods-BlitzBi/Pods-BlitzBi.debug.xcconfig"; sourceTree = "<group>"; };
-		7A515ADF2AA67782AEF2F4F7 /* Pods_BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8421669D252C816000E2017C /* BlitzBiEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlitzBiEventHandler.swift; path = Module/BlitzBiEventHandler.swift; sourceTree = "<group>"; };
 		843BB7BC25245195007272D9 /* BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843BB7BF25245195007272D9 /* BlitzBi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlitzBi.h; sourceTree = "<group>"; };
@@ -125,17 +101,6 @@
 		844A0EDD25246A3300D8529B /* BlitzRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzRequestBuilder.m; path = Module/BlitzRequestBuilder.m; sourceTree = "<group>"; };
 		844A0EDF25246A3300D8529B /* PBlitzDataTransferService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PBlitzDataTransferService.swift; path = Module/PBlitzDataTransferService.swift; sourceTree = "<group>"; };
 		844A0EE125246A3300D8529B /* BlitzServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzServerHandler.m; path = Module/BlitzServerHandler.m; sourceTree = "<group>"; };
-		849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlitzBiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		849B7A12252F173D00A0D63C /* BlitzBiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzBiTests.swift; sourceTree = "<group>"; };
-		849B7A14252F173D00A0D63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		849B7A2D252F2B6400A0D63C /* BlitzBiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlitzBiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		849B7A2F252F2B6400A0D63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		849B7A31252F2B6400A0D63C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		849B7A33252F2B6400A0D63C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		849B7A36252F2B6400A0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		849B7A38252F2B6800A0D63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		849B7A3B252F2B6800A0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		849B7A3D252F2B6800A0D63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84B3111A252DCB6E0051016E /* BlitzDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzDeviceUtils.m; path = Module/BlitzDeviceUtils.m; sourceTree = "<group>"; };
 		84B3111B252DCB6E0051016E /* BlitzReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzReachability.h; path = Module/BlitzReachability.h; sourceTree = "<group>"; };
 		84B3111C252DCB6E0051016E /* BlitzReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzReachability.m; path = Module/BlitzReachability.m; sourceTree = "<group>"; };
@@ -144,11 +109,7 @@
 		84CE9C01252B052900D0E48F /* BlitzStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzStringUtils.m; path = Module/BlitzStringUtils.m; sourceTree = "<group>"; };
 		84CE9C02252B052900D0E48F /* BlitzCommonConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzCommonConstant.h; path = Module/BlitzCommonConstant.h; sourceTree = "<group>"; };
 		84CE9C03252B052900D0E48F /* BlitzStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzStringUtils.h; path = Module/BlitzStringUtils.h; sourceTree = "<group>"; };
-		8FD325A9A75C929266CF824F /* Pods-BlitzBiDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiDemo.debug.xcconfig"; path = "Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		9214E7F451570EA2E2EF9A1C /* Pods-BlitzBi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBi.release.xcconfig"; path = "Target Support Files/Pods-BlitzBi/Pods-BlitzBi.release.xcconfig"; sourceTree = "<group>"; };
-		C9ABDCACA705FFC6BA581CDE /* Pods-BlitzBiDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiDemo.release.xcconfig"; path = "Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo.release.xcconfig"; sourceTree = "<group>"; };
-		CBBB5BEF14BB07055F59811B /* Pods-BlitzBiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlitzBiTests.debug.xcconfig"; path = "Target Support Files/Pods-BlitzBiTests/Pods-BlitzBiTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CC65201A71A041639D952FD2 /* Pods_BlitzBiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EEAA3C2533A73500851468 /* BlitzBi.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlitzBi.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,24 +117,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6A8A56FC7A275FF8589C11D /* Pods_BlitzBi.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		849B7A0D252F173D00A0D63C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				849B7A15252F173D00A0D63C /* BlitzBi.framework in Frameworks */,
-				B5D8245D812703739FB84B65 /* Pods_BlitzBiTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		849B7A2A252F2B6400A0D63C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B3AA29FF6A44FDD5EB971BA6 /* Pods_BlitzBiDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,40 +158,14 @@
 			path = security;
 			sourceTree = "<group>";
 		};
-		64D59D549AD311BA00496B64 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1BF4B8630947470CF34A7F69 /* Pods_BlitzBiDemo.framework */,
-				7A515ADF2AA67782AEF2F4F7 /* Pods_BlitzBi.framework */,
-				CC65201A71A041639D952FD2 /* Pods_BlitzBiTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		790B3B4A8EB06365AADD10C0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8FD325A9A75C929266CF824F /* Pods-BlitzBiDemo.debug.xcconfig */,
-				C9ABDCACA705FFC6BA581CDE /* Pods-BlitzBiDemo.release.xcconfig */,
-				2D246B0FC7F616B9CEF3F7D0 /* Pods-BlitzBi.debug.xcconfig */,
-				9214E7F451570EA2E2EF9A1C /* Pods-BlitzBi.release.xcconfig */,
-				CBBB5BEF14BB07055F59811B /* Pods-BlitzBiTests.debug.xcconfig */,
-				1951CC7E291BF6D914C6571B /* Pods-BlitzBiTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		843BB7B225245195007272D9 = {
 			isa = PBXGroup;
 			children = (
+				84EEAA3C2533A73500851468 /* BlitzBi.podspec */,
 				844A0E90252467D600D8529B /* Common */,
 				844A0E8F252467CE00D8529B /* Networking */,
 				843BB7BE25245195007272D9 /* BlitzBi */,
-				849B7A11252F173D00A0D63C /* BlitzBiTests */,
-				849B7A2E252F2B6400A0D63C /* BlitzBiDemo */,
 				843BB7BD25245195007272D9 /* Products */,
-				790B3B4A8EB06365AADD10C0 /* Pods */,
-				64D59D549AD311BA00496B64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,8 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				843BB7BC25245195007272D9 /* BlitzBi.framework */,
-				849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */,
-				849B7A2D252F2B6400A0D63C /* BlitzBiDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,29 +236,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		849B7A11252F173D00A0D63C /* BlitzBiTests */ = {
-			isa = PBXGroup;
-			children = (
-				849B7A12252F173D00A0D63C /* BlitzBiTests.swift */,
-				849B7A14252F173D00A0D63C /* Info.plist */,
-			);
-			path = BlitzBiTests;
-			sourceTree = "<group>";
-		};
-		849B7A2E252F2B6400A0D63C /* BlitzBiDemo */ = {
-			isa = PBXGroup;
-			children = (
-				849B7A2F252F2B6400A0D63C /* AppDelegate.swift */,
-				849B7A31252F2B6400A0D63C /* SceneDelegate.swift */,
-				849B7A33252F2B6400A0D63C /* ViewController.swift */,
-				849B7A35252F2B6400A0D63C /* Main.storyboard */,
-				849B7A38252F2B6800A0D63C /* Assets.xcassets */,
-				849B7A3A252F2B6800A0D63C /* LaunchScreen.storyboard */,
-				849B7A3D252F2B6800A0D63C /* Info.plist */,
-			);
-			path = BlitzBiDemo;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -382,7 +274,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843BB7C425245195007272D9 /* Build configuration list for PBXNativeTarget "BlitzBi" */;
 			buildPhases = (
-				3C33144BBA826DEFC9B443F4 /* [CP] Check Pods Manifest.lock */,
 				843BB7B725245195007272D9 /* Headers */,
 				843BB7B825245195007272D9 /* Sources */,
 				843BB7B925245195007272D9 /* Frameworks */,
@@ -397,44 +288,6 @@
 			productReference = 843BB7BC25245195007272D9 /* BlitzBi.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		849B7A0F252F173D00A0D63C /* BlitzBiTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 849B7A1A252F173D00A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiTests" */;
-			buildPhases = (
-				1FF740D8714E826CA9BB5249 /* [CP] Check Pods Manifest.lock */,
-				849B7A0C252F173D00A0D63C /* Sources */,
-				849B7A0D252F173D00A0D63C /* Frameworks */,
-				849B7A0E252F173D00A0D63C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				849B7A17252F173D00A0D63C /* PBXTargetDependency */,
-			);
-			name = BlitzBiTests;
-			productName = BlitzBiTests;
-			productReference = 849B7A10252F173D00A0D63C /* BlitzBiTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		849B7A2C252F2B6400A0D63C /* BlitzBiDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 849B7A3E252F2B6800A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiDemo" */;
-			buildPhases = (
-				A736BFC13DABE295A0F6435A /* [CP] Check Pods Manifest.lock */,
-				849B7A29252F2B6400A0D63C /* Sources */,
-				849B7A2A252F2B6400A0D63C /* Frameworks */,
-				849B7A2B252F2B6400A0D63C /* Resources */,
-				B528651FD38123CBA0B40C9B /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BlitzBiDemo;
-			productName = BlitzBiDemo;
-			productReference = 849B7A2D252F2B6400A0D63C /* BlitzBiDemo.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -447,12 +300,6 @@
 					843BB7BB25245195007272D9 = {
 						CreatedOnToolsVersion = 12.0.1;
 						LastSwiftMigration = 1200;
-					};
-					849B7A0F252F173D00A0D63C = {
-						CreatedOnToolsVersion = 12.0.1;
-					};
-					849B7A2C252F2B6400A0D63C = {
-						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -470,8 +317,6 @@
 			projectRoot = "";
 			targets = (
 				843BB7BB25245195007272D9 /* BlitzBi */,
-				849B7A0F252F173D00A0D63C /* BlitzBiTests */,
-				849B7A2C252F2B6400A0D63C /* BlitzBiDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -481,113 +326,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		849B7A0E252F173D00A0D63C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		849B7A2B252F2B6400A0D63C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				849B7A3C252F2B6800A0D63C /* LaunchScreen.storyboard in Resources */,
-				849B7A39252F2B6800A0D63C /* Assets.xcassets in Resources */,
-				849B7A37252F2B6400A0D63C /* Main.storyboard in Resources */,
+				84EEAA3D2533A73500851468 /* BlitzBi.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1FF740D8714E826CA9BB5249 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BlitzBiTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3C33144BBA826DEFC9B443F4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BlitzBi-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A736BFC13DABE295A0F6435A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BlitzBiDemo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B528651FD38123CBA0B40C9B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BlitzBiDemo/Pods-BlitzBiDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		843BB7B825245195007272D9 /* Sources */ = {
@@ -624,53 +367,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		849B7A0C252F173D00A0D63C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				849B7A13252F173D00A0D63C /* BlitzBiTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		849B7A29252F2B6400A0D63C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				849B7A34252F2B6400A0D63C /* ViewController.swift in Sources */,
-				849B7A30252F2B6400A0D63C /* AppDelegate.swift in Sources */,
-				849B7A32252F2B6400A0D63C /* SceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		849B7A17252F173D00A0D63C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 843BB7BB25245195007272D9 /* BlitzBi */;
-			targetProxy = 849B7A16252F173D00A0D63C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		849B7A35252F2B6400A0D63C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				849B7A36252F2B6400A0D63C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		849B7A3A252F2B6800A0D63C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				849B7A3B252F2B6800A0D63C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		843BB7C225245195007272D9 /* Debug */ = {
@@ -799,7 +496,6 @@
 		};
 		843BB7C525245195007272D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D246B0FC7F616B9CEF3F7D0 /* Pods-BlitzBi.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -822,6 +518,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "BlitzBi/BlitzBi-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -830,7 +527,6 @@
 		};
 		843BB7C625245195007272D9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9214E7F451570EA2E2EF9A1C /* Pods-BlitzBi.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -853,88 +549,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		849B7A18252F173D00A0D63C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBBB5BEF14BB07055F59811B /* Pods-BlitzBiTests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6B3N73X9SX;
-				INFOPLIST_FILE = BlitzBiTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		849B7A19252F173D00A0D63C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1951CC7E291BF6D914C6571B /* Pods-BlitzBiTests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6B3N73X9SX;
-				INFOPLIST_FILE = BlitzBiTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		849B7A3F252F2B6800A0D63C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FD325A9A75C929266CF824F /* Pods-BlitzBiDemo.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6B3N73X9SX;
-				INFOPLIST_FILE = BlitzBiDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		849B7A40252F2B6800A0D63C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9ABDCACA705FFC6BA581CDE /* Pods-BlitzBiDemo.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6B3N73X9SX;
-				INFOPLIST_FILE = BlitzBiDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Kiwi.Joyride.BlitzBiDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "BlitzBi/BlitzBi-Swift.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -957,24 +572,6 @@
 			buildConfigurations = (
 				843BB7C525245195007272D9 /* Debug */,
 				843BB7C625245195007272D9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		849B7A1A252F173D00A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				849B7A18252F173D00A0D63C /* Debug */,
-				849B7A19252F173D00A0D63C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		849B7A3E252F2B6800A0D63C /* Build configuration list for PBXNativeTarget "BlitzBiDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				849B7A3F252F2B6800A0D63C /* Debug */,
-				849B7A40252F2B6800A0D63C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

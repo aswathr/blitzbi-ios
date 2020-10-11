@@ -9,7 +9,6 @@
 #import "BlitzReachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
-#import <BlitzBi/BlitzBi-Swift.h>
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>

@@ -36,7 +36,7 @@ extern BlitzConfig *config;
 
 - (void)setDebugEnabled:(BOOL)value;
 - (BOOL)isDebugEnabled;
-- (NSString *)stringForEnvironment:(NSInteger)envType;
+//- (NSString *)stringForEnvironment:(NSInteger)envType;
 
-- (NSInteger)getEnvTypeFor:(NSString *)env;
+//- (NSInteger)getEnvTypeFor:(NSString *)env;
 @end
