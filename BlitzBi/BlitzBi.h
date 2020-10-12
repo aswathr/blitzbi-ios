@@ -21,3 +21,6 @@ FOUNDATION_EXPORT const unsigned char BIVersionString[];
 #import <BlitzBi/BlitzFileHelper.h>
 #import <BlitzBi/BlitzConfig.h>
 #import <BlitzBi/BlitzDeviceUtils.h>
+#import <BlitzBi/BaseUrls.h>
+#import <BlitzBi/BlitzServerConfig.h>
+#import <BlitzBi/BlitzNetworkDataTransferService.h>

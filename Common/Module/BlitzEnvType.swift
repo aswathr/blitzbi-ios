@@ -16,31 +16,3 @@ public class BaseUrls {
         self._BASE_URL = _BASE_URL
     }
 }
-
-@objc public enum BlitzEnvType : NSInteger {
-    case qa = 0
-    case prod = 1
-    case dev = 2
-    case stage = 3
-    case local = 4
-
-    func getBaseUrls() -> BaseUrls {
-        var _BASE_URL:String!
-        switch (self) {
-            case .local:
-                _BASE_URL = "http://localhost:9000";
-                break;
-                
-            case .prod:
-                break;
-            case .qa:
-                break;
-            case .dev:
-                break;
-            case .stage:
-                break;
-        }
-        
-        return BaseUrls(_BASE_URL: _BASE_URL)
-    }
-}
