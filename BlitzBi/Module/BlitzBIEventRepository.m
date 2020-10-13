@@ -5,14 +5,14 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BlitzBIEventRepository.h"
+#import <BlitzBIEventRepository.h>
 
 @implementation BlitzBIEventRepository
 - (instancetype)init:(NSNumber*) appId withToken: (NSString*)appToken withService:(id <PBlitzDataTransferService>) networkService{
     if (self = [super init]) {
-        _appId = appId;
-        _appToken = appToken;
-        _networkService = networkService;
+        self->appId = appId;
+        self->appToken = appToken;
+        self->networkService = networkService;
     }
     return self;
 }
@@ -26,7 +26,7 @@
     [requestBuilder setReqType:BI_REQUEST];
     [requestBuilder setContentType:@"application/json"];
     
-    [self.networkService executeServerCall:requestBuilder withCompletion: completion];
+    [networkService executeServerCall:requestBuilder withCompletion: completion];
 }
 
 - (void)processJsonRequestWithoutResponse:(NSString*)url withData:(NSData*)data withIsEmergency:(BOOL)isEmergency {
@@ -44,14 +44,14 @@
             
         }] resume];
     } else {
-        [self.networkService executeServerCallWithNoCallBack:requestBuilder];
+        [networkService executeServerCallWithNoCallBack:requestBuilder];
     }
 }
 
 - (NSMutableDictionary*) getRequestHeaders {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
-    [headers setValue:[_appId stringValue] forKey:@"blitzAppId"];
-    [headers setValue:_appToken forKey:@"blitzAppToken"];
+    [headers setValue:[appId stringValue] forKey:@"blitzAppId"];
+    [headers setValue:appToken forKey:@"blitzAppToken"];
     return headers;
 }
 @end

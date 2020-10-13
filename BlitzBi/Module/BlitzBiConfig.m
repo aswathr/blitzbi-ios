@@ -6,16 +6,16 @@
 //  Copyright © 2016 Kiwi, Inc. All rights reserved.
 //
 
-#import "BlitzBiConfig.h"
+#import <BlitzBiConfig.h>
 
 @implementation BlitzBiConfig
 - (id)initWithUrl:(NSString*) baseUrl {
     if (self = [super init]) {
-        _BASE_URL = baseUrl;
+        BASE_URL = baseUrl;
     }
     return self;
 }
 - (NSString*)base_URL {
-    return _BASE_URL;
+    return BASE_URL;
 }
 @end

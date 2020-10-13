@@ -5,7 +5,7 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BlitzNetworkModuleBuilder.h"
+#import <BlitzNetworkModuleBuilder.h>
 
 @implementation BlitzNetworkModuleBuilder
 - (void)setParams:(BaseUrls*)baseUrls serverHandler: (id <PServerHandler>)serverHandler {

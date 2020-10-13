@@ -12,8 +12,7 @@
 #import <netinet/in.h>
 
 #import <CoreFoundation/CoreFoundation.h>
-
-#import "BlitzReachability.h"
+#import <BlitzReachability.h>
 
 #pragma mark IPv6 Support
 //Reachability fully support IPv6.  For full details, see ReadMe.md.

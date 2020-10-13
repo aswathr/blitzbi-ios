@@ -5,12 +5,12 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BaseUrls.h"
+#import <BaseUrls.h>
 
 @implementation BaseUrls
 - (instancetype)initWithBaseUrl:(NSString *) baseUrl {
     if (self = [super init]) {
-        _BASE_URL = baseUrl;
+        BASE_URL = baseUrl;
     }
     return self;
 }

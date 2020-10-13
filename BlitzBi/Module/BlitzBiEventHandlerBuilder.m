@@ -13,14 +13,14 @@
             withAppId:(NSNumber*)appId
             withAppToken:(NSString*) appToken
             withService:(id <PBlitzDataTransferService>) networkService {
-    self.batchSize = batchSize;
-    self.baseUrl = baseUrl;
-    self.appId = appId;
-    self.appToken = appToken;
-    self.networkService = networkService;
+    self->batchSize = batchSize;
+    self->baseUrl = baseUrl;
+    self->appId = appId;
+    self->appToken = appToken;
+    self->networkService = networkService;
 }
 
 - (BlitzBiEventSendHandler*) build {
-    return [[BlitzBiEventSendHandler alloc] init:self.batchSize withBaseUrl:self.baseUrl withEventRepository: self.networkService];;
+    return [[BlitzBiEventSendHandler alloc] init:batchSize :baseUrl :networkService];;
 }
 @end

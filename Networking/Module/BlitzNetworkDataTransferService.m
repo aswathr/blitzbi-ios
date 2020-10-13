@@ -5,10 +5,10 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BlitzNetworkDataTransferService.h"
-#import "PBlitzServerConfig.h"
-#import "BlitzServerConfig.h"
-#import "BlitzServerHandler.h"
+#import <BlitzNetworkDataTransferService.h>
+#import <PBlitzServerConfig.h>
+#import <BlitzServerConfig.h>
+#import <BlitzServerHandler.h>
 
 @implementation BlitzNetworkDataTransferService
 - (instancetype)initWithConfig:(id <PBlitzServerConfig>)serverConfig withhandler:(id <PServerHandler>)serverHandler {

@@ -9,9 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BaseUrls : NSObject
-@property (strong) NSString* BASE_URL;
-
+@interface BaseUrls : NSObject {
+    NSString* BASE_URL;
+}
 - (instancetype)initWithBaseUrl:(NSString *) baseUrl;
 @end
 

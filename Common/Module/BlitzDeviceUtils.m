@@ -4,9 +4,9 @@
 //
 //  Created by Admin on 07/10/20.
 //
-#import "BlitzDeviceUtils.h"
+#import <BlitzDeviceUtils.h>
 
-#import "BlitzReachability.h"
+#import <BlitzReachability.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #import <UIKit/UIKit.h>

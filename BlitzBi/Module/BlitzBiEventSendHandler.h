@@ -9,15 +9,37 @@
 #import <BlitzBIEventRepository.h>
 #import <BlitzRequestBuilder.h>
 #import <BlitzBiConstants.h>
+#import <BlitzBiConfig.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BlitzBiEventSendHandler : NSObject
-- (instancetype)init:(NSNumber*) batchSize withBaseUrl:(NSString*) baseUrl withEventRepository:(BlitzBIEventRepository*)eventRepository;
-- (void)setBlitzdeviceId:(NSNumber*)appId withDeviceId:(NSString*)deviceId;
+@interface BlitzBiEventSendHandler : NSObject {
+    dispatch_queue_t serialQueue;
+    dispatch_queue_t networkQueue;
+    NSMutableArray<NSDictionary *> *pendingEvents;
+    NSTimer *biEventFireTimer;
 
-- (void)sendEvents:(NSArray *)events;
-- (void)sendEvent:(NSDictionary *)eventDict;
+    NSTimeInterval nextFlushTime;
+
+    BOOL isBlockSubmittedToNetworkQueue;
+    BOOL isAppIdValidated;
+
+    NSString *blitzDeviceId;
+    NSString *blitzAppId;
+    NSString *blitzSessionId;
+
+    BlitzBiConfig *biConfig;
+    BlitzBIEventRepository *eventRepository;
+
+    long long currentTimestamp;
+}
+- (instancetype)init:(NSNumber*)batchSize
+                    :(NSString*)baseUrl
+                    :(BlitzBIEventRepository*)eventRepository;
+- (void)setBlitzdeviceId:(NSNumber*)appId
+                        :(NSString*)deviceId;
+- (void)sendEvents:(NSArray*)events;
+- (void)sendEvent:(NSDictionary*)eventDict;
 @end
 
 NS_ASSUME_NONNULL_END

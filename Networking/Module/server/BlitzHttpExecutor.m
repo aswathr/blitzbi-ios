@@ -126,10 +126,6 @@
         }
     }
 
-    if (config.isDebugEnabled) {
-        NSLog(@"[Server][ServerHandler] making request(type: %d) to URL: %@",requestBuilder.reqType, request.URL);
-    }
-
     [requestBuilder setStartTime:[[NSDate date] timeIntervalSince1970]];
     
     [[session dataTaskWithRequest:request

@@ -5,16 +5,23 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BlitzBiService.h"
+#import <BlitzBiService.h>
+
+@interface BlitzBiService()
+-(void)checkForDeviceId:(NSNumber*)appId
+                       :(NSString*)appToken;
+-(void)initialize:(NSNumber*)appId
+                 :(NSString*)appToken;
+-(void)checkForDeviceId:(NSNumber*)appId
+                       :(NSString*)appToken
+                       :(NSData*)data
+                       :(void(^)(NSObject *, NSError *))completionBlock;
+@end
 
 @implementation BlitzBiService
 
-NSString* baseUrl;
-BaseUrls* baseUrls;
-id <PBlitzDataTransferService> biNetworkService;
-BlitzBiEventSendHandler* biBuilder;
-
-- (void)setUp:(NSNumber*)appId withAppToken:(NSString*)appToken {
+- (void)setUp:(NSNumber*)appId
+             :(NSString*)appToken {
     baseUrl = @"https://blitzbi-dev.useblitz.com/";
     baseUrls = [[BaseUrls alloc] initWithBaseUrl:baseUrl];
     
@@ -26,21 +33,23 @@ BlitzBiEventSendHandler* biBuilder;
     [handlerBuilder setParams:[NSNumber numberWithInt:60] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService];
     biBuilder = [handlerBuilder build];
     
-    [self checkForDeviceId:appId withAppToken:appToken];
+    [self checkForDeviceId:appId :appToken];
 }
 
--(void)checkForDeviceId:(NSNumber*)appId withAppToken:(NSString*)appToken {
+-(void)checkForDeviceId:(NSNumber*)appId
+                       :(NSString*)appToken {
     NSString *deviceId = [[NSUserDefaults standardUserDefaults] stringForKey:BLITZ_DEVICE_ID_KEY];
     if(deviceId) {
-        [biBuilder setBlitzdeviceId:appId withDeviceId:deviceId];
+        [biBuilder setBlitzdeviceId:appId :deviceId];
     }  else {
-        [self initialize:appId withAppToken:appToken];
+        [self initialize:appId :appToken];
     }
 }
 
--(void)initialize:(NSNumber*)appId withAppToken:(NSString*)appToken {
+-(void)initialize:(NSNumber*)appId
+                 :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
-    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] initWithAppId:appId withDeviceId:deviceId];
+    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] initWithAppId:appId :deviceId];
     
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:deviceRequest options:0 error:&error];
@@ -49,7 +58,7 @@ BlitzBiEventSendHandler* biBuilder;
     }
     
     NSLog(@"%@", data);
-    [self checkForDeviceId:appId withAppToken:appToken withData:data withCompletionBlock:^(NSObject *response, NSError *err){
+    [self checkForDeviceId:appId :appToken :data :^(NSObject *response, NSError *err){
         if (err == nil) {
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
             if (err == nil) {
@@ -59,14 +68,17 @@ BlitzBiEventSendHandler* biBuilder;
                     [[NSUserDefaults standardUserDefaults] setObject:blitzDeviceId forKey:BLITZ_DEVICE_ID_KEY];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     
-                    [biBuilder setBlitzdeviceId:appId withDeviceId:deviceId];
+                    [self->biBuilder setBlitzdeviceId:appId :deviceId];
                 }
             }
         }
     }];
 }
 
--(void) checkForDeviceId:(NSNumber*)appId withAppToken:(NSString*)appToken withData:(NSData*) data withCompletionBlock:(void(^)(NSObject *, NSError *))completionBlock {
+-(void) checkForDeviceId:(NSNumber*)appId
+                        :(NSString*)appToken
+                        :(NSData*) data
+                        :(void(^)(NSObject *, NSError *))completionBlock {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     [headers setValue:[appId stringValue] forKey:@"blitzAppId"];
     [headers setValue:appToken forKey:@"blitzAppToken"];
@@ -83,13 +95,13 @@ BlitzBiEventSendHandler* biBuilder;
     [biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
-- (void)sendEvents:(NSArray *)events{
+- (void)sendEvents:(NSArray*)events{
     if (events != nil) {
         [biBuilder sendEvents:events];
     }
 }
 
-- (void)sendEvent:(NSDictionary *)eventDict {
+- (void)sendEvent:(NSDictionary*)eventDict {
     if (eventDict != nil) {
         [biBuilder sendEvent:eventDict];
     }

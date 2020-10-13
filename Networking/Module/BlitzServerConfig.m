@@ -5,7 +5,7 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BlitzServerConfig.h"
+#import <BlitzServerConfig.h>
 
 @implementation BlitzServerConfig
 - (instancetype)initWithBaseUrl:(BaseUrls *) baseUrls {

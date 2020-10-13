@@ -6,12 +6,11 @@
 //  Copyright © 2016 Twilio, Inc. All rights reserved.
 //
 
-#import "BlitzServerHandler.h"
-#import "BlitzRequestBuilder.h"
-#import "BlitzHttpExecutor.h"
-#import "BlitzKWConcurrentDictionary.h"
-#import "BlitzCommonConstant.h"
-#import "BlitzStringConstant.h"
+#import <BlitzServerHandler.h>
+#import <BlitzRequestBuilder.h>
+#import <BlitzHttpExecutor.h>
+#import <BlitzKWConcurrentDictionary.h>
+#import <BlitzCommonConstant.h>
 
 @implementation BlitzServerHandler
 
@@ -165,7 +164,6 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
         if (err != nil) {
             if (response != nil) {
                 NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:err.userInfo];
-                dict[API_RESPONSE] = response;
                 NSError *responseError = [NSError errorWithDomain:err.domain code:err.code userInfo:dict];
                 err = responseError;
             }

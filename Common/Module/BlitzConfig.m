@@ -6,12 +6,10 @@
 //  Copyright © 2016 Kiwi, Inc. All rights reserved.
 //
 
-#import "BlitzConfig.h"
-
-#import "BlitzCommon.h"
-#import "BlitzFileHelper.h"
-#import "BlitzStringConstant.h"
-#import "BlitzCommonConstant.h"
+#import <BlitzConfig.h>
+#import <BlitzCommon.h>
+#import <BlitzFileHelper.h>
+#import <BlitzCommonConstant.h>
 
 @interface BlitzConfig () {
     BOOL isDebugEnabled;

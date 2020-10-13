@@ -8,10 +8,9 @@
 #ifndef JrxCommon_h
 #define JrxCommon_h
 
-#import "BlitzCommonConstant.h"
-#import "BlitzStringConstant.h"
-#import "BlitzConfig.h"
-#import "BlitzFileHelper.h"
-#import "BlitzFileCacheHelper.h"
+#import <BlitzCommonConstant.h>
+#import <BlitzConfig.h>
+#import <BlitzFileHelper.h>
+#import <BlitzFileCacheHelper.h>
 
 #endif

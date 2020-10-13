@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BlitzBiConfig : NSObject
-@property (nonatomic, strong) NSString *BASE_URL;
+@interface BlitzBiConfig : NSObject {
+    NSString *BASE_URL;
+}
+
 - (id)initWithUrl:(NSString*) baseUrl;
 - (NSString*)base_URL;
 @end

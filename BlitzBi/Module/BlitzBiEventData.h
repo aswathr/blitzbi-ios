@@ -16,6 +16,7 @@
 - (NSObject *)getValue;
 
 @end
+
 typedef NameValuePair BasicNameValuePair;
 
 @interface BlitzBiEventData : NSObject {
@@ -24,5 +25,4 @@ typedef NameValuePair BasicNameValuePair;
 
 - (NSMutableArray *)getPayload;
 - (id)init:(NSMutableArray *)payload;
-
 @end
