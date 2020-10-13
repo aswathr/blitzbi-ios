@@ -5,7 +5,7 @@
 //  Created by Mitesh on 17/01/17.
 //  Copyright © 2017 Kiwi, Inc. All rights reserved.
 //
-#import "BlitzStringUtils.h"
+#import <BlitzStringUtils.h>
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation BlitzStringUtils

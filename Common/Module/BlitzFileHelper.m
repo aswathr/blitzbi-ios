@@ -6,7 +6,7 @@
 //  Copyright © 2016 Kiwi, Inc. All rights reserved.
 //
 
-#import "BlitzFileHelper.h"
+#import <BlitzFileHelper.h>
 
 @implementation BlitzFileHelper
 

@@ -10,7 +10,7 @@
 #import <BlitzRequestBuilder.h>
 #import <BlitzHttpExecutor.h>
 #import <BlitzKWConcurrentDictionary.h>
-#import <BlitzCommonConstant.h>
+#import <BlitzConstants.h>
 
 @implementation BlitzServerHandler
 

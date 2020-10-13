@@ -8,7 +8,7 @@
 
 #import <BlitzReachability.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-#import <BlitzCommonConstant.h>
+#import <BlitzConstants.h>
 
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>

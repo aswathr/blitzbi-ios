@@ -7,7 +7,7 @@
 //
 
 #import <BlitzRequestBuilder.h>
-#import <BlitzCommonConstant.h>
+#import <BlitzConstants.h>
 #import <BlitzStringUtils.h>
 #import <BlitzParser.h>
 

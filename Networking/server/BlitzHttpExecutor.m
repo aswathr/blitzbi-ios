@@ -6,9 +6,9 @@
 //  Copyright © 2016 Kiwi, Inc. All rights reserved.
 //
 
-#import "BlitzHttpExecutor.h"
-#import "BlitzRequestBuilder.h"
-#import "BlitzParser.h"
+#import <BlitzHttpExecutor.h>
+#import <BlitzRequestBuilder.h>
+#import <BlitzParser.h>
 
 @implementation BlitzHttpExecutor
 

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <BlitzBiEventRepository.h>
 #import <BlitzRequestBuilder.h>
-#import <BlitzBiConstants.h>
+#import <BlitzConstants.h>
 #import <BlitzBiConfig.h>
 
 NS_ASSUME_NONNULL_BEGIN

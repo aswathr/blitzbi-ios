@@ -12,7 +12,7 @@
 #import <PBlitzDataTransferService.h>
 #import <BlitzBiEventSendHandler.h>
 #import <BlitzNetworkModuleBuilder.h>
-#import <BlitzBiConstants.h>
+#import <BlitzConstants.h>
 #import <BlitzBIEventHandlerBuilder.h>
 
 NS_ASSUME_NONNULL_BEGIN
