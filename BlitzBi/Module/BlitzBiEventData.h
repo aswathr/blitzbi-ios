@@ -11,10 +11,10 @@
 @interface NameValuePair : NSObject {
     NSObject *name, *value;
 }
+
 - (id)init:(NSString *)_name value:(NSString *)_value;
 - (NSObject *)getName;
 - (NSObject *)getValue;
-
 @end
 
 typedef NameValuePair BasicNameValuePair;

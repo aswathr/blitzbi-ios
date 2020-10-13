@@ -8,7 +8,7 @@
 #import <BlitzServerConfig.h>
 
 @implementation BlitzServerConfig
-- (instancetype)initWithBaseUrl:(BaseUrls *) baseUrls {
+- (instancetype)init:(BaseUrls *) baseUrls {
     if (self = [super init]) {
         _baseUrls = baseUrls;
     }

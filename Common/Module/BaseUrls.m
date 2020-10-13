@@ -8,7 +8,7 @@
 #import <BaseUrls.h>
 
 @implementation BaseUrls
-- (instancetype)initWithBaseUrl:(NSString *) baseUrl {
+- (instancetype)init:(NSString *) baseUrl {
     if (self = [super init]) {
         BASE_URL = baseUrl;
     }

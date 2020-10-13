@@ -61,7 +61,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [self setBatchSize:batchSize];
 
         self->eventRepository = eventRepository;
-        self->biConfig = [[BlitzBiConfig alloc] initWithUrl:baseUrl];
+        self->biConfig = [[BlitzBiConfig alloc] init:baseUrl];
         self->blitzSessionId = [BlitzDeviceUtils getSessionId];
         self->isBlockSubmittedToNetworkQueue = NO;
         self->currentTimestamp = 0;

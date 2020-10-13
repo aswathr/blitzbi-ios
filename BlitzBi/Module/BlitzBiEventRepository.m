@@ -7,8 +7,12 @@
 
 #import <BlitzBiEventRepository.h>
 
+@interface BlitzBiEventRepository()
+- (NSMutableDictionary*) getRequestHeaders;
+@end
+
 @implementation BlitzBiEventRepository
-- (instancetype)init:(NSNumber*)appId
+- (id)init:(NSNumber*)appId
                     :(NSString*)appToken
                     :(id <PBlitzDataTransferService>)networkService {
     if (self = [super init]) {
@@ -18,6 +22,7 @@
     }
     return self;
 }
+
 - (void)processJsonRequest:(NSString*)url
                           :(NSData*)data
                           :(void(^)(NSObject *, NSError *))completion{

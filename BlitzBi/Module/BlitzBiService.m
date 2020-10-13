@@ -23,7 +23,7 @@
 - (void)setUp:(NSNumber*)appId
              :(NSString*)appToken {
     baseUrl = @"https://blitzbi-dev.useblitz.com/";
-    baseUrls = [[BaseUrls alloc] initWithBaseUrl:baseUrl];
+    baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
     [networkBuilder setParams:baseUrls serverHandler:[[BlitzServerHandler alloc] init]];
@@ -49,7 +49,7 @@
 -(void)initialize:(NSNumber*)appId
                  :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
-    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] initWithAppId:appId :deviceId];
+    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId];
     NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
     
     NSError *error;

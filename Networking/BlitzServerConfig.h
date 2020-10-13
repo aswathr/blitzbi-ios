@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BlitzServerConfig : NSObject<PBlitzServerConfig>
 @property (strong) BaseUrls* baseUrls;
 
-- (instancetype)initWithBaseUrl:(BaseUrls *) baseUrls;
+- (instancetype)init:(BaseUrls *) baseUrls;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,9 +14,9 @@
 }
 
 - (id <PBlitzDataTransferService>) build {
-    BlitzServerConfig *config = [[BlitzServerConfig alloc] initWithBaseUrl:self.baseUrls];
+    BlitzServerConfig *config = [[BlitzServerConfig alloc] init:self.baseUrls];
     
-    BlitzNetworkDataTransferService *service = [[BlitzNetworkDataTransferService alloc] initWithConfig:config
+    BlitzNetworkDataTransferService *service = [[BlitzNetworkDataTransferService alloc] init:config
                                                                                                       :self.serverHandler];
     return service;
 }

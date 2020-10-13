@@ -11,7 +11,7 @@
 #import <BlitzServerHandler.h>
 
 @implementation BlitzNetworkDataTransferService
-- (instancetype)initWithConfig:(id <PBlitzServerConfig>)serverConfig
+- (instancetype)init:(id <PBlitzServerConfig>)serverConfig
                               :(id <PServerHandler>)serverHandler {
     if (self = [super init]) {
         self.serverConfig = serverConfig;

@@ -8,7 +8,7 @@
 #import <BiDeviceRequest.h>
 
 @implementation BiDeviceRequest
-- (instancetype)initWithAppId:(NSNumber*)appId
+- (instancetype)init:(NSNumber*)appId
                              :(NSString*)deviceId {
     if (self = [super init]) {
         blitzAppId = appId;
