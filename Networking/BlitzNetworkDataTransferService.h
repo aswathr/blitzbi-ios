@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property id <PBlitzServerConfig> serverConfig;
 @property id <PServerHandler> serverHandler;
 
-- (instancetype)initWithConfig:(id <PBlitzServerConfig>)serverConfig withhandler:(id <PServerHandler>)serverHandler;
+- (instancetype)initWithConfig:(id <PBlitzServerConfig>)serverConfig
+                              :(id <PServerHandler>)serverHandler;
 @end
 
 NS_ASSUME_NONNULL_END

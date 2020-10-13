@@ -55,7 +55,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*) baseUrl
-                    :(BlitzBIEventRepository*)eventRepository {
+                    :(BlitzBiEventRepository*)eventRepository {
     self = [super init];
     if (self) {
         [self setBatchSize:batchSize];
@@ -176,7 +176,7 @@ name:NSExtensionHostWillEnterForegroundNotification
         NSData *jsonData = [self getJSONDataForBatch:batch];
         NSString *url = [biConfig base_URL];
                     
-        [self->eventRepository processJsonRequestWithoutResponse:url withData:jsonData withIsEmergency:YES];
+        [self->eventRepository processJsonRequestWithoutResponse:url :jsonData :YES];
         [eventsCopy removeObjectsInArray:batch];
     }
 }
@@ -255,9 +255,9 @@ name:NSExtensionHostWillEnterForegroundNotification
                 
                 dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-                [eventRepository processJsonRequest:url withData:jsonData withCompletion:^(NSObject *response, NSError *err) {
+                [eventRepository processJsonRequest:url :jsonData :^(NSObject *response, NSError *err) {
                     if(err != nil) {
-                        didFail = true;
+                        didFail = YES;
                         //Send error to crashlytics
                         NSLog(@"Error in getting response from server for jsondata %@ with error %@", jsonData, err);
                     }
@@ -423,7 +423,7 @@ name:NSExtensionHostWillEnterForegroundNotification
                          :(NSString*)deviceId {
     self->blitzAppId = [appId stringValue];
     self->blitzDeviceId = deviceId;
-    self->isAppIdValidated = true;
+    self->isAppIdValidated = YES;
 }
 
 - (void)updateNextFlushTime {

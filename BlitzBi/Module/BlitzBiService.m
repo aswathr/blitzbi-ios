@@ -50,15 +50,16 @@
                  :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
     BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] initWithAppId:appId :deviceId];
+    NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
     
     NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:deviceRequest options:0 error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceRequestDict options:NSJSONWritingPrettyPrinted error:&error];
     if (error) {
         return;
     }
     
-    NSLog(@"%@", data);
-    [self checkForDeviceId:appId :appToken :data :^(NSObject *response, NSError *err){
+    NSLog(@"%@", jsonData);
+    [self checkForDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
         if (err == nil) {
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
             if (err == nil) {

@@ -18,4 +18,12 @@
     }
     return self;
 }
+- (NSMutableDictionary*)dictionary {
+    NSMutableDictionary *requestDict = [[NSMutableDictionary alloc] init];
+    [requestDict setValue:blitzAppId forKey:@"blitzAppId"];
+    [requestDict setValue:blitzDeviceId forKey:@"blitzDeviceId"];
+    [requestDict setValue:installAppVersion forKey:@"installAppVersion"];
+    [requestDict setValue:deviceType forKey:@"deviceType"];
+    return requestDict;
+}
 @end

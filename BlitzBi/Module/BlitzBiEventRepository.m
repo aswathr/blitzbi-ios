@@ -1,14 +1,16 @@
 //
-//  BlitzBIEventRepository.m
+//  BlitzBiEventRepository.m
 //  BlitzBi
 //
 //  Created by Admin on 12/10/20.
 //
 
-#import <BlitzBIEventRepository.h>
+#import <BlitzBiEventRepository.h>
 
-@implementation BlitzBIEventRepository
-- (instancetype)init:(NSNumber*) appId withToken: (NSString*)appToken withService:(id <PBlitzDataTransferService>) networkService{
+@implementation BlitzBiEventRepository
+- (instancetype)init:(NSNumber*)appId
+                    :(NSString*)appToken
+                    :(id <PBlitzDataTransferService>)networkService {
     if (self = [super init]) {
         self->appId = appId;
         self->appToken = appToken;
@@ -16,7 +18,9 @@
     }
     return self;
 }
-- (void)processJsonRequest:(NSString*)url withData: (NSData*)data withCompletion:(void(^)(NSObject *, NSError *))completion{
+- (void)processJsonRequest:(NSString*)url
+                          :(NSData*)data
+                          :(void(^)(NSObject *, NSError *))completion{
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:POST_METHOD];
     [requestBuilder setBaseUrl:url];
@@ -29,7 +33,9 @@
     [networkService executeServerCall:requestBuilder withCompletion: completion];
 }
 
-- (void)processJsonRequestWithoutResponse:(NSString*)url withData:(NSData*)data withIsEmergency:(BOOL)isEmergency {
+- (void)processJsonRequestWithoutResponse:(NSString*)url
+                                         :(NSData*)data
+                                         :(BOOL)isEmergency {
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:POST_METHOD];
     [requestBuilder setBaseUrl:url];

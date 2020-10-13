@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAppId:(NSNumber*)appId
                              :(NSString*)deviceId;
+- (NSMutableDictionary*)dictionary;
 @end
 
 NS_ASSUME_NONNULL_END

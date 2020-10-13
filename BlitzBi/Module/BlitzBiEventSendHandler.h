@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BlitzBIEventRepository.h>
+#import <BlitzBiEventRepository.h>
 #import <BlitzRequestBuilder.h>
 #import <BlitzBiConstants.h>
 #import <BlitzBiConfig.h>
@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *blitzSessionId;
 
     BlitzBiConfig *biConfig;
-    BlitzBIEventRepository *eventRepository;
+    BlitzBiEventRepository *eventRepository;
 
     long long currentTimestamp;
 }
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*)baseUrl
-                    :(BlitzBIEventRepository*)eventRepository;
+                    :(BlitzBiEventRepository*)eventRepository;
 - (void)setBlitzdeviceId:(NSNumber*)appId
                         :(NSString*)deviceId;
 - (void)sendEvents:(NSArray*)events;

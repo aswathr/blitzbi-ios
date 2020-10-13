@@ -21,6 +21,6 @@
 }
 
 - (BlitzBiEventSendHandler*) build {
-    return [[BlitzBiEventSendHandler alloc] init:batchSize :baseUrl :networkService];;
+    return [[BlitzBiEventSendHandler alloc] init:batchSize :baseUrl :[[BlitzBiEventRepository alloc]init:appId :appToken :networkService]];;
 }
 @end
