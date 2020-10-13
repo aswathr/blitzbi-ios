@@ -54,7 +54,7 @@ static NSInteger forceSendAfterSeconds = 30;
 static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (instancetype)init:(NSNumber*)batchSize
-                    :(NSString*) baseUrl
+                    :(NSString*)baseUrl
                     :(BlitzBiEventRepository*)eventRepository {
     self = [super init];
     if (self) {
@@ -95,46 +95,46 @@ name:NSExtensionHostWillEnterForegroundNotification
                                                object:nil];
 }
 
--(void) onPause {
+- (void) onPause {
     NSLog(@"BlitzBiEventSendHandler::onPause");
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
 }
 
--(void) onResume {
+- (void) onResume {
     NSLog(@"BlitzBiEventSendHandler::onResume");
     self->currentTimestamp = [self getCurrentEpochTime];
     [self fireSessionStartEvent];
     [self invalidateTimer];
 }
 
--(void) onDestroy {
+- (void) onDestroy {
     NSLog(@"BlitzBiEventSendHandler::onDestroy");
     [self flushEmergency];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
 }
 
--(long long) getCurrentEpochTime{
+- (long long) getCurrentEpochTime{
     return (long long)[[NSDate date] timeIntervalSince1970];
 }
 
 // TODO: @kash
--(void) fireSessionLengthEvent {
+- (void) fireSessionLengthEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
     [eventDict setValue:@"session_length" forKey:@"eventName"];
     //[eventDict setValue:([self getCurrentEpochTime] - _currentTimestamp) forKey:@"session_length"];
     [self sendEvent:eventDict];
 }
 
--(void) fireSessionStartEvent {
+- (void) fireSessionStartEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
     [eventDict setValue:@"session_start" forKey:@"eventName"];
     [self sendEvent:eventDict];
 }
 
--(void) fireSessionPauseEvent {
+- (void) fireSessionPauseEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
     [eventDict setValue:@"session_pause" forKey:@"eventName"];
     [self sendEvent:eventDict];
@@ -158,8 +158,8 @@ name:NSExtensionHostWillEnterForegroundNotification
     [self flush];
 }
 
-- (void)setBlitzdeviceId:(NSNumber*)appId withDeviceId: (NSString*) deviceId {
-    self->blitzAppId = [appId stringValue];
+- (void)setBlitzdeviceId:(NSString*)appId withDeviceId: (NSString*) deviceId {
+    self->blitzAppId = appId;
     self->blitzDeviceId = deviceId;
 }
 
@@ -419,9 +419,9 @@ name:NSExtensionHostWillEnterForegroundNotification
     return isAppIdValidated && blitzDeviceId != nil;
 }
 
-- (void)setBlitzdeviceId :(NSNumber*)appId
+- (void)setBlitzdeviceId :(NSString*)appId
                          :(NSString*)deviceId {
-    self->blitzAppId = [appId stringValue];
+    self->blitzAppId = appId;
     self->blitzDeviceId = deviceId;
     self->isAppIdValidated = YES;
 }
@@ -434,7 +434,7 @@ name:NSExtensionHostWillEnterForegroundNotification
     maxPendingCount = [size longValue];
 }
 
--(NSMutableDictionary*) getCommonParams {
+- (NSMutableDictionary*) getCommonParams {
     NSMutableDictionary *biCommonParams = [[NSMutableDictionary alloc] init];
     [biCommonParams setValue:blitzAppId forKey:@"blitzAppId"];
     [biCommonParams setValue:blitzDeviceId  forKey:@"blitzDeviceId"];

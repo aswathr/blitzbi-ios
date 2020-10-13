@@ -15,14 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BlitzBiEventHandlerBuilder : NSObject {
     NSNumber* batchSize;
     NSString* baseUrl;
-    NSNumber* appId;
+    NSString* appId;
     NSString* appToken;
     id <PBlitzDataTransferService> networkService;
 }
 
 - (void)setParams:(NSNumber*)batchSize
             withUrl:(NSString*)baseUrl
-            withAppId:(NSNumber*) appId
+            withAppId:(NSString*) appId
             withAppToken:(NSString*) appToken
             withService:(id <PBlitzDataTransferService>) networkService;
 - (BlitzBiEventSendHandler*) build;

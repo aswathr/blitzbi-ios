@@ -11,7 +11,6 @@
 #import <Foundation/Foundation.h>
 
 @interface BlitzStringUtils : NSObject
-
 + (BOOL)isValidIntegerString:(NSString *)str;
 + (NSString *)MD5String:(NSString *)str;
 + (NSString *)MD5Base64String:(NSString *)str;

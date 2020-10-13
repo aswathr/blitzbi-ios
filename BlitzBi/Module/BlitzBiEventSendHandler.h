@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*)baseUrl
                     :(BlitzBiEventRepository*)eventRepository;
-- (void)setBlitzdeviceId:(NSNumber*)appId
+- (void)setBlitzdeviceId:(NSString*)appId
                         :(NSString*)deviceId;
 - (void)sendEvents:(NSArray*)events;
 - (void)sendEvent:(NSDictionary*)eventDict;

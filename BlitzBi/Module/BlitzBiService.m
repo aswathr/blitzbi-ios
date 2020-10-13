@@ -8,19 +8,19 @@
 #import <BlitzBiService.h>
 
 @interface BlitzBiService()
--(void)checkForDeviceId:(NSNumber*)appId
-                       :(NSString*)appToken;
--(void)initialize:(NSNumber*)appId
-                 :(NSString*)appToken;
--(void)checkForDeviceId:(NSNumber*)appId
-                       :(NSString*)appToken
-                       :(NSData*)data
-                       :(void(^)(NSObject *, NSError *))completionBlock;
+- (void)checkForDeviceId:(NSString*)appId
+                        :(NSString*)appToken;
+- (void)initialize:(NSString*)appId
+                  :(NSString*)appToken;
+- (void)checkForDeviceId:(NSString*)appId
+                        :(NSString*)appToken
+                        :(NSData*)data
+                        :(void(^)(NSObject *, NSError *))completionBlock;
 @end
 
 @implementation BlitzBiService
 
-- (void)setUp:(NSNumber*)appId
+- (void)setUp:(NSString*)appId
              :(NSString*)appToken {
     baseUrl = @"https://blitzbi-dev.useblitz.com/";
     baseUrls = [[BaseUrls alloc] init:baseUrl];
@@ -36,8 +36,8 @@
     [self checkForDeviceId:appId :appToken];
 }
 
--(void)checkForDeviceId:(NSNumber*)appId
-                       :(NSString*)appToken {
+- (void)checkForDeviceId:(NSString*)appId
+                        :(NSString*)appToken {
     NSString *deviceId = [[NSUserDefaults standardUserDefaults] stringForKey:BLITZ_DEVICE_ID_KEY];
     if(deviceId) {
         [biBuilder setBlitzdeviceId:appId :deviceId];
@@ -46,8 +46,8 @@
     }
 }
 
--(void)initialize:(NSNumber*)appId
-                 :(NSString*)appToken {
+- (void)initialize:(NSString*)appId
+                  :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
     BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId];
     NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
@@ -76,12 +76,12 @@
     }];
 }
 
--(void) checkForDeviceId:(NSNumber*)appId
-                        :(NSString*)appToken
-                        :(NSData*) data
-                        :(void(^)(NSObject *, NSError *))completionBlock {
+- (void) checkForDeviceId:(NSString*)appId
+                         :(NSString*)appToken
+                         :(NSData*) data
+                         :(void(^)(NSObject *, NSError *))completionBlock {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
-    [headers setValue:[appId stringValue] forKey:@"blitzAppId"];
+    [headers setValue:appId forKey:@"blitzAppId"];
     [headers setValue:appToken forKey:@"blitzAppToken"];
     
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];

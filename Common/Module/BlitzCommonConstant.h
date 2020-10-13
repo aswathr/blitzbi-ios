@@ -20,12 +20,7 @@
     [[[UserService sharedInstance] retrieveUser] getUserIdAsString]
 #define SPAM_CONTACT_LIST [NSArray arrayWithObjects:@"spam", @"identified as spam", @"identified by eyecon", @"", nil]
 
-typedef void (^HttpSuccessCallback)(NSObject *_Nullable data);
-typedef void (^HttpFailureCallback)(NSError *_Nullable error, NSString * _Nonnull extraInfo);
-
 static NSString * _Nonnull const CACHE_PREFIX_MACRO = @"cache_prefix_";
-
-////Will Add up these details
 static NSString * _Nonnull const BLITZ_P_D1_C1 = @"NuW9";
 static NSString * _Nonnull const BLITZ_P_D2_C1 = @"6N";
 static NSString * _Nonnull const K_PARSER_D1_C2= @"cG5C";
@@ -34,11 +29,9 @@ static NSString * _Nonnull const K_P_DETAILS1_C3= @"dd7c";
 static NSString * _Nonnull const K_P_DETAILS2_C3= @"rf";
 static NSString * _Nonnull const K_P_D1_CHUNK4= @"lBlg";
 static NSString * _Nonnull const K_P_D2_CHUNK4= @"tr";
-
 static NSString * _Nonnull const USER_DEFAULTS_APPENDER = @",";
-
-static NSInteger const BLITZ_DOWN_TIME_STATUS_CODE = 459;
-
+static NSString * _Nonnull const BLITZ_DEVICE_ID_KEY  = @"BLITZ_DEVICE_ID_KEY";
 static NSString * _Nonnull const SERVER_CALL_SENT_NOTIFICATION = @"SERVER_CALL_SENT_NOTIFICATION";
 
+static NSInteger const BLITZ_DOWN_TIME_STATUS_CODE = 459;
 #endif /* CommonConstant_h */

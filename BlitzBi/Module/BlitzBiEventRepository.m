@@ -12,9 +12,9 @@
 @end
 
 @implementation BlitzBiEventRepository
-- (id)init:(NSNumber*)appId
-                    :(NSString*)appToken
-                    :(id <PBlitzDataTransferService>)networkService {
+- (id)init:(NSString*)appId
+          :(NSString*)appToken
+          :(id <PBlitzDataTransferService>)networkService {
     if (self = [super init]) {
         self->appId = appId;
         self->appToken = appToken;
@@ -61,7 +61,7 @@
 
 - (NSMutableDictionary*) getRequestHeaders {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
-    [headers setValue:[appId stringValue] forKey:@"blitzAppId"];
+    [headers setValue:appId forKey:@"blitzAppId"];
     [headers setValue:appToken forKey:@"blitzAppToken"];
     return headers;
 }

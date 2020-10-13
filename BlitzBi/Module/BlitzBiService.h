@@ -24,10 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
     BlitzBiEventSendHandler* biBuilder;
 }
 
--(void)setUp:(NSNumber*)appId
-            :(NSString*)appToken;
--(void)sendEvent:(NSDictionary*)eventDict;
--(void)sendEvents:(NSArray*)events;
+- (void)setUp:(NSString*)appId
+             :(NSString*)appToken;
+- (void)sendEvent:(NSDictionary*)eventDict;
+- (void)sendEvents:(NSArray*)events;
 @end
 
 NS_ASSUME_NONNULL_END

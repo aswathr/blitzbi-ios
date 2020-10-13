@@ -8,6 +8,7 @@
 
 #import <BlitzReachability.h>
 #import <SystemConfiguration/SystemConfiguration.h>
+#import <BlitzCommonConstant.h>
 
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
@@ -19,7 +20,13 @@
 #import <DeviceCheck/DeviceCheck.h>
 #endif
 
-static NSString *BLITZ_DEVICE_ID_KEY  = @"BLITZ_DEVICE_ID_KEY";
+@interface BlitzDeviceUtils()
++ (NSString*)DarwinVersion;
++ (NSString*)CFNetworkVersion;
++ (NSString*)deviceVersion;
++ (NSString*)deviceName;
++ (NSString*)appNameAndVersion;
+@end
 
 @implementation BlitzDeviceUtils
 
@@ -235,42 +242,34 @@ static NSString *BLITZ_DEVICE_ID_KEY  = @"BLITZ_DEVICE_ID_KEY";
 }
 
 + (NSString *)getUserAgent {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", appNameAndVersion(), deviceName(), deviceVersion(), CFNetworkVersion(), DarwinVersion()];
+    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [self appNameAndVersion], [self deviceName], [self deviceVersion], [self CFNetworkVersion], [self DarwinVersion]];
 }
 
-//eg. Darwin/16.3.0
-static NSString * DarwinVersion(void) {
++ (NSString*)DarwinVersion {
     struct utsname u;
     (void) uname(&u);
     return [NSString stringWithFormat:@"Darwin/%@", [NSString stringWithUTF8String:u.release]];
 }
 
-//eg. CFNetwork/808.3
-static NSString * CFNetworkVersion(void) {
++ (NSString*)CFNetworkVersion {
     return [NSString stringWithFormat:@"CFNetwork/%@", [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"].infoDictionary[@"CFBundleShortVersionString"]];
 }
 
-//eg. iOS/10_1
-static NSString* deviceVersion()
-{
++ (NSString*)deviceVersion {
     NSString *systemName = [UIDevice currentDevice].systemName;
     NSString *systemVersion = [UIDevice currentDevice].systemVersion;
     
     return [NSString stringWithFormat:@"%@/%@", systemName, systemVersion];
 }
 
-//eg. iPhone5,2
-static NSString* deviceName()
-{
++ (NSString*)deviceName {
     struct utsname systemInfo;
     uname(&systemInfo);
     
     return [NSString stringWithUTF8String:systemInfo.machine];
 }
 
-//eg. MyApp/1
-static NSString* appNameAndVersion()
-{
++ (NSString*)appNameAndVersion {
     NSString* appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
     NSString* appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     return [NSString stringWithFormat:@"%@/%@", appName, appVersion];
