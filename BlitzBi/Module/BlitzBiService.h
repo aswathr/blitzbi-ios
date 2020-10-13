@@ -7,18 +7,20 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseUrls.h"
+#import "BlitzRequestBuilder.h"
+#import "BiDeviceRequest.h"
+#import "PBlitzDataTransferService.h"
+#import "BlitzBiEventSendHandler.h"
+#import "BlitzNetworkModuleBuilder.h"
+#import "BlitzBiConstants.h"
+#import "BlitzBiEventHandlerBuilder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BlitzBiService : NSObject
-@property BaseUrls* baseUrls;
-@property id <PBlitzDataTransferService> biNetworkService;
-@property id <PBlitzBiEventSendHandler> biBuilder;
-@property (strong) NSString* baseUrl;
-
-- (void)setUp:(Int*)appId withAppToken:(NSString*)appToken;
-- (void)sendEvents:(NSArray *)events;
-- (void)sendEvent:(NSDictionary *)eventDict;
+-(void)setUp:(NSNumber*)appId withAppToken:(NSString*)appToken;
+-(void)sendEvent:(NSDictionary *)eventDict;
+-(void)sendEvents:(NSArray *)events;
 @end
 
 NS_ASSUME_NONNULL_END

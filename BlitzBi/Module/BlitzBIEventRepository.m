@@ -8,7 +8,7 @@
 #import "BlitzBIEventRepository.h"
 
 @implementation BlitzBIEventRepository
-- (instancetype)init:(int *) appId withToken: (NSString*)appToken withService:(PBlitzDataTransferService*) networkService{
+- (instancetype)init:(NSNumber*) appId withToken: (NSString*)appToken withService:(id <PBlitzDataTransferService>) networkService{
     if (self = [super init]) {
         _appId = appId;
         _appToken = appToken;
@@ -16,8 +16,8 @@
     }
     return self;
 }
-- (void)processJsonRequest:(String*)url withData: (Data*)data withCompletion:(void(^)(NSObject *, NSError *))completion{
-    RequestBuilder *requestBuilder = [[RequestBuilder alloc] init];
+- (void)processJsonRequest:(NSString*)url withData: (NSData*)data withCompletion:(void(^)(NSObject *, NSError *))completion{
+    BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:@"POST"];
     [requestBuilder setBaseUrl:url];
     [requestBuilder setPath:@"events"];
@@ -26,21 +26,11 @@
     [requestBuilder setReqType:BI_REQUEST];
     [requestBuilder setContentType:@"application/json"];
     
-    [self.networkService executeServerCall:requestBuilder withCompletion: completion]
-    
-    //        networkService.executeServerCall(requestBuilder: requestBuilder, type: BiResponse.self, completionBlock: {result in
-    //          switch(result) {
-    //          case .success(let result):
-    //              completionHandler(result,nil)
-    //          case .failure(let error):
-    //              completionHandler(nil,error)
-    //          }
-    //        })
-    
+    [self.networkService executeServerCall:requestBuilder withCompletion: completion];
 }
 
-- (void)processJsonRequestWithoutResponse:(String*)url withData: (Data*)data withIsEmergency:(Bool*)isEmergency {
-    RequestBuilder *requestBuilder = [[RequestBuilder alloc] init];
+- (void)processJsonRequestWithoutResponse:(NSString*)url withData:(NSData*)data withIsEmergency:(bool*)isEmergency {
+    BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:@"POST"];
     [requestBuilder setBaseUrl:url];
     [requestBuilder setPath:@"events"];
@@ -49,21 +39,21 @@
     [requestBuilder setReqType:BI_REQUEST];
     [requestBuilder setContentType:@"application/json"];
     
-//    if (isEmergency  && !Thread.isMainThread) {
-//      do {
-//          try NSURLConnection.sendSynchronousRequest(requestBuilder.generateRequest() as URLRequest, returning: nil)
-//      } catch {
-//      }
-//    } else {
-//          networkService.executeServerCallWithNoCallBack(requestBuilder:requestBuilder)
-//    }
+    if (isEmergency && ![NSThread isMainThread]) {
+        [[[NSURLSession sharedSession] dataTaskWithRequest:[requestBuilder generateRequest] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+            
+        }] resume];
+//        [NSURLSession dataTaskWithRequest:[requestBuilder generateRequest] completionHandler:nil];
+        //[NSURLConnection sendSynchronousRequest:[requestBuilder generateRequest] returningResponse:nil error:nil];
+    } else {
+        [self.networkService executeServerCallWithNoCallBack:requestBuilder];
+    }
 }
 
-+ (NSMutableDictionary<NSString *, NSString *>) getRequestHeaders {
+- (NSDictionary<NSString *, NSString *> *) getRequestHeaders {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
-    [headers setValue:_appId forKey:"blitzAppId"];
-    [headers setValue:_appToken forKey:"blitzAppToken"];
+    [headers setValue:[_appId stringValue] forKey:@"blitzAppId"];
+    [headers setValue:_appToken forKey:@"blitzAppToken"];
     return headers;
-}
 }
 @end

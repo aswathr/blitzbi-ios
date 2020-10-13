@@ -6,12 +6,10 @@
 //
 
 //#import "PBlitzServerConfig.h"
-#import "BlitzServerConfig.h"
-#import "BlitzServerHandler.h"
+#import <BlitzServerConfig.h>
+#import <BlitzServerHandler.h>
 
 @protocol PBlitzDataTransferService <NSObject>
-- (id <PBlitzServerConfig>)getServerConfig;
-- (void) setServerConfig:(id <PBlitzServerConfig>)serverConfig;
 - (void) executeServerCallWithNoCallBack:(BlitzRequestBuilder *)requestBuilder;
 - (void) executeServerCall:(BlitzRequestBuilder *)requestBuilder withCompletion:(void(^)(NSObject *, NSError *))completion;
 @end

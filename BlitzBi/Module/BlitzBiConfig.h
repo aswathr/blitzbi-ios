@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface BlitzBiConfig : NSObject
-
-+ (void)initialize;
-
-// General Stuff..
 @property (nonatomic, strong) NSString *BASE_URL;
-
+- (id)initWithUrl:(NSString*) baseUrl;
+- (NSString*)base_URL;
 @end

@@ -8,12 +8,12 @@
 #import "BiDeviceRequest.h"
 
 @implementation BiDeviceRequest
-- (instancetype)initWithAppId:(int*) blitzAppId withDeviceId:(NSString*)blitzDeviceId {
+- (instancetype)initWithAppId:(NSNumber*) appId withDeviceId:(NSString*)deviceId {
     if (self = [super init]) {
-        _blitzAppId = blitzAppId;
-        _blitzDeviceId = blitzDeviceId;
-        _installAppVersion = @"1.0.0";
-        _deviceType = @"IOS";
+        self.blitzAppId = appId;
+        self.blitzDeviceId = deviceId;
+        self.installAppVersion = @"1.0.0";
+        self.deviceType = @"IOS";
     }
     return self;
 }

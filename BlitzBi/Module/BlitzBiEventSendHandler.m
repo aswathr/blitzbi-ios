@@ -7,6 +7,7 @@
 #import "BlitzBiEventSendHandler.h"
 #import "BlitzBiConfig.h"
 #import "BlitzFileHelper.h"
+#import "BlitzDeviceUtils.h"
 
 #define COMMON_FIELD_3 @"common_field_3"
 #define FILE_NAME @"filename"
@@ -15,10 +16,11 @@
 
 @property (nonatomic) dispatch_queue_t serialQueue;
 @property (nonatomic) dispatch_queue_t networkQueue;
-
 @property (nonatomic) NSMutableArray<NSDictionary *> *pendingEvents;
 @property (nonatomic) NSTimer *biEventFireTimer;
+
 @property NSTimeInterval nextFlushTime;
+
 @property BOOL isBlockSubmittedToNetworkQueue;
 @property BOOL isAppIdValidated;
 
@@ -27,9 +29,9 @@
 @property NSString *blitzSessionId;
 
 @property BlitzBiConfig *biConfig;
-@property id <IBlitzBIEventRepository> eventRepository;
+@property BlitzBIEventRepository *eventRepository;
 
-@property CLongLong *currentTimestamp;
+@property long long *currentTimestamp;
 
 @end
 
@@ -42,16 +44,14 @@ static NSInteger maxPendingCount = 200;
 static NSInteger forceSendAfterSeconds = 30;
 static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
-- (instancetype)init:(int*) batchSize withBaseUrl:(NSString*) baseUrl withEventRepository:(id <IBlitzBIEventRepository>)eventRepository {
+- (instancetype)init:(NSNumber*) batchSize withBaseUrl:(NSString*) baseUrl withEventRepository:(BlitzBIEventRepository*)eventRepository {
     self = [super init];
     if (self) {
         self.eventRepository = eventRepository;
         
         [self setBatchSize:batchSize];
-        self.biConfig = [BlitzBiConfig new];
-        
-        self.biConfig.base_URL = baseUrl
-        self.blitzSessionId = [BlitzDeviceUtils getSessionId]
+        self.biConfig = [[BlitzBiConfig alloc] initWithUrl:baseUrl];
+        self.blitzSessionId = [BlitzDeviceUtils getSessionId];
         self.isBlockSubmittedToNetworkQueue = NO;
         self.currentTimestamp = 0;
         
@@ -80,52 +80,52 @@ name:NSExtensionHostWillEnterForegroundNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDestroy)
-                                                 name:UIApplicationWillTerminateNotification
+                                                 name:NSExtensionHostWillResignActiveNotification
                                                object:nil];
 }
 
-+(void) onPause {
-    print("BlitzBiEventSendHandler::onPause")
+-(void) onPause {
+    NSLog(@"BlitzBiEventSendHandler::onPause");
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
 }
 
-+(void) onResume {
-    print("BlitzBiEventSendHandler::onResume")
-    self.currentTimestamp = [self getCurrentEpochTime];
+-(void) onResume {
+    NSLog(@"BlitzBiEventSendHandler::onResume");
+    self.currentTimestamp = (long long)[self getCurrentEpochTime];
     [self fireSessionStartEvent];
     [self invalidateTimer];
 }
 
-+(void) onDestroy {
+-(void) onDestroy {
     NSLog(@"BlitzBiEventSendHandler::onDestroy");
     [self flushEmergency];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
 }
 
-+(CLongLong) getCurrentEpochTime{
-    return [CLongLong init: [[NSDate date] timeIntervalSince1970]];
+-(long long) getCurrentEpochTime{
+    return (long long)[[NSDate date] timeIntervalSince1970];
 }
 
-+(void) fireSessionLengthEvent {
-    var event: [String : Any] = [String : Any]()
-    event["eventName"] = "session_length"
-    event["session_length"] = getCurrentEpochTime() - currentTimestamp;
-    sendEvent(event)
+-(void) fireSessionLengthEvent {
+    NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
+    [eventDict setValue:@"session_length" forKey:@"eventName"];
+    //[eventDict setValue:([self getCurrentEpochTime] - _currentTimestamp) forKey:@"session_length"];
+    [self sendEvent:eventDict];
 }
 
-+(void) fireSessionStartEvent {
-    var event: [String : Any] = [String : Any]()
-    event["eventName"] = "session_start"
-    sendEvent(event)
+-(void) fireSessionStartEvent {
+    NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
+    [eventDict setValue:@"session_start" forKey:@"eventName"];
+    [self sendEvent:eventDict];
 }
 
-+(void) fireSessionPauseEvent {
-    var event: [String : Any] = [String : Any]()
-    event["eventName"] = "session_pause"
-    sendEvent(event)
+-(void) fireSessionPauseEvent {
+    NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
+    [eventDict setValue:@"session_pause" forKey:@"eventName"];
+    [self sendEvent:eventDict];
 }
 
 - (void)startRepeatedTimerToAttemptFlush {
@@ -143,19 +143,18 @@ name:NSExtensionHostWillEnterForegroundNotification
 
 - (void)timerTicked {
     NSLog(@"[BI] timer ticked");
-    [self flush:YES];
+    [self flush];
+}
+
+- (void)setBlitzdeviceId:(NSNumber*)appId withDeviceId: (NSString*) deviceId {
+    self.blitzAppId = [appId stringValue];
+    self.blitzDeviceId = deviceId;
 }
 
 - (void)flushEmergency {
     NSLog(@"[BI] flushing all the events immediately without any response tracking");
-    if (eventDict != nil) {
-        eventDict = [eventDict copy];
-    }
     NSMutableArray *eventsCopy;
     @synchronized (self) {
-        if (eventDict != nil) {
-            [self.pendingEvents addObject:eventDict];
-        }
         eventsCopy = [self.pendingEvents mutableCopy];
     }
     while (eventsCopy.count > 0) {
@@ -163,9 +162,9 @@ name:NSExtensionHostWillEnterForegroundNotification
         NSArray *batch = [eventsCopy subarrayWithRange:NSMakeRange(0, batchSize)];
         
         NSData *jsonData = [self getJSONDataForBatch:batch];
-        NSString *url = [[BiEventManager biEventManager] getEventsUrl];
+        NSString *url = [_biConfig base_URL];
                     
-        [eventRepository processJsonRequestWithoutResponse:url body:jsonData isEmergency:true]
+        //[_eventRepository processJsonRequestWithoutResponse:url withData:jsonData withIsEmergency:true];
         [eventsCopy removeObjectsInArray:batch];
     }
 }
@@ -177,13 +176,8 @@ name:NSExtensionHostWillEnterForegroundNotification
 - (void)sendEvents:(NSArray *)events {
     NSMutableArray *eventsCopy = [NSMutableArray new];
     for (NSDictionary *event in events) {
-        NSString *eventName = [event objectForKey:EVENT_NAME_TAG];
-        if (eventName == nil || eventName.length == 0) {
-            if (config.isDebugEnabled) {
-                NSAssert(NO, @"Event name is absent.");
-            }
-        }
-        else {
+        NSString *eventName = [event objectForKey:BLITZ_EVENT_NAME_TAG];
+        if (eventName != nil && eventName.length > 0) {
             [eventsCopy addObject:[event copy]];
         }
     }
@@ -205,14 +199,14 @@ name:NSExtensionHostWillEnterForegroundNotification
 
 - (void (^)(void))checkAndFlushAndArchiveBlock{
     return ^{
-        BOOL shouldArchive = [self checkAndFlushWithIsForced];
+        BOOL shouldArchive = [self checkAndFlush];
         if (shouldArchive) {
             [self archiveEvents];
         }
     };
 }
 
-- (void)flushWithIsForced {
+- (void)flush {
     dispatch_async(self.serialQueue, ^{
         BOOL shouldFlush = [self shouldFlushEvents] && [self isAppIdAvailable];
         if (shouldFlush) {
@@ -224,9 +218,9 @@ name:NSExtensionHostWillEnterForegroundNotification
     });
 }
 
-- (BOOL)checkAndFlushWithIsForced:(BOOL)isForced {
+- (BOOL)checkAndFlush {
     @try {
-        if (![self shouldFlushEvents]; && [self isAppIdAvailable]) {
+        if (![self shouldFlushEvents] && [self isAppIdAvailable]) {
             return NO;
         }
         
@@ -245,16 +239,15 @@ name:NSExtensionHostWillEnterForegroundNotification
             
             if ([NSJSONSerialization isValidJSONObject:batch]) {
                 NSData *jsonData = [self getJSONDataForBatch:batch];
-                NSString *url = [[BiEventManager biEventManager] getEventsUrl];
+                NSString *url = [_biConfig base_URL];;
                 
                 dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-                
-                [eventRepository processJsonRequest:url withPostData:jsonData requestType:BI_REQUEST withCompletionHandler:^(NSObject *response, NSError *err) {
-                    if err != nil {
-                        didFail = true
+
+                [_eventRepository processJsonRequest:url withData:jsonData withCompletion:^(NSObject *response, NSError *err) {
+                    if(err != nil) {
+                        didFail = true;
                         //Send error to crashlytics
                         NSLog(@"Error in getting response from server for jsondata %@ with error %@", jsonData, err);
-                        BlitzBiEventSendHandler.sendCrashlyticsError(withCode: BI_SERVER_ERROR_CODE, withDescription: BI_SERVER_ERROR, withUserInfo: (err as NSError?)?.userInfo)
                     }
                     dispatch_semaphore_signal(semaphore);
                 }];
@@ -273,10 +266,6 @@ name:NSExtensionHostWillEnterForegroundNotification
             else {
                 //remove the defective events from our pending events
                 [self removeDefectiveEvents];
-                
-                if (config.isDebugEnabled) {
-                    NSAssert(NO, @"JSON object for server call is not valid.");
-                }
                 break;
             }
         }
@@ -308,7 +297,7 @@ name:NSExtensionHostWillEnterForegroundNotification
 }
 
 - (NSString *)eventsFilePath {
-    return [FileHelper fullFilePathInDocumentsDirectoryForFileName:EVENTS_FILE_PATH];
+    return [BlitzFileHelper fullFilePathInDocumentsDirectoryForFileName:EVENTS_FILE_PATH];
 }
 
 - (void)removeDefectiveEvents {
@@ -329,33 +318,20 @@ name:NSExtensionHostWillEnterForegroundNotification
     }
     
     //Recording crashlytics error
-    NSArray<NSString *> *defectiveEventsNames = [defectiveEvents valueForKeyPath:EVENT_NAME_TAG];
+    NSArray<NSString *> *defectiveEventsNames = [defectiveEvents valueForKeyPath:BLITZ_EVENT_NAME_TAG];
     NSString *commaSeparatedNames = [defectiveEventsNames componentsJoinedByString:@", "];
     NSLog(@"[BI] defective events with names: %@, and total defective count: %lu, removed from pending events.", commaSeparatedNames, defectiveEvents.count);
-    [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_JSON_DATA_ERROR_CODE
-                       withDescription:BI_JSON_DATA_ERROR
-                          withUserInfo:@{
-                                         BAD_EVENTS_NAMES:commaSeparatedNames,
-                                         BAD_EVENTS_COUNT:[NSString stringWithFormat:@"%lu", defectiveEvents.count]
-                                         }];
     
     //as now defective events has been filetered, we can force flush.
-    [self flushWithIsForced:YES];
+    [self flush];
 }
 
 - (BOOL)archiveObject:(id)object withFilePath:(NSString *)filePath {
     @try {
         if (![NSKeyedArchiver archiveRootObject:object toFile:filePath]) {
-            [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_ARCHIVE_DATA_FAILURE_CODE withDescription:BI_ARCHIVE_DATA_FAILURE withUserInfo:nil];
             return NO;
         }
     } @catch (NSException* exception) {
-        [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_ARCHIVE_DATA_EXCEPTION_CODE
-                           withDescription:BI_ARCHIVE_DATA_EXCEPTION
-                              withUserInfo:@{
-                                             EXCEPTION_NAME:exception.name,
-                                             EXCEPTION_REASON:exception.reason
-                                             }];
         return NO;
     }
     
@@ -366,9 +342,6 @@ name:NSExtensionHostWillEnterForegroundNotification
 - (BOOL)addSkipBackupAttributeToItemAtPath:(NSString *)filePathString {
     NSURL *url = [NSURL fileURLWithPath:filePathString];
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[url path]];
-    if (config.isDebugEnabled) {
-        NSAssert(fileExists, @"events file does not exist at filepath");
-    }
     NSError *error = nil;
     if (fileExists) {
         BOOL success = [url setResourceValue:[NSNumber numberWithBool:YES]
@@ -377,16 +350,14 @@ name:NSExtensionHostWillEnterForegroundNotification
             NSLog(@"[BI] Error in excluding %@ from backup %@", [url lastPathComponent], error);
             NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
             [userInfo setObject:[url lastPathComponent] forKey:FILE_NAME];
-            [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_EXCLUDING_FROM_BACKUP_ERROR_CODE withDescription:BI_EXCLUDING_FROM_BACKUP_ERROR withUserInfo:userInfo];
         }
         return success;
     }
-    [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_FILE_NOT_EXISTS_ERROR_CODE withDescription:BI_FILE_NOT_EXISTS_ERROR withUserInfo:@{FILE_NAME:[url lastPathComponent]}];
     return NO;
 }
 
 - (void)unarchiveEvents {
-    self.pendingEvents = (NSMutableArray *)[BiEventSendHandler unarchiveOrDefaultFromFile:[self eventsFilePath] asClass:[NSMutableArray class]];
+    self.pendingEvents = (NSMutableArray *)[BlitzBiEventSendHandler unarchiveOrDefaultFromFile:[self eventsFilePath] asClass:[NSMutableArray class]];
     NSMutableArray *newPendingEvents = [[NSMutableArray alloc] init];
     for (NSDictionary *event in self.pendingEvents) {
         NSMutableDictionary *eventDict = [event mutableCopy];
@@ -410,13 +381,6 @@ name:NSExtensionHostWillEnterForegroundNotification
         NSLog(@"[BI] unarchived data from %@: %@", filePath, unarchivedData);
     }
     @catch (NSException *exception) {
-        [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_UNARCHIVE_DATA_ERROR_CODE
-                                         withDescription:BI_UNARCHIVE_DATA_ERROR
-                                            withUserInfo:@{
-                                                           FILE_NAME:filePath,
-                                                           EXCEPTION_NAME:exception.name,
-                                                           EXCEPTION_REASON:exception.reason
-                                                           }];
         unarchivedData = nil;
         
         NSError *error;
@@ -424,7 +388,6 @@ name:NSExtensionHostWillEnterForegroundNotification
         if (!removed) {
             NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
             [userInfo setObject:filePath forKey:FILE_NAME];
-            [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_FILE_REMOVAL_FAILURE_CODE withDescription:BI_FILE_REMOVAL_FAILURE withUserInfo:userInfo];
         }
     }
     return unarchivedData;
@@ -453,10 +416,10 @@ name:NSExtensionHostWillEnterForegroundNotification
     return [self isAppIdValidated] && [self blitzDeviceId] != nil;
 }
 
--(void) setBlitzdeviceId:(int*)appId: withDeviceId:(NSString*)deviceId {
-    self.blitzDeviceId = deviceId
-    self.blitzAppId = appId
-    self.isAppIdValidated = true
+-(void) setBlitzdeviceId:(NSNumber*)appId: withDeviceId:(NSString*)deviceId {
+    self.blitzAppId = [appId stringValue];
+    self.blitzDeviceId = deviceId;
+    self.isAppIdValidated = true;
 }
 
 - (void)updateNextFlushTime {
@@ -464,46 +427,34 @@ name:NSExtensionHostWillEnterForegroundNotification
     self.nextFlushTime = [nextDate timeIntervalSince1970];
 }
 
-- (void)setBatchSize:(int)size {
-    maxPendingCount = size;
+- (void)setBatchSize:(NSNumber*)size {
+    maxPendingCount = [size longValue];
 }
 
 -(NSMutableDictionary*) getCommonParams {
     NSMutableDictionary *biCommonParams = [[NSMutableDictionary alloc] init];
-    [biCommonParams setValue:[self blitzAppId] forKey:"blitzAppId"];
-    [biCommonParams setValue:[self blitzDeviceId]  forKey:"blitzDeviceId"];
-    [biCommonParams setValue:[BlitzDeviceUtils getPlatformCode] forKey:"platformCode"];
-    [biCommonParams setValue:[self blitzSessionId] forKey:"blitzSessionId"];
-    [biCommonParams setValue:[BlitzDeviceUtils getAppVersion] forKey:"appVersion"];
-    [biCommonParams setValue:[BlitzDeviceUtils getTimeZone] forKey:"timezone"];
-    [biCommonParams setValue:[BlitzDeviceUtils getIDFA] forKey:"ifa"];
-    [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:"ifv"];
-    [biCommonParams setValue:[BlitzDeviceUtils getOSId] forKey:"osId"];
-    [biCommonParams setValue:[BlitzDeviceUtils getConnDetails] forKey:"connDetails"];
-    [biCommonParams setValue:[BlitzDeviceUtils getManufacturer] forKey:"manufacturer"];
-    [biCommonParams setValue:[BlitzDeviceUtils getDeviceModel] forKey:"deviceModel"];
-    [biCommonParams setValue:[BlitzDeviceUtils getCarrierName] forKey:"carrierName"];
-    [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:"adTrackingEnabled"];
-    [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:"appTrackingEnabled"];
-    [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:"userAgent"];
-    [biCommonParams setValue:_appToken forKey:"blitzAppToken"];
-    [biCommonParams setValue:_appId forKey:"blitzAppId"];
-    [biCommonParams setValue:_appToken forKey:"blitzAppToken"];
-    [biCommonParams setValue:_appId forKey:"blitzAppId"];
-    [biCommonParams setValue:_appToken forKey:"blitzAppToken"];
-    [biCommonParams setValue:_appId forKey:"blitzAppId"];
-    [biCommonParams setValue:_appToken forKey:"blitzAppToken"];
-    [biCommonParams setValue:_appId forKey:"blitzAppId"];
-    [biCommonParams setValue:_appToken forKey:"blitzAppToken"];
-    [biCommonParams setValue:_appId forKey:"blitzAppId"];
-    [biCommonParams setValue:_appToken forKey:"blitzAppToken"];
+    [biCommonParams setValue:[self blitzAppId] forKey:@"blitzAppId"];
+    [biCommonParams setValue:[self blitzDeviceId]  forKey:@"blitzDeviceId"];
+    [biCommonParams setValue:[BlitzDeviceUtils getPlatformCode] forKey:@"platformCode"];
+    [biCommonParams setValue:[self blitzSessionId] forKey:@"blitzSessionId"];
+    [biCommonParams setValue:[BlitzDeviceUtils getAppVersion] forKey:@"appVersion"];
+    [biCommonParams setValue:[BlitzDeviceUtils getTimeZone] forKey:@"timezone"];
+    [biCommonParams setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+    [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
+    [biCommonParams setValue:[BlitzDeviceUtils getOSId] forKey:@"osId"];
+    [biCommonParams setValue:[BlitzDeviceUtils getConnDetails] forKey:@"connDetails"];
+    [biCommonParams setValue:[BlitzDeviceUtils getManufacturer] forKey:@"manufacturer"];
+    [biCommonParams setValue:[BlitzDeviceUtils getDeviceModel] forKey:@"deviceModel"];
+    [biCommonParams setValue:[BlitzDeviceUtils getCarrierName] forKey:@"carrierName"];
+    [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:@"adTrackingEnabled"];
+    [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
+    [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
     return biCommonParams;
 }
 
 - (NSData *)getJSONDataForBatch:(NSArray *)batch {
     NSError *error;
     NSMutableDictionary *biDictionary = [[NSMutableDictionary alloc] init];
-    [biDictionary setObject:[[BiEventManager biEventManager] addGenericDataInBIBatch] forKey:@"common_fields"];
     [biDictionary setObject:batch forKey:@"events"];
     [biDictionary setObject:[self getCommonParams] forKey:@"commonParams"];
     
@@ -511,13 +462,7 @@ name:NSExtensionHostWillEnterForegroundNotification
 
     if (jsonData == nil || error) {
         NSLog(@"Error in getting json data for batch %@ with error %@", batch, error);
-        [BiEventSendHandler sendCrashlyticsErrorWithCode:BI_JSON_DATA_ERROR_CODE withDescription:BI_JSON_DATA_ERROR withUserInfo:error.userInfo];
     }
     return jsonData;
 }
-
-+ (void)sendCrashlyticsErrorWithCode:(NSInteger)code withDescription:(NSString *)description withUserInfo:(NSDictionary *)userInfo {
-    [Utility sendCrashlyticsErrorWithDomain:BUNDLE_IDENTIFIER withCode:code withDescription:description withUserInfo:userInfo];
-}
-
 @end

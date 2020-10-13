@@ -9,11 +9,13 @@
 #import "BlitzBiConfig.h"
 
 @implementation BlitzBiConfig
-
-- (id)init {
+- (id)initWithUrl:(NSString*) baseUrl {
     if (self = [super init]) {
-        return self;
+        _BASE_URL = baseUrl;
     }
-    return nil;
+    return self;
+}
+- (NSString*)base_URL {
+    return _BASE_URL;
 }
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BlitzCommonConstant.h"
+#import <BlitzCommonConstant.h>
 
 
 @class BlitzConfig;
