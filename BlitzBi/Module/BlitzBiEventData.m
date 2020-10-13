@@ -8,7 +8,7 @@
 
 #import <BlitzBiEventData.h>
 
-@implementation NameValuePair
+@implementation BlitzNameValuePair
 - (id)init:(NSString *)_name value:(NSString *)_value {
     if (self = [super init]) {
         name = _name;

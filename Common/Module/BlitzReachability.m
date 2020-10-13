@@ -17,7 +17,7 @@
 #pragma mark IPv6 Support
 //Reachability fully support IPv6.  For full details, see ReadMe.md.
 
-NSString *kReachabilityChangedNotification = @"kNetworkReachabilityChangedNotification";
+NSString *kBlitzReachabilityChangedNotification = @"kBlitzNetworkReachabilityChangedNotification";
 
 #pragma mark - Supporting functions
 
@@ -48,7 +48,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
     BlitzReachability *noteObject = (__bridge BlitzReachability *)info;
     // Post a notification to notify the client that the network reachability changed.
-    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:noteObject];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kBlitzReachabilityChangedNotification object:noteObject];
 }
 
 #pragma mark - Reachability implementation

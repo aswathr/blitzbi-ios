@@ -14,15 +14,17 @@
 
 @implementation BlitzServerHandler
 
-BlitzKWConcurrentDictionary *requestRetry;
-NSMutableArray *pendingRequests;
-NSArray<NSNumber *> *INTERNET_ERROR_CODES;
-NSArray<NSNumber *> *SERVER_ERROR_CODES;
-NSArray<NSNumber *> *RECOVERABLE_ERROR_CODES;
-NSArray<NSNumber *> *BAD_REQUEST_ERROR_CODES;
-static NSInteger const MAX_RETRY = 2;//meaning three tries in total
-static NSInteger const DELAY_PER_RETRY = NSEC_PER_SEC;//in ns translates to 1s currently
-static NSString * const FORBIDDED_ERROR_CODE = @"403";
+BlitzKWConcurrentDictionary *blitzRequestRetry;
+
+NSMutableArray *blitzPendingRequests;
+NSArray<NSNumber *> *BLITZ_INTERNET_ERROR_CODES;
+NSArray<NSNumber *> *BLITZ_SERVER_ERROR_CODES;
+NSArray<NSNumber *> *BLITZ_RECOVERABLE_ERROR_CODES;
+NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
+
+static NSInteger const BLITZ_MAX_RETRY = 2;//meaning three tries in total
+static NSInteger const BLITZ_DELAY_PER_RETRY = NSEC_PER_SEC;//in ns translates to 1s currently
+static NSString * const BLITZ_FORBIDDED_ERROR_CODE = @"403";
 
 + (instancetype)serverHandler {
     static BlitzServerHandler *sharedInstace = nil;
@@ -35,15 +37,15 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
 - (instancetype)init {
     if (self = [super init]) {
-        requestRetry = [[BlitzKWConcurrentDictionary alloc] init];
+        blitzRequestRetry = [[BlitzKWConcurrentDictionary alloc] init];
 
-        INTERNET_ERROR_CODES = @[@ - 1, @1, @2, @100, @101, @ - 1001, @ - 1003, @ - 1004, @ - 1005, @ - 1006, @ - 1009, @-1011, @ - 1018, @ - 1020];
+        BLITZ_INTERNET_ERROR_CODES = @[@ - 1, @1, @2, @100, @101, @ - 1001, @ - 1003, @ - 1004, @ - 1005, @ - 1006, @ - 1009, @-1011, @ - 1018, @ - 1020];
 
-        SERVER_ERROR_CODES = @[@121, @122, @123, @124, @300, @301, @303, @307, @308, @309, @310, @311, @ - 999, @ - 1002, @ - 1010, @ - 1011, @ - 1013, @ - 1015, @ - 1016, @ - 1017, @ - 1021, @ - 1201, @ - 1202, @ - 1203, @ - 1204, @ - 1205, @ - 1206];
+        BLITZ_SERVER_ERROR_CODES = @[@121, @122, @123, @124, @300, @301, @303, @307, @308, @309, @310, @311, @ - 999, @ - 1002, @ - 1010, @ - 1011, @ - 1013, @ - 1015, @ - 1016, @ - 1017, @ - 1021, @ - 1201, @ - 1202, @ - 1203, @ - 1204, @ - 1205, @ - 1206];
 
-        BAD_REQUEST_ERROR_CODES = @[@ - 1011];
+        BLITZ_BAD_REQUEST_ERROR_CODES = @[@ - 1011];
 
-        RECOVERABLE_ERROR_CODES = @[@110, @111, @112, @113, @120, @302, @304, @305, @306, @ - 998, @ - 999, @ - 1007, @ - 1008, @ - 1012, @ - 1014, @ - 1019, @ - 1200];
+        BLITZ_RECOVERABLE_ERROR_CODES = @[@110, @111, @112, @113, @120, @302, @304, @305, @306, @ - 998, @ - 999, @ - 1007, @ - 1008, @ - 1012, @ - 1014, @ - 1019, @ - 1200];
     }
     return self;
 }
@@ -56,7 +58,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *requestId = [self getUniqueRequestId];
         [requestBuilder setRequestId:requestId];
-        [requestRetry setObject:[NSNumber numberWithInteger:0] forKey:requestId];
+        [blitzRequestRetry setObject:[NSNumber numberWithInteger:0] forKey:requestId];
         [BlitzHttpExecutor executeRequest:requestBuilder listener:self];
         requestBuilder.responseBlock = ^(NSObject *data, NSError *error) {
             completionBlock(data,error);
@@ -92,7 +94,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
             httpResponseCode = @"412";
         }
         if (httpResponseCode == nil && [[err localizedDescription] containsString:@"forbidden (403)"]) {
-            httpResponseCode = FORBIDDED_ERROR_CODE;
+            httpResponseCode = BLITZ_FORBIDDED_ERROR_CODE;
         }
         if (request.reqType == APP_REQUEST) {
             NSLog(@"Got error from APP_REQUEST -- %@, %@", request.baseUrl, request.path);
@@ -100,19 +102,19 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
         NSNumber *errorCode = [NSNumber numberWithInteger:[err code]];
 
-        if (pendingRequests == nil) {
-            pendingRequests = [[NSMutableArray alloc] init];
+        if (blitzPendingRequests == nil) {
+            blitzPendingRequests = [[NSMutableArray alloc] init];
         }
         /*error codes is one of temporary error code or no-internet case*/
-        if ([self arrayContains:RECOVERABLE_ERROR_CODES num:errorCode]) {
+        if ([self arrayContains:BLITZ_RECOVERABLE_ERROR_CODES num:errorCode]) {
             /*first try few times to handle temp errors -- can be done using error codes too*/
-            NSInteger retry = [[requestRetry objectForKey:reqId] integerValue];
-            if (retry < MAX_RETRY) {
+            NSInteger retry = [[blitzRequestRetry objectForKey:reqId] integerValue];
+            if (retry < BLITZ_MAX_RETRY) {
                 retry++;
 
-                [requestRetry setObject:[NSNumber numberWithInteger:retry] forKey:reqId];
+                [blitzRequestRetry setObject:[NSNumber numberWithInteger:retry] forKey:reqId];
 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DELAY_PER_RETRY), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, BLITZ_DELAY_PER_RETRY), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^{
                     NSLog(@"will retry again, retry count being %li", (long)retry);
                     [BlitzHttpExecutor executeRequest:request listener:self];
                     [self sendFailueOrRetryEvent:request error:err isRetry:YES];
@@ -121,7 +123,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
             }
 
             /*after max retry add to pending requests and reset retry count*/
-            [requestRetry setObject:[NSNumber numberWithInteger:0] forKey:reqId];
+            [blitzRequestRetry setObject:[NSNumber numberWithInteger:0] forKey:reqId];
         }
         
         if (request.reqType != BI_REQUEST) {
@@ -130,7 +132,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
         // If the request is a BI REQUEST, we have done enough retries and processing, return here
         // No need to add to pendingrequests, ignoring this request is the best case we can do
-        if ((httpResponseCode != nil && ([httpResponseCode isEqualToString: @"401"] || [httpResponseCode isEqualToString: @"451"] || [httpResponseCode isEqualToString:FORBIDDED_ERROR_CODE])) || (request.reqType != BI_REQUEST && request.reqType != ERROR_FREE_REQUEST && request.reqType != PARALLEL_ERROR_FREE_REQUEST)) {
+        if ((httpResponseCode != nil && ([httpResponseCode isEqualToString: @"401"] || [httpResponseCode isEqualToString: @"451"] || [httpResponseCode isEqualToString:BLITZ_FORBIDDED_ERROR_CODE])) || (request.reqType != BI_REQUEST && request.reqType != ERROR_FREE_REQUEST && request.reqType != PARALLEL_ERROR_FREE_REQUEST)) {
 
             /*show connection error dialog*/
             
@@ -143,7 +145,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
             if (shouldAddToPendingRequest) {
                 @synchronized(self) {
-                    [pendingRequests addObject:request];
+                    [blitzPendingRequests addObject:request];
                 }
             }
         }
@@ -183,8 +185,8 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
         return;
     }
 
-    if (err == nil && [requestRetry objectForKey:reqId]) {
-        [requestRetry removeObjectForKey:reqId];
+    if (err == nil && [blitzRequestRetry objectForKey:reqId]) {
+        [blitzRequestRetry removeObjectForKey:reqId];
     }
 
     if (err == nil && request.pendingRequest == YES) {
@@ -200,11 +202,11 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 
 - (void)retryPendingCalls {
     @synchronized(self) {
-        for (BlitzRequestBuilder *req in pendingRequests) {
+        for (BlitzRequestBuilder *req in blitzPendingRequests) {
             [req setPendingRequest:YES];
             [BlitzHttpExecutor executeRequest:req listener:self];
         }
-        [pendingRequests removeAllObjects];
+        [blitzPendingRequests removeAllObjects];
     }
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "BlitzFileHelper.h"
-#import "BlitzConfig.h"
 
 @implementation BlitzFileHelper
 

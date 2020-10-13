@@ -9,7 +9,6 @@
 #define JrxCommon_h
 
 #import <BlitzCommonConstant.h>
-#import <BlitzConfig.h>
 #import <BlitzFileHelper.h>
 #import <BlitzFileCacheHelper.h>
 

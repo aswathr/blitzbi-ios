@@ -9,7 +9,7 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation BlitzStringUtils
-NSString *const NO_BREAK_SPACE = @" ";
+NSString *const BLITZ_NO_BREAK_SPACE = @" ";
 + (BOOL)isValidIntegerString:(NSString *)str {
     NSScanner *scan = [NSScanner scannerWithString:str];
     int val;
@@ -99,7 +99,7 @@ NSString *const NO_BREAK_SPACE = @" ";
 }
 
 + (NSString *)replaceMysteriousSpaceCharacterFromCurrency:(NSString *)input {
-    return [input stringByReplacingOccurrencesOfString:NO_BREAK_SPACE withString:@""];
+    return [input stringByReplacingOccurrencesOfString:BLITZ_NO_BREAK_SPACE withString:@""];
 }
 
 + (NSNumber *)convertStringToNumber:(NSString *)string {

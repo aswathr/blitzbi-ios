@@ -23,14 +23,7 @@
 typedef void (^HttpSuccessCallback)(NSObject *_Nullable data);
 typedef void (^HttpFailureCallback)(NSError *_Nullable error, NSString * _Nonnull extraInfo);
 
-static unsigned short const USER_ACTIVE_CALL_TIMER = 12;
-
 static NSString * _Nonnull const CACHE_PREFIX_MACRO = @"cache_prefix_";
-
-static NSString * _Nonnull const IS_ADMIN_MODE_DISABLED = @"isAdminModeDisabled";
-
-static NSString * _Nonnull const HASH_KEY = @"hashKey";
-static NSString * _Nonnull const JWT = @"jwt";
 
 ////Will Add up these details
 static NSString * _Nonnull const BLITZ_P_D1_C1 = @"NuW9";

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NameValuePair : NSObject {
+@interface BlitzNameValuePair : NSObject {
     NSObject *name, *value;
 }
 
@@ -16,8 +16,6 @@
 - (NSObject *)getName;
 - (NSObject *)getValue;
 @end
-
-typedef NameValuePair BasicNameValuePair;
 
 @interface BlitzBiEventData : NSObject {
     NSMutableArray *payload;

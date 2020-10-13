@@ -8,7 +8,6 @@
 
 #import "BlitzHttpExecutor.h"
 #import "BlitzRequestBuilder.h"
-#import "BlitzConfig.h"
 #import "BlitzParser.h"
 
 @implementation BlitzHttpExecutor
