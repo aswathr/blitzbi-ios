@@ -38,7 +38,7 @@
 
 - (void)checkForDeviceId:(NSString*)appId
                         :(NSString*)appToken {
-    NSString *deviceId = [[NSUserDefaults standardUserDefaults] stringForKey:BLITZ_DEVICE_ID_KEY];
+    NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if(deviceId) {
         [biBuilder setBlitzdeviceId:appId :deviceId];
     }  else {
@@ -66,9 +66,7 @@
                 NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
                 NSString *blitzDeviceId = [jsonDataDictionary objectForKey:@"blitzDeviceId"];
                 if (blitzDeviceId != nil) {
-                    [[NSUserDefaults standardUserDefaults] setObject:blitzDeviceId forKey:BLITZ_DEVICE_ID_KEY];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    
+                    [BlitzDeviceUtils setBlitzDeviceId:blitzDeviceId];
                     [self->biBuilder setBlitzdeviceId:appId :deviceId];
                 }
             }

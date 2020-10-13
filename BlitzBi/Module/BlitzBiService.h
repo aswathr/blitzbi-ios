@@ -14,6 +14,7 @@
 #import <BlitzNetworkModuleBuilder.h>
 #import <BlitzConstants.h>
 #import <BlitzBIEventHandlerBuilder.h>
+#import <BlitzDeviceUtils.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
