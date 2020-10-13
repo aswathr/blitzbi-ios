@@ -6,14 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseUrls.h"
-#import "BlitzRequestBuilder.h"
-#import "BiDeviceRequest.h"
-#import "PBlitzDataTransferService.h"
-#import "BlitzBiEventSendHandler.h"
-#import "BlitzNetworkModuleBuilder.h"
-#import "BlitzBiConstants.h"
-#import "BlitzBiEventHandlerBuilder.h"
+#import <BaseUrls.h>
+#import <BlitzRequestBuilder.h>
+#import <BiDeviceRequest.h>
+#import <PBlitzDataTransferService.h>
+#import <BlitzBiEventSendHandler.h>
+#import <BlitzNetworkModuleBuilder.h>
+#import <BlitzBiConstants.h>
+#import <BlitzBIEventHandlerBuilder.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

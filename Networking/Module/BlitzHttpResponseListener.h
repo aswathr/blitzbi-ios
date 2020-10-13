@@ -12,9 +12,7 @@
 @class BlitzRequestBuilder;
 
 @protocol BlitzHttpResponseListener<NSObject>
-
 - (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withStatusCode:(NSInteger)statusCode;
-
 @end
 
 #endif /* HttpResponseListener_h */

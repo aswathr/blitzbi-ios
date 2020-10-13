@@ -118,7 +118,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     
     [request setAllHTTPHeaderFields:[self getHeaders]];
 
-    if (![self.getMethod isEqual:@"GET"]) {
+    if (![self.getMethod isEqual:GET_METHOD]) {
         NSData *httpBodyToSet = [self getHttpBody];
         NSString *contentType = [self getContentType];
         if (_shouldEncryptRequestBody) {
@@ -134,8 +134,6 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
         [request setHTTPBody:httpBodyToSet];
         [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
     }
-
-    [request setValue:[NSString stringWithFormat:@"%ld", 1] forHTTPHeaderField:USER_ID];
     return request;
 }
 

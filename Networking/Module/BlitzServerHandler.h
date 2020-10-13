@@ -7,15 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BlitzHttpResponseListener.h"
-
-static NSString *const PHONE_MACRO_IN_URL = @":phone";
-static NSString *const ROOM_ID_MACRO_IN_URL = @":roomId";
-static NSString *const USER_ID_MACRO_IN_URL = @":userId";
-static NSString *const DEVICE_TYPE_MACRO_IN_URL = @":deviceType";
-
-static NSString *const LOCAL_IP_PREFIX = @"172.16.";
-static NSString *const LOCAL_IP_PREFIX2 = @"192.168.";
+#import <BlitzHttpResponseListener.h>
 
 #pragma method types
 static NSString *const POST_METHOD = @"POST";
@@ -49,5 +41,4 @@ static NSString *const DELETE_METHOD = @"DELETE";
 @interface BlitzServerHandler : NSObject<BlitzHttpResponseListener,PServerHandler>
 + (id)serverHandler;
 - (void)retryPendingCalls;
-
 @end

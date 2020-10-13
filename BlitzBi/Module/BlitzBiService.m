@@ -72,7 +72,7 @@ BlitzBiEventSendHandler* biBuilder;
     [headers setValue:appToken forKey:@"blitzAppToken"];
     
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
-    [requestBuilder setMethod:@"POST"];
+    [requestBuilder setMethod:POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
     [requestBuilder setPath:@"app/device/update"];
     [requestBuilder setHeaders:headers];

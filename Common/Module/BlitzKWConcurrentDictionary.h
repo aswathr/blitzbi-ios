@@ -12,17 +12,17 @@
 
 @interface BlitzKWConcurrentDictionary<KeyType, ObjectType> : NSObject
 
-- (instancetype)initWithCapacity:(NSUInteger)capacity;
-- (instancetype)initWithDictionary:(NSDictionary<KeyType, ObjectType> *)dict;
-- (ObjectType _Nullable)objectForKey:(KeyType)aKey;
-- (void)setObject:(ObjectType)anObject forKey:(KeyType)aKey;
-- (ObjectType _Nullable)putIfAbsentObject:(ObjectType)anObject forKey:(KeyType)aKey;
-- (void)removeObjectForKey:(KeyType)aKey;
+- (instancetype _Nullable )initWithCapacity:(NSUInteger)capacity;
+- (instancetype _Nullable )initWithDictionary:(NSDictionary<KeyType, ObjectType> *_Nullable)dict;
+- (ObjectType _Nullable)objectForKey:(KeyType _Nullable )aKey;
+- (void)setObject:(ObjectType _Nullable )anObject forKey:(KeyType _Nullable )aKey;
+- (ObjectType _Nullable)putIfAbsentObject:(ObjectType _Nullable )anObject forKey:(KeyType _Nullable )aKey;
+- (void)removeObjectForKey:(KeyType _Nullable )aKey;
 - (void)removeAllObjects;
-- (void)addObjectsFromDictAfterEmptying:(NSDictionary<KeyType, ObjectType> *)dict;
-- (NSArray<KeyType> *)allKeys;
-- (NSArray<ObjectType> *)allValues;
+- (void)addObjectsFromDictAfterEmptying:(NSDictionary<KeyType, ObjectType> *_Nullable)dict;
+- (NSArray<KeyType> *_Nullable)allKeys;
+- (NSArray<ObjectType> *_Nullable)allValues;
 - (NSUInteger)count;
-- (NSDictionary<KeyType, ObjectType> *)getSnapshot;
+- (NSDictionary<KeyType, ObjectType> *_Nullable)getSnapshot;
 
 @end

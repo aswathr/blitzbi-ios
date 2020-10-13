@@ -6,8 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PBlitzDataTransferService.h"
-#import "BlitzRequestBuilder.h"
+#import <PBlitzDataTransferService.h>
+#import <BlitzRequestBuilder.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property id <PBlitzDataTransferService> networkService;
 
 - (void)processJsonRequest:(NSString*)url withData: (NSData*)data withCompletion:(void(^)(NSObject *, NSError *))completion;
-- (void)processJsonRequestWithoutResponse:(NSString*)url withData: (NSData*)data withIsEmergency:(bool*)isEmergency;
+- (void)processJsonRequestWithoutResponse:(NSString*)url withData: (NSData*)data withIsEmergency:(BOOL)isEmergency;
 @end
 
 NS_ASSUME_NONNULL_END

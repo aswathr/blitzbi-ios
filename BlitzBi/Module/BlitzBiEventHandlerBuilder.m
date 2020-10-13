@@ -5,7 +5,7 @@
 //  Created by Admin on 12/10/20.
 //
 
-#import "BlitzBiEventHandlerBuilder.h"
+#import <BlitzBiEventHandlerBuilder.h>
 
 @implementation BlitzBiEventHandlerBuilder
 - (void)setParams:(NSNumber*)batchSize

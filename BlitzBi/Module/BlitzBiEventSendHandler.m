@@ -31,7 +31,7 @@
 @property BlitzBiConfig *biConfig;
 @property BlitzBIEventRepository *eventRepository;
 
-@property long long *currentTimestamp;
+@property long long currentTimestamp;
 
 @end
 
@@ -93,7 +93,7 @@ name:NSExtensionHostWillEnterForegroundNotification
 
 -(void) onResume {
     NSLog(@"BlitzBiEventSendHandler::onResume");
-    self.currentTimestamp = (long long)[self getCurrentEpochTime];
+    self.currentTimestamp = [self getCurrentEpochTime];
     [self fireSessionStartEvent];
     [self invalidateTimer];
 }
@@ -109,6 +109,7 @@ name:NSExtensionHostWillEnterForegroundNotification
     return (long long)[[NSDate date] timeIntervalSince1970];
 }
 
+// TODO: @kash
 -(void) fireSessionLengthEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
     [eventDict setValue:@"session_length" forKey:@"eventName"];
@@ -164,7 +165,7 @@ name:NSExtensionHostWillEnterForegroundNotification
         NSData *jsonData = [self getJSONDataForBatch:batch];
         NSString *url = [_biConfig base_URL];
                     
-        //[_eventRepository processJsonRequestWithoutResponse:url withData:jsonData withIsEmergency:true];
+        [self.eventRepository processJsonRequestWithoutResponse:url withData:jsonData withIsEmergency:YES];
         [eventsCopy removeObjectsInArray:batch];
     }
 }
@@ -412,11 +413,12 @@ name:NSExtensionHostWillEnterForegroundNotification
     return isPendingEventsCrossedMaxLimit || hasTimeCrossedCooldown;
 }
 
--(BOOL) isAppIdAvailable {
+- (BOOL)isAppIdAvailable {
     return [self isAppIdValidated] && [self blitzDeviceId] != nil;
 }
 
--(void) setBlitzdeviceId:(NSNumber*)appId: withDeviceId:(NSString*)deviceId {
+- (void)setBlitzdeviceId :(NSNumber*)appId
+                         :(NSString*)deviceId {
     self.blitzAppId = [appId stringValue];
     self.blitzDeviceId = deviceId;
     self.isAppIdValidated = true;

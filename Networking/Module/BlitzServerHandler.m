@@ -35,8 +35,7 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
 }
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         requestRetry = [[BlitzKWConcurrentDictionary alloc] init];
 
         INTERNET_ERROR_CODES = @[@ - 1, @1, @2, @100, @101, @ - 1001, @ - 1003, @ - 1004, @ - 1005, @ - 1006, @ - 1009, @-1011, @ - 1018, @ - 1020];
@@ -118,7 +117,6 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
                     NSLog(@"will retry again, retry count being %li", (long)retry);
                     [BlitzHttpExecutor executeRequest:request listener:self];
                     [self sendFailueOrRetryEvent:request error:err isRetry:YES];
-                    //                    [weakSelf submitRequest:request forAction:[request actionName]];
                 });
                 return;
             }
@@ -220,7 +218,6 @@ static NSString * const FORBIDDED_ERROR_CODE = @"403";
     if (requestBuilder.reqType == BI_REQUEST) {
         return;
     }
-    NSString *errorStr = [[error.localizedDescription stringByAppendingString:@", code: "] stringByAppendingString:[@(error.code)stringValue]];
 }
 
 @end

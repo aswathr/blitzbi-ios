@@ -21,7 +21,6 @@
     patchNeeded = ([key length] > kCCKeySizeAES256+1);
     if(patchNeeded)
     {
-        //        NSLog(@"Key length is longer %lu", (unsigned long)[[self md5:key] length]);
         key = [key substringToIndex:kCCKeySizeAES256]; // Ensure that the key isn't longer than what's needed (kCCKeySizeAES128)
     }
 
@@ -77,7 +76,6 @@
         key = [key substringToIndex:kCCKeySizeAES256]; // Ensure that the key isn't longer than what's needed (kCCKeySizeAES256)
     }
 
-    //NSLog(@"md5 :%@", key);
     [key getCString:keyPointer maxLength:sizeof(keyPointer) encoding:NSUTF8StringEncoding];
     [iv getCString:ivPointer maxLength:sizeof(ivPointer) encoding:NSUTF8StringEncoding];
 

@@ -39,7 +39,6 @@
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
     if (error) {
-        NSString *errorString = [error description];
         return NO;
     }
     NSString *dataStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -72,7 +71,6 @@
         if (jsonData) {
             cachedContent = (NSArray *)[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
             if (error) {
-                NSString *errorString = [error description];
                 cachedContent = nil;
             }
         }

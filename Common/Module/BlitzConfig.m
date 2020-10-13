@@ -33,11 +33,6 @@ BlitzConfig *config;
     return nil;
 }
 
-- (void)updateFileLogging:(BOOL)enableFileLogging {
-    _LOG_TO_FILE = enableFileLogging;
-//    [[UserDefaultsUtil sharedInstance] setBool:enableFileLogging forKey:LOG_TO_FILE_KEY];
-}
-
 - (void)setDebugEnabled:(BOOL)value {
     isDebugEnabled = value;
 }

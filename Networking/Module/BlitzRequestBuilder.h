@@ -6,8 +6,7 @@
 //  Copyright © 2016 Twilio, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "BlitzServerHandler.h"
+#import <BlitzServerHandler.h>
 
 typedef enum {
     APP_REQUEST,
@@ -20,7 +19,6 @@ typedef enum {
 typedef void (^HTTPRequestResponseBlock)(NSObject *response, NSError *error);
 
 @interface BlitzRequestBuilder : NSObject
-
 @property (nonatomic) NSString *method;
 @property NSString *path; // url extension after base url
 @property NSString *baseUrl;
@@ -33,19 +31,14 @@ typedef void (^HTTPRequestResponseBlock)(NSObject *response, NSError *error);
 @property NSMutableDictionary *multipartParameters;
 @property NSMutableDictionary *multipartData;
 @property BOOL shouldEncryptRequestBody;
-
 @property (nonatomic, assign) RequestType reqType;
 @property (weak) id<ResponseListener> responseListener;
 @property HTTPRequestResponseBlock responseBlock;
-
 @property NSTimeInterval startTime;
 @property NSTimeInterval requestTotalTime;
-
 @property NSMutableDictionary *headers;
 
 - (NSMutableURLRequest *)generateRequest;
-
 - (NSString *)detailsOne;
 - (NSString *)detailsTwo;
-
 @end

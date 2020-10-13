@@ -20,7 +20,6 @@
 }
 
 + (NSURL *)fullFileUrlInCacheDirectoryForFileName:(NSString *)fileName {
-    //NSURL *cacheDirectoryURL = [FileHelper getDirectoryURLFor:NSCachesDirectory andShouldCreateIfNot:NO];
     NSURL *cacheDirectoryURL =  [[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSAllDomainsMask].firstObject;
     return [cacheDirectoryURL URLByAppendingPathComponent:fileName];
 }
@@ -127,11 +126,9 @@
 
 + (BOOL)deleteLocalCacheFileWithName:(NSString *)filename {
     NSURL *fullPath = [BlitzFileHelper fullFileUrlInCacheDirectoryForFileName:filename];
-    //if ([[NSFileManager defaultManager] isDe:fullPath]) {
     NSError *error;
     BOOL deleted = [[NSFileManager defaultManager] removeItemAtURL:fullPath error:&error];
     if (deleted && !error) {
-        //[[SimpleImageCache imageCache] onFileDelete:filename];
         return YES;
     }
     //}

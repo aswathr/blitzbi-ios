@@ -18,7 +18,7 @@
 }
 - (void)processJsonRequest:(NSString*)url withData: (NSData*)data withCompletion:(void(^)(NSObject *, NSError *))completion{
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
-    [requestBuilder setMethod:@"POST"];
+    [requestBuilder setMethod:POST_METHOD];
     [requestBuilder setBaseUrl:url];
     [requestBuilder setPath:@"events"];
     [requestBuilder setHeaders:[self getRequestHeaders]];
@@ -29,9 +29,9 @@
     [self.networkService executeServerCall:requestBuilder withCompletion: completion];
 }
 
-- (void)processJsonRequestWithoutResponse:(NSString*)url withData:(NSData*)data withIsEmergency:(bool*)isEmergency {
+- (void)processJsonRequestWithoutResponse:(NSString*)url withData:(NSData*)data withIsEmergency:(BOOL)isEmergency {
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
-    [requestBuilder setMethod:@"POST"];
+    [requestBuilder setMethod:POST_METHOD];
     [requestBuilder setBaseUrl:url];
     [requestBuilder setPath:@"events"];
     [requestBuilder setHeaders:[self getRequestHeaders]];
@@ -43,14 +43,12 @@
         [[[NSURLSession sharedSession] dataTaskWithRequest:[requestBuilder generateRequest] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
             
         }] resume];
-//        [NSURLSession dataTaskWithRequest:[requestBuilder generateRequest] completionHandler:nil];
-        //[NSURLConnection sendSynchronousRequest:[requestBuilder generateRequest] returningResponse:nil error:nil];
     } else {
         [self.networkService executeServerCallWithNoCallBack:requestBuilder];
     }
 }
 
-- (NSDictionary<NSString *, NSString *> *) getRequestHeaders {
+- (NSMutableDictionary*) getRequestHeaders {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     [headers setValue:[_appId stringValue] forKey:@"blitzAppId"];
     [headers setValue:_appToken forKey:@"blitzAppToken"];
