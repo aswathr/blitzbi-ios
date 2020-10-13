@@ -7,21 +7,26 @@
 
 #import <BlitzBi.h>
 
-@implementation BlitzBi
-BlitzBiService* biService;
+@interface BlitzBi ()
+- (instancetype)init;
+@end
 
-+ (instancetype)sharedInstance {
+@implementation BlitzBi
++ (id)sharedInstance {
     static BlitzBi *sharedInstance = nil;
     static dispatch_once_t once_token;
-    
     dispatch_once(&once_token, ^{
-        sharedInstance = [BlitzBi new];
-        biService = [[BlitzBiService alloc] init];
+        sharedInstance = [[self alloc] init];
     });
-    
     return sharedInstance;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        biService = [[BlitzBiService alloc] init];
+    }
+    return self;
+}
 
 - (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)appToken {
