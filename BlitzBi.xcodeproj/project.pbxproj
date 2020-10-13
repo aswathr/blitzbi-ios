@@ -112,7 +112,6 @@
 		84CE9C02252B052900D0E48F /* BlitzConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzConstants.h; path = Module/BlitzConstants.h; sourceTree = "<group>"; };
 		84CE9C03252B052900D0E48F /* BlitzStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzStringUtils.h; path = Module/BlitzStringUtils.h; sourceTree = "<group>"; };
 		84EEAA3C2533A73500851468 /* BlitzBi.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlitzBi.podspec; sourceTree = "<group>"; };
-		C83928669D9416524098A8FB /* Pods_BlitzBiDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlitzBiDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +161,6 @@
 				844A0E8F252467CE00D8529B /* Networking */,
 				843BB7BE25245195007272D9 /* BlitzBi */,
 				843BB7BD25245195007272D9 /* Products */,
-				96AA44632CC91988F9D2A028 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,14 +237,6 @@
 				84C211722534319100DFEC24 /* BaseUrls.m */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		96AA44632CC91988F9D2A028 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C83928669D9416524098A8FB /* Pods_BlitzBiDemo.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
