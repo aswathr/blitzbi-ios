@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name                 = "BlitzBi"
-  spec.version              = "0.0.16"
+  spec.version              = "0.0.18"
   spec.summary              = "Blitz Bi Module."
   spec.description          = "Blitz Bi Module: Used for integration blitz-bi services"
   spec.homepage             = "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"
@@ -38,7 +38,7 @@ Pod::Spec.new do |spec|
   spec.platform             = :ios, "9.0"
   spec.source               = { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
   spec.swift_version        = "4.2"
-  spec.source_files         = "**/**/*.{h,m}"
+  spec.source_files         = "**/**/*.{h,m,swift}"
   spec.public_header_files  = "**/**/*.h"
   spec.exclude_files        = "BlitzBi/BlitzBi/*.plist"
 end
