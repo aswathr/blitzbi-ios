@@ -39,6 +39,6 @@ Pod::Spec.new do |spec|
   spec.source               = { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
   spec.swift_version        = "4.2"
   spec.source_files         = "**/**/*.{h,m}"
-  spec.public_header_files  = "BlitzBi/BlitzBi/Module/BlitzBiService.{h}"
-  spec.exclude_files        = "BlitzBi/BlitzBi/info.plist"
+  spec.public_header_files  = "**/**/*.h"
+  spec.exclude_files        = "BlitzBi/BlitzBi/*.plist"
 end
