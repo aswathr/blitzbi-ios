@@ -5,17 +5,17 @@
 //  Created by Admin on 13/10/20.
 //
 
-#import <Blitz.h>
+#import <BlitzBi.h>
 
-@implementation Blitz
+@implementation BlitzBi
 BlitzBiService* biService;
 
 + (instancetype)sharedInstance {
-    static Blitz *sharedInstance = nil;
+    static BlitzBi *sharedInstance = nil;
     static dispatch_once_t once_token;
     
     dispatch_once(&once_token, ^{
-        sharedInstance = [Blitz new];
+        sharedInstance = [BlitzBi new];
         biService = [[BlitzBiService alloc] init];
     });
     

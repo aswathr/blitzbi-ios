@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Blitz : NSObject
+@interface BlitzBi : NSObject
 + (instancetype)sharedInstance;
 - (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)andAppToken;
