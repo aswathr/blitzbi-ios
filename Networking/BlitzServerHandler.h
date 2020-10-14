@@ -12,28 +12,28 @@
 
 @class BlitzRequestBuilder;
 
-@protocol ResponseListener
+@protocol BlitzResponseListener
 - (void)success:(NSObject *)data;
 - (void)failure:(NSError *)error extraInfo:(NSString *)channelId;
 @end
 
-@protocol DiffServiceResponseListener<ResponseListener>
+@protocol BlitzDiffServiceResponseListener<BlitzResponseListener>
 - (void)success:(NSObject *)data withRequestTime:(NSTimeInterval)totalTime;
 @end
 
-@protocol ResponseObjectSerializable
-- (id<ResponseObjectSerializable> )init:(NSObject *)response;
+@protocol BlitzResponseObjectSerializable
+- (id<BlitzResponseObjectSerializable> )init:(NSObject *)response;
 @end
 
-@protocol ResponseCollectionSerializable<ResponseObjectSerializable>
+@protocol BlitzResponseCollectionSerializable<BlitzResponseObjectSerializable>
 - (NSArray *)collection:(NSArray *)response;
 @end
 
-@protocol PServerHandler
+@protocol PBlitzServerHandler
 - (void)serverCall:(BlitzRequestBuilder *)requestBuilder withCompletionBlock:(void(^)(NSObject *, NSError *))completionBlock;
 @end
 
-@interface BlitzServerHandler : NSObject<BlitzHttpResponseListener,PServerHandler>
+@interface BlitzServerHandler : NSObject<BlitzHttpResponseListener,PBlitzServerHandler>
 + (id)serverHandler;
 - (void)retryPendingCalls;
 @end

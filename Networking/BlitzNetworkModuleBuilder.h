@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlitzNetworkModuleBuilder : NSObject
 @property (strong) BaseUrls* baseUrls;
-@property (strong) id <PServerHandler> serverHandler;
+@property (strong) id <PBlitzServerHandler> serverHandler;
 
-- (void)setParams:(BaseUrls*)baseUrls serverHandler: (id <PServerHandler>)serverHandler;
+- (void)setParams:(BaseUrls*)baseUrls serverHandler: (id <PBlitzServerHandler>)serverHandler;
 - (id <PBlitzDataTransferService>) build;
 @end
 
