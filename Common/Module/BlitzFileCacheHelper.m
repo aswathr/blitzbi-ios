@@ -83,7 +83,7 @@
 }
 
 - (NSString *)getCacheFilePath:(NSString *)cacheKey {
-    NSString *fileName = [NSString stringWithFormat:@"%@%@",CACHE_PREFIX_MACRO, cacheKey];
+    NSString *fileName = [NSString stringWithFormat:@"%@%@",BLITZ_CACHE_PREFIX_MACRO, cacheKey];
     NSString *fPath = [BlitzFileHelper fullFilePathInDocumentsDirectoryForFileName:fileName];
     return fPath;
 }

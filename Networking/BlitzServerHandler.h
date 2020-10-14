@@ -8,12 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <BlitzHttpResponseListener.h>
-
-#pragma method types
-static NSString *const POST_METHOD = @"POST";
-static NSString *const GET_METHOD = @"GET";
-static NSString *const PUT_METHOD = @"PUT";
-static NSString *const DELETE_METHOD = @"DELETE";
+#import <BlitzConstants.h>
 
 @class BlitzRequestBuilder;
 

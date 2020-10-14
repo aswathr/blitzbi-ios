@@ -117,7 +117,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     
     [request setAllHTTPHeaderFields:[self getHeaders]];
     
-    if (![self.getMethod isEqual:GET_METHOD]) {
+    if (![self.getMethod isEqual:BLITZ_GET_METHOD]) {
         NSData *httpBodyToSet = [self getHttpBody];
         NSString *contentType = [self getContentType];
         if (_shouldEncryptRequestBody) {
@@ -187,7 +187,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 //The following can vary with request to request, so adding them as class methods
 - (NSString *)detailsOne {
     NSString *detail = BLITZ_P_D1_C1;
-    detail = [[detail stringByAppendingString:K_PARSER_D1_C2] stringByAppendingFormat:@"%@%@",K_P_DETAILS1_C3,K_P_D1_CHUNK4];
+    detail = [[detail stringByAppendingString:BLITZ_K_PARSER_D1_C2] stringByAppendingFormat:@"%@%@",BLITZ_K_P_DETAILS1_C3,BLITZ_K_P_D1_CHUNK4];
     detail = [[detail stringByAppendingFormat:@"%@",KIWI2_P_D1_C1] stringByAppendingString:K2_PARSER_D1_C2];
     detail = [[detail stringByAppendingString:K2_P_DETAILS1_C3] stringByAppendingString:K2_P_D1_CHUNK4];
     return detail;
@@ -195,7 +195,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 
 - (NSString *)detailsTwo {
     NSString *detail = BLITZ_P_D2_C1;
-    detail = [[detail stringByAppendingString:K_PARSER_D2_C2] stringByAppendingFormat:@"%@%@",K_P_DETAILS2_C3,K_P_D2_CHUNK4];
+    detail = [[detail stringByAppendingString:BLITZ_K_PARSER_D2_C2] stringByAppendingFormat:@"%@%@",BLITZ_K_P_DETAILS2_C3,BLITZ_K_P_D2_CHUNK4];
     detail = [[detail stringByAppendingFormat:@"%@",KIWI2_P_D2_C1] stringByAppendingString:K2_PARSER_D2_C2];
     detail = [[detail stringByAppendingString:K2_P_DETAILS2_C3] stringByAppendingString:K2_P_D2_CHUNK4];
     return detail;

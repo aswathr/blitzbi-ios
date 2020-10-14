@@ -28,7 +28,7 @@
                           :(NSData*)data
                           :(void(^)(NSObject *, NSError *))completion{
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
-    [requestBuilder setMethod:POST_METHOD];
+    [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:url];
     [requestBuilder setPath:@"events"];
     [requestBuilder setHeaders:[self getRequestHeaders]];
@@ -43,7 +43,7 @@
                                          :(NSData*)data
                                          :(BOOL)isEmergency {
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
-    [requestBuilder setMethod:POST_METHOD];
+    [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:url];
     [requestBuilder setPath:@"events"];
     [requestBuilder setHeaders:[self getRequestHeaders]];

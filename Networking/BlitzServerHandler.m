@@ -22,10 +22,6 @@ NSArray<NSNumber *> *BLITZ_SERVER_ERROR_CODES;
 NSArray<NSNumber *> *BLITZ_RECOVERABLE_ERROR_CODES;
 NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
 
-static NSInteger const BLITZ_MAX_RETRY = 2;//meaning three tries in total
-static NSInteger const BLITZ_DELAY_PER_RETRY = NSEC_PER_SEC;//in ns translates to 1s currently
-static NSString * const BLITZ_FORBIDDED_ERROR_CODE = @"403";
-
 + (instancetype)serverHandler {
     static BlitzServerHandler *sharedInstace = nil;
     static dispatch_once_t onceToken;
@@ -190,7 +186,7 @@ static NSString * const BLITZ_FORBIDDED_ERROR_CODE = @"403";
     }
     
     if (err == nil && request.pendingRequest == YES) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SERVER_CALL_SENT_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BLITZ_SERVER_CALL_SENT_NOTIFICATION object:nil];
     }
 }
 
