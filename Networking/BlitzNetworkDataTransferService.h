@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlitzNetworkDataTransferService : NSObject<PBlitzDataTransferService>
 @property id <PBlitzServerConfig> serverConfig;
-@property id <PServerHandler> serverHandler;
+@property id <PBlitzServerHandler> serverHandler;
 
 - (instancetype)init:(id <PBlitzServerConfig>)serverConfig
-                    :(id <PServerHandler>)serverHandler;
+                    :(id <PBlitzServerHandler>)serverHandler;
 @end
 
 NS_ASSUME_NONNULL_END

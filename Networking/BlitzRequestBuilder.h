@@ -32,7 +32,7 @@ typedef void (^HTTPRequestResponseBlock)(NSObject *response, NSError *error);
 @property NSMutableDictionary *multipartData;
 @property BOOL shouldEncryptRequestBody;
 @property (nonatomic, assign) RequestType reqType;
-@property (weak) id<ResponseListener> responseListener;
+@property (weak) id<BlitzResponseListener> responseListener;
 @property HTTPRequestResponseBlock responseBlock;
 @property NSTimeInterval startTime;
 @property NSTimeInterval requestTotalTime;

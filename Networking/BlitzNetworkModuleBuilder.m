@@ -9,7 +9,7 @@
 #import <BlitzNetworkModuleBuilder.h>
 
 @implementation BlitzNetworkModuleBuilder
-- (void)setParams:(BaseUrls*)baseUrls serverHandler: (id <PServerHandler>)serverHandler {
+- (void)setParams:(BaseUrls*)baseUrls serverHandler: (id <PBlitzServerHandler>)serverHandler {
     self.baseUrls = baseUrls;
     self.serverHandler = serverHandler;
 }
