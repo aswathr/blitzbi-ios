@@ -1,8 +1,9 @@
 //
-//  Reachability.h
-//  BlitzDemo
+//  BlitzReachability.h
+//  BlitzBi
 //
-//  Created by Admin on 07/10/20.
+//  Created by Akash on 01/10/20.
+//  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

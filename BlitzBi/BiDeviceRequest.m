@@ -2,7 +2,8 @@
 //  BiDeviceRequest.m
 //  BlitzBi
 //
-//  Created by Admin on 12/10/20.
+//  Created by Akash on 01/10/20.
+//  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
 #import <BiDeviceRequest.h>

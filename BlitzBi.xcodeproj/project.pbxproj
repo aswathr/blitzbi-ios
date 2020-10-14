@@ -123,13 +123,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0194E69A2530764A00257D29 /* Module */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Module;
-			sourceTree = "<group>";
-		};
 		0194E69E2530764A00257D29 /* server */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,7 +202,6 @@
 				84C211F4253460E500DFEC24 /* BlitzNetworkModuleBuilder.h */,
 				84C211F5253460E500DFEC24 /* BlitzNetworkModuleBuilder.m */,
 				84C211FC2534659F00DFEC24 /* PBlitzServerConfig.h */,
-				0194E69A2530764A00257D29 /* Module */,
 			);
 			path = Networking;
 			sourceTree = "<group>";

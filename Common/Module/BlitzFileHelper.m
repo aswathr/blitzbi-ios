@@ -1,9 +1,9 @@
 //
-//  FileHelper.m
-//  ArVideoDemo
+//  BlitzFileHelper.m
+//  BlitzBi
 //
-//  Created by Prabal on 23/11/16.
-//  Copyright © 2016 Kiwi, Inc. All rights reserved.
+//  Created by Akash on 01/10/20.
+//  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
 #import <BlitzFileHelper.h>

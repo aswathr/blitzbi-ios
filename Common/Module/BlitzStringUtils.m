@@ -1,10 +1,11 @@
 //
-//  StringUtils.m
-//  ArVideoDemo
+//  BlitzStringUtils.m
+//  BlitzBi
 //
-//  Created by Mitesh on 17/01/17.
-//  Copyright © 2017 Kiwi, Inc. All rights reserved.
+//  Created by Akash on 01/10/20.
+//  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
+
 #import <BlitzStringUtils.h>
 #import <CommonCrypto/CommonDigest.h>
 

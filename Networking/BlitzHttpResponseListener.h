@@ -1,9 +1,9 @@
 //
-//  HttpResponseListener.h
-//  ArVideoDemo
+//  BlitzHttpResponseListener.h
+//  BlitzBi
 //
-//  Created by Mitesh on 20/12/16.
-//  Copyright © 2016 Kiwi, Inc. All rights reserved.
+//  Created by Akash on 01/10/20.
+//  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
 #ifndef HttpResponseListener_h
@@ -15,4 +15,4 @@
 - (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withStatusCode:(NSInteger)statusCode;
 @end
 
-#endif /* HttpResponseListener_h */
+#endif

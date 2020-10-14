@@ -1,9 +1,9 @@
 //
-//  KWConcurrentDictionary.m
-//  ArVideoDemo
+//  BlitzKWConcurrentDictionary.m
+//  BlitzBi
 //
-//  Created by Prabal on 24/11/17.
-//  Copyright © 2017 Kiwi, Inc. All rights reserved.
+//  Created by Akash on 01/10/20.
+//  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
 #import <BlitzKWConcurrentDictionary.h>
