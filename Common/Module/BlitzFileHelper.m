@@ -158,20 +158,20 @@
     [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
 }
 
-+ (NSString *)getUserGifPathForResolution:(GifResolution)resolution {
++ (NSString *)getUserGifPathForResolution:(BlitzGifResolution)resolution {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *tempPath;
     switch (resolution) {
-        case GifResolutionLow: {
+        case BlitzGifResolutionLow: {
             tempPath = [documentsDirectory stringByAppendingFormat:@"/thumbnailprofile.gif"];
             break;
         }
-        case GifResolutionNormal: {
+        case BlitzGifResolutionNormal: {
             tempPath = [documentsDirectory stringByAppendingFormat:@"/profile.gif"];
             break;
         }
-        case GifResolutionHigh: {
+        case BlitzGifResolutionHigh: {
             tempPath = [documentsDirectory stringByAppendingFormat:@"/hrprofile.gif"];
             break;
         }
@@ -183,7 +183,7 @@
 }
 
 + (NSString *)getUserGifPath {
-    return [self getUserGifPathForResolution:GifResolutionNormal];
+    return [self getUserGifPathForResolution:BlitzGifResolutionNormal];
 }
 
 + (NSURL *)getHeadShotGifPath {

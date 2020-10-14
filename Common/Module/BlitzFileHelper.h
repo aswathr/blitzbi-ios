@@ -10,10 +10,10 @@
 
 @interface BlitzFileHelper : NSObject
 
-typedef NS_ENUM(NSInteger, GifResolution) {
-    GifResolutionLow,
-    GifResolutionNormal,
-    GifResolutionHigh
+typedef NS_ENUM(NSInteger, BlitzGifResolution) {
+    BlitzGifResolutionLow,
+    BlitzGifResolutionNormal,
+    BlitzGifResolutionHigh
 };
 
 + (void)deleteFilesMatching:(NSRegularExpression *)regex inPath:(NSString *)path;
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, GifResolution) {
 + (NSDictionary *)readDictionaryFromFile:(NSString *)fileName;
 
 + (NSString *)getUserGifPath;
-+ (NSString *)getUserGifPathForResolution:(GifResolution)resolution;
++ (NSString *)getUserGifPathForResolution:(BlitzGifResolution)resolution;
 + (NSString *)getUserVideoPath;
 
 + (NSURL *)getHeadShotGifPath;
