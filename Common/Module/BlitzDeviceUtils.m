@@ -88,7 +88,7 @@
 + (NSString *)getConnDetails {
     BlitzReachability *reachability = [BlitzReachability reachabilityForInternetConnection];
     NetworkStatus internetStatus = [reachability currentReachabilityStatus];
-
+    
     if (internetStatus == ReachableViaWiFi) {
         return @"wifi";
     }
@@ -218,7 +218,7 @@
 + (NSString *)getCarrierName {
     CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = [netinfo subscriberCellularProvider];
-
+    
     if (carrier != nil) {
         return [carrier carrierName] ? [carrier carrierName] : @"unknown";
     }

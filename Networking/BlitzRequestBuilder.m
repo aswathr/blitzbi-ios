@@ -29,8 +29,8 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     }
     NSException *e = [NSException
                       exceptionWithName:@"UndefinedHttpMethodException"
-                                 reason:@"*** Http method not defined"
-                               userInfo:nil];
+                      reason:@"*** Http method not defined"
+                      userInfo:nil];
     @throw e;
 }
 
@@ -40,8 +40,8 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     }
     NSException *e = [NSException
                       exceptionWithName:@"UndefinedHttpPathException"
-                                 reason:@"*** Http path not defined"
-                               userInfo:nil];
+                      reason:@"*** Http path not defined"
+                      userInfo:nil];
     @throw e;
 }
 
@@ -58,8 +58,8 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     }
     NSException *e = [NSException
                       exceptionWithName:@"UndefinedHttpParameterException"
-                                 reason:@"*** Http params not defined"
-                               userInfo:nil];
+                      reason:@"*** Http params not defined"
+                      userInfo:nil];
     @throw e;
 }
 
@@ -104,19 +104,19 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 - (NSMutableURLRequest *)generateRequest {
     NSString *urlPath = self.getBaseUrl;
     urlPath = [urlPath stringByAppendingString:self.getPath];
-
+    
     if (self.parameters && (int)[self.getParameters count] != 0) {
         urlPath = [urlPath stringByAppendingFormat:@"?%@", [self.getUrlParam stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]];
     }
-
+    
     NSURL *url = [NSURL URLWithString:urlPath];
-
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-
+    
     [request setHTTPMethod:self.getMethod];
     
     [request setAllHTTPHeaderFields:[self getHeaders]];
-
+    
     if (![self.getMethod isEqual:GET_METHOD]) {
         NSData *httpBodyToSet = [self getHttpBody];
         NSString *contentType = [self getContentType];
@@ -148,34 +148,34 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
 
 - (NSData *)createBodyWithBoundary:(NSString *)boundary {
     NSMutableData *httpBody = [NSMutableData data];
-
+    
     // add params (all params are strings)
     NSDictionary *multipartParameters = self.multipartParameters;
     NSDictionary *multipartData = self.multipartData;
-
+    
     [multipartParameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
         [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
     }];
-
+    
     // add image data
-
+    
     [multipartData enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSDictionary *parameterDict, BOOL *stop) {
         NSString *filename = parameterKey;
         NSString *fieldName = [parameterKey componentsSeparatedByString:@"."][0];
         NSData *data = [parameterDict valueForKey:@"data"];
         NSString *mimetype = [parameterDict valueForKey:@"mimeType"];
-
+        
         [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:data];
         [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     }];
-
+    
     [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-
+    
     return httpBody;
 }
 

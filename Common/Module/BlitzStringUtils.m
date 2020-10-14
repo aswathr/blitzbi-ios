@@ -21,9 +21,9 @@ NSString *const BLITZ_NO_BREAK_SPACE = @" ";
     const char *cStr = [str UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
-
+    
     NSData* data = [NSData dataWithBytes:(const void *)result length:sizeof(unsigned char)*CC_MD5_DIGEST_LENGTH];
-
+    
     return [data base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength];
 }
 
@@ -31,7 +31,7 @@ NSString *const BLITZ_NO_BREAK_SPACE = @" ";
     const char *cStr = [str UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
-
+    
     return [NSString stringWithFormat:
             @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
             result[0], result[1], result[2], result[3],
@@ -112,7 +112,7 @@ NSString *const BLITZ_NO_BREAK_SPACE = @" ";
 }
 
 + (NSString *)includeOnlyAlphabetsAndWordSeperators:(NSString *)input {
-
+    
     NSCharacterSet *notAllowedChars = [[NSCharacterSet characterSetWithCharactersInString:@"-_ |abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
     return [[input componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
 }

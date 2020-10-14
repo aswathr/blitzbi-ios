@@ -10,10 +10,10 @@
 
 @implementation BlitzBiEventHandlerBuilder
 - (void)setParams:(NSNumber*)batchSize
-            withUrl: (NSString*)baseUrl
-            withAppId:(NSString*)appId
-            withAppToken:(NSString*) appToken
-            withService:(id <PBlitzDataTransferService>) networkService {
+          withUrl: (NSString*)baseUrl
+        withAppId:(NSString*)appId
+     withAppToken:(NSString*) appToken
+      withService:(id <PBlitzDataTransferService>) networkService {
     self->batchSize = batchSize;
     self->baseUrl = baseUrl;
     self->appId = appId;

@@ -10,7 +10,7 @@
 
 @interface BlitzFileHelper : NSObject
 
-    typedef NS_ENUM(NSInteger, GifResolution) {
+typedef NS_ENUM(NSInteger, GifResolution) {
     GifResolutionLow,
     GifResolutionNormal,
     GifResolutionHigh

@@ -28,18 +28,18 @@
 
 // TODO: @kash Add pinning.
 + (void)applyPinningToNSURLSession:(NSURLSession *)session {
-//    NSString *cerPath = [[NSBundle bundleForClass:self] pathForResource:@"onsequel" ofType:@"cer"];
-//    //[[NSBundle mainBundle] pathForResource:@"onsequel" ofType:@"cer"];
-//    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
-//    NSString *certPathAmazon = [[NSBundle bundleForClass:self] pathForResource:@"onsequel-am" ofType:@"cer"];
-//    NSData *certAmazonData = [NSData dataWithContentsOfFile:certPathAmazon];
-//
-//    NSPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-//    policy.validatesDomainName = NO;
-//
-//    policy.pinnedCertificates = @[certData, certAmazonData];
-//    [policy setAllowInvalidCertificates:YES];
-//    session.securityPolicy = policy;
+    //    NSString *cerPath = [[NSBundle bundleForClass:self] pathForResource:@"onsequel" ofType:@"cer"];
+    //    //[[NSBundle mainBundle] pathForResource:@"onsequel" ofType:@"cer"];
+    //    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    //    NSString *certPathAmazon = [[NSBundle bundleForClass:self] pathForResource:@"onsequel-am" ofType:@"cer"];
+    //    NSData *certAmazonData = [NSData dataWithContentsOfFile:certPathAmazon];
+    //
+    //    NSPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
+    //    policy.validatesDomainName = NO;
+    //
+    //    policy.pinnedCertificates = @[certData, certAmazonData];
+    //    [policy setAllowInvalidCertificates:YES];
+    //    session.securityPolicy = policy;
 }
 
 + (NSURLSession *)getNSURLSessionWithNoConnectionLimit {
@@ -81,12 +81,12 @@
             [self executeParallelRequest:requestBuilder listener:listener];
             break;
         }
-
+            
         case BI_REQUEST: {
             [self executeBIRequest:requestBuilder listener:listener];
             break;
         }
-
+            
         default: {
             break;
         }
@@ -110,7 +110,7 @@
 
 + (void)fire:(NSURLSession *)session withRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
     NSMutableURLRequest *request = requestBuilder.generateRequest;
-
+    
     // Send request id to track each and every request.
     if (requestBuilder.requestId) {
         [request setValue:requestBuilder.requestId forHTTPHeaderField:@"X-APP-REQUESTID"];
@@ -118,46 +118,46 @@
     
     [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     [request setValue:@"v1" forHTTPHeaderField:@"Blitz-Encoding"];
-
+    
     if (requestBuilder.headers) {
         for (NSString *key in requestBuilder.headers) {
             [request setValue:[requestBuilder.headers objectForKey:key] forHTTPHeaderField:key];
         }
     }
-
+    
     [requestBuilder setStartTime:[[NSDate date] timeIntervalSince1970]];
     
     [[session dataTaskWithRequest:request
-                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                        NSInteger statusCode = 0;
-                        if ([response isKindOfClass:NSHTTPURLResponse.class]) {
-                            statusCode = ((NSHTTPURLResponse *)response).statusCode;
-                        }
-                        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                        NSData* newData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-                        NSDictionary *jsonOutput = [NSJSONSerialization JSONObjectWithData:newData options:0 error:nil];
-                        [requestBuilder setRequestTotalTime:([[NSDate date] timeIntervalSince1970] - requestBuilder.startTime)];
-                        NSObject *responseObjectToSubmit = [self getParsedData:response withRequest:requestBuilder withResponseObject:jsonOutput andError:error];
-                        [listener onHttpResponse:responseObjectToSubmit forRequestBuilder:requestBuilder error:error withStatusCode:statusCode];
-                    }] resume];
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSInteger statusCode = 0;
+        if ([response isKindOfClass:NSHTTPURLResponse.class]) {
+            statusCode = ((NSHTTPURLResponse *)response).statusCode;
+        }
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSData* newData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *jsonOutput = [NSJSONSerialization JSONObjectWithData:newData options:0 error:nil];
+        [requestBuilder setRequestTotalTime:([[NSDate date] timeIntervalSince1970] - requestBuilder.startTime)];
+        NSObject *responseObjectToSubmit = [self getParsedData:response withRequest:requestBuilder withResponseObject:jsonOutput andError:error];
+        [listener onHttpResponse:responseObjectToSubmit forRequestBuilder:requestBuilder error:error withStatusCode:statusCode];
+    }] resume];
 }
 
 + (NSObject *)getParsedData:(NSURLResponse *)response withRequest:(BlitzRequestBuilder *)requestBuilder withResponseObject:(id)responseObject andError:(NSError *)error {
     NSObject *responseObjectToSubmit = responseObject;
-
+    
     //Get headers
     NSDictionary *headers = [[NSDictionary alloc] init];
     if ([response isKindOfClass:NSHTTPURLResponse.class] && ((NSHTTPURLResponse *)response).allHeaderFields) {
         headers = ((NSHTTPURLResponse *)response).allHeaderFields;
     }
-
+    
     //check if the response body is encrypted using response headers
     NSString *blitzEncryptionHeader = (NSString *)[headers objectForKey:@"Blitz-Encryption"];
     if (error == nil
         && blitzEncryptionHeader
         && [blitzEncryptionHeader isEqualToString:@"enabled"]
         && [responseObject isKindOfClass:NSArray.class] && [(NSArray *)responseObject count] > 0) {
-
+        
         //Decrypt the body
         NSString *encryptedResponseObjectStr = (NSString *)[(NSArray *)responseObject objectAtIndex:0];
         NSData *responseData = [BlitzParser parse:encryptedResponseObjectStr withDetailsOne:[requestBuilder detailsOne] andDetailsTwo:[requestBuilder detailsTwo]];
@@ -166,7 +166,7 @@
                                                                    error:&error];
     }
     return responseObjectToSubmit;
-
+    
 }
 
 @end

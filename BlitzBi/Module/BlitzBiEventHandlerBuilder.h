@@ -22,10 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)setParams:(NSNumber*)batchSize
-            withUrl:(NSString*)baseUrl
-            withAppId:(NSString*) appId
-            withAppToken:(NSString*) appToken
-            withService:(id <PBlitzDataTransferService>) networkService;
+          withUrl:(NSString*)baseUrl
+        withAppId:(NSString*) appId
+     withAppToken:(NSString*) appToken
+      withService:(id <PBlitzDataTransferService>) networkService;
 - (BlitzBiEventSendHandler*) build;
 @end
 

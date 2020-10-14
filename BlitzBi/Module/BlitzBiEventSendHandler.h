@@ -19,19 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
     dispatch_queue_t networkQueue;
     NSMutableArray<NSDictionary *> *pendingEvents;
     NSTimer *biEventFireTimer;
-
+    
     NSTimeInterval nextFlushTime;
-
+    
     BOOL isBlockSubmittedToNetworkQueue;
     BOOL isAppIdValidated;
-
+    
     NSString *blitzDeviceId;
     NSString *blitzAppId;
     NSString *blitzSessionId;
-
+    
     BlitzBiConfig *biConfig;
     BlitzBiEventRepository *eventRepository;
-
+    
     long long currentTimestamp;
 }
 - (instancetype)init:(NSNumber*)batchSize

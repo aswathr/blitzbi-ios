@@ -14,11 +14,11 @@
 
 #define TICK(XXX) NSDate * XXX = [NSDate date]
 #define TOCK(XXX)                                                             \
-    NSLog(@"[MethodTime] <%@>  %s: %f",                                       \
-          [[NSString stringWithUTF8String:__FILE__] lastPathComponent], #XXX, \
-          -[XXX timeIntervalSinceNow])
+NSLog(@"[MethodTime] <%@>  %s: %f",                                       \
+[[NSString stringWithUTF8String:__FILE__] lastPathComponent], #XXX, \
+-[XXX timeIntervalSinceNow])
 #define USERIDASSTRING \
-    [[[UserService sharedInstance] retrieveUser] getUserIdAsString]
+[[[UserService sharedInstance] retrieveUser] getUserIdAsString]
 #define SPAM_CONTACT_LIST [NSArray arrayWithObjects:@"spam", @"identified as spam", @"identified by eyecon", @"", nil]
 
 static NSString * _Nonnull const CACHE_PREFIX_MACRO = @"cache_prefix_";

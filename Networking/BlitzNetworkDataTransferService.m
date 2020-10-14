@@ -13,7 +13,7 @@
 
 @implementation BlitzNetworkDataTransferService
 - (instancetype)init:(id <PBlitzServerConfig>)serverConfig
-                              :(id <PServerHandler>)serverHandler {
+                    :(id <PServerHandler>)serverHandler {
     if (self = [super init]) {
         self.serverConfig = serverConfig;
         self.serverHandler = serverHandler;

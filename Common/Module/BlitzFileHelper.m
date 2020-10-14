@@ -14,7 +14,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachesDir = [paths objectAtIndex:0];
     NSString *fullFilePath = [cachesDir stringByAppendingPathComponent:fileName];
-
+    
     return fullFilePath;
 }
 
@@ -27,7 +27,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [paths objectAtIndex:0];
     NSString *fullFilePath = [docsDir stringByAppendingPathComponent:fileName];
-
+    
     return fullFilePath;
 }
 
@@ -96,14 +96,14 @@
 + (NSArray<NSString *> *)listFilesInCacheDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *appCacheDir = [paths objectAtIndex:0];
-
+    
     return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appCacheDir error:nil];
 }
 
 + (NSArray<NSString *> *)listFilesInDocumentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *publicDocumentsDir = [paths objectAtIndex:0];
-
+    
     return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:publicDocumentsDir error:nil];
 }
 
@@ -209,7 +209,7 @@
     NSString *documentsDirectoryPath = [BlitzFileHelper publicDocumentsDirectoryPath];
     NSString *libraryDirectoryPath = [BlitzFileHelper publicLibraryDirectoryPath];
     NSString *cacheDirectoryPath = [BlitzFileHelper applicationCacheDirectoryPath];
-
+    
     [BlitzFileHelper deleteFilesInDirectory:documentsDirectoryPath];
     [BlitzFileHelper deleteFilesInDirectory:libraryDirectoryPath];
     [BlitzFileHelper deleteFilesInDirectory:cacheDirectoryPath];
@@ -218,7 +218,7 @@
 + (void)deleteFilesInDirectory:(NSString *)directoryPath {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSError *error = nil;
-
+    
     for (NSString *file in[fm contentsOfDirectoryAtPath:directoryPath error:&error]) {
         BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", directoryPath, file] error:&error];
         if (!success || error) {
@@ -229,14 +229,14 @@
 
 + (void)deleteFilesMatching:(NSRegularExpression *)regex inPath:(NSString *)path {
     NSDirectoryEnumerator *filesEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
-
+    
     NSString *file;
     NSError *error;
     while (file = [filesEnumerator nextObject]) {
         NSUInteger match = [regex numberOfMatchesInString:file
                                                   options:0
                                                     range:NSMakeRange(0, [file length])];
-
+        
         if (match) {
             [[NSFileManager defaultManager] removeItemAtPath:[path stringByAppendingPathComponent:file] error:&error];
         }

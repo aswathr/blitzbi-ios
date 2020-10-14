@@ -8,37 +8,37 @@
 
 Pod::Spec.new do |spec|
 
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
+# ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+#
+#  These will help people to find your library, and whilst it
+#  can feel like a chore to fill in it's definitely to your advantage. The
+#  summary should be tweet-length, and the description more in depth.
+#
 
-  spec.name                 = "BlitzBi"
-  spec.version              = "0.0.20"
-  spec.summary              = "Blitz Bi Module."
-  spec.description          = "Blitz Bi Module: Used for integration blitz-bi services"
-  spec.homepage             = "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"
-  spec.license              = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+spec.name                 = "BlitzBi"
+spec.version              = "0.0.21"
+spec.summary              = "Blitz Bi Module."
+spec.description          = "Blitz Bi Module: Used for integration blitz-bi services"
+spec.homepage             = "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"
+spec.license              = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-    LICENSE
-  }
-  spec.author               = "Akash Chetty"
-  spec.platform             = :ios, "9.0"
-  spec.source               = { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
-  spec.swift_version        = "4.2"
-  spec.source_files         = "**/**/*.{h,m,swift}"
-  spec.public_header_files  = "**/**/*.h"
-  spec.exclude_files        = "BlitzBi/BlitzBi/*.plist"
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+LICENSE
+}
+spec.author               = "Akash Chetty"
+spec.platform             = :ios, "9.0"
+spec.source               = { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
+spec.swift_version        = "4.2"
+spec.source_files         = "**/**/*.{h,m,swift}"
+spec.public_header_files  = "**/**/*.h"
+spec.exclude_files        = "BlitzBi/BlitzBi/*.plist"
 end

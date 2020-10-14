@@ -61,7 +61,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     self = [super init];
     if (self) {
         [self setBatchSize:batchSize];
-
+        
         self->eventRepository = eventRepository;
         self->biConfig = [[BlitzBiConfig alloc] init:baseUrl];
         self->blitzSessionId = [BlitzDeviceUtils getSessionId];
@@ -75,7 +75,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         
         self->pendingEvents = [NSMutableArray new];
         self->nextFlushTime = [[NSDate dateWithTimeIntervalSinceNow:forceSendAfterSeconds] timeIntervalSince1970];
-
+        
         [self unarchiveEvents];
         [self addNotification];
     }
@@ -85,11 +85,11 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onPause)
-name:NSExtensionHostDidEnterBackgroundNotification
+                                                 name:NSExtensionHostDidEnterBackgroundNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onResume)
-name:NSExtensionHostWillEnterForegroundNotification
+                                                 name:NSExtensionHostWillEnterForegroundNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDestroy)
@@ -177,7 +177,7 @@ name:NSExtensionHostWillEnterForegroundNotification
         
         NSData *jsonData = [self getJSONDataForBatch:batch];
         NSString *url = [biConfig base_URL];
-                    
+        
         [self->eventRepository processJsonRequestWithoutResponse:url :jsonData :YES];
         [eventsCopy removeObjectsInArray:batch];
     }
@@ -256,7 +256,7 @@ name:NSExtensionHostWillEnterForegroundNotification
                 NSString *url = [biConfig base_URL];;
                 
                 dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-
+                
                 [eventRepository processJsonRequest:url :jsonData :^(NSObject *response, NSError *err) {
                     if(err != nil) {
                         didFail = YES;
@@ -464,7 +464,7 @@ name:NSExtensionHostWillEnterForegroundNotification
     [biDictionary setObject:[self getCommonParams] forKey:@"commonParams"];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:biDictionary options:0 error:&error];
-
+    
     if (jsonData == nil || error) {
         NSLog(@"Error in getting json data for batch %@ with error %@", batch, error);
     }

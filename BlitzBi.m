@@ -9,36 +9,81 @@
 #import <BlitzBi.h>
 
 @interface BlitzBi ()
-- (instancetype)init;
++ (BlitzBiService*)sharedService;
 @end
 
 @implementation BlitzBi
-+ (id)sharedInstance {
-    static BlitzBi *sharedInstance = nil;
++ (BlitzBiService*)sharedService {
+    static BlitzBiService *sharedInstance = nil;
     static dispatch_once_t once_token;
     dispatch_once(&once_token, ^{
-        sharedInstance = [[self alloc] init];
+        sharedInstance = [[BlitzBiService alloc] init];
     });
     return sharedInstance;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        biService = [[BlitzBiService alloc] init];
-    }
-    return self;
-}
-
-- (void)initailiseWithAppId:(NSString*)appId
++ (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)appToken {
-    [biService setUp:appId :appToken];
+    [self.sharedService setUp:appId :appToken];
 }
 
-- (void)sendEvent:(NSDictionary*)event{
-    [biService sendEvent:event];
++ (void)sendEvent:(NSDictionary*)event{
+    [self.sharedService sendEvent:event];
 }
 
-- (void)sendEvents:(NSArray*)events {
-    [biService sendEvents:events];
++ (void)sendEvents:(NSArray*)events {
+    [self.sharedService sendEvents:events];
+}
+
++ (void)BlitzBiEventCompletedRegistration:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [self.sharedService sendEvent:eventsMap];
+}
+
++ (void)BlitzBiEventSubscribeWithAmount:(double)price
+                              andParams:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"price"];
+    [self.sharedService sendEvent:eventsMap];
+}
+
++ (void)BlitzBiEventSubscriptionRenewalWithRenewalCount:(int)renewalCount
+                                                 amount:(double)price
+                                              andParams:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [eventsMap setObject:[NSNumber numberWithInt:renewalCount] forKey:@"renewalCount"];
+    [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"price"];
+    [self.sharedService sendEvent:eventsMap];
+}
+
++ (void)BlitzBiEventSubscriptionCancelWithParams:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [self.sharedService sendEvent:eventsMap];
+}
+
++ (void)BlitzBiEventPurchaseWithAmount:(double)price
+                             andParams:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"price"];
+    [self.sharedService sendEvent:eventsMap];
+}
+
++ (void)BlitzBiEventScreenVisitedWithScreenName:(NSString*)screenName {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap setObject:screenName forKey:@"screenName"];
+    [self.sharedService sendEvent:eventsMap];
+}
+
++ (void)BlitzBiEventClickedWithWidgetnName:(NSString*)widgetName
+                                 andParams:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [eventsMap setObject:widgetName forKey:@"widgetName"];
+    [self.sharedService sendEvent:eventsMap];
 }
 @end
