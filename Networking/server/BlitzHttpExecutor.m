@@ -72,18 +72,14 @@
 + (void)executeRequest:(BlitzRequestBuilder *)requestBuilder listener:(id<BlitzHttpResponseListener> )listener {
     switch (requestBuilder.reqType) {
         case APP_REQUEST:
-        case ERROR_FREE_REQUEST: {
+        case ERROR_FREE_REQUEST:
+        case BI_REQUEST: {
             [self executeAppRequest:requestBuilder listener:listener];
             break;
         }
         case PARALLEL_REQUEST:
         case PARALLEL_ERROR_FREE_REQUEST: {
             [self executeParallelRequest:requestBuilder listener:listener];
-            break;
-        }
-            
-        case BI_REQUEST: {
-            [self executeBIRequest:requestBuilder listener:listener];
             break;
         }
             

@@ -45,7 +45,7 @@
     if (blitzDeviceId) {
         return blitzDeviceId;
     }
-    return @"-1";
+    return nil;
 }
 
 + (void)setBlitzDeviceId:(NSString *) deviceId {

@@ -23,7 +23,7 @@
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken {
-    baseUrl = @"https://blitzbi-dev.useblitz.com/";
+    baseUrl = @"https://prod-blitzbi.useblitz.com/";
     baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
