@@ -19,6 +19,39 @@ static NSString * _Nonnull const BlitzBiParameterDiscountedPrice = @"discountedP
 static NSString * _Nonnull const BlitzBiParameterScreenName = @"screenName";
 static NSString * _Nonnull const BlitzBiAction = @"action";
 
+static NSString * _Nonnull const BlitzBiParameterStringDetails1 = @"str_field0";
+static NSString * _Nonnull const BlitzBiParameterStringDetails2 = @"str_field1";
+static NSString * _Nonnull const BlitzBiParameterStringDetails3 = @"str_field2";
+static NSString * _Nonnull const BlitzBiParameterStringDetails4 = @"str_field3";
+static NSString * _Nonnull const BlitzBiParameterStringDetails5 = @"str_field4";
+static NSString * _Nonnull const BlitzBiParameterStringDetails6 = @"str_field5";
+static NSString * _Nonnull const BlitzBiParameterStringDetails7 = @"str_field6";
+static NSString * _Nonnull const BlitzBiParameterStringDetails8 = @"str_field7";
+static NSString * _Nonnull const BlitzBiParameterStringDetails9 = @"str_field8";
+static NSString * _Nonnull const BlitzBiParameterStringDetails10 = @"str_field9";
+static NSString * _Nonnull const BlitzBiParameterIntDetails1 = @"int_field0";
+static NSString * _Nonnull const BlitzBiParameterIntDetails2 = @"int_field1";
+static NSString * _Nonnull const BlitzBiParameterIntDetails3 = @"int_field2";
+static NSString * _Nonnull const BlitzBiParameterIntDetails4 = @"int_field3";
+static NSString * _Nonnull const BlitzBiParameterIntDetails5 = @"int_field4";
+static NSString * _Nonnull const BlitzBiParameterIntDetails6 = @"int_field5";
+static NSString * _Nonnull const BlitzBiParameterIntDetails7 = @"int_field6";
+static NSString * _Nonnull const BlitzBiParameterIntDetails8 = @"int_field7";
+static NSString * _Nonnull const BlitzBiParameterIntDetails9 = @"int_field8";
+static NSString * _Nonnull const BlitzBiParameterIntDetails10 = @"int_field9";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails1 = @"float_field0";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails2 = @"float_field1";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails3 = @"float_field2";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails4 = @"float_field3";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails5 = @"float_field4";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails6 = @"float_field5";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails7 = @"float_field6";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails8 = @"float_field7";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails9 = @"float_field8";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails10 = @"float_field9";
+
+
+
 @interface BlitzBi : NSObject
 /// Description: Initialize BlitzBi sdk with the app_id and app_token.
 + (void)initailiseWithAppId:(NSString*)appId
