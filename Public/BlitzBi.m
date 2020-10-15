@@ -10,7 +10,7 @@
 #import "BlitzBiService.h"
 
 @interface BlitzBi ()
-+ (BlitzBiService*)sharedService;
++ (BlitzBiService *)sharedService;
 @end
 
 @implementation BlitzBi
@@ -45,7 +45,7 @@
 }
 
 + (void)logSubscribeEventWithAmount:(double)price
-                              andParams:(NSDictionary*)params {
+                          andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_subscribe" forKey:@"eventName"];
@@ -54,8 +54,8 @@
 }
 
 + (void)logSubscriptionRenewalEventWithRenewalCount:(int)renewalCount
-                                                 amount:(double)price
-                                              andParams:(NSDictionary*)params {
+                                          andAmount:(double)price
+                                          andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_subscription_renewal" forKey:@"eventName"];
@@ -87,12 +87,20 @@
     [self.sharedService sendEvent:eventsMap];
 }
 
-+ (void)logClickedEventWithWidgetnName:(NSString*)widgetName
++ (void)logClickedEventWithWidgetName:(NSString*)widgetName
                                  andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_clicked" forKey:@"eventName"];
     [eventsMap setObject:widgetName forKey:@"widgetName"];
+    [self.sharedService sendEvent:eventsMap];
+}
+
+
++ (void)logGenericEventWithParams:(NSDictionary*)params {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:params];
+    [eventsMap setObject:@"blitz_generic_event" forKey:@"eventName"];
     [self.sharedService sendEvent:eventsMap];
 }
 @end
