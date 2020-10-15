@@ -60,7 +60,7 @@
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_subscription_renewal" forKey:@"eventName"];
     [eventsMap setObject:[NSNumber numberWithInt:renewalCount] forKey:@"renewalCount"];
-    [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"price"];
+    [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"amount"];
     [self.sharedService sendEvent:eventsMap];
 }
 

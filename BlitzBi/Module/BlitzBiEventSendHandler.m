@@ -66,7 +66,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         self->biConfig = [[BlitzBiConfig alloc] init:baseUrl];
         self->blitzSessionId = [BlitzDeviceUtils getSessionId];
         self->isBlockSubmittedToNetworkQueue = NO;
-        self->currentTimestamp = 0;
+        self->sessionStartTimeStamp = 0;
         
         self->serialQueue = dispatch_queue_create([@"bi_events_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
         
@@ -106,7 +106,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (void) onResume {
     NSLog(@"BlitzBiEventSendHandler::onResume");
-    self->currentTimestamp = [self getCurrentEpochTime];
+    self->sessionStartTimeStamp = [self getCurrentEpochTime];
     [self fireSessionStartEvent];
     [self invalidateTimer];
 }
@@ -122,23 +122,23 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     return (long long)[[NSDate date] timeIntervalSince1970];
 }
 
-// TODO: @kash
 - (void) fireSessionLengthEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
-    [eventDict setValue:@"session_length" forKey:@"eventName"];
-    //[eventDict setValue:([self getCurrentEpochTime] - _currentTimestamp) forKey:@"session_length"];
+    [eventDict setValue:@"blitz_session_length" forKey:@"eventName"];
+    NSString *sessionLengthStr = [NSString stringWithFormat:@"%lld", [self getCurrentEpochTime] - self->sessionStartTimeStamp];
+    [eventDict setValue:sessionLengthStr forKey:@"session_length"];
     [self sendEvent:eventDict];
 }
 
 - (void) fireSessionStartEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
-    [eventDict setValue:@"session_start" forKey:@"eventName"];
+    [eventDict setValue:@"blitz_session_start" forKey:@"eventName"];
     [self sendEvent:eventDict];
 }
 
 - (void) fireSessionPauseEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
-    [eventDict setValue:@"session_pause" forKey:@"eventName"];
+    [eventDict setValue:@"blitz_session_pause" forKey:@"eventName"];
     [self sendEvent:eventDict];
 }
 

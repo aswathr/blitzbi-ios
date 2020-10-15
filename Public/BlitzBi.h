@@ -15,7 +15,7 @@ static NSString * _Nonnull const BlitzBiParameterOrderID = @"orderId";
 static NSString * _Nonnull const BlitzBiParameterCurrency = @"currency";
 static NSString * _Nonnull const BlitzBiParameterRenewalPeriod = @"renewalPeriod";
 static NSString * _Nonnull const BlitzBiParameterTrialDays = @"trialDays";
-static NSString * _Nonnull const BlitzBiParameterDiscountedPrice = @"discountedPrice";
+static NSString * _Nonnull const BlitzBiParameterDiscountedPrice = @"discountedAmount";
 static NSString * _Nonnull const BlitzBiParameterScreenName = @"screenName";
 static NSString * _Nonnull const BlitzBiAction = @"action";
 
