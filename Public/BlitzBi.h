@@ -23,32 +23,33 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)sendEvents:(NSArray*)events;
 
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
-+ (void)BlitzBiEventCompletedRegistration:(NSDictionary*)params;
++ (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod
+                                     andParams:(NSDictionary*)params;
 
 
 /// Description: Log this event at the start of a paid subscription for a product or any service you offer.
-+ (void)BlitzBiEventSubscribeWithAmount:(double)price
++ (void)logSubscribeEventWithAmount:(double)price
                               andParams:(NSDictionary*)params;
 
 
 /// Description: Log this event when a paid subscription for a product or service is renewed.
-+ (void)BlitzBiEventSubscriptionRenewalWithRenewalCount:(int)renewalCount
++ (void)logSubscriptionRenewalEventWithRenewalCount:(int)renewalCount
                                                  amount:(double)price
                                               andParams:(NSDictionary*)params;
 
 /// Description: Log this event when a paid subscription for a  product or service is cancelled.
-+ (void)BlitzBiEventSubscriptionCancelWithParams:(NSDictionary*)params;
++ (void)logSubscriptionCancelEventWithParams:(NSDictionary*)params;
 
 /// Description: Log this event when a user makes an inapp purchase to some virtual currency.
-+ (void)BlitzBiEventPurchaseWithAmount:(double)price
++ (void)logPurchaseEventWithAmount:(double)price
                              andParams:(NSDictionary*)params;
 
 /// Description: Log this event when a user visited any screen in the app.
-+ (void)BlitzBiEventScreenVisitedWithScreenName:(NSString*)screenName;
++ (void)logScreenVisitedEventWithScreenName:(NSString*)screenName;
 
 
 /// Description: Log this event when the user clicks on any widget in the app.
-+ (void)BlitzBiEventClickedWithWidgetnName:(NSString*)widgetName
++ (void)logClickedEventWithWidgetnName:(NSString*)widgetName
                                  andParams:(NSDictionary*)params;
 @end
 
