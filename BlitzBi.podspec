@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name                 = "BlitzBi"
-spec.version              = "0.0.31"
+spec.version              = "0.0.32"
 spec.summary              = "Blitz Bi Module."
 spec.description          = "Blitz Bi Module: Used for integration blitz-bi services"
 spec.homepage             = "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"

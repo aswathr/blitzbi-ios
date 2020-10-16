@@ -85,15 +85,15 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onPause)
-                                                 name:NSExtensionHostDidEnterBackgroundNotification
+                                                 name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onResume)
-                                                 name:NSExtensionHostWillEnterForegroundNotification
+                                                 name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDestroy)
-                                                 name:NSExtensionHostWillResignActiveNotification
+                                                 name:UIApplicationWillTerminateNotification
                                                object:nil];
 }
 
