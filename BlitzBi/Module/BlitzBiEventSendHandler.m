@@ -102,6 +102,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
+    [self flushEmergency];
 }
 
 - (void) onResume {
@@ -116,6 +117,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [self flushEmergency];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
+    [self flushEmergency];
 }
 
 - (long long) getCurrentEpochTime{
