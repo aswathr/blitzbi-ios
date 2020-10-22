@@ -45,34 +45,40 @@
 }
 
 + (void)logSubscribeEventWithAmount:(double)price
+                  andSubscriptionId:(NSString*)subscriptionId
                           andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_subscribe" forKey:@"eventName"];
+    [eventsMap setObject:subscriptionId forKey:@"subscriptionId"];
     [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"amount"];
     [self.sharedService sendEvent:eventsMap];
 }
 
 + (void)logSubscriptionRenewalEventWithRenewalCount:(int)renewalCount
+                                  andSubscriptionId:(NSString*)subscriptionId
                                           andAmount:(double)price
                                           andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_subscription_renewal" forKey:@"eventName"];
+    [eventsMap setObject:subscriptionId forKey:@"subscriptionId"];
     [eventsMap setObject:[NSNumber numberWithInt:renewalCount] forKey:@"renewalCount"];
     [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"amount"];
     [self.sharedService sendEvent:eventsMap];
 }
 
-+ (void)logSubscriptionCancelEventWithParams:(NSDictionary*)params {
++ (void)logSubscriptionCancelEventWithParams:(NSDictionary*)params
+                           andSubscriptionId:(NSString*)subscriptionId {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap setObject:@"blitz_subscription_cancel" forKey:@"eventName"];
+    [eventsMap setObject:subscriptionId forKey:@"subscriptionId"];
     [eventsMap addEntriesFromDictionary:params];
     [self.sharedService sendEvent:eventsMap];
 }
 
 + (void)logPurchaseEventWithAmount:(double)price
-                             andParams:(NSDictionary*)params {
+                         andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_inapp_purchase" forKey:@"eventName"];
@@ -88,7 +94,7 @@
 }
 
 + (void)logClickedEventWithWidgetName:(NSString*)widgetName
-                                 andParams:(NSDictionary*)params {
+                            andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_clicked" forKey:@"eventName"];

@@ -70,16 +70,19 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails10 = @"float_field9
 
 /// Description: Log this event at the start of a paid subscription for a product or any service you offer.
 + (void)logSubscribeEventWithAmount:(double)price
+                  andSubscriptionId:(NSString*)subscriptionId
                           andParams:(NSDictionary*)params;
 
 
 /// Description: Log this event when a paid subscription for a product or service is renewed.
 + (void)logSubscriptionRenewalEventWithRenewalCount:(int)renewalCount
+                                  andSubscriptionId:(NSString*)subscriptionId
                                           andAmount:(double)price
                                           andParams:(NSDictionary*)params;
 
 /// Description: Log this event when a paid subscription for a  product or service is cancelled.
-+ (void)logSubscriptionCancelEventWithParams:(NSDictionary*)params;
++ (void)logSubscriptionCancelEventWithParams:(NSDictionary*)params
+                           andSubscriptionId:(NSString*)subscriptionId;
 
 /// Description: Log this event when a user makes an inapp purchase to some virtual currency.
 + (void)logPurchaseEventWithAmount:(double)price
