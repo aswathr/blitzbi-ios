@@ -12,11 +12,11 @@
 @implementation BiDeviceRequest
 - (instancetype)init:(NSString*)appId
                     :(NSString*)deviceId
-                    :(NSString*)appSpecificDeviceId {
+                    :(NSString*)specificDeviceId {
     if (self = [super init]) {
         blitzAppId = appId;
         blitzDeviceId = deviceId;
-        appSpecificDeviceId = appSpecificDeviceId;
+        appSpecificDeviceId = specificDeviceId;
         installAppVersion = BlitzDeviceUtils.getAppVersion;
         deviceType = @"IOS";
     }
