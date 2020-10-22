@@ -28,6 +28,10 @@
     [self.sharedService setUp:appId :appToken];
 }
 
++ (void)setAppDeviceIdentifier:(NSString*)identifier {
+    [self.sharedService setAppDeviceIdentifier:identifier];
+}
+
 + (void)sendEvent:(NSDictionary*)event{
     [self.sharedService sendEvent:event];
 }

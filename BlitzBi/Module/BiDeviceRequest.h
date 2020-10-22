@@ -13,12 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BiDeviceRequest : NSObject {
     NSString* blitzAppId;
     NSString* blitzDeviceId;
+    NSString* appSpecificDeviceId;
     NSString* installAppVersion;
     NSString* deviceType;
 }
 
 - (instancetype)init:(NSString*)appId
-                    :(NSString*)deviceId;
+                    :(NSString*)deviceId
+                    :(NSString*)appSpecificDeviceId;
 - (NSMutableDictionary*)dictionary;
 @end
 

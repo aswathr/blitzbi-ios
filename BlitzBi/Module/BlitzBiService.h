@@ -20,7 +20,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BlitzBiService : NSObject {
+    NSString* appId;
+    NSString* appToken;
     NSString* baseUrl;
+    NSString* appSpecificDeviceId;
     BaseUrls* baseUrls;
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
@@ -28,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken;
+- (void)setAppDeviceIdentifier:(NSString*)identifier;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 @end

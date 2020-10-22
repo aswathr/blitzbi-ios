@@ -11,6 +11,7 @@
 @interface BlitzBiService()
 - (void)checkForDeviceId:(NSString*)appId
                         :(NSString*)appToken;
+- (void)updateDeviceIdentifier;
 - (void)initialize:(NSString*)appId
                   :(NSString*)appToken;
 - (void)checkForDeviceId:(NSString*)appId
@@ -23,18 +24,26 @@
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken {
-    baseUrl = @"https://prod-blitzbi.useblitz.com/";
-    baseUrls = [[BaseUrls alloc] init:baseUrl];
+    self->appId = appId;
+    self->appToken = appToken;
+    
+    self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
     [networkBuilder setParams:baseUrls serverHandler:[[BlitzServerHandler alloc] init]];
-    biNetworkService = [networkBuilder build];
+    self->biNetworkService = [networkBuilder build];
     
     BlitzBiEventHandlerBuilder *handlerBuilder = [[BlitzBiEventHandlerBuilder alloc] init];
     [handlerBuilder setParams:[NSNumber numberWithInt:60] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService];
-    biBuilder = [handlerBuilder build];
+    self->biBuilder = [handlerBuilder build];
     
     [self checkForDeviceId:appId :appToken];
+}
+
+- (void)setAppDeviceIdentifier:(NSString*)identifier {
+    self->appSpecificDeviceId = identifier;
+    [self updateDeviceIdentifier];
 }
 
 - (void)checkForDeviceId:(NSString*)appId
@@ -50,7 +59,7 @@
 - (void)initialize:(NSString*)appId
                   :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
-    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId];
+    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId :@""];
     NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
     
     NSError *error;
@@ -59,7 +68,7 @@
         return;
     }
     
-    NSLog(@"%@", jsonData);
+    NSLog(@"initialize -> %@", jsonData);
     [self checkForDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
         if (err == nil) {
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
@@ -69,10 +78,30 @@
                 if (blitzDeviceId != nil) {
                     [BlitzDeviceUtils setBlitzDeviceId:blitzDeviceId];
                     [self->biBuilder setBlitzdeviceId:appId :deviceId];
+                    [self updateDeviceIdentifier];
                 }
             }
         }
     }];
+}
+
+- (void)updateDeviceIdentifier {
+    NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
+    if (deviceId && appSpecificDeviceId) {
+        BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceId];
+        NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceRequestDict options:NSJSONWritingPrettyPrinted error:&error];
+        if (error) {
+            return;
+        }
+        
+        NSLog(@"updateDeviceIdentifier -> %@", jsonData);
+        [self checkForDeviceId:appId :appToken :jsonData :^(__attribute__((unused)) NSObject *response,__attribute__((unused)) NSError *err){
+            
+        }];
+    }
 }
 
 - (void) checkForDeviceId:(NSString*)appId
