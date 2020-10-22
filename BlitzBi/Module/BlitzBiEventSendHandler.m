@@ -259,7 +259,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                 
                 dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
                 
-                [eventRepository processJsonRequest:url :jsonData :^(NSObject *response, NSError *err) {
+                [eventRepository processJsonRequest:url :jsonData :^(__attribute__((unused)) NSObject *response, NSError *err) {
                     if(err != nil) {
                         didFail = YES;
                         //Send error to crashlytics

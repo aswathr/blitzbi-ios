@@ -21,14 +21,6 @@
 - (void)success:(NSObject *)data withRequestTime:(NSTimeInterval)totalTime;
 @end
 
-@protocol BlitzResponseObjectSerializable
-- (id<BlitzResponseObjectSerializable> )init:(NSObject *)response;
-@end
-
-@protocol BlitzResponseCollectionSerializable<BlitzResponseObjectSerializable>
-- (NSArray *)collection:(NSArray *)response;
-@end
-
 @protocol PBlitzServerHandler
 - (void)serverCall:(BlitzRequestBuilder *)requestBuilder withCompletionBlock:(void(^)(NSObject *, NSError *))completionBlock;
 @end

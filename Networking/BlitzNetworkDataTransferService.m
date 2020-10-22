@@ -22,7 +22,7 @@
 }
 
 - (void) executeServerCallWithNoCallBack:(BlitzRequestBuilder *)requestBuilder {
-    [self.serverHandler serverCall:requestBuilder withCompletionBlock:^(NSObject *response, NSError *err){
+    [self.serverHandler serverCall:requestBuilder withCompletionBlock:^(__attribute__((unused)) NSObject *_response, __attribute__((unused)) NSError *err){
         
     }];
 }

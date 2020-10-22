@@ -8,7 +8,6 @@
 
 #import <BlitzRequestBuilder.h>
 #import <BlitzConstants.h>
-#import <BlitzStringUtils.h>
 #import <BlitzParser.h>
 
 @implementation BlitzRequestBuilder
@@ -153,7 +152,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     NSDictionary *multipartParameters = self.multipartParameters;
     NSDictionary *multipartData = self.multipartData;
     
-    [multipartParameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
+    [multipartParameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, __attribute__((unused)) BOOL *stop) {
         [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -161,7 +160,7 @@ static NSString *const K2_P_D2_CHUNK4= @"X8";
     
     // add image data
     
-    [multipartData enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSDictionary *parameterDict, BOOL *stop) {
+    [multipartData enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSDictionary *parameterDict, __attribute__((unused)) BOOL *stop) {
         NSString *filename = parameterKey;
         NSString *fieldName = [parameterKey componentsSeparatedByString:@"."][0];
         NSData *data = [parameterDict valueForKey:@"data"];

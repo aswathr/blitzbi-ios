@@ -52,7 +52,7 @@
     [requestBuilder setContentType:@"application/json"];
     
     if (isEmergency && ![NSThread isMainThread]) {
-        [[[NSURLSession sharedSession] dataTaskWithRequest:[requestBuilder generateRequest] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [[[NSURLSession sharedSession] dataTaskWithRequest:[requestBuilder generateRequest] completionHandler:^(__attribute__((unused)) NSData *data,__attribute__((unused)) NSURLResponse *response, __attribute__((unused)) NSError *error){
             
         }] resume];
     } else {

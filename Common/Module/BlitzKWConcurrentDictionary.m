@@ -61,17 +61,6 @@
     });
 }
 
-- (id)putIfAbsentObject:(id)anObject forKey:(id)aKey {
-    __block id oldObject;
-    dispatch_barrier_sync(accessQueue, ^{
-        oldObject = [self->underlyingDict objectForKey:aKey];
-        if (!oldObject) {
-            [self->underlyingDict setObject:anObject forKey:aKey];
-        }
-    });
-    return oldObject;
-}
-
 - (void)removeObjectForKey:(id)aKey {
     dispatch_barrier_async(accessQueue, ^{
         [self->underlyingDict removeObjectForKey:aKey];
@@ -82,21 +71,6 @@
     dispatch_barrier_async(accessQueue, ^{
         [self->underlyingDict removeAllObjects];
     });
-}
-
-- (void)addObjectsFromDictAfterEmptying:(NSDictionary*)dict {
-    dispatch_barrier_async(accessQueue, ^{
-        [self->underlyingDict removeAllObjects];
-        [self->underlyingDict addEntriesFromDictionary:dict];
-    });
-}
-
-- (NSDictionary *)getSnapshot {
-    __block NSDictionary *copy;
-    dispatch_sync(accessQueue, ^{
-        copy = [self->underlyingDict copy];
-    });
-    return copy;
 }
 
 - (NSArray *)allKeys {

@@ -16,9 +16,6 @@ typedef enum : NSInteger {
     ReachableViaWWAN
 } NetworkStatus;
 
-#pragma mark IPv6 Support
-//Reachability fully support IPv6.  For full details, see ReadMe.md.
-
 extern NSString *kBlitzReachabilityChangedNotification;
 
 @interface BlitzReachability : NSObject
@@ -45,14 +42,7 @@ extern NSString *kBlitzReachabilityChangedNotification;
 /*!
  * Start listening for reachability notifications on the current run loop.
  */
-- (BOOL)startNotifier;
-- (void)stopNotifier;
 
 - (NetworkStatus)currentReachabilityStatus;
-
-/*!
- * WWAN may be available, but not active until a connection has been established. WiFi may require a connection for VPN on Demand.
- */
-- (BOOL)connectionRequired;
 
 @end
