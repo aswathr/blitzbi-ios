@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init:(NSString*)appId
                     :(NSString*)deviceId
-                    :(NSString*)appSpecificDeviceId;
+                    :(nullable NSString*)appSpecificDeviceId;
 - (NSMutableDictionary*)dictionary;
 @end
 

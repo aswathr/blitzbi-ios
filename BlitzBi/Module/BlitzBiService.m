@@ -59,7 +59,7 @@
 - (void)initialize:(NSString*)appId
                   :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
-    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId :@""];
+    BiDeviceRequest *deviceRequest = [[BiDeviceRequest alloc] init:appId :deviceId :nil];
     NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
     
     NSError *error;
