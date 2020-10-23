@@ -58,7 +58,7 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails10 = @"float_field9
                 andAppToken:(NSString*)andAppToken;
 
 /// Description: Initialize device Identifier.
-+ (void)setAppDeviceIdentifier:(NSString*)identifier;
++ (void)setAppIdentifier:(NSString*)identifier;
 
 /// Description: Use this for logging custom event.
 + (void)sendEvent:(NSDictionary*)eventDict;
