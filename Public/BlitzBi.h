@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 static NSString * _Nonnull const BlitzBiParameterRegistrationDetails = @"registrationDetails";
 static NSString * _Nonnull const BlitzBiParameterOrderID = @"orderId";
+static NSString * _Nonnull const BlitzBiParameterProductID = @"productId";
 static NSString * _Nonnull const BlitzBiParameterCurrency = @"currency";
 static NSString * _Nonnull const BlitzBiParameterRenewalPeriod = @"renewalPeriod";
 static NSString * _Nonnull const BlitzBiParameterTrialDays = @"trialDays";
