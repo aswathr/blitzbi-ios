@@ -23,7 +23,8 @@
 @implementation BlitzBiService
 
 - (void)setUp:(NSString*)appId
-             :(NSString*)appToken {
+             :(NSString*)appToken
+             :(BOOL)adTracking {
     self->appId = appId;
     self->appToken = appToken;
     
@@ -35,7 +36,7 @@
     self->biNetworkService = [networkBuilder build];
     
     BlitzBiEventHandlerBuilder *handlerBuilder = [[BlitzBiEventHandlerBuilder alloc] init];
-    [handlerBuilder setParams:[NSNumber numberWithInt:60] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService];
+    [handlerBuilder setParams:[NSNumber numberWithInt:60] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService withAdTracking:adTracking];
     self->biBuilder = [handlerBuilder build];
     
     [self checkForDeviceId:appId :appToken];

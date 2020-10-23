@@ -13,15 +13,17 @@
           withUrl: (NSString*)baseUrl
         withAppId:(NSString*)appId
      withAppToken:(NSString*) appToken
-      withService:(id <PBlitzDataTransferService>) networkService {
+      withService:(id <PBlitzDataTransferService>) networkService
+   withAdTracking:(BOOL)adTracking {
     self->batchSize = batchSize;
     self->baseUrl = baseUrl;
     self->appId = appId;
     self->appToken = appToken;
     self->networkService = networkService;
+    self->adTracking = adTracking;
 }
 
 - (BlitzBiEventSendHandler*) build {
-    return [[BlitzBiEventSendHandler alloc] init:batchSize :baseUrl :[[BlitzBiEventRepository alloc]init:appId :appToken :networkService]];;
+    return [[BlitzBiEventSendHandler alloc] init:batchSize :baseUrl :[[BlitzBiEventRepository alloc]init:appId :appToken :networkService] :adTracking];
 }
 @end

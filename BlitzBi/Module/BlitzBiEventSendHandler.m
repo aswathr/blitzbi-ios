@@ -57,7 +57,8 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*)baseUrl
-                    :(BlitzBiEventRepository*)eventRepository {
+                    :(BlitzBiEventRepository*)eventRepository
+                    :(BOOL)adTracking {
     self = [super init];
     if (self) {
         [self setBatchSize:batchSize];
@@ -67,6 +68,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         self->blitzSessionId = [BlitzDeviceUtils getSessionId];
         self->isBlockSubmittedToNetworkQueue = NO;
         self->sessionStartTimeStamp = 0;
+        self->adTracking = adTracking;
         
         self->serialQueue = dispatch_queue_create([@"bi_events_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
         
@@ -446,8 +448,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:blitzSessionId forKey:@"blitzSessionId"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppVersion] forKey:@"appVersion"];
     [biCommonParams setValue:[BlitzDeviceUtils getTimeZone] forKey:@"timezone"];
-    [biCommonParams setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
-    [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
     [biCommonParams setValue:[BlitzDeviceUtils getOSId] forKey:@"osId"];
     [biCommonParams setValue:[BlitzDeviceUtils getConnDetails] forKey:@"connDetails"];
     [biCommonParams setValue:[BlitzDeviceUtils getManufacturer] forKey:@"manufacturer"];
@@ -456,6 +456,11 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:@"adTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
+    
+    if (adTracking) {
+        [biCommonParams setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+        [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
+    }
     return biCommonParams;
 }
 

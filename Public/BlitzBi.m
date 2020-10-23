@@ -24,8 +24,9 @@
 }
 
 + (void)initailiseWithAppId:(NSString*)appId
-                andAppToken:(NSString*)appToken {
-    [self.sharedService setUp:appId :appToken];
+                andAppToken:(NSString*)appToken
+         andAllowAdTracking:(BOOL)adTracking {
+    [self.sharedService setUp:appId :appToken :adTracking];
 }
 
 + (void)setAppSpecificIdentifier:(NSString*)identifier {

@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     BOOL isBlockSubmittedToNetworkQueue;
     BOOL isAppIdValidated;
+    BOOL adTracking;
     
     NSString *blitzDeviceId;
     NSString *blitzAppId;
@@ -36,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*)baseUrl
-                    :(BlitzBiEventRepository*)eventRepository;
+                    :(BlitzBiEventRepository*)eventRepository
+                    :(BOOL)adTracking;
 - (void)setBlitzdeviceId:(NSString*)appId
                         :(NSString*)deviceId;
 - (void)sendEvents:(NSArray*)events;

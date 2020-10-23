@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* baseUrl;
     NSString* appId;
     NSString* appToken;
+    BOOL adTracking;
     id <PBlitzDataTransferService> networkService;
 }
 
@@ -25,7 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
           withUrl:(NSString*)baseUrl
         withAppId:(NSString*) appId
      withAppToken:(NSString*) appToken
-      withService:(id <PBlitzDataTransferService>) networkService;
+      withService:(id <PBlitzDataTransferService>) networkService
+   withAdTracking:(BOOL)adTracking;
 - (BlitzBiEventSendHandler*) build;
 @end
 

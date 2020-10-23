@@ -56,7 +56,8 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails10 = @"float_field9
 @interface BlitzBi : NSObject
 /// Description: Initialize BlitzBi sdk with the app_id and app_token.
 + (void)initailiseWithAppId:(NSString*)appId
-                andAppToken:(NSString*)andAppToken;
+                andAppToken:(NSString*)andAppToken
+         andAllowAdTracking:(BOOL)adTracking;
 
 /// Description: Initialize device Identifier.
 + (void)setAppSpecificIdentifier:(NSString*)identifier;
