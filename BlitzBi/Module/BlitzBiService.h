@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken;
-- (void)setAppIdentifier:(NSString*)identifier;
+- (void)setAppSpecificIdentifier:(NSString*)identifier;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 @end

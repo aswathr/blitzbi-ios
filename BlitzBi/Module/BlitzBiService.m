@@ -41,7 +41,7 @@
     [self checkForDeviceId:appId :appToken];
 }
 
-- (void)setAppIdentifier:(NSString*)identifier {
+- (void)setAppSpecificIdentifier:(NSString*)identifier {
     self->appSpecificDeviceId = identifier;
     [self updateDeviceIdentifier];
 }
