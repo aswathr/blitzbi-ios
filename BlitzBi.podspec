@@ -16,10 +16,10 @@ Pod::Spec.new do |spec|
 #
 
 spec.name                 = "BlitzBi"
-spec.version              = "1.0.1"
+spec.version              = "1.0.2"
 spec.summary              = "Blitz Bi Module."
 spec.description          = "Blitz Bi Module: Used for integration blitz-bi services"
-spec.homepage             = "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git"
+spec.homepage             = "https://gitlab.useblitz.com/blitz/blitzbi-ios.git"
 spec.license              = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ LICENSE
 }
 spec.author               = "Akash Chetty"
 spec.platform             = :ios, "9.0"
-spec.source               = { :git => "http://gitlab.kiwiup.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
+spec.source               = { :git => "https://gitlab.useblitz.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
 spec.swift_version        = "4.2"
 spec.source_files         = "**/**/*.{h,m,swift}"
 spec.public_header_files  = "Public/*.h"
