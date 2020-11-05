@@ -164,9 +164,11 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [self flush];
 }
 
-- (void)setBlitzdeviceId:(NSString*)appId withDeviceId: (NSString*) deviceId {
+- (void)setBlitzdeviceId :(NSString*)appId
+                         :(NSString*)deviceId {
     self->blitzAppId = appId;
     self->blitzDeviceId = deviceId;
+    self->isAppIdValidated = YES;
 }
 
 - (void)flushEmergency {
@@ -423,13 +425,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (BOOL)isAppIdAvailable {
     return isAppIdValidated && blitzDeviceId != nil;
-}
-
-- (void)setBlitzdeviceId :(NSString*)appId
-                         :(NSString*)deviceId {
-    self->blitzAppId = appId;
-    self->blitzDeviceId = deviceId;
-    self->isAppIdValidated = YES;
 }
 
 - (void)updateNextFlushTime {
