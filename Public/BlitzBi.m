@@ -121,8 +121,6 @@
                      andFloatParams:(NSDictionary<NSString *,NSNumber *> *)floatParams {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:strParams];
-    
-    
         
     NSEnumerator *enumerator = [intParams keyEnumerator];
     id key;
@@ -135,6 +133,7 @@
     while((key = [enumerator nextObject]))
           [eventsMap setValue:[NSNumber numberWithInt:[[floatParams objectForKey:key] floatValue]] forKey:key];
     
-    [eventsMap setObject:[NSString stringWithFormat:@"blitz_custom_", eventName] forKey:@"eventName"];
+    [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"blitz_custom", eventName] forKey:@"eventName"];
+    [self.sharedService sendEvent:eventsMap];
 }
 @end
