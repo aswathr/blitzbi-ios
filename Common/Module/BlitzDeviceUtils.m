@@ -151,6 +151,7 @@
                                         encoding:NSUTF8StringEncoding];
     static NSDictionary *deviceNamesByCode = nil;
     if (!deviceNamesByCode) {
+        //Reference - https://gist.github.com/adamawolf/3048717
         deviceNamesByCode = @{
             @"i386" : @"iPhone Simulator",
             @"x86_64" : @"iPhone Simulator",
