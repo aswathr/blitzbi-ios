@@ -114,4 +114,27 @@
     [eventsMap setObject:@"blitz_generic_event" forKey:@"eventName"];
     [self.sharedService sendEvent:eventsMap];
 }
+
++ (void)logCustomEventWithEventName:(NSString *)eventName
+                             andStringParams:(NSDictionary<NSString *, NSString *> *)strParams
+                             andIntParams:(NSDictionary<NSString *, NSNumber *> *)intParams
+                     andFloatParams:(NSDictionary<NSString *,NSNumber *> *)floatParams {
+    NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
+    [eventsMap addEntriesFromDictionary:strParams];
+    
+    
+        
+    NSEnumerator *enumerator = [intParams keyEnumerator];
+    id key;
+    // extra parens to suppress warning about using = instead of ==
+    while((key = [enumerator nextObject]))
+          [eventsMap setValue:[NSNumber numberWithInt:[[intParams objectForKey:key] intValue]] forKey:key];
+        
+    enumerator = [floatParams keyEnumerator];
+    // extra parens to suppress warning about using = instead of ==
+    while((key = [enumerator nextObject]))
+          [eventsMap setValue:[NSNumber numberWithInt:[[floatParams objectForKey:key] floatValue]] forKey:key];
+    
+    [eventsMap setObject:[NSString stringWithFormat:@"blitz_custom_", eventName] forKey:@"eventName"];
+}
 @end
