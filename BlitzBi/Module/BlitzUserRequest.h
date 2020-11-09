@@ -1,26 +1,24 @@
 //
-//  BiDeviceRequest.h
+//  BlitzUserRequest.h
 //  BlitzBi
 //
-//  Created by Akash on 01/10/20.
-//  Copyright © 2016 Blitz, Inc. All rights reserved.
+//  Created by Admin on 09/11/20.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BiDeviceRequest : NSObject {
+@interface BlitzUserRequest : NSObject {
     NSString* blitzAppId;
     NSString* blitzDeviceId;
-    NSString* appSpecificDeviceId;
-    NSString* installAppVersion;
+    NSString* blitzUserId;
     NSString* deviceType;
 }
 
 - (instancetype)init:(NSString*)appId
                     :(NSString*)deviceId
-                    :(nullable NSString*)appSpecificDeviceId;
+                    :(nullable NSString*)userId;
 - (NSMutableDictionary*)dictionary;
 @end
 

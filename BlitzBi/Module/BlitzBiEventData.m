@@ -9,7 +9,7 @@
 #import <BlitzBiEventData.h>
 
 @implementation BlitzNameValuePair
-- (id)init:(NSString *)_name value:(NSString *)_value {
+- (instancetype)init:(NSString *)_name value:(NSString *)_value {
     if (self = [super init]) {
         name = _name;
         value = _value;
@@ -31,7 +31,7 @@
 @end
 
 @implementation BlitzBiEventData
-- (id)init:(NSMutableArray *)_payload {
+- (instancetype)init:(NSMutableArray *)_payload {
     if (self = [super init]) {
         payload = _payload;
     }

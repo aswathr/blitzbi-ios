@@ -12,6 +12,6 @@
     NSString *BASE_URL;
 }
 
-- (id)init:(NSString*) baseUrl;
+- (instancetype)init:(NSString*) baseUrl;
 - (NSString*)base_URL;
 @end

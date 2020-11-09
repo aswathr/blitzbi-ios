@@ -36,6 +36,10 @@
     return @"iOS";
 }
 
++ (NSString *)getDeviceType {
+    return [self getPlatformCode];
+}
+
 + (NSString *)getSessionId {
     return [[NSUUID UUID] UUIDString];;
 }
@@ -50,6 +54,16 @@
 
 + (void)setBlitzDeviceId:(NSString *) deviceId {
     [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:BLITZ_DEVICE_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setAppSpecificDeviceId:(NSString *) appSpecificDeviceId {
+    [[NSUserDefaults standardUserDefaults] setObject:appSpecificDeviceId forKey:BLITZ_APP_SPECIFIC_DEVICE_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setAppSpecificUserId:(NSString *) appSpecificUserId {
+    [[NSUserDefaults standardUserDefaults] setObject:appSpecificUserId forKey:BLITZ_APP_SPECIFIC_USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

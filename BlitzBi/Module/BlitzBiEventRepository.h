@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
     id <PBlitzDataTransferService> networkService;
 }
 
-- (id)init:(NSString*)appId
-          :(NSString*)appToken
-          :(id <PBlitzDataTransferService>)networkService;
+- (instancetype)init:(NSString*)appId
+                    :(NSString*)appToken
+                    :(id <PBlitzDataTransferService>)networkService;
 - (void)processJsonRequest:(NSString*)url
                           :(NSData*)data
                           :(void(^)(NSObject *, NSError *))completion;

@@ -12,7 +12,7 @@
     NSObject *name, *value;
 }
 
-- (id)init:(NSString *)_name value:(NSString *)_value;
+- (instancetype)init:(NSString *)_name value:(NSString *)_value;
 - (NSObject *)getName;
 - (NSObject *)getValue;
 @end
@@ -22,5 +22,5 @@
 }
 
 - (NSMutableArray *)getPayload;
-- (id)init:(NSMutableArray *)payload;
+- (instancetype)init:(NSMutableArray *)payload;
 @end

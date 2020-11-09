@@ -16,9 +16,12 @@
 
 @interface BlitzDeviceUtils : NSObject
 + (NSString*)getPlatformCode;
++ (NSString*)getDeviceType;
 + (NSString*)getSessionId;
 + (NSString*)getBlitzDeviceId;
 + (void)setBlitzDeviceId:(NSString*) deviceId;
++ (void)setAppSpecificDeviceId:(NSString *) appSpecificDeviceId;
++ (void)setAppSpecificUserId:(NSString *) appSpecificUserId;
 + (NSString*)getAppVersion;
 + (NSString*)getTimeZone;
 + (NSString*)getIDFA;

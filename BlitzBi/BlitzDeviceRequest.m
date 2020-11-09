@@ -6,10 +6,10 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BiDeviceRequest.h>
+#import <BlitzDeviceRequest.h>
 #import <BlitzDeviceUtils.h>
 
-@implementation BiDeviceRequest
+@implementation BlitzDeviceRequest
 - (instancetype)init:(NSString*)appId
                     :(NSString*)deviceId
                     :(NSString*)specificDeviceId {
@@ -18,7 +18,7 @@
         blitzDeviceId = deviceId;
         appSpecificDeviceId = specificDeviceId;
         installAppVersion = BlitzDeviceUtils.getAppVersion;
-        deviceType = @"IOS";
+        deviceType = BlitzDeviceUtils.getDeviceType;
     }
     return self;
 }

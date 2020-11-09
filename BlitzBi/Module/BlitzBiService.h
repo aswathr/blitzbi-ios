@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <BaseUrls.h>
 #import <BlitzRequestBuilder.h>
-#import <BiDeviceRequest.h>
+#import <BlitzDeviceRequest.h>
+#import <BlitzUserRequest.h>
 #import <PBlitzDataTransferService.h>
 #import <BlitzBiEventSendHandler.h>
 #import <BlitzNetworkModuleBuilder.h>
 #import <BlitzConstants.h>
 #import <BlitzBIEventHandlerBuilder.h>
 #import <BlitzDeviceUtils.h>
+#import <BlitzBiDataHandler.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,16 +25,19 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* appId;
     NSString* appToken;
     NSString* baseUrl;
-    NSString* appSpecificDeviceId;
+    NSString* appSpecificDeviceIdentifier;
+    NSString* appSpecificUserIdentifier;
     BaseUrls* baseUrls;
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
+    BlitzBiDataHandler* dataHandler;
 }
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking;
-- (void)setAppSpecificIdentifier:(NSString*)identifier;
+- (void)setAppSpecificDeviceIdentifier:(NSString*)deviceIdentifier;
+- (void)setAppSpecificUserIdentifier:(NSString*)userIdentifier;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 @end
