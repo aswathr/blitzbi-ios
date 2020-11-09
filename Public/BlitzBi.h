@@ -122,9 +122,9 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails15 = @"float_field1
 + (void)logGenericEventWithParams:(NSDictionary*)params;
 
 + (void)logCustomEventWithEventName:(NSString *)eventName
-                             andStringParams:(NSDictionary<NSString *, NSString *> *)strParams
-                             andIntParams:(NSDictionary<NSString *, NSNumber *> *)intParams
-                            andFloatParams:(NSDictionary<NSString *,NSNumber *> *)floatParams;
+                    andStringParams:(NSDictionary<NSString *, NSString *> *)strParams
+                       andIntParams:(NSDictionary<NSString *, NSNumber *> *)intParams
+                     andFloatParams:(NSDictionary<NSString *,NSNumber *> *)floatParams;
 
 @end
 

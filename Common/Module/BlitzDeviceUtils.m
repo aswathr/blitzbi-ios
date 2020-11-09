@@ -37,7 +37,7 @@
 }
 
 + (NSString *)getDeviceType {
-    return [self getPlatformCode];
+    return @"IOS";
 }
 
 + (NSString *)getSessionId {

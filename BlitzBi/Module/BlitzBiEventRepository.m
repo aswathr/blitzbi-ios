@@ -14,8 +14,8 @@
 
 @implementation BlitzBiEventRepository
 - (instancetype)init:(NSString*)appId
-          :(NSString*)appToken
-          :(id <PBlitzDataTransferService>)networkService {
+                    :(NSString*)appToken
+                    :(id <PBlitzDataTransferService>)networkService {
     if (self = [super init]) {
         self->appId = appId;
         self->appToken = appToken;
