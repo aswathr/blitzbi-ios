@@ -442,7 +442,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getPlatformCode] forKey:@"platformCode"];
     [biCommonParams setValue:blitzSessionId forKey:@"blitzSessionId"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppVersion] forKey:@"appVersion"];
-    [biCommonParams setValue:[BlitzDeviceUtils getTimeZone] forKey:@"timezone"];
+    [biCommonParams setValue:[BlitzDeviceUtils getTimeZone] forKey:@"timeZone"];
     [biCommonParams setValue:[BlitzDeviceUtils getOSId] forKey:@"osId"];
     [biCommonParams setValue:[BlitzDeviceUtils getConnDetails] forKey:@"connDetails"];
     [biCommonParams setValue:[BlitzDeviceUtils getManufacturer] forKey:@"manufacturer"];
@@ -451,13 +451,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:@"adTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
-    
-    NSString *appDeviceId = [BlitzDeviceUtils getAppDeviceId];
-    if (appDeviceId) {
-        [biCommonParams setValue:appDeviceId forKey:@"appDeviceId"];
-    } else {
-        [biCommonParams setValue:@"" forKey:@"appDeviceId"];
-    }
     
     NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
     if (blitzUserId) {
