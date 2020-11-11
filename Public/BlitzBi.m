@@ -29,12 +29,12 @@
     [self.sharedService setUp:appId :appToken :adTracking];
 }
 
-+ (void)setAppSpecificDeviceIdentifier:(NSString*)deviceIdentifier {
-    [self.sharedService setAppSpecificDeviceIdentifier:deviceIdentifier];
++ (void)setAppSpecificIdentifier:(NSString*)identifier {
+    [self.sharedService setAppSpecificIdentifier:identifier];
 }
 
-+ (void)setAppSpecificUserIdentifier:(NSString*)userIdentifier {
-    [self.sharedService setAppSpecificUserIdentifier:userIdentifier];
++ (void)setBlitzIdentifier:(NSString*)identifier {
+    [self.sharedService setBlitzIdentifier:identifier];
 }
 
 + (void)sendEvent:(NSDictionary*)event{

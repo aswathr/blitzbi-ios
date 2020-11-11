@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking;
-- (void)setAppSpecificDeviceIdentifier:(NSString*)deviceIdentifier;
-- (void)setAppSpecificUserIdentifier:(NSString*)userIdentifier;
+- (void)setAppSpecificIdentifier:(NSString*)deviceIdentifier;
+- (void)setBlitzIdentifier:(NSString*)userIdentifier;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 @end

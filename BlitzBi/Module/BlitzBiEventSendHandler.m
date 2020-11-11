@@ -452,6 +452,20 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
     
+    NSString *appDeviceId = [BlitzDeviceUtils getAppDeviceId];
+    if (appDeviceId) {
+        [biCommonParams setValue:appDeviceId forKey:@"appDeviceId"];
+    } else {
+        [biCommonParams setValue:@"" forKey:@"appDeviceId"];
+    }
+    
+    NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
+    if (blitzUserId) {
+        [biCommonParams setValue:blitzUserId forKey:@"blitzUserId"];
+    } else {
+        [biCommonParams setValue:@"" forKey:@"blitzUserId"];
+    }
+    
     if (adTracking) {
         [biCommonParams setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
         [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];

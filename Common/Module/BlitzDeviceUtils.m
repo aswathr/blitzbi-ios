@@ -52,18 +52,34 @@
     return nil;
 }
 
++ (NSString *)getAppDeviceId {
+    NSString *blitzDeviceId = [[NSUserDefaults standardUserDefaults] stringForKey: BLITZ_APP_DEVICE_ID_KEY];
+    if (blitzDeviceId) {
+        return blitzDeviceId;
+    }
+    return nil;
+}
+
++ (NSString *)getBlitzUserId {
+    NSString *blitzDeviceId = [[NSUserDefaults standardUserDefaults] stringForKey: BLITZ_BLITZ_USER_ID_KEY];
+    if (blitzDeviceId) {
+        return blitzDeviceId;
+    }
+    return nil;
+}
+
 + (void)setBlitzDeviceId:(NSString *) deviceId {
     [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:BLITZ_DEVICE_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)setAppSpecificDeviceId:(NSString *) appSpecificDeviceId {
-    [[NSUserDefaults standardUserDefaults] setObject:appSpecificDeviceId forKey:BLITZ_APP_SPECIFIC_DEVICE_ID_KEY];
++ (void)setAppDeviceId:(NSString *) appSpecificDeviceId {
+    [[NSUserDefaults standardUserDefaults] setObject:appSpecificDeviceId forKey:BLITZ_APP_DEVICE_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)setAppSpecificUserId:(NSString *) appSpecificUserId {
-    [[NSUserDefaults standardUserDefaults] setObject:appSpecificUserId forKey:BLITZ_APP_SPECIFIC_USER_ID_KEY];
++ (void)setBlitzUserId:(NSString *) appSpecificUserId {
+    [[NSUserDefaults standardUserDefaults] setObject:appSpecificUserId forKey:BLITZ_BLITZ_USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

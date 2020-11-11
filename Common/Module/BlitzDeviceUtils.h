@@ -19,9 +19,11 @@
 + (NSString*)getDeviceType;
 + (NSString*)getSessionId;
 + (NSString*)getBlitzDeviceId;
++ (NSString *)getAppDeviceId;
++ (NSString *)getBlitzUserId;
 + (void)setBlitzDeviceId:(NSString*) deviceId;
-+ (void)setAppSpecificDeviceId:(NSString *) appSpecificDeviceId;
-+ (void)setAppSpecificUserId:(NSString *) appSpecificUserId;
++ (void)setAppDeviceId:(NSString *) appSpecificDeviceId;
++ (void)setBlitzUserId:(NSString *) appSpecificUserId;
 + (NSString*)getAppVersion;
 + (NSString*)getTimeZone;
 + (NSString*)getIDFA;
