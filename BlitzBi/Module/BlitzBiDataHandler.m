@@ -37,7 +37,7 @@
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
-- (void) updateAppSpecificDeviceId:(NSString*)appId
+- (void) updateAppSpecificDeviceIdentifier:(NSString*)appId
                                   :(NSString*)appToken
                                   :(NSData*) data
                                   :(void(^)(NSObject *, NSError *))completionBlock {
@@ -57,7 +57,7 @@
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
-- (void) updateAppSpecificUserId:(NSString*)appId
+- (void) updateBlitzUserId:(NSString*)appId
                                 :(NSString*)appToken
                                 :(NSData*) data
                                 :(void(^)(NSObject *, NSError *))completionBlock {

@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* appToken;
     NSString* baseUrl;
     NSString* appSpecificDeviceIdentifier;
-    NSString* appSpecificUserIdentifier;
+    NSString* blitzUserId;
     BaseUrls* baseUrls;
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
              :(NSString*)appToken
              :(BOOL)adTracking;
 - (void)setAppSpecificIdentifier:(NSString*)deviceIdentifier;
-- (void)setBlitzIdentifier:(NSString*)userIdentifier;
+- (void)setBlitzUserId:(NSString*)userIdentifier;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 @end

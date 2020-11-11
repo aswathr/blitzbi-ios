@@ -33,8 +33,8 @@
     [self.sharedService setAppSpecificIdentifier:identifier];
 }
 
-+ (void)setBlitzIdentifier:(NSString*)identifier {
-    [self.sharedService setBlitzIdentifier:identifier];
++ (void)setBlitzUserId:(NSString*)userId {
+    [self.sharedService setBlitzUserId:userId];
 }
 
 + (void)sendEvent:(NSDictionary*)event{

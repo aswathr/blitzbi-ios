@@ -13,8 +13,8 @@
                         :(NSString*)appToken;
 - (void)initializeDeviceId:(NSString*)appId
                           :(NSString*)appToken;
-- (void)updateAppSpecificIdentifier;
-- (void)updateBlitzIdentifier;
+- (void)updateAppSpecificDeviceIdentifier;
+- (void)updateBlitzUserId;
 @end
 
 @implementation BlitzBiService
@@ -43,12 +43,12 @@
 
 - (void)setAppSpecificIdentifier:(NSString*)identifier {
     self->appSpecificDeviceIdentifier = identifier;
-    [self updateAppSpecificIdentifier];
+    [self updateAppSpecificDeviceIdentifier];
 }
 
-- (void)setBlitzIdentifier:(NSString*)userIdentifier {
-    self->appSpecificUserIdentifier = userIdentifier;
-    [self updateBlitzIdentifier];
+- (void)setBlitzUserId:(NSString*)userId {
+    self->blitzUserId = userId;
+    [self updateBlitzUserId];
 }
 
 - (void)sendEvents:(NSArray*)events{
@@ -95,15 +95,15 @@
                 if (blitzDeviceId != nil) {
                     [BlitzDeviceUtils setBlitzDeviceId:blitzDeviceId];
                     [self->biBuilder setBlitzdeviceId:appId :deviceId];
-                    [self updateAppSpecificIdentifier];
-                    [self updateBlitzIdentifier];
+                    [self updateAppSpecificDeviceIdentifier];
+                    [self updateBlitzUserId];
                 }
             }
         }
     }];
 }
 
-- (void)updateAppSpecificIdentifier {
+- (void)updateAppSpecificDeviceIdentifier {
     NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if (deviceId && appSpecificDeviceIdentifier) {
         BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceIdentifier];
@@ -115,7 +115,7 @@
             return;
         }
         
-        [self->dataHandler updateAppSpecificDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
+        [self->dataHandler updateAppSpecificDeviceIdentifier:appId :appToken :jsonData :^(NSObject *response, NSError *err){
             if (err == nil) {
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
                 if (err == nil) {
@@ -130,10 +130,10 @@
     }
 }
 
-- (void)updateBlitzIdentifier {
+- (void)updateBlitzUserId {
     NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
-    if (deviceId && appSpecificUserIdentifier) {
-        BlitzUserRequest *userRequest = [[BlitzUserRequest alloc] init:appId :deviceId :appSpecificUserIdentifier];
+    if (deviceId && blitzUserId) {
+        BlitzUserRequest *userRequest = [[BlitzUserRequest alloc] init:appId :deviceId :blitzUserId];
         NSMutableDictionary *userRequestDict = [userRequest dictionary];
         
         NSError *error;
@@ -142,7 +142,7 @@
             return;
         }
         
-        [self->dataHandler updateAppSpecificUserId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
+        [self->dataHandler updateBlitzUserId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
             if (err == nil) {
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
                 if (err == nil) {

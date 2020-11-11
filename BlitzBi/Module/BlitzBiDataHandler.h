@@ -22,11 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
                        :(NSString*)appToken
                        :(NSData*) data
                        :(void(^)(NSObject *, NSError *))completionBlock;
-- (void) updateAppSpecificDeviceId:(NSString*)appId
+- (void) updateAppSpecificDeviceIdentifier:(NSString*)appId
                                   :(NSString*)appToken
                                   :(NSData*) data
                                   :(void(^)(NSObject *, NSError *))completionBlock;
-- (void) updateAppSpecificUserId:(NSString*)appId
+- (void) updateBlitzUserId:(NSString*)appId
                                 :(NSString*)appToken
                                 :(NSData*) data
                                 :(void(^)(NSObject *, NSError *))completionBlock;
