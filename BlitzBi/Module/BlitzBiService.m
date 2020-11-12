@@ -19,13 +19,31 @@
 
 @implementation BlitzBiService
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        isDebugMode = NO;
+    }
+    return self;
+}
+
+- (void)enabledDebugMode {
+    isDebugMode = YES;
+}
+
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking {
     self->appId = appId;
     self->appToken = appToken;
     
-    self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    if (isDebugMode) {
+        self->baseUrl = @"https://blitzbi-dev.useblitz.com/";
+    } else {
+        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    }
+    
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];

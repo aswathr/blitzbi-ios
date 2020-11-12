@@ -31,8 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
     BlitzBiDataHandler* dataHandler;
+    BOOL isDebugMode;
 }
-
+- (void)enabledDebugMode;
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking;
