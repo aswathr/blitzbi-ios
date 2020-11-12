@@ -47,6 +47,7 @@
 - (void)setBatchSize:(NSNumber*)size;
 - (NSMutableDictionary*) getCommonParams;
 - (NSData*)getJSONDataForBatch:(NSArray *)batch;
+- (long) getFormattedDate;
 @end
 
 @implementation BlitzBiEventSendHandler
@@ -80,6 +81,8 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         
         [self unarchiveEvents];
         [self addNotification];
+        
+        self->server = [[NTPServer alloc] initWithHostname:@"time.google.com" port:123];
     }
     return self;
 }
@@ -435,6 +438,11 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     maxPendingCount = [size longValue];
 }
 
+- (long) getFormattedDate {
+    NSDate *date = [server dateWithError:nil];
+    return [date timeIntervalSince1970];
+}
+
 - (NSMutableDictionary*) getCommonParams {
     NSMutableDictionary *biCommonParams = [[NSMutableDictionary alloc] init];
     [biCommonParams setValue:blitzAppId forKey:@"blitzAppId"];
@@ -451,6 +459,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:@"adTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
+    [biCommonParams setValue:[NSNumber numberWithLong:[self getFormattedDate]] forKey:@"client_event_time"];
     
     NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
     if (blitzUserId) {

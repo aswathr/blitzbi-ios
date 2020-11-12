@@ -46,4 +46,35 @@ static NSInteger const BLITZ_DOWN_TIME_STATUS_CODE = 459;
 static NSInteger const BLITZ_MAX_RETRY = 2;
 static NSInteger const BLITZ_DELAY_PER_RETRY = NSEC_PER_SEC;
 
+static NSString * _Nonnull const BLITZ_KEY_CACHED_BOOT_TIME = @"com.blitz.bi.time.cached_boot_time";
+static NSString * _Nonnull const BLITZ_KEY_CACHED_DEVICE_UPTIME = @"com.blitz.bi.time.cached_device_uptime";
+static NSString * _Nonnull const BLITZ_KEY_CACHED_SNTP_TIME = @"com.blitz.bi.time.cached_sntp_time";
+
+static NSInteger const BLITZ_RESPONSE_INDEX_ORIGINATE_TIME = 0;
+static NSInteger const BLITZ_RESPONSE_INDEX_RECEIVE_TIME = 1;
+static NSInteger const BLITZ_RESPONSE_INDEX_TRANSMIT_TIME = 2;
+static NSInteger const BLITZ_RESPONSE_INDEX_RESPONSE_TIME = 3;
+static NSInteger const BLITZ_RESPONSE_INDEX_ROOT_DELAY = 4;
+static NSInteger const BLITZ_RESPONSE_INDEX_DISPERSION = 5;
+static NSInteger const BLITZ_RESPONSE_INDEX_STRATUM = 6;
+static NSInteger const BLITZ_RESPONSE_INDEX_RESPONSE_TICKS = 7;
+static NSInteger const BLITZ_RESPONSE_INDEX_SIZE = 8;
+static NSInteger const BLITZ_NTP_PORT = 123;
+static NSInteger const BLITZ_NTP_MODE = 3;
+static NSInteger const BLITZ_NTP_VERSION = 3;
+static NSInteger const BLITZ_NTP_PACKET_SIZE = 48;
+static NSInteger const BLITZ_INDEX_VERSION = 0;
+static NSInteger const BLITZ_INDEX_ROOT_DELAY = 4;
+static NSInteger const BLITZ_INDEX_ROOT_DISPERSION = 8;
+static NSInteger const BLITZ_INDEX_ORIGINATE_TIME = 24;
+static NSInteger const BLITZ_INDEX_RECEIVE_TIME = 32;
+static NSInteger const BLITZ_INDEX_TRANSMIT_TIME = 40;
+static NSInteger const BLITZ_OFFSET_1900_TO_1970 = (365L * 70L + 17L) * 24L * 60L * 60L;
+
+static NSString * _Nonnull const BLITZ_NTP_HOST = @"time.google.com";
+static NSInteger const BLITZ_ROOT_DELAY_MAX = 100;
+static NSInteger const BLITZ_ROOT_DISPERSION_MAX = 100;
+static NSInteger const BLITZ_SERVER_RESPONSE_DELAY_MAX = 750;
+static NSInteger const BLITZ_UDP_SOCKET_TIMEOUT_IN_MILLIS = 30000;
+
 #endif
