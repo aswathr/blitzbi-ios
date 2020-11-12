@@ -82,7 +82,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [self unarchiveEvents];
         [self addNotification];
         
-        self->server = [[NTPServer alloc] initWithHostname:@"time.google.com" port:123];
+        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
     }
     return self;
 }

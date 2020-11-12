@@ -5,8 +5,8 @@
 //  Created by Admin on 12/11/20.
 //
 
-#ifndef NTPTypes_h
-#define NTPTypes_h
+#ifndef BlitzTimeTypes_h
+#define BlitzTimeTypes_h
 
 #include <stdint.h>
 #include <assert.h>

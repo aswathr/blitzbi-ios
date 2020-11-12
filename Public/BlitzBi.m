@@ -7,7 +7,7 @@
 //
 
 #import <BlitzBi.h>
-#import "BlitzBiService.h"
+#import <BlitzBiService.h>
 
 @interface BlitzBi ()
 + (BlitzBiService *)sharedService;

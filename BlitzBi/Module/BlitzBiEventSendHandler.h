@@ -11,7 +11,7 @@
 #import <BlitzRequestBuilder.h>
 #import <BlitzConstants.h>
 #import <BlitzBiConfig.h>
-#import <NTPKit.h>
+#import <BlitzTime.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
     BlitzBiEventRepository *eventRepository;
     
     long long sessionStartTimeStamp;
-    NTPServer *server;
+    BlitzTime *server;
 }
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*)baseUrl
