@@ -40,6 +40,6 @@ spec.source               = { :git => "https://gitlab.useblitz.com/blitz/blitzbi
 spec.swift_version        = "4.2"
 spec.source_files         = "**/**/*.{h,m,swift,plist,xcconfig}"
 spec.public_header_files  = "Public/*.h"
-#spec.pod_target_xcconfig  = { 'INFOPLIST_FILE' => '${PODS_TARGET_SRCROOT}/BlitzBi/BlitzBi/Info.plist' }
+spec.pod_target_xcconfig  = { 'INFOPLIST_FILE' => '${PODS_TARGET_SRCROOT}/BlitzBi/Info.plist' }
 #spec.exclude_files        = "BlitzBi/BlitzBi/*.plist"
 end
