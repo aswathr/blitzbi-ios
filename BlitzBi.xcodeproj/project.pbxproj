@@ -155,8 +155,6 @@
 		843BB7B225245195007272D9 = {
 			isa = PBXGroup;
 			children = (
-				84B36798256E241B0038BC82 /* Release.xcconfig */,
-				84B36795256E24060038BC82 /* Debug.xcconfig */,
 				84567278253709DB00AAA58E /* BlitzBi.h */,
 				84567277253709DB00AAA58E /* BlitzBi.m */,
 				84EEAA3C2533A73500851468 /* BlitzBi.podspec */,
@@ -179,6 +177,8 @@
 		843BB7BE25245195007272D9 /* BlitzBi */ = {
 			isa = PBXGroup;
 			children = (
+				84B36798256E241B0038BC82 /* Release.xcconfig */,
+				84B36795256E24060038BC82 /* Debug.xcconfig */,
 				843BB7C025245195007272D9 /* Info.plist */,
 				844A0E84252467C300D8529B /* BlitzBiConfig.h */,
 				844A0E80252467C300D8529B /* BlitzBiConfig.m */,
