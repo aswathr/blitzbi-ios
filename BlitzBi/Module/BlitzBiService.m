@@ -70,7 +70,7 @@
 
 - (void)addCommonParamsWithKey:(NSString *)key
                       andValue:(NSString *)value {
-    NSDictionary *commonParams = [BlitzDeviceUtils getBlitzCommonParams];
+    NSMutableDictionary *commonParams = [[BlitzDeviceUtils getBlitzCommonParams]mutableCopy];
     [commonParams setValue:value forKey:key];
     [BlitzDeviceUtils setBlitzCommonParam:commonParams];
 }
