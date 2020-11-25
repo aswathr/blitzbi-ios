@@ -23,7 +23,6 @@ static NSString * _Nonnull const BlitzBiParameterFBC = @"fbc";
 static NSString * _Nonnull const BlitzBiParameterFBP = @"fbp";
 static NSString * _Nonnull const BlitzBiAction = @"action";
 
-
 static NSString * _Nonnull const BlitzBiParameterStringDetails1 = @"str_field0";
 static NSString * _Nonnull const BlitzBiParameterStringDetails2 = @"str_field1";
 static NSString * _Nonnull const BlitzBiParameterStringDetails3 = @"str_field2";

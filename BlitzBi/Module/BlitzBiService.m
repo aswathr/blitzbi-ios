@@ -18,6 +18,7 @@
 @end
 
 @implementation BlitzBiService
+
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking {

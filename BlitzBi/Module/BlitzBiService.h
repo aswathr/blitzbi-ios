@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
     BlitzBiEventSendHandler* biBuilder;
     BlitzBiDataHandler* dataHandler;
 }
+
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking;
