@@ -37,8 +37,6 @@
 		84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111B252DCB6E0051016E /* BlitzReachability.h */; };
 		84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111C252DCB6E0051016E /* BlitzReachability.m */; };
 		84B31121252DCB6E0051016E /* BlitzDeviceUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111D252DCB6E0051016E /* BlitzDeviceUtils.h */; };
-		84B367B5256E2BF50038BC82 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84B36798256E241B0038BC82 /* Release.xcconfig */; };
-		84B367B8256E2BFD0038BC82 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84B36795256E24060038BC82 /* Debug.xcconfig */; };
 		84C211732534319100DFEC24 /* BaseUrls.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C211712534319100DFEC24 /* BaseUrls.h */; };
 		84C211742534319100DFEC24 /* BaseUrls.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C211722534319100DFEC24 /* BaseUrls.m */; };
 		84C211C5253435D500DFEC24 /* BlitzServerConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C211C3253435D500DFEC24 /* BlitzServerConfig.h */; };
@@ -96,8 +94,6 @@
 		84B3111B252DCB6E0051016E /* BlitzReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzReachability.h; path = Module/BlitzReachability.h; sourceTree = "<group>"; };
 		84B3111C252DCB6E0051016E /* BlitzReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzReachability.m; path = Module/BlitzReachability.m; sourceTree = "<group>"; };
 		84B3111D252DCB6E0051016E /* BlitzDeviceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzDeviceUtils.h; path = Module/BlitzDeviceUtils.h; sourceTree = "<group>"; };
-		84B36795256E24060038BC82 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		84B36798256E241B0038BC82 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		84C211712534319100DFEC24 /* BaseUrls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BaseUrls.h; path = Module/BaseUrls.h; sourceTree = "<group>"; };
 		84C211722534319100DFEC24 /* BaseUrls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BaseUrls.m; path = Module/BaseUrls.m; sourceTree = "<group>"; };
 		84C211C3253435D500DFEC24 /* BlitzServerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlitzServerConfig.h; sourceTree = "<group>"; };
@@ -177,8 +173,6 @@
 		843BB7BE25245195007272D9 /* BlitzBi */ = {
 			isa = PBXGroup;
 			children = (
-				84B36798256E241B0038BC82 /* Release.xcconfig */,
-				84B36795256E24060038BC82 /* Debug.xcconfig */,
 				843BB7C025245195007272D9 /* Info.plist */,
 				844A0E84252467C300D8529B /* BlitzBiConfig.h */,
 				844A0E80252467C300D8529B /* BlitzBiConfig.m */,
@@ -348,8 +342,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84B367B8256E2BFD0038BC82 /* Debug.xcconfig in Resources */,
-				84B367B5256E2BF50038BC82 /* Release.xcconfig in Resources */,
 				84EEAA3D2533A73500851468 /* BlitzBi.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,7 +518,6 @@
 		};
 		843BB7C525245195007272D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84B36795256E24060038BC82 /* Debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -559,7 +550,6 @@
 		};
 		843BB7C625245195007272D9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84B36798256E241B0038BC82 /* Release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;

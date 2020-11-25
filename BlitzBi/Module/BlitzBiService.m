@@ -24,7 +24,12 @@
     self->appId = appId;
     self->appToken = appToken;
     
-    self->baseUrl = [NSString stringWithFormat:@"%@_%@", @"https://", [[[NSBundle bundleWithIdentifier:@"com.blitz.bi"] infoDictionary] objectForKey:@"BASE_URL"]];
+    #ifdef DEBUG
+        self->baseUrl = @"https://blitzbi-dev.useblitz.com/";
+    #else
+        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    #endif
+    
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
