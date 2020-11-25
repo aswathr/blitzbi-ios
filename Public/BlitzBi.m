@@ -23,10 +23,6 @@
     return sharedInstance;
 }
 
-+ (void)enabledDebugMode {
-    [self.sharedService enabledDebugMode];
-}
-
 + (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)appToken
          andAllowAdTracking:(BOOL)adTracking {

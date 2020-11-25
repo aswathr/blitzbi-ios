@@ -73,9 +73,6 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails15 = @"float_field1
 
 
 @interface BlitzBi : NSObject
-/// Description: Calling this will enabled the debug mode.
-+ (void)enabledDebugMode;
-
 /// Description: Initialize BlitzBi sdk with the app_id and app_token.
 + (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)andAppToken

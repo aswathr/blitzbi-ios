@@ -253,7 +253,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         @synchronized (self) {
             eventsCopy = [self->pendingEvents mutableCopy];
         }
-        NSLog(@"[BI] sending all the events with count %lu with blocking response tracking", eventsCopy.count);
+        NSLog(@"[BI] sending all the events with count %lu with blocking response tracking", (unsigned long)eventsCopy.count);
         while (eventsCopy.count > 0) {
             NSUInteger batchSize = MIN(eventsCopy.count, maxPendingCount);
             NSArray *batch = [eventsCopy subarrayWithRange:NSMakeRange(0, batchSize)];
@@ -280,7 +280,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                     break;
                 }
                 
-                NSLog(@"[BI] the batch containing %lu events sent successfully, going to remove it from pending events", batch.count);
+                NSLog(@"[BI] the batch containing %lu events sent successfully, going to remove it from pending events", (unsigned long)batch.count);
                 [eventsCopy removeObjectsInArray:batch];
                 @synchronized (self) {
                     [self->pendingEvents removeObjectsInArray:batch];
@@ -343,7 +343,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     //Recording crashlytics error
     NSArray<NSString *> *defectiveEventsNames = [defectiveEvents valueForKeyPath:BLITZ_EVENT_NAME_TAG];
     NSString *commaSeparatedNames = [defectiveEventsNames componentsJoinedByString:@", "];
-    NSLog(@"[BI] defective events with names: %@, and total defective count: %lu, removed from pending events.", commaSeparatedNames, defectiveEvents.count);
+    NSLog(@"[BI] defective events with names: %@, and total defective count: %lu, removed from pending events.", commaSeparatedNames, (unsigned long)defectiveEvents.count);
     
     //as now defective events has been filetered, we can force flush.
     [self flush];

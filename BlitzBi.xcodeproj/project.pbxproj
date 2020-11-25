@@ -519,6 +519,7 @@
 		843BB7C525245195007272D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BASE_URL = "https://blitzbi-dev.useblitz.com/";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -551,6 +552,7 @@
 		843BB7C625245195007272D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BASE_URL = "https://prod-blitzbi.useblitz.com/";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
