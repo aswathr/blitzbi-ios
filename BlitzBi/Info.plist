@@ -20,7 +20,7 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>Base Url</key>
+	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
 </dict>
 </plist>
