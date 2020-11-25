@@ -37,8 +37,8 @@
 		84B3111F252DCB6E0051016E /* BlitzReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111B252DCB6E0051016E /* BlitzReachability.h */; };
 		84B31120252DCB6E0051016E /* BlitzReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B3111C252DCB6E0051016E /* BlitzReachability.m */; };
 		84B31121252DCB6E0051016E /* BlitzDeviceUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B3111D252DCB6E0051016E /* BlitzDeviceUtils.h */; };
-		84B36796256E24060038BC82 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84B36795256E24060038BC82 /* Debug.xcconfig */; };
-		84B36799256E241B0038BC82 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84B36798256E241B0038BC82 /* Release.xcconfig */; };
+		84B367B5256E2BF50038BC82 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84B36798256E241B0038BC82 /* Release.xcconfig */; };
+		84B367B8256E2BFD0038BC82 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 84B36795256E24060038BC82 /* Debug.xcconfig */; };
 		84C211732534319100DFEC24 /* BaseUrls.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C211712534319100DFEC24 /* BaseUrls.h */; };
 		84C211742534319100DFEC24 /* BaseUrls.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C211722534319100DFEC24 /* BaseUrls.m */; };
 		84C211C5253435D500DFEC24 /* BlitzServerConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C211C3253435D500DFEC24 /* BlitzServerConfig.h */; };
@@ -348,9 +348,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84B36796256E24060038BC82 /* Debug.xcconfig in Resources */,
+				84B367B8256E2BFD0038BC82 /* Debug.xcconfig in Resources */,
+				84B367B5256E2BF50038BC82 /* Release.xcconfig in Resources */,
 				84EEAA3D2533A73500851468 /* BlitzBi.podspec in Resources */,
-				84B36799256E241B0038BC82 /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
