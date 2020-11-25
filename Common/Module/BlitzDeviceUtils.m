@@ -68,6 +68,15 @@
     return nil;
 }
 
++ (NSDictionary *)getBlitzCommonParams {
+    NSDictionary *blitzCommonParams = [[NSUserDefaults standardUserDefaults] dictionaryForKey: BLITZ_COMMON_PARAM_KEY];
+    if (blitzCommonParams) {
+        return blitzCommonParams;
+    } else {
+        return [[NSDictionary alloc] init];
+    }
+}
+
 + (void)setBlitzDeviceId:(NSString *) deviceId {
     [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:BLITZ_DEVICE_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -80,6 +89,11 @@
 
 + (void)setBlitzUserId:(NSString *) appSpecificUserId {
     [[NSUserDefaults standardUserDefaults] setObject:appSpecificUserId forKey:BLITZ_BLITZ_USER_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setBlitzCommonParam:(NSDictionary *) commonParams {
+    [[NSUserDefaults standardUserDefaults] setObject:commonParams forKey:BLITZ_COMMON_PARAM_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

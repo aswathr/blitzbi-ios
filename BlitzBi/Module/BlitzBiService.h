@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setBlitzUserId:(NSString*)userIdentifier;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
+- (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value;
 @end
 
 NS_ASSUME_NONNULL_END

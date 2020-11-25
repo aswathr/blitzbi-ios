@@ -445,7 +445,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (NSMutableDictionary*) getCommonParams {
     NSMutableDictionary *biCommonParams = [[NSMutableDictionary alloc] init];
-    [biCommonParams setValue:blitzAppId forKey:@"blitzAppId"];
     [biCommonParams setValue:blitzDeviceId  forKey:@"blitzDeviceId"];
     [biCommonParams setValue:[BlitzDeviceUtils getPlatformCode] forKey:@"platformCode"];
     [biCommonParams setValue:blitzSessionId forKey:@"blitzSessionId"];
@@ -460,6 +459,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
     [biCommonParams setValue:[NSNumber numberWithLong:[self getFormattedDate]] forKey:@"client_event_time"];
+    [biCommonParams addEntriesFromDictionary:[BlitzDeviceUtils getBlitzCommonParams]];
     
     NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
     if (blitzUserId) {

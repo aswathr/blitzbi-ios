@@ -45,6 +45,11 @@
     [self.sharedService sendEvents:events];
 }
 
++ (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value {
+    [self.sharedService addCommonParamsWithKey:key andValue:value];
+}
+
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];

@@ -23,7 +23,7 @@
              :(BOOL)adTracking {
     self->appId = appId;
     self->appToken = appToken;
-
+    
     self->baseUrl = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"Base Url"];
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
@@ -60,6 +60,13 @@
     if (eventDict != nil) {
         [biBuilder sendEvent:eventDict];
     }
+}
+
+- (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value {
+    NSDictionary *commonParams = [BlitzDeviceUtils getBlitzCommonParams];
+    [commonParams setValue:value forKey:key];
+    [BlitzDeviceUtils setBlitzCommonParam:commonParams];
 }
 
 - (void)checkForDeviceId:(NSString*)appId

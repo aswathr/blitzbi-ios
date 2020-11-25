@@ -90,6 +90,10 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails15 = @"float_field1
 /// Description: Use this for logging custom events.
 + (void)sendEvents:(NSArray*)events;
 
+/// Description: Use this to add common Params.
++ (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value;
+
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod
                                      andParams:(NSDictionary*)params;
