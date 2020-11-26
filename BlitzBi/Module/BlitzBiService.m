@@ -15,9 +15,19 @@
                           :(NSString*)appToken;
 - (void)updateAppSpecificDeviceIdentifier;
 - (void)updateBlitzUserId;
+- (void)initializeBlitzTime;
 @end
 
 @implementation BlitzBiService
+
++ (BlitzBiService*)sharedService {
+    static BlitzBiService *sharedInstance = nil;
+    static dispatch_once_t once_token;
+    dispatch_once(&once_token, ^{
+        sharedInstance = [[BlitzBiService alloc] init];
+    });
+    return sharedInstance;
+}
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
@@ -44,6 +54,7 @@
     self->dataHandler = [[BlitzBiDataHandler alloc] init:baseUrl :biNetworkService ];
     
     [self checkForDeviceId:appId :appToken];
+    [self initializeBlitzTime];
 }
 
 - (void)setAppSpecificIdentifier:(NSString*)identifier {
@@ -73,6 +84,10 @@
     NSMutableDictionary *commonParams = [[BlitzDeviceUtils getBlitzCommonParams]mutableCopy];
     [commonParams setValue:value forKey:key];
     [BlitzDeviceUtils setBlitzCommonParam:commonParams];
+}
+
+- (long)getCurrentTime {
+    return [[server dateWithError:nil] timeIntervalSince1970];
 }
 
 - (void)checkForDeviceId:(NSString*)appId
@@ -113,6 +128,10 @@
             }
         }
     }];
+}
+
+- (void)initializeBlitzTime {
+    self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
 }
 
 - (void)updateAppSpecificDeviceIdentifier {

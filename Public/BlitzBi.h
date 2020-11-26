@@ -93,6 +93,8 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails15 = @"float_field1
 + (void)addCommonParamsWithKey:(NSString *)key
                       andValue:(NSString *)value;
 
++ (long)getCurrentTime;
+
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod
                                      andParams:(NSDictionary*)params;

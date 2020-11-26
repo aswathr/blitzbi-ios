@@ -9,45 +9,36 @@
 #import <BlitzBi.h>
 #import <BlitzBiService.h>
 
-@interface BlitzBi ()
-+ (BlitzBiService *)sharedService;
-@end
-
 @implementation BlitzBi
-+ (BlitzBiService*)sharedService {
-    static BlitzBiService *sharedInstance = nil;
-    static dispatch_once_t once_token;
-    dispatch_once(&once_token, ^{
-        sharedInstance = [[BlitzBiService alloc] init];
-    });
-    return sharedInstance;
-}
-
 + (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)appToken
          andAllowAdTracking:(BOOL)adTracking {
-    [self.sharedService setUp:appId :appToken :adTracking];
+    [[BlitzBiService sharedService] setUp:appId :appToken :adTracking];
 }
 
 + (void)setAppSpecificIdentifier:(NSString*)identifier {
-    [self.sharedService setAppSpecificIdentifier:identifier];
+    [[BlitzBiService sharedService] setAppSpecificIdentifier:identifier];
 }
 
 + (void)setBlitzUserId:(NSString*)userId {
-    [self.sharedService setBlitzUserId:userId];
+    [[BlitzBiService sharedService] setBlitzUserId:userId];
 }
 
 + (void)sendEvent:(NSDictionary*)event{
-    [self.sharedService sendEvent:event];
+    [[BlitzBiService sharedService] sendEvent:event];
 }
 
 + (void)sendEvents:(NSArray*)events {
-    [self.sharedService sendEvents:events];
+    [[BlitzBiService sharedService] sendEvents:events];
 }
 
 + (void)addCommonParamsWithKey:(NSString *)key
                       andValue:(NSString *)value {
-    [self.sharedService addCommonParamsWithKey:key andValue:value];
+    [[BlitzBiService sharedService] addCommonParamsWithKey:key andValue:value];
+}
+
++ (long)getCurrentTime {
+    return [[BlitzBiService sharedService] getCurrentTime];
 }
 
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod andParams:(NSDictionary*)params {
@@ -55,7 +46,7 @@
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_complete_registration" forKey:@"eventName"];
     [eventsMap setObject:registrationMethod forKey:@"registrationMethod"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logSubscribeEventWithAmount:(double)price
@@ -66,7 +57,7 @@
     [eventsMap setObject:@"blitz_subscribe" forKey:@"eventName"];
     [eventsMap setObject:subscriptionId forKey:@"subscriptionId"];
     [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"amount"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logSubscriptionRenewalEventWithRenewalCount:(int)renewalCount
@@ -79,7 +70,7 @@
     [eventsMap setObject:subscriptionId forKey:@"subscriptionId"];
     [eventsMap setObject:[NSNumber numberWithInt:renewalCount] forKey:@"renewalCount"];
     [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"amount"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logSubscriptionCancelEventWithParams:(NSDictionary*)params
@@ -88,7 +79,7 @@
     [eventsMap setObject:@"blitz_subscription_cancel" forKey:@"eventName"];
     [eventsMap setObject:subscriptionId forKey:@"subscriptionId"];
     [eventsMap addEntriesFromDictionary:params];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logPurchaseEventWithAmount:(double)price
@@ -97,14 +88,14 @@
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_inapp_purchase" forKey:@"eventName"];
     [eventsMap setObject:[NSNumber numberWithFloat:price] forKey:@"amount"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logScreenVisitedEventWithScreenName:(NSString*)screenName {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap setObject:@"blitz_screen_visited" forKey:@"eventName"];
     [eventsMap setObject:screenName forKey:@"screenName"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logClickedEventWithWidgetName:(NSString*)widgetName
@@ -113,7 +104,7 @@
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_clicked" forKey:@"eventName"];
     [eventsMap setObject:widgetName forKey:@"widgetName"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 
@@ -121,7 +112,7 @@
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];
     [eventsMap setObject:@"blitz_generic_event" forKey:@"eventName"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
 + (void)logCustomEventWithEventName:(NSString *)eventName
@@ -143,6 +134,6 @@
         [eventsMap setValue:[NSNumber numberWithInt:[[floatParams objectForKey:key] floatValue]] forKey:key];
     
     [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"blitz_custom", eventName] forKey:@"eventName"];
-    [self.sharedService sendEvent:eventsMap];
+    [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 @end

@@ -31,8 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
     BlitzBiDataHandler* dataHandler;
+    BlitzTime *server;
 }
-
++ (BlitzBiService*)sharedService;
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking;
@@ -42,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)sendEvents:(NSArray*)events;
 - (void)addCommonParamsWithKey:(NSString *)key
                       andValue:(NSString *)value;
+- (long)getCurrentTime;
 @end
 
 NS_ASSUME_NONNULL_END

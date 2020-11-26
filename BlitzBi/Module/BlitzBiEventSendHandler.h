@@ -35,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
     BlitzBiEventRepository *eventRepository;
     
     long long sessionStartTimeStamp;
-    BlitzTime *server;
 }
 - (instancetype)init:(NSNumber*)batchSize
                     :(NSString*)baseUrl
