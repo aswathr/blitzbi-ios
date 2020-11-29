@@ -47,7 +47,8 @@
 - (void)setBatchSize:(NSNumber*)size;
 - (NSMutableDictionary*) getCommonParams;
 - (NSData*)getJSONDataForBatch:(NSArray *)batch;
-- (long) getFormattedDate;
+- (long)getFormattedDate;
+- (long)initializeBlitzTime;
 @end
 
 @implementation BlitzBiEventSendHandler
@@ -81,8 +82,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         
         [self unarchiveEvents];
         [self addNotification];
-        
-        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+        [self initializeBlitzTime];
     }
     return self;
 }
@@ -100,6 +100,14 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                                              selector:@selector(onDestroy)
                                                  name:UIApplicationWillTerminateNotification
                                                object:nil];
+}
+
+- (long)initializeBlitzTime {
+    @try {
+        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::initializeBlitzTime Error whlle initialixing blitz time.");
+    }
 }
 
 - (void) onPause {
@@ -439,8 +447,12 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (long) getFormattedDate {
-    NSDate *date = [server dateWithError:nil];
-    return [date timeIntervalSince1970];
+    @try {
+        return [[server dateWithError:nil] timeIntervalSince1970];
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::getFormattedDate Error whlle getting formatted date.");
+        return 0;
+    }
 }
 
 - (NSMutableDictionary*) getCommonParams {
