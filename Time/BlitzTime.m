@@ -73,6 +73,9 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             struct timeval tv = { .tv_sec = _timeout, .tv_usec = (_timeout - trunc(_timeout)) * USEC_PER_SEC };
             setsockopt(_socket, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
             setsockopt(_socket, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+            int value = 1;
+            setsockopt(_socket, SOL_SOCKET, SO_NOSIGPIPE, &value, sizeof(value));
+
         }
         
     }
@@ -159,6 +162,8 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         // set timeout.
         setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
         setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+        int value = 1;
+        setsockopt(sock, SOL_SOCKET, SO_NOSIGPIPE, &value, sizeof(value));
         
         [self willChangeValueForKey:@"connected"];
         _socket = sock;
