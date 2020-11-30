@@ -11,6 +11,8 @@
 @interface BlitzBiService()
 - (void)checkForDeviceId:(NSString*)appId
                         :(NSString*)appToken;
+- (void)getAllParams:(NSString*)appId
+                    :(NSString*)appToken;
 - (void)initializeDeviceId:(NSString*)appId
                           :(NSString*)appToken;
 - (void)updateAppSpecificDeviceIdentifier;
@@ -27,6 +29,15 @@
         sharedInstance = [[BlitzBiService alloc] init];
     });
     return sharedInstance;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self->paramsDictionary = [[NSDictionary alloc] init];
+    }
+    return self;
 }
 
 - (void)setUp:(NSString*)appId
@@ -87,7 +98,12 @@
 }
 
 - (long)getCurrentTime {
-    return [[server dateWithError:nil] timeIntervalSince1970];
+    @try {
+        return [[server dateWithError:nil] timeIntervalSince1970];
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::getFormattedDate Error whlle getting formatted date.");
+        return 0;
+    }
 }
 
 - (void)checkForDeviceId:(NSString*)appId
@@ -95,8 +111,38 @@
     NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if(deviceId) {
         [biBuilder setBlitzdeviceId:appId :deviceId];
+        [self getAllParams:appId :appToken];
     }  else {
         [self initializeDeviceId:appId :appToken];
+    }
+}
+
+- (void)getAllParams:(NSString*)appId
+                    :(NSString*)appToken {
+    [self->dataHandler getAllParams:appId :appToken :^(NSObject *response, NSError *err){
+        if (err == nil && response) {
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+            if (err == nil) {
+                NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                if (dictionary) {
+                    self->paramsDictionary = dictionary;
+                }
+            }
+        }
+    }];
+}
+
+- (nullable NSString*) getParamForKey:(NSString*)key
+                     withDefaultValue:(NSString*)defaultValue {
+    @try {
+        if (paramsDictionary && [paramsDictionary valueForKey:key]) {
+            return [paramsDictionary valueForKey:key];
+        } else {
+            return defaultValue;
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Error while getting Param for key %@", key);
+        return defaultValue;
     }
 }
 
@@ -124,6 +170,7 @@
                     [self->biBuilder setBlitzdeviceId:appId :deviceId];
                     [self updateAppSpecificDeviceIdentifier];
                     [self updateBlitzUserId];
+                    [self getAllParams:appId :appToken];
                 }
             }
         }
@@ -131,7 +178,22 @@
 }
 
 - (void)initializeBlitzTime {
-    self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+    @try {
+        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::initializeBlitzTime Error whlle initialixing blitz time.");
+    }
+}
+
+
+- (long)disconnectBlitzTime {
+    @try {
+        if (self->server) {
+            [self->server disconnect];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::disconnectBlitzTime Error whlle disconnecting blitz time.");
+    }
 }
 
 - (void)updateAppSpecificDeviceIdentifier {
