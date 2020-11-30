@@ -123,7 +123,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (void) onPause {
     NSLog(@"BlitzBiEventSendHandler::onPause");
-    [self disconnectBlitzTime];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
