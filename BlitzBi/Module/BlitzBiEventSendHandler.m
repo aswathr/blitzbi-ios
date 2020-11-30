@@ -49,6 +49,7 @@
 - (NSData*)getJSONDataForBatch:(NSArray *)batch;
 - (long)getFormattedDate;
 - (long)initializeBlitzTime;
+- (long)disconnectBlitzTime;
 @end
 
 @implementation BlitzBiEventSendHandler
@@ -110,12 +111,23 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     }
 }
 
+- (long)disconnectBlitzTime {
+    @try {
+        if (self->server) {
+            [self->server disconnect];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::disconnectBlitzTime Error whlle disconnecting blitz time.");
+    }
+}
+
 - (void) onPause {
     NSLog(@"BlitzBiEventSendHandler::onPause");
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
     [self flushEmergency];
+    [self disconnectBlitzTime];
 }
 
 - (void) onResume {
