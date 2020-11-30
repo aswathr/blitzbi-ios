@@ -85,7 +85,7 @@
     [headers setValue:appToken forKey:@"blitzAppToken"];
     
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
-    [requestBuilder setMethod:BLITZ_POST_METHOD];
+    [requestBuilder setMethod:BLITZ_GET_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
     [requestBuilder setPath:@"params"];
     [requestBuilder setHeaders:headers];
