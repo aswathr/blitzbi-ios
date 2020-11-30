@@ -10,6 +10,7 @@
 #import <BlitzBiConfig.h>
 #import <BlitzFileHelper.h>
 #import <BlitzDeviceUtils.h>
+#import <BlitzBiService.h>
 
 #define COMMON_FIELD_3 @"common_field_3"
 #define FILE_NAME @"filename"
@@ -46,6 +47,7 @@
 - (void)updateNextFlushTime;
 - (void)setBatchSize:(NSNumber*)size;
 - (NSMutableDictionary*) getCommonParams;
+- (void)addClientEventTime:(NSDictionary *)biCommonParams;
 - (NSData*)getJSONDataForBatch:(NSArray *)batch;
 - (long)getFormattedDate;
 - (long)initializeBlitzTime;
@@ -483,7 +485,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:@"adTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
-    [biCommonParams setValue:[NSNumber numberWithLong:[self getFormattedDate]] forKey:@"client_event_time"];
+    [self addClientEventTime:biCommonParams];
     
     NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
     if (blitzUserId) {
@@ -497,6 +499,13 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
     }
     return biCommonParams;
+}
+
+- (void)addClientEventTime:(NSDictionary *)biCommonParams{
+    NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"YES"];
+    if (isBlitzTime && [isBlitzTime boolValue]) {
+        [biCommonParams setValue:[NSNumber numberWithLong:[self getFormattedDate]] forKey:@"client_event_time"];
+    }
 }
 
 - (NSData *)getJSONDataForBatch:(NSArray *)batch {

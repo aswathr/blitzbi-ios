@@ -11,6 +11,8 @@
 @interface BlitzBiService()
 - (void)checkForDeviceId:(NSString*)appId
                         :(NSString*)appToken;
+- (void)getAllParams:(NSString*)appId
+                    :(NSString*)appToken;
 - (void)initializeDeviceId:(NSString*)appId
                           :(NSString*)appToken;
 - (void)updateAppSpecificDeviceIdentifier;
@@ -18,6 +20,24 @@
 @end
 
 @implementation BlitzBiService
+
++ (BlitzBiService*)sharedService {
+    static BlitzBiService *sharedInstance = nil;
+    static dispatch_once_t once_token;
+    dispatch_once(&once_token, ^{
+        sharedInstance = [[BlitzBiService alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self->paramsDictionary = [[NSDictionary alloc] init];
+    }
+    return self;
+}
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
@@ -68,8 +88,38 @@
     NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if(deviceId) {
         [biBuilder setBlitzdeviceId:appId :deviceId];
+        [self getAllParams:appId :appToken];
     }  else {
         [self initializeDeviceId:appId :appToken];
+    }
+}
+
+- (void)getAllParams:(NSString*)appId
+                    :(NSString*)appToken {
+    [self->dataHandler getAllParams:appId :appToken :^(NSObject *response, NSError *err){
+        if (err == nil && response) {
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+            if (err == nil) {
+                NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                if (dictionary) {
+                    self->paramsDictionary = dictionary;
+                }
+            }
+        }
+    }];
+}
+
+- (nullable NSString*) getParamForKey:(NSString*)key
+                     withDefaultValue:(NSString*)defaultValue {
+    @try {
+        if (paramsDictionary && [paramsDictionary valueForKey:key]) {
+            return [paramsDictionary valueForKey:key];
+        } else {
+            return defaultValue;
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Error while getting Param for key %@", key);
+        return defaultValue;
     }
 }
 
@@ -97,6 +147,7 @@
                     [self->biBuilder setBlitzdeviceId:appId :deviceId];
                     [self updateAppSpecificDeviceIdentifier];
                     [self updateBlitzUserId];
+                    [self getAllParams:appId :appToken];
                 }
             }
         }
