@@ -502,7 +502,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (void)addClientEventTime:(NSDictionary *)biCommonParams{
-    NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"YES"];
+    NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"NO"];
     if (isBlitzTime && [isBlitzTime boolValue]) {
         [biCommonParams setValue:[NSNumber numberWithLong:[self getFormattedDate]] forKey:@"client_event_time"];
     }
