@@ -17,6 +17,7 @@
                           :(NSString*)appToken;
 - (void)updateAppSpecificDeviceIdentifier;
 - (void)updateBlitzUserId;
+- (void)initializeBlitzTime;
 @end
 
 @implementation BlitzBiService
@@ -45,7 +46,12 @@
     self->appId = appId;
     self->appToken = appToken;
     
-    self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    #ifdef DEBUG
+        self->baseUrl = @"https://blitzbi-dev.useblitz.com/";
+    #else
+        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    #endif
+    
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
@@ -59,6 +65,7 @@
     self->dataHandler = [[BlitzBiDataHandler alloc] init:baseUrl :biNetworkService ];
     
     [self checkForDeviceId:appId :appToken];
+    [self initializeBlitzTime];
 }
 
 - (void)setAppSpecificIdentifier:(NSString*)identifier {
@@ -80,6 +87,22 @@
 - (void)sendEvent:(NSDictionary*)eventDict {
     if (eventDict != nil) {
         [biBuilder sendEvent:eventDict];
+    }
+}
+
+- (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value {
+    NSMutableDictionary *commonParams = [[BlitzDeviceUtils getBlitzCommonParams]mutableCopy];
+    [commonParams setValue:value forKey:key];
+    [BlitzDeviceUtils setBlitzCommonParam:commonParams];
+}
+
+- (long)getCurrentTime {
+    @try {
+        return [[server dateWithError:nil] timeIntervalSince1970];
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::getFormattedDate Error whlle getting formatted date.");
+        return 0;
     }
 }
 
@@ -152,6 +175,25 @@
             }
         }
     }];
+}
+
+- (void)initializeBlitzTime {
+    @try {
+        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::initializeBlitzTime Error whlle initialixing blitz time.");
+    }
+}
+
+
+- (long)disconnectBlitzTime {
+    @try {
+        if (self->server) {
+            [self->server disconnect];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"BlitzBiEventSendHandler::disconnectBlitzTime Error whlle disconnecting blitz time.");
+    }
 }
 
 - (void)updateAppSpecificDeviceIdentifier {

@@ -32,6 +32,15 @@
     [[BlitzBiService sharedService] sendEvents:events];
 }
 
++ (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value {
+    [[BlitzBiService sharedService] addCommonParamsWithKey:key andValue:value];
+}
+
++ (long)getCurrentTime {
+    return [[BlitzBiService sharedService] getCurrentTime];
+}
+
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
     [eventsMap addEntriesFromDictionary:params];

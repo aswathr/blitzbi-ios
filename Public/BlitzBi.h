@@ -18,6 +18,9 @@ static NSString * _Nonnull const BlitzBiParameterRenewalPeriod = @"renewalPeriod
 static NSString * _Nonnull const BlitzBiParameterTrialDays = @"trialDays";
 static NSString * _Nonnull const BlitzBiParameterDiscountedPrice = @"discountedAmount";
 static NSString * _Nonnull const BlitzBiParameterScreenName = @"screenName";
+static NSString * _Nonnull const BlitzBiParameterTrialSubscription = @"trialSubscription";
+static NSString * _Nonnull const BlitzBiParameterFBC = @"fbc";
+static NSString * _Nonnull const BlitzBiParameterFBP = @"fbp";
 static NSString * _Nonnull const BlitzBiAction = @"action";
 
 static NSString * _Nonnull const BlitzBiParameterStringDetails1 = @"str_field0";
@@ -85,6 +88,12 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails15 = @"float_field1
 
 /// Description: Use this for logging custom events.
 + (void)sendEvents:(NSArray*)events;
+
+/// Description: Use this to add common Params.
++ (void)addCommonParamsWithKey:(NSString *)key
+                      andValue:(NSString *)value;
+
++ (long)getCurrentTime;
 
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod

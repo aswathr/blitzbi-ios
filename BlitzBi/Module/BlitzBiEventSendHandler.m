@@ -50,8 +50,7 @@
 - (void)addClientEventTime:(NSDictionary *)biCommonParams;
 - (NSData*)getJSONDataForBatch:(NSArray *)batch;
 - (long)getFormattedDate;
-- (long)initializeBlitzTime;
-- (long)disconnectBlitzTime;
+
 @end
 
 @implementation BlitzBiEventSendHandler
@@ -85,7 +84,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         
         [self unarchiveEvents];
         [self addNotification];
-        [self initializeBlitzTime];
     }
     return self;
 }
@@ -105,23 +103,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                                                object:nil];
 }
 
-- (long)initializeBlitzTime {
-    @try {
-        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
-    } @catch (NSException *exception) {
-        NSLog(@"BlitzBiEventSendHandler::initializeBlitzTime Error whlle initialixing blitz time.");
-    }
-}
 
-- (long)disconnectBlitzTime {
-    @try {
-        if (self->server) {
-            [self->server disconnect];
-        }
-    } @catch (NSException *exception) {
-        NSLog(@"BlitzBiEventSendHandler::disconnectBlitzTime Error whlle disconnecting blitz time.");
-    }
-}
 
 - (void) onPause {
     NSLog(@"BlitzBiEventSendHandler::onPause");
@@ -129,7 +111,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
     [self flushEmergency];
-    [self disconnectBlitzTime];
+    [[BlitzBiService sharedService] disconnectBlitzTime];
 }
 
 - (void) onResume {
@@ -460,18 +442,9 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     maxPendingCount = [size longValue];
 }
 
-- (long) getFormattedDate {
-    @try {
-        return [[server dateWithError:nil] timeIntervalSince1970];
-    } @catch (NSException *exception) {
-        NSLog(@"BlitzBiEventSendHandler::getFormattedDate Error whlle getting formatted date.");
-        return 0;
-    }
-}
 
 - (NSMutableDictionary*) getCommonParams {
     NSMutableDictionary *biCommonParams = [[NSMutableDictionary alloc] init];
-    [biCommonParams setValue:blitzAppId forKey:@"blitzAppId"];
     [biCommonParams setValue:blitzDeviceId  forKey:@"blitzDeviceId"];
     [biCommonParams setValue:[BlitzDeviceUtils getPlatformCode] forKey:@"platformCode"];
     [biCommonParams setValue:blitzSessionId forKey:@"blitzSessionId"];
@@ -485,6 +458,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAdTrackingEnabled] forKey:@"adTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
+    [biCommonParams addEntriesFromDictionary:[BlitzDeviceUtils getBlitzCommonParams]];
     [self addClientEventTime:biCommonParams];
     
     NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
@@ -504,7 +478,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)addClientEventTime:(NSDictionary *)biCommonParams{
     NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"NO"];
     if (isBlitzTime && [isBlitzTime boolValue]) {
-        [biCommonParams setValue:[NSNumber numberWithLong:[self getFormattedDate]] forKey:@"client_event_time"];
+        [biCommonParams setValue:[NSNumber numberWithLong:[[BlitzBiService sharedService] getCurrentTime]] forKey:@"client_event_time"];
     }
 }
 

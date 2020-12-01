@@ -32,6 +32,7 @@ static NSString * _Nonnull const BLITZ_K_P_D1_CHUNK4= @"lBlg";
 static NSString * _Nonnull const BLITZ_K_P_D2_CHUNK4= @"tr";
 static NSString * _Nonnull const BLITZ_USER_DEFAULTS_APPENDER = @",";
 static NSString * _Nonnull const BLITZ_DEVICE_ID_KEY  = @"BLITZ_DEVICE_ID_KEY";
+static NSString * _Nonnull const BLITZ_COMMON_PARAM_KEY  = @"BLITZ_COMMON_PARAM_KEY";
 static NSString * _Nonnull const BLITZ_APP_DEVICE_ID_KEY  = @"BLITZ_APP_DEVICE_ID_KEY";
 static NSString * _Nonnull const BLITZ_BLITZ_USER_ID_KEY  = @"BLITZ_BLITZ_USER_ID_KEY";
 static NSString * _Nonnull const BLITZ_SERVER_CALL_SENT_NOTIFICATION = @"SERVER_CALL_SENT_NOTIFICATION";
