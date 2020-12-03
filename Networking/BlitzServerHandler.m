@@ -64,16 +64,20 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
 
 - (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withStatusCode:(NSInteger)statusCode {
     BOOL isDownTime = statusCode == BLITZ_DOWN_TIME_STATUS_CODE;
-    [self onHttpResponse:response forRequestBuilder:request error:err withAlertVisibility:!isDownTime];
+    [self onHttpResponse:response forRequestBuilder:request error:err withAlertVisibility:!isDownTime withStatusCode:statusCode];
 }
 
-- (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withAlertVisibility:(BOOL)visiblityFlag {
+- (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withAlertVisibility:(BOOL)visiblityFlag withStatusCode:(NSInteger)statusCode {
     NSString *reqId = request.requestId;
     
     if (request.reqType == APP_REQUEST|| request.reqType == PARALLEL_REQUEST) {
         NSLog(@"Got response for APP_REQUEST -- %@, %@  - Error= %@", request.baseUrl, request.path, err);
     }
-    
+
+    if (response == nil  || (err == nil && statusCode != 200)) {
+        err = [NSError errorWithDomain:@"HTTPResponseNot200" code:statusCode userInfo:@{}];
+    }
+
     if (err) {
         NSString *httpResponseCode;
         if (response != nil && [response isKindOfClass:[NSDictionary class]]){
