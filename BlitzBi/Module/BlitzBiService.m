@@ -46,12 +46,13 @@
     self->appId = appId;
     self->appToken = appToken;
     
-    #ifdef DEBUG
-        self->baseUrl = @"https://blitzbi-dev.useblitz.com/";
-    #else
-        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
-    #endif
+//    #ifdef DEBUG
+//        self->baseUrl = @"https://blitzbi-dev.useblitz.com/";
+//    #else
+//        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+//    #endif
     
+    self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
