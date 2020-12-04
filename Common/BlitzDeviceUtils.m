@@ -371,7 +371,7 @@
     @try {
         CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
         CTCarrier *carrier = [netinfo subscriberCellularProvider];
-        if (carrier != nil) {
+        if (carrier) {
             return [carrier carrierName] ?: BLITZ_DEFAULT_CARRIER_NAME;
         }
         else {

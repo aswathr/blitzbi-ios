@@ -80,13 +80,13 @@
 }
 
 - (void)sendEvents:(NSArray*)events{
-    if (events != nil) {
+    if (events) {
         [biBuilder sendEvents:events];
     }
 }
 
 - (void)sendEvent:(NSDictionary*)eventDict {
-    if (eventDict != nil) {
+    if (eventDict) {
         [biBuilder sendEvent:eventDict];
     }
 }
@@ -121,14 +121,18 @@
 - (void)getAllParams:(NSString*)appId
                     :(NSString*)appToken {
     [self->dataHandler getAllParams:appId :appToken :^(NSObject *response, NSError *err){
-        if (err == nil && response) {
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
-            if (err == nil) {
-                NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-                if (dictionary) {
-                    self->paramsDictionary = dictionary;
+        @try {
+            if (err == nil && response) {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                if (err == nil && jsonData) {
+                    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                    if (err == nil && dictionary) {
+                        self->paramsDictionary = dictionary;
+                    }
                 }
             }
+        } @catch (NSException *err) {
+            NSLog(@"[BlitzBi] Error whlle getting params with error %@", err);
         }
     }];
 }
@@ -160,19 +164,25 @@
     }
     
     [self->dataHandler updateDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
-        if (err == nil) {
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
-            if (err == nil) {
-                NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-                NSString *blitzDeviceId = [jsonDataDictionary objectForKey:@"blitzDeviceId"];
-                if (blitzDeviceId != nil) {
-                    [BlitzDeviceUtils setBlitzDeviceId:blitzDeviceId];
-                    [self->biBuilder setBlitzdeviceId:appId :deviceId];
-                    [self updateAppSpecificDeviceIdentifier];
-                    [self updateBlitzUserId];
-                    [self getAllParams:appId :appToken];
+        @try {
+            if (err == nil && response) {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                if (err == nil && jsonData) {
+                    NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                    if (err == nil && jsonDataDictionary) {
+                        NSString *blitzDeviceId = [jsonDataDictionary objectForKey:@"blitzDeviceId"];
+                        if (blitzDeviceId) {
+                            [BlitzDeviceUtils setBlitzDeviceId:blitzDeviceId];
+                            [self->biBuilder setBlitzdeviceId:appId :deviceId];
+                            [self updateAppSpecificDeviceIdentifier];
+                            [self updateBlitzUserId];
+                            [self getAllParams:appId :appToken];
+                        }
+                    }
                 }
             }
+        } @catch (NSException *err) {
+            NSLog(@"[BlitzBi] Error whlle updating device Id with error %@", err);
         }
     }];
 }
@@ -209,15 +219,21 @@
         }
         
         [self->dataHandler updateAppSpecificDeviceIdentifier:appId :appToken :jsonData :^(NSObject *response, NSError *err){
-            if (err == nil) {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
-                if (err == nil) {
-                    NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-                    NSString *appSpecificDeviceId = [jsonDataDictionary objectForKey:@"appSpecificDeviceId"];
-                    if (appSpecificDeviceId != nil) {
-                        [BlitzDeviceUtils setAppDeviceId:appSpecificDeviceId];
+            @try {
+                if (err == nil && response) {
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                    if (err == nil && jsonData) {
+                        NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                        if (err == nil && jsonDataDictionary) {
+                            NSString *appSpecificDeviceId = [jsonDataDictionary objectForKey:@"appSpecificDeviceId"];
+                            if (appSpecificDeviceId) {
+                                [BlitzDeviceUtils setAppDeviceId:appSpecificDeviceId];
+                            }
+                        }
                     }
                 }
+            } @catch (NSException *err) {
+                NSLog(@"[BlitzBi] Error while updating app specific device identifier with error %@", err);
             }
         }];
     }
@@ -236,15 +252,21 @@
         }
         
         [self->dataHandler updateBlitzUserId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
-            if (err == nil) {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
-                if (err == nil) {
-                    NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-                    NSString *blitzUserId = [jsonDataDictionary objectForKey:@"blitzUserId"];
-                    if (blitzUserId != nil) {
-                        [BlitzDeviceUtils setBlitzUserId:blitzUserId];
+            @try {
+                if (err == nil && response) {
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                    if (err == nil && jsonData) {
+                        NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                        if (err == nil && jsonDataDictionary) {
+                            NSString *blitzUserId = [jsonDataDictionary objectForKey:@"blitzUserId"];
+                            if (blitzUserId) {
+                                [BlitzDeviceUtils setBlitzUserId:blitzUserId];
+                            }
+                        }
                     }
                 }
+            } @catch (NSException *err) {
+                NSLog(@"[BlitzBi] Error while updating blitz user id with error %@", err);
             }
         }];
     }

@@ -14,8 +14,6 @@
 
 #define COMMON_FIELD_3 @"common_field_3"
 #define FILE_NAME @"filename"
-#define FLUSH_AFTER_APP_PARAM_KEY @"bi_flush_after_secs"
-#define MAX_BATCH_SIZE_APP_PARAM_KEY @"bi_max_batch_size"
 
 @interface BlitzBiEventSendHandler()
 - (void)addNotification;
@@ -202,7 +200,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     NSMutableArray *eventsCopy = [NSMutableArray new];
     for (NSDictionary *event in events) {
         NSString *eventName = [event objectForKey:BLITZ_EVENT_NAME_TAG];
-        if (eventName != nil && eventName.length > 0) {
+        if (eventName && eventName.length > 0) {
             [eventsCopy addObject:[event copy]];
         }
     }
@@ -269,9 +267,8 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                 dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
                 
                 [eventRepository processJsonRequest:url :jsonData :^(__attribute__((unused)) NSObject *response, NSError *err) {
-                    if(err != nil) {
+                    if(err) {
                         didFail = YES;
-                        //Send error to crashlytics
                         NSLog(@"[BlitzBi] Error in getting response from server for jsondata %@ with error %@", jsonData, err);
                     }
                     dispatch_semaphore_signal(semaphore);
@@ -422,7 +419,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (BOOL)isAppIdAvailable {
-    return isAppIdValidated && blitzDeviceId != nil;
+    return isAppIdValidated && blitzDeviceId;
 }
 
 - (void)updateNextFlushTime {

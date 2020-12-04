@@ -13,24 +13,6 @@
 #import <BlitzConstants.h>
 
 @implementation BlitzServerHandler
-
-BlitzKWConcurrentDictionary *blitzRequestRetry;
-
-NSMutableArray *blitzPendingRequests;
-NSArray<NSNumber *> *BLITZ_INTERNET_ERROR_CODES;
-NSArray<NSNumber *> *BLITZ_SERVER_ERROR_CODES;
-NSArray<NSNumber *> *BLITZ_RECOVERABLE_ERROR_CODES;
-NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
-
-+ (instancetype)serverHandler {
-    static BlitzServerHandler *sharedInstace = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstace = [[BlitzServerHandler alloc] init];
-    });
-    return sharedInstace;
-}
-
 - (instancetype)init {
     if (self = [super init]) {
         blitzRequestRetry = [[BlitzKWConcurrentDictionary alloc] init];
@@ -54,7 +36,7 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *requestId = [self getUniqueRequestId];
         [requestBuilder setRequestId:requestId];
-        [blitzRequestRetry setObject:[NSNumber numberWithInteger:0] forKey:requestId];
+        [self->blitzRequestRetry setObject:[NSNumber numberWithInteger:0] forKey:requestId];
         [BlitzHttpExecutor executeRequest:requestBuilder listener:self];
         requestBuilder.responseBlock = ^(NSObject *data, NSError *error) {
             completionBlock(data,error);
@@ -63,11 +45,6 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
 }
 
 - (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withStatusCode:(NSInteger)statusCode {
-    BOOL isDownTime = statusCode == BLITZ_DOWN_TIME_STATUS_CODE;
-    [self onHttpResponse:response forRequestBuilder:request error:err withAlertVisibility:!isDownTime withStatusCode:statusCode];
-}
-
-- (void)onHttpResponse:(id)response forRequestBuilder:(BlitzRequestBuilder *)request error:(NSError *)err withAlertVisibility:(BOOL)visiblityFlag withStatusCode:(NSInteger)statusCode {
     NSString *reqId = request.requestId;
     
     if (request.reqType == APP_REQUEST|| request.reqType == PARALLEL_REQUEST) {
@@ -80,7 +57,7 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
 
     if (err) {
         NSString *httpResponseCode;
-        if (response != nil && [response isKindOfClass:[NSDictionary class]]){
+        if (response && [response isKindOfClass:[NSDictionary class]]){
             NSDictionary *httpResponse = (NSDictionary *) response;
             httpResponseCode = [httpResponse objectForKey:@"code"];
         }
@@ -117,7 +94,6 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, BLITZ_DELAY_PER_RETRY), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^{
                     NSLog(@"[BlitzBi] Will retry again, retry count being %li", (long)retry);
                     [BlitzHttpExecutor executeRequest:request listener:self];
-                    [self sendFailueOrRetryEvent:request error:err isRetry:YES];
                 });
                 return;
             }
@@ -126,27 +102,10 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
             [blitzRequestRetry setObject:[NSNumber numberWithInteger:0] forKey:reqId];
         }
         
-        if (request.reqType != BI_REQUEST) {
-            [self sendFailueOrRetryEvent:request error:err isRetry:NO];
-        }
-        
-        // If the request is a BI REQUEST, we have done enough retries and processing, return here
-        // No need to add to pendingrequests, ignoring this request is the best case we can do
-        if ((httpResponseCode != nil && ([httpResponseCode isEqualToString: @"401"] || [httpResponseCode isEqualToString: @"451"] || [httpResponseCode isEqualToString:BLITZ_FORBIDDED_ERROR_CODE])) || (request.reqType != BI_REQUEST && request.reqType != ERROR_FREE_REQUEST && request.reqType != PARALLEL_ERROR_FREE_REQUEST)) {
+        if ((httpResponseCode && ([httpResponseCode isEqualToString: @"401"] || [httpResponseCode isEqualToString: @"451"] || [httpResponseCode isEqualToString:BLITZ_FORBIDDED_ERROR_CODE])) || (request.reqType != BI_REQUEST && request.reqType != ERROR_FREE_REQUEST && request.reqType != PARALLEL_ERROR_FREE_REQUEST)) {
             
-            /*show connection error dialog*/
-            
-            BOOL shouldAddToPendingRequest = NO;
-            if (response==nil || ![response isKindOfClass:[NSDictionary class]]) {
-                shouldAddToPendingRequest = [self callShowAlert:err forRequest:request forResponseCode: httpResponseCode withResponse:nil withAlertVisibility:visiblityFlag];
-            } else {
-                shouldAddToPendingRequest = [self callShowAlert:err forRequest:request forResponseCode: httpResponseCode withResponse:response withAlertVisibility:visiblityFlag];
-            }
-            
-            if (shouldAddToPendingRequest) {
-                @synchronized(self) {
-                    [blitzPendingRequests addObject:request];
-                }
+            @synchronized(self) {
+                [blitzPendingRequests addObject:request];
             }
         }
         // This is done to pass HTTP response to caller
@@ -157,7 +116,7 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
         }
     }
     
-    if (request.responseBlock != nil) {
+    if (request.responseBlock) {
         request.responseBlock(response, err);
     }
     
@@ -168,12 +127,6 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
     if (err == nil && [blitzRequestRetry objectForKey:reqId]) {
         [blitzRequestRetry removeObjectForKey:reqId];
     }
-}
-
-/*show connection error dialog*/
-- (BOOL)callShowAlert:(NSError *)err forRequest:(BlitzRequestBuilder *)request forResponseCode:(NSString *) responseCode withResponse:(NSDictionary*) response withAlertVisibility:(BOOL)showAlert {
-    
-    return YES;
 }
 
 - (void)retryPendingCalls {
@@ -188,12 +141,6 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
 
 - (BOOL)arrayContains:(NSArray *)arr num:(NSNumber *)num {
     return [arr containsObject:num];
-}
-
-- (void)sendFailueOrRetryEvent:(BlitzRequestBuilder *)requestBuilder error:(NSError *)error isRetry:(BOOL)isRetry {
-    if (requestBuilder.reqType == BI_REQUEST) {
-        return;
-    }
 }
 
 @end

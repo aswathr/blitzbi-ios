@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <BlitzHttpResponseListener.h>
+#import <BlitzKWConcurrentDictionary.h>
 #import <BlitzConstants.h>
 
 @class BlitzRequestBuilder;
@@ -25,7 +26,15 @@
 - (void)serverCall:(BlitzRequestBuilder *)requestBuilder withCompletionBlock:(void(^)(NSObject *, NSError *))completionBlock;
 @end
 
-@interface BlitzServerHandler : NSObject<BlitzHttpResponseListener,PBlitzServerHandler>
-+ (id)serverHandler;
+@interface BlitzServerHandler : NSObject<BlitzHttpResponseListener,PBlitzServerHandler> {
+    BlitzKWConcurrentDictionary *blitzRequestRetry;
+
+    NSMutableArray *blitzPendingRequests;
+    NSArray<NSNumber *> *BLITZ_INTERNET_ERROR_CODES;
+    NSArray<NSNumber *> *BLITZ_SERVER_ERROR_CODES;
+    NSArray<NSNumber *> *BLITZ_RECOVERABLE_ERROR_CODES;
+    NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
+}
+
 - (void)retryPendingCalls;
 @end
