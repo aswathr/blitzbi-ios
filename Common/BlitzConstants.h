@@ -78,4 +78,20 @@ static NSInteger const BLITZ_ROOT_DISPERSION_MAX = 100;
 static NSInteger const BLITZ_SERVER_RESPONSE_DELAY_MAX = 750;
 static NSInteger const BLITZ_UDP_SOCKET_TIMEOUT_IN_MILLIS = 30000;
 
+// Default constants
+static NSString * _Nonnull const BLITZ_DEFAULT_VERSION = @"0.0.0";
+static NSString * _Nonnull const BLITZ_DEFAULT_TIMEZONE = @"tz";
+static NSString * _Nonnull const BLITZ_DEFAULT_IDFA = @"";
+static NSString * _Nonnull const BLITZ_DEFAULT_IDFV = @"";
+static NSString * _Nonnull const BLITZ_DEFAULT_CONN_DETAILS = @"unknown";
+static NSString * _Nonnull const BLITZ_DEFAULT_CARRIER_NAME = @"unknown";
+static NSString * _Nonnull const BLITZ_DEFAULT_AD_TRACKING_ENABLED = @"false";
+static NSString * _Nonnull const BLITZ_DEFAULT_APP_TRACKING_ENABLED = @"false";
+static NSString * _Nonnull const BLITZ_DEFAULT_DEVICE_NAME = @"";
+static NSString * _Nonnull const BLITZ_DEFAULT_DEVICE_VERSION = @"";
+static NSString * _Nonnull const BLITZ_DEFAULT_NETWORK_VERSION= @"";
+static NSString * _Nonnull const BLITZ_DEFAULT_DARWIN_VERSION= @"";
+static NSString * _Nonnull const BLITZ_DEFAULT_APP_NAME_AND_VERSION= @"BlitzBi/0.0.0";
+static NSString * _Nonnull const BLITZ_DEFAULT_USER_AGENT     = @"BlitzBi/0.0.0";
+static NSNumber * _Nonnull const BLITZ_DEFAULT_OSID = 0;
 #endif
