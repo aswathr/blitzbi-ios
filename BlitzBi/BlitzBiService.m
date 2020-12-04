@@ -42,17 +42,17 @@
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
-             :(BOOL)adTracking {
+             :(BOOL)adTracking
+             :(BOOL)debugEnabled{
     self->appId = appId;
     self->appToken = appToken;
     
-//    #ifdef DEBUG
-//        self->baseUrl = @"https://blitzbi-dev.useblitz.com/";
-//    #else
-//        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
-//    #endif
+    if (debugEnabled) {
+        self->baseUrl = @"https://blitzbi-test.useblitz.com/";
+    } else {
+        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+    }
     
-    self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
     
     BlitzNetworkModuleBuilder *networkBuilder = [[BlitzNetworkModuleBuilder alloc] init];
@@ -63,7 +63,7 @@
     [handlerBuilder setParams:[NSNumber numberWithInt:60] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService withAdTracking:adTracking];
     self->biBuilder = [handlerBuilder build];
     
-    self->dataHandler = [[BlitzBiDataHandler alloc] init:baseUrl :biNetworkService ];
+    self->dataHandler = [[BlitzBiDataHandler alloc]initWithBaseUrl:baseUrl andNetworkService:biNetworkService];
     
     [self checkForDeviceId:appId :appToken];
     [self initializeBlitzTime];
@@ -102,7 +102,7 @@
     @try {
         return [[server dateWithError:nil] timeIntervalSince1970];
     } @catch (NSException *exception) {
-        NSLog(@"BlitzBiEventSendHandler::getFormattedDate Error whlle getting formatted date.");
+        NSLog(@"[BlitzBi] Error whlle getting formatted date.");
         return 0;
     }
 }
@@ -142,7 +142,7 @@
             return defaultValue;
         }
     } @catch (NSException *exception) {
-        NSLog(@"Error while getting Param for key %@", key);
+        NSLog(@"[BlitzBi] Error while getting Param for key %@", key);
         return defaultValue;
     }
 }
@@ -159,7 +159,6 @@
         return;
     }
     
-    NSLog(@"initialize -> %@", jsonData);
     [self->dataHandler updateDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
         if (err == nil) {
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
@@ -182,18 +181,18 @@
     @try {
         self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
     } @catch (NSException *exception) {
-        NSLog(@"BlitzBiEventSendHandler::initializeBlitzTime Error whlle initialixing blitz time.");
+        NSLog(@"[BlitzBi] Error whlle initialixing blitz time.");
     }
 }
 
 
-- (long)disconnectBlitzTime {
+- (void)disconnectBlitzTime {
     @try {
         if (self->server) {
             [self->server disconnect];
         }
     } @catch (NSException *exception) {
-        NSLog(@"BlitzBiEventSendHandler::disconnectBlitzTime Error whlle disconnecting blitz time.");
+        NSLog(@"[BlitzBi] Error whlle disconnecting blitz time.");
     }
 }
 

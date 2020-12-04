@@ -71,7 +71,7 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
     NSString *reqId = request.requestId;
     
     if (request.reqType == APP_REQUEST|| request.reqType == PARALLEL_REQUEST) {
-        NSLog(@"Got response for APP_REQUEST -- %@, %@  - Error= %@", request.baseUrl, request.path, err);
+        NSLog(@"[BlitzBi] Got response for APP_REQUEST -- %@, %@  - Error= %@", request.baseUrl, request.path, err);
     }
 
     if (response == nil  || (err == nil && statusCode != 200)) {
@@ -97,7 +97,7 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
             httpResponseCode = BLITZ_FORBIDDED_ERROR_CODE;
         }
         if (request.reqType == APP_REQUEST) {
-            NSLog(@"Got error from APP_REQUEST -- %@, %@", request.baseUrl, request.path);
+            NSLog(@"[BlitzBi] Got error from APP_REQUEST -- %@, %@", request.baseUrl, request.path);
         }
         
         NSNumber *errorCode = [NSNumber numberWithInteger:[err code]];
@@ -115,7 +115,7 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
                 [blitzRequestRetry setObject:[NSNumber numberWithInteger:retry] forKey:reqId];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, BLITZ_DELAY_PER_RETRY), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^{
-                    NSLog(@"will retry again, retry count being %li", (long)retry);
+                    NSLog(@"[BlitzBi] Will retry again, retry count being %li", (long)retry);
                     [BlitzHttpExecutor executeRequest:request listener:self];
                     [self sendFailueOrRetryEvent:request error:err isRetry:YES];
                 });
@@ -161,36 +161,12 @@ NSArray<NSNumber *> *BLITZ_BAD_REQUEST_ERROR_CODES;
         request.responseBlock(response, err);
     }
     
-    /* the success of failure call back will on the same thread. Any main thread specifics should be handled in the listener itself */
-    if (request.responseListener != nil) {
-        if (err != nil) {
-            if (response != nil) {
-                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:err.userInfo];
-                NSError *responseError = [NSError errorWithDomain:err.domain code:err.code userInfo:dict];
-                err = responseError;
-            }
-            [request.responseListener failure:err extraInfo:request.extraInfo];
-        }
-        else {
-            if ([((id)(request.responseListener)) respondsToSelector:@selector(success:withRequestTime:)]) {
-                [((id)(request.responseListener)) success:response withRequestTime:request.requestTotalTime];
-            }
-            else {
-                [request.responseListener success:response];
-            }
-        }
-    }
-    
     if (request.reqType == BI_REQUEST || request.reqType == ERROR_FREE_REQUEST || request.reqType == PARALLEL_ERROR_FREE_REQUEST) {
         return;
     }
     
     if (err == nil && [blitzRequestRetry objectForKey:reqId]) {
         [blitzRequestRetry removeObjectForKey:reqId];
-    }
-    
-    if (err == nil && request.pendingRequest == YES) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:BLITZ_SERVER_CALL_SENT_NOTIFICATION object:nil];
     }
 }
 

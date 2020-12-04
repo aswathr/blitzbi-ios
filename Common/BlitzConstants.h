@@ -12,15 +12,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define TICK(XXX) NSDate * XXX = [NSDate date]
-#define TOCK(XXX)                                                             \
-NSLog(@"[MethodTime] <%@>  %s: %f",                                       \
-[[NSString stringWithUTF8String:__FILE__] lastPathComponent], #XXX, \
--[XXX timeIntervalSinceNow])
-#define USERIDASSTRING \
-[[[UserService sharedInstance] retrieveUser] getUserIdAsString]
-#define SPAM_CONTACT_LIST [NSArray arrayWithObjects:@"spam", @"identified as spam", @"identified by eyecon", @"", nil]
-
 static NSString * _Nonnull const BLITZ_CACHE_PREFIX_MACRO = @"cache_prefix_";
 static NSString * _Nonnull const BLITZ_P_D1_C1 = @"NuW9";
 static NSString * _Nonnull const BLITZ_P_D2_C1 = @"6N";
@@ -35,7 +26,6 @@ static NSString * _Nonnull const BLITZ_DEVICE_ID_KEY  = @"BLITZ_DEVICE_ID_KEY";
 static NSString * _Nonnull const BLITZ_COMMON_PARAM_KEY  = @"BLITZ_COMMON_PARAM_KEY";
 static NSString * _Nonnull const BLITZ_APP_DEVICE_ID_KEY  = @"BLITZ_APP_DEVICE_ID_KEY";
 static NSString * _Nonnull const BLITZ_BLITZ_USER_ID_KEY  = @"BLITZ_BLITZ_USER_ID_KEY";
-static NSString * _Nonnull const BLITZ_SERVER_CALL_SENT_NOTIFICATION = @"SERVER_CALL_SENT_NOTIFICATION";
 static NSString * _Nonnull const BLITZ_EVENT_NAME_TAG = @"eventName";
 
 static NSString * _Nonnull const BLITZ_POST_METHOD = @"POST";
@@ -51,28 +41,9 @@ static NSString * _Nonnull const BLITZ_KEY_CACHED_BOOT_TIME = @"com.blitz.bi.tim
 static NSString * _Nonnull const BLITZ_KEY_CACHED_DEVICE_UPTIME = @"com.blitz.bi.time.cached_device_uptime";
 static NSString * _Nonnull const BLITZ_KEY_CACHED_SNTP_TIME = @"com.blitz.bi.time.cached_sntp_time";
 
-static NSInteger const BLITZ_RESPONSE_INDEX_ORIGINATE_TIME = 0;
-static NSInteger const BLITZ_RESPONSE_INDEX_RECEIVE_TIME = 1;
-static NSInteger const BLITZ_RESPONSE_INDEX_TRANSMIT_TIME = 2;
-static NSInteger const BLITZ_RESPONSE_INDEX_RESPONSE_TIME = 3;
-static NSInteger const BLITZ_RESPONSE_INDEX_ROOT_DELAY = 4;
-static NSInteger const BLITZ_RESPONSE_INDEX_DISPERSION = 5;
-static NSInteger const BLITZ_RESPONSE_INDEX_STRATUM = 6;
-static NSInteger const BLITZ_RESPONSE_INDEX_RESPONSE_TICKS = 7;
-static NSInteger const BLITZ_RESPONSE_INDEX_SIZE = 8;
-static NSInteger const BLITZ_NTP_PORT = 123;
-static NSInteger const BLITZ_NTP_MODE = 3;
-static NSInteger const BLITZ_NTP_VERSION = 3;
-static NSInteger const BLITZ_NTP_PACKET_SIZE = 48;
-static NSInteger const BLITZ_INDEX_VERSION = 0;
-static NSInteger const BLITZ_INDEX_ROOT_DELAY = 4;
-static NSInteger const BLITZ_INDEX_ROOT_DISPERSION = 8;
-static NSInteger const BLITZ_INDEX_ORIGINATE_TIME = 24;
-static NSInteger const BLITZ_INDEX_RECEIVE_TIME = 32;
-static NSInteger const BLITZ_INDEX_TRANSMIT_TIME = 40;
-static NSInteger const BLITZ_OFFSET_1900_TO_1970 = (365L * 70L + 17L) * 24L * 60L * 60L;
-
+// Blitz Time Constants
 static NSString * _Nonnull const BLITZ_NTP_HOST = @"time.google.com";
+
 static NSInteger const BLITZ_ROOT_DELAY_MAX = 100;
 static NSInteger const BLITZ_ROOT_DISPERSION_MAX = 100;
 static NSInteger const BLITZ_SERVER_RESPONSE_DELAY_MAX = 750;

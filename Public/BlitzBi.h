@@ -9,13 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <BlitzBiParameterConstants.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
+
 @interface BlitzBi : NSObject
-/// Description: Initialize BlitzBi sdk with the app_id and app_token.
+
+/// Description: Initialize BlitzBi sdk with the app_id and app_token with extra parameters as adTracking.
 + (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)andAppToken
          andAllowAdTracking:(BOOL)adTracking;
+
+/// Description: Initialize BlitzBi sdk with the app_id and app_token with extra parameters as adTracking and debugEnabled.
++ (void)initailiseWithAppId:(NSString*)appId
+                andAppToken:(NSString*)appToken
+         andAllowAdTracking:(BOOL)adTracking
+          andIsDebugEnabled:(BOOL)debugEnabled;
 
 /// Description: Initialize device Identifier.
 + (void)setAppSpecificIdentifier:(NSString*)deviceIdentifier;
