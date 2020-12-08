@@ -50,7 +50,7 @@
     if (debugEnabled) {
         self->baseUrl = @"https://blitzbi-test.useblitz.com/";
     } else {
-        self->baseUrl = @"https://prod-blitzbi.useblitz.com/";
+        self->baseUrl = @"https://prod-blitzbi-infra.useblitz.com/";
     }
     
     self->baseUrls = [[BaseUrls alloc] init:baseUrl];
