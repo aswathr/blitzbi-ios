@@ -140,7 +140,7 @@
     while((key = [enumerator nextObject]))
         [eventsMap setValue:[NSNumber numberWithInt:[[floatParams objectForKey:key] floatValue]] forKey:key];
     
-    [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"blitz_custom", eventName] forKey:@"eventName"];
+    [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"bz", eventName] forKey:@"eventName"];
     [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 @end
