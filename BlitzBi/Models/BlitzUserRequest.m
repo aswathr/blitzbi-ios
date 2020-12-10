@@ -20,6 +20,7 @@
     }
     return self;
 }
+
 - (NSMutableDictionary*)dictionary {
     NSMutableDictionary *requestDict = [[NSMutableDictionary alloc] init];
     [requestDict setValue:blitzAppId forKey:@"blitzAppId"];
