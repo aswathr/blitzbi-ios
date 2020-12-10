@@ -14,12 +14,17 @@
 #import <netdb.h>
 #import <sys/time.h>
 
-@implementation BlitzTime {
+@interface BlitzTime() {
     NSTimeInterval _timeout;
-    int _socket;
-    
     NSTimeInterval _offset;
+    NSUInteger _port;
+    int _socket;
+    NSString *_hostname;
+    BOOL connected;
 }
+@end
+
+@implementation BlitzTime
 
 //! The number of seconds from 1900 to 1970
 static const uint32_t kSecondsFrom1900To1970 = 2208988800UL;
@@ -31,18 +36,8 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
     return ufixed64((uint32_t)tv.tv_sec + kSecondsFrom1900To1970, tv.tv_usec * (pow(2, 32) / USEC_PER_SEC));
 }
 
-+ (BlitzTime *)defaultServer {
-    static BlitzTime *server = nil;
-    static dispatch_once_t onceToken = 0;
-    dispatch_once(&onceToken, ^{
-        server = [[BlitzTime alloc] init];
-    });
-    return server;
-}
-
 - (instancetype)initWithHostname:(NSString *)hostname port:(NSUInteger)port {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         _hostname = [hostname copy];
         _port = port;
         _timeout = 5.0;
@@ -51,14 +46,6 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         _offset = NAN;
     }
     return self;
-}
-
-- (instancetype)initWithHostname:(NSString *)hostname {
-    return [self initWithHostname:hostname port:123];
-}
-
-- (instancetype)init {
-    return [self initWithHostname:@"pool.ntp.org"];
 }
 
 - (void)dealloc {

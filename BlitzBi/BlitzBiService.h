@@ -38,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BlitzBiService*)sharedService;
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
-             :(BOOL)adTracking;
+             :(BOOL)adTracking
+             :(BOOL)debugEnabled;
 - (void)setAppSpecificIdentifier:(NSString*)deviceIdentifier;
 - (void)setBlitzUserId:(NSString*)userIdentifier;
 - (void)sendEvent:(NSDictionary*)eventDict;

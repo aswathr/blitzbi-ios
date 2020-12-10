@@ -10,6 +10,7 @@
 #import <BlitzDeviceUtils.h>
 
 @implementation BlitzDeviceRequest
+
 - (instancetype)init:(NSString*)appId
                     :(NSString*)deviceId
                     :(NSString*)specificDeviceId {
@@ -22,6 +23,7 @@
     }
     return self;
 }
+
 - (NSMutableDictionary*)dictionary {
     NSMutableDictionary *requestDict = [[NSMutableDictionary alloc] init];
     [requestDict setValue:blitzAppId forKey:@"blitzAppId"];

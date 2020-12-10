@@ -20,26 +20,9 @@
             configuration.HTTPMaximumConnectionsPerHost = 1;
             [configuration setTimeoutIntervalForRequest:30];
             session = [NSURLSession sessionWithConfiguration:configuration];
-            [BlitzHttpExecutor applyPinningToNSURLSession:session];
         }
     }
     return session;
-}
-
-// TODO: @kash Add pinning.
-+ (void)applyPinningToNSURLSession:(NSURLSession *)session {
-    //    NSString *cerPath = [[NSBundle bundleForClass:self] pathForResource:@"onsequel" ofType:@"cer"];
-    //    //[[NSBundle mainBundle] pathForResource:@"onsequel" ofType:@"cer"];
-    //    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
-    //    NSString *certPathAmazon = [[NSBundle bundleForClass:self] pathForResource:@"onsequel-am" ofType:@"cer"];
-    //    NSData *certAmazonData = [NSData dataWithContentsOfFile:certPathAmazon];
-    //
-    //    NSPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-    //    policy.validatesDomainName = NO;
-    //
-    //    policy.pinnedCertificates = @[certData, certAmazonData];
-    //    [policy setAllowInvalidCertificates:YES];
-    //    session.securityPolicy = policy;
 }
 
 + (NSURLSession *)getNSURLSessionWithNoConnectionLimit {
@@ -49,7 +32,6 @@
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
             [configuration setTimeoutIntervalForRequest:30];
             session = [NSURLSession sessionWithConfiguration:configuration];
-            [BlitzHttpExecutor applyPinningToNSURLSession:session];
         }
     }
     return session;
@@ -63,7 +45,6 @@
             configuration.HTTPMaximumConnectionsPerHost = 1;
             [configuration setTimeoutIntervalForRequest:60];
             biSession = [NSURLSession sessionWithConfiguration:configuration];
-            [BlitzHttpExecutor applyPinningToNSURLSession:biSession];
         }
     }
     return biSession;

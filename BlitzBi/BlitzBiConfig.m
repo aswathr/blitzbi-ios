@@ -9,7 +9,7 @@
 #import <BlitzBiConfig.h>
 
 @implementation BlitzBiConfig
-- (instancetype)init:(NSString*) baseUrl {
+- (instancetype)initWithBaseUrl:(NSString*) baseUrl {
     if (self = [super init]) {
         BASE_URL = baseUrl;
     }
