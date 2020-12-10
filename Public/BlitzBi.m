@@ -13,7 +13,14 @@
 + (void)initailiseWithAppId:(NSString*)appId
                 andAppToken:(NSString*)appToken
          andAllowAdTracking:(BOOL)adTracking {
-    [[BlitzBiService sharedService] setUp:appId :appToken :adTracking];
+    [[BlitzBiService sharedService] setUp:appId :appToken :adTracking : NO];
+}
+
++ (void)initailiseWithAppId:(NSString*)appId
+                andAppToken:(NSString*)appToken
+         andAllowAdTracking:(BOOL)adTracking
+          andIsDebugEnabled:(BOOL)debugEnabled {
+    [[BlitzBiService sharedService] setUp:appId :appToken :adTracking :debugEnabled];
 }
 
 + (void)setAppSpecificIdentifier:(NSString*)identifier {
@@ -133,7 +140,7 @@
     while((key = [enumerator nextObject]))
         [eventsMap setValue:[NSNumber numberWithInt:[[floatParams objectForKey:key] floatValue]] forKey:key];
     
-    [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"blitz_custom", eventName] forKey:@"eventName"];
+    [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"bz", eventName] forKey:@"eventName"];
     [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 @end

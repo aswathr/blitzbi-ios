@@ -18,7 +18,7 @@
     BlitzServerConfig *config = [[BlitzServerConfig alloc] init:self.baseUrls];
     
     BlitzNetworkDataTransferService *service = [[BlitzNetworkDataTransferService alloc] init:config
-                                                                                            :self.serverHandler];
+                                                                                    :self.serverHandler];
     return service;
 }
 @end

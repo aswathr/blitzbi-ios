@@ -17,28 +17,6 @@
 
 NSString *kBlitzReachabilityChangedNotification = @"kBlitzNetworkReachabilityChangedNotification";
 
-#pragma mark - Supporting functions
-
-#define kShouldPrintReachabilityFlags 1
-
-static void PrintReachabilityFlags(SCNetworkReachabilityFlags flags, const char *comment) {
-#if kShouldPrintReachabilityFlags
-    
-    NSLog(@"Reachability Flag Status: %c%c %c%c%c%c%c%c%c %s\n",
-          (flags & kSCNetworkReachabilityFlagsIsWWAN) ? 'W' : '-',
-          (flags & kSCNetworkReachabilityFlagsReachable) ? 'R' : '-',
-          
-          (flags & kSCNetworkReachabilityFlagsTransientConnection) ? 't' : '-',
-          (flags & kSCNetworkReachabilityFlagsConnectionRequired) ? 'c' : '-',
-          (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) ? 'C' : '-',
-          (flags & kSCNetworkReachabilityFlagsInterventionRequired) ? 'i' : '-',
-          (flags & kSCNetworkReachabilityFlagsConnectionOnDemand) ? 'D' : '-',
-          (flags & kSCNetworkReachabilityFlagsIsLocalAddress) ? 'l' : '-',
-          (flags & kSCNetworkReachabilityFlagsIsDirect) ? 'd' : '-',
-          comment);
-#endif
-}
-
 #pragma mark - Reachability implementation
 
 @implementation BlitzReachability {
@@ -89,7 +67,6 @@ static void PrintReachabilityFlags(SCNetworkReachabilityFlags flags, const char 
 #pragma mark - Network Flag Handling
 
 - (NetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags {
-    PrintReachabilityFlags(flags, "networkStatusForFlags");
     if ((flags & kSCNetworkReachabilityFlagsReachable) == 0) {
         // The target host is not reachable.
         return NotReachable;
