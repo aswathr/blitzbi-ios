@@ -30,7 +30,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:url];
-    [requestBuilder setPath:@"events"];
+    [requestBuilder setPath:[@"app/{appId}/events" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:[self getRequestHeaders]];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:BI_REQUEST];
@@ -45,7 +45,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:url];
-    [requestBuilder setPath:@"events"];
+    [requestBuilder setPath:[@"app/{appId}/events" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:[self getRequestHeaders]];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:BI_REQUEST];
