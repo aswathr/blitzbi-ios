@@ -138,7 +138,7 @@
     enumerator = [floatParams keyEnumerator];
     // extra parens to suppress warning about using = instead of ==
     while((key = [enumerator nextObject]))
-        [eventsMap setValue:[NSNumber numberWithInt:[[floatParams objectForKey:key] floatValue]] forKey:key];
+        [eventsMap setValue:[NSNumber numberWithFloat:[[floatParams objectForKey:key] floatValue]] forKey:key];
     
     [eventsMap setObject:[NSString stringWithFormat:@"%@_%@", @"bz", eventName] forKey:@"eventName"];
     [[BlitzBiService sharedService] sendEvent:eventsMap];
