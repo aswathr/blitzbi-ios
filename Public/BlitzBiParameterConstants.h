@@ -38,6 +38,17 @@ static NSString * _Nonnull const BlitzBiParameterStringDetails12 = @"str_field11
 static NSString * _Nonnull const BlitzBiParameterStringDetails13 = @"str_field12";
 static NSString * _Nonnull const BlitzBiParameterStringDetails14 = @"str_field13";
 static NSString * _Nonnull const BlitzBiParameterStringDetails15 = @"str_field14";
+static NSString * _Nonnull const BlitzBiParameterStringDetails16 = @"str_field15";
+static NSString * _Nonnull const BlitzBiParameterStringDetails17 = @"str_field16";
+static NSString * _Nonnull const BlitzBiParameterStringDetails18 = @"str_field17";
+static NSString * _Nonnull const BlitzBiParameterStringDetails19 = @"str_field18";
+static NSString * _Nonnull const BlitzBiParameterStringDetails20 = @"str_field19";
+static NSString * _Nonnull const BlitzBiParameterStringDetails21 = @"str_field20";
+static NSString * _Nonnull const BlitzBiParameterStringDetails22 = @"str_field21";
+static NSString * _Nonnull const BlitzBiParameterStringDetails23 = @"str_field22";
+static NSString * _Nonnull const BlitzBiParameterStringDetails24 = @"str_field23";
+static NSString * _Nonnull const BlitzBiParameterStringDetails25 = @"str_field24";
+
 
 static NSString * _Nonnull const BlitzBiParameterIntDetails1 = @"int_field0";
 static NSString * _Nonnull const BlitzBiParameterIntDetails2 = @"int_field1";
@@ -54,6 +65,11 @@ static NSString * _Nonnull const BlitzBiParameterIntDetails12 = @"int_field11";
 static NSString * _Nonnull const BlitzBiParameterIntDetails13 = @"int_field12";
 static NSString * _Nonnull const BlitzBiParameterIntDetails14 = @"int_field13";
 static NSString * _Nonnull const BlitzBiParameterIntDetails15 = @"int_field14";
+static NSString * _Nonnull const BlitzBiParameterIntDetails16 = @"int_field15";
+static NSString * _Nonnull const BlitzBiParameterIntDetails17 = @"int_field16";
+static NSString * _Nonnull const BlitzBiParameterIntDetails18 = @"int_field17";
+static NSString * _Nonnull const BlitzBiParameterIntDetails19 = @"int_field18";
+static NSString * _Nonnull const BlitzBiParameterIntDetails20 = @"int_field19";
 
 static NSString * _Nonnull const BlitzBiParameterFloatDetails1 = @"float_field0";
 static NSString * _Nonnull const BlitzBiParameterFloatDetails2 = @"float_field1";
@@ -70,6 +86,7 @@ static NSString * _Nonnull const BlitzBiParameterFloatDetails12 = @"float_field1
 static NSString * _Nonnull const BlitzBiParameterFloatDetails13 = @"float_field12";
 static NSString * _Nonnull const BlitzBiParameterFloatDetails14 = @"float_field13";
 static NSString * _Nonnull const BlitzBiParameterFloatDetails15 = @"float_field14";
+static NSString * _Nonnull const BlitzBiParameterFloatDetails16 = @"float_field15";
 
 NS_ASSUME_NONNULL_END
 
