@@ -199,6 +199,9 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)sendEvents:(NSArray *)events {
     NSMutableArray *eventsCopy = [NSMutableArray new];
     for (NSDictionary *event in events) {
+        // When the event is being logged, client_event_time should be added.
+        [self addClientEventTime:event];
+        
         NSString *eventName = [event objectForKey:BLITZ_EVENT_NAME_TAG];
         if (eventName && eventName.length > 0) {
             [eventsCopy addObject:[event copy]];
@@ -447,7 +450,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [biCommonParams setValue:[BlitzDeviceUtils getAppTrackingEnabled] forKey:@"appTrackingEnabled"];
     [biCommonParams setValue:[BlitzDeviceUtils getUserAgent] forKey:@"userAgent"];
     [biCommonParams addEntriesFromDictionary:[BlitzDeviceUtils getBlitzCommonParams]];
-    [self addClientEventTime:biCommonParams];
     
     NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
     if (blitzUserId) {
@@ -463,10 +465,10 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     return biCommonParams;
 }
 
-- (void)addClientEventTime:(NSDictionary *)biCommonParams{
-    NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"NO"];
+- (void)addClientEventTime:(NSDictionary *)event{
+    NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"YES"];
     if (isBlitzTime && [isBlitzTime boolValue]) {
-        [biCommonParams setValue:[NSNumber numberWithLong:[[BlitzBiService sharedService] getCurrentTime]] forKey:@"client_event_time"];
+        [event setValue:[NSNumber numberWithLong:[[BlitzBiService sharedService] getCurrentTime]] forKey:@"client_event_time"];
     }
 }
 
