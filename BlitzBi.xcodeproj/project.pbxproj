@@ -41,6 +41,7 @@
 		38056713257ABB8400DDD854 /* BlitzUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805670F257ABB8400DDD854 /* BlitzUserRequest.m */; };
 		38056714257ABB8400DDD854 /* BlitzDeviceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 38056710257ABB8400DDD854 /* BlitzDeviceRequest.m */; };
 		38056715257ABB8400DDD854 /* BlitzUserRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 38056711257ABB8400DDD854 /* BlitzUserRequest.h */; };
+		38A17F8825B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 38A17F8725B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h */; };
 		8445106D255CD6F8002A445C /* BlitzTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8445106B255CD6F8002A445C /* BlitzTime.h */; };
 		8445106E255CD6F8002A445C /* BlitzTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445106C255CD6F8002A445C /* BlitzTime.m */; };
 		84451072255CD72D002A445C /* BlitzTimeTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 84451070255CD72D002A445C /* BlitzTimeTypes.h */; };
@@ -98,6 +99,7 @@
 		3805670F257ABB8400DDD854 /* BlitzUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzUserRequest.m; path = Models/BlitzUserRequest.m; sourceTree = "<group>"; };
 		38056710257ABB8400DDD854 /* BlitzDeviceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzDeviceRequest.m; path = Models/BlitzDeviceRequest.m; sourceTree = "<group>"; };
 		38056711257ABB8400DDD854 /* BlitzUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzUserRequest.h; path = Models/BlitzUserRequest.h; sourceTree = "<group>"; };
+		38A17F8725B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlitzBiCommonParameterConstants.h; path = Public/BlitzBiCommonParameterConstants.h; sourceTree = "<group>"; };
 		843BB7BC25245195007272D9 /* BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843BB7C025245195007272D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8445106B255CD6F8002A445C /* BlitzTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlitzTime.h; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		843BB7B225245195007272D9 = {
 			isa = PBXGroup;
 			children = (
+				38A17F8725B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h */,
 				380566BF257A3B6400DDD854 /* BlitzBiParameterConstants.h */,
 				84567278253709DB00AAA58E /* BlitzBi.h */,
 				84567277253709DB00AAA58E /* BlitzBi.m */,
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				380566FC257A768100DDD854 /* BlitzBiEventRepository.h in Headers */,
+				38A17F8825B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h in Headers */,
 				38056715257ABB8400DDD854 /* BlitzUserRequest.h in Headers */,
 				8456727A253709DB00AAA58E /* BlitzBi.h in Headers */,
 				380566C1257A3C5500DDD854 /* BlitzBiParameterConstants.h in Headers */,
@@ -539,7 +543,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.bi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -571,7 +575,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.bi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
