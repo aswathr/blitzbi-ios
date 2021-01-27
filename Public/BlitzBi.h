@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addCommonParamsWithKey:(NSString *)key
                       andValue:(NSString *)value;
 
+
+/// Description: Use this to get current time in millis.
 + (long)getCurrentTime;
 
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
