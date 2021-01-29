@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
                          :(NSString*)appToken
                          :(NSData*) data
                          :(void(^)(NSObject *, NSError *))completionBlock;
+- (void)updateBlitzPayerData:(NSString*)appId
+                            :(NSString*)appToken
+                            :(NSData*) data
+                            :(void(^)(NSObject *, NSError *))completionBlock;
 - (void)getAllParams:(NSString*)appId
                     :(NSString*)appToken
                     :(void(^)(NSObject *, NSError *))completionBlock;
