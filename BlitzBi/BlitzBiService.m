@@ -280,17 +280,17 @@
 
 - (void)updateBlitzPayerData {
     NSString *userId = [BlitzDeviceUtils getBlitzUserId];
-    if (userId) {
+    if (!userId) {
         return;
     }
     
     NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if (deviceId && blitzUserId) {
-        BlitzUserRequest *userRequest = [[BlitzUserRequest alloc] init:appId :deviceId :blitzUserId];
-        NSMutableDictionary *userRequestDict = [userRequest dictionary];
+        BlitzPayerRequest *payerRequest = [[BlitzPayerRequest alloc] initWith:userId andPayerData:blitzPayerData];
+        NSMutableDictionary *payerRequestDict = [payerRequest dictionary];
         
         NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userRequestDict options:NSJSONWritingPrettyPrinted error:&error];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payerRequestDict options:NSJSONWritingPrettyPrinted error:&error];
         if (error) {
             return;
         }

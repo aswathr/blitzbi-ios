@@ -18,6 +18,7 @@
 #import <BlitzBIEventHandlerBuilder.h>
 #import <BlitzDeviceUtils.h>
 #import <BlitzBiDataHandler.h>
+#import <BlitzPayerRequest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

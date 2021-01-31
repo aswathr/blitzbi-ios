@@ -41,6 +41,8 @@
 		38056713257ABB8400DDD854 /* BlitzUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805670F257ABB8400DDD854 /* BlitzUserRequest.m */; };
 		38056714257ABB8400DDD854 /* BlitzDeviceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 38056710257ABB8400DDD854 /* BlitzDeviceRequest.m */; };
 		38056715257ABB8400DDD854 /* BlitzUserRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 38056711257ABB8400DDD854 /* BlitzUserRequest.h */; };
+		388FDC9125C6DB9E008C343E /* BlitzPayerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 388FDC8F25C6DB9E008C343E /* BlitzPayerRequest.h */; };
+		388FDC9225C6DB9E008C343E /* BlitzPayerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 388FDC9025C6DB9E008C343E /* BlitzPayerRequest.m */; };
 		38A17F8825B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 38A17F8725B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h */; };
 		8445106D255CD6F8002A445C /* BlitzTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 8445106B255CD6F8002A445C /* BlitzTime.h */; };
 		8445106E255CD6F8002A445C /* BlitzTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445106C255CD6F8002A445C /* BlitzTime.m */; };
@@ -99,6 +101,8 @@
 		3805670F257ABB8400DDD854 /* BlitzUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzUserRequest.m; path = Models/BlitzUserRequest.m; sourceTree = "<group>"; };
 		38056710257ABB8400DDD854 /* BlitzDeviceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlitzDeviceRequest.m; path = Models/BlitzDeviceRequest.m; sourceTree = "<group>"; };
 		38056711257ABB8400DDD854 /* BlitzUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlitzUserRequest.h; path = Models/BlitzUserRequest.h; sourceTree = "<group>"; };
+		388FDC8F25C6DB9E008C343E /* BlitzPayerRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlitzPayerRequest.h; path = Models/BlitzPayerRequest.h; sourceTree = "<group>"; };
+		388FDC9025C6DB9E008C343E /* BlitzPayerRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BlitzPayerRequest.m; path = Models/BlitzPayerRequest.m; sourceTree = "<group>"; };
 		38A17F8725B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlitzBiCommonParameterConstants.h; path = Public/BlitzBiCommonParameterConstants.h; sourceTree = "<group>"; };
 		843BB7BC25245195007272D9 /* BlitzBi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlitzBi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843BB7C025245195007272D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				38056710257ABB8400DDD854 /* BlitzDeviceRequest.m */,
 				38056711257ABB8400DDD854 /* BlitzUserRequest.h */,
 				3805670F257ABB8400DDD854 /* BlitzUserRequest.m */,
+				388FDC8F25C6DB9E008C343E /* BlitzPayerRequest.h */,
+				388FDC9025C6DB9E008C343E /* BlitzPayerRequest.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 				380566FC257A768100DDD854 /* BlitzBiEventRepository.h in Headers */,
 				38A17F8825B7439D004E3FA7 /* BlitzBiCommonParameterConstants.h in Headers */,
 				38056715257ABB8400DDD854 /* BlitzUserRequest.h in Headers */,
+				388FDC9125C6DB9E008C343E /* BlitzPayerRequest.h in Headers */,
 				8456727A253709DB00AAA58E /* BlitzBi.h in Headers */,
 				380566C1257A3C5500DDD854 /* BlitzBiParameterConstants.h in Headers */,
 				380566E0257A767400DDD854 /* BlitzDeviceUtils.h in Headers */,
@@ -365,6 +372,7 @@
 				380566F8257A768100DDD854 /* BlitzBiService.m in Sources */,
 				84567279253709DB00AAA58E /* BlitzBi.m in Sources */,
 				380566F4257A768100DDD854 /* BlitzBiEventRepository.m in Sources */,
+				388FDC9225C6DB9E008C343E /* BlitzPayerRequest.m in Sources */,
 				380566E2257A767400DDD854 /* BlitzDeviceUtils.m in Sources */,
 				380566E3257A767400DDD854 /* BlitzReachability.m in Sources */,
 				0194E6B32530764B00257D29 /* BlitzServerHandler.m in Sources */,
