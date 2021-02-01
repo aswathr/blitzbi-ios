@@ -17,6 +17,7 @@
                           :(NSString*)appToken;
 - (void)updateAppSpecificDeviceIdentifier;
 - (void)updateBlitzUserId;
+- (void)updateBlitzPayerData;
 - (void)initializeBlitzTime;
 @end
 
@@ -77,6 +78,11 @@
 - (void)setBlitzUserId:(NSString*)userId {
     self->blitzUserId = userId;
     [self updateBlitzUserId];
+}
+
+- (void)setBlitzPayerData:(NSString*)payerData {
+    self->blitzPayerData = payerData;
+    [self updateBlitzPayerData];
 }
 
 - (void)sendEvents:(NSArray*)events{
@@ -267,6 +273,42 @@
                 }
             } @catch (NSException *err) {
                 NSLog(@"[BlitzBi] Error while updating blitz user id with error %@", err);
+            }
+        }];
+    }
+}
+
+- (void)updateBlitzPayerData {
+    NSString *userId = [BlitzDeviceUtils getBlitzUserId];
+    if (!userId) {
+        return;
+    }
+    
+    NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
+    if (deviceId && blitzUserId) {
+        BlitzPayerRequest *payerRequest = [[BlitzPayerRequest alloc] initWith:userId andPayerData:blitzPayerData];
+        NSMutableDictionary *payerRequestDict = [payerRequest dictionary];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payerRequestDict options:NSJSONWritingPrettyPrinted error:&error];
+        if (error) {
+            return;
+        }
+        
+        [self->dataHandler updateBlitzPayerData:appId :appToken :jsonData :^(NSObject *response, NSError *err){
+            @try {
+                if (err == nil && response) {
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                    if (err == nil && jsonData) {
+                        NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                        if (err == nil && jsonDataDictionary) {
+                            return;
+                        }
+                    }
+                }
+                NSLog(@"[BlitzBi] Error while updating blitz payer data with error %@", err);
+            } @catch (NSException *err) {
+                NSLog(@"[BlitzBi] Error while updating blitz payer data with error %@", err);
             }
         }];
     }

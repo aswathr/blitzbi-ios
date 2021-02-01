@@ -18,6 +18,7 @@
 #import <BlitzBIEventHandlerBuilder.h>
 #import <BlitzDeviceUtils.h>
 #import <BlitzBiDataHandler.h>
+#import <BlitzPayerRequest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* baseUrl;
     NSString* appSpecificDeviceIdentifier;
     NSString* blitzUserId;
+    NSString* blitzPayerData;
     BaseUrls* baseUrls;
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
@@ -42,6 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
              :(BOOL)debugEnabled;
 - (void)setAppSpecificIdentifier:(NSString*)deviceIdentifier;
 - (void)setBlitzUserId:(NSString*)userIdentifier;
+- (void)setBlitzPayerData:(NSString*)payerData;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 - (void)addCommonParamsWithKey:(NSString *)key

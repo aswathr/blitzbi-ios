@@ -77,6 +77,26 @@
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
+- (void)updateBlitzPayerData:(NSString*)appId
+                            :(NSString*)appToken
+                            :(NSData*) data
+                            :(void(^)(NSObject *, NSError *))completionBlock {
+    NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
+    [headers setValue:appId forKey:@"blitzAppId"];
+    [headers setValue:appToken forKey:@"blitzAppToken"];
+    
+    BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
+    [requestBuilder setMethod:BLITZ_POST_METHOD];
+    [requestBuilder setBaseUrl:baseUrl];
+    [requestBuilder setPath:@"app/user/updatePayerData"];
+    [requestBuilder setHeaders:headers];
+    [requestBuilder setHttpBody:data];
+    [requestBuilder setReqType:APP_REQUEST];
+    [requestBuilder setContentType:@"application/json"];
+    
+    [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
+}
+
 - (void)getAllParams:(NSString*)appId
                     :(NSString*)appToken
                     :(void(^)(NSObject *, NSError *))completionBlock {
