@@ -5,9 +5,9 @@
 //  Created by Admin on 12/11/20.
 //
 
-#import <BlitzTime.h>
+#import "BlitzTime.h"
 
-#import <BlitzTimeTypes.h>
+#import "BlitzTimeTypes.h"
 
 #import <arpa/inet.h>
 #import <assert.h>

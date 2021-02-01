@@ -7,18 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BaseUrls.h>
-#import <BlitzRequestBuilder.h>
-#import <BlitzDeviceRequest.h>
-#import <BlitzUserRequest.h>
-#import <PBlitzDataTransferService.h>
-#import <BlitzBiEventSendHandler.h>
-#import <BlitzNetworkModuleBuilder.h>
-#import <BlitzConstants.h>
-#import <BlitzBIEventHandlerBuilder.h>
-#import <BlitzDeviceUtils.h>
-#import <BlitzBiDataHandler.h>
-#import <BlitzPayerRequest.h>
+#import "PBlitzDataTransferService.h"
+
+@class BaseUrls;
+@class BlitzRequestBuilder;
+@class BlitzDeviceRequest;
+@class BlitzUserRequest;
+@class BlitzBiEventSendHandler;
+@class BlitzNetworkModuleBuilder;
+@class BlitzConstants;
+@class BlitzBiEventHandlerBuilder;
+@class BlitzDeviceUtils;
+@class BlitzBiDataHandler;
+@class BlitzPayerRequest;
+@class BlitzTime;
 
 NS_ASSUME_NONNULL_BEGIN
 

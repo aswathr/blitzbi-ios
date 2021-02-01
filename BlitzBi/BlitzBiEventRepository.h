@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PBlitzDataTransferService.h>
-#import <BlitzRequestBuilder.h>
+#import "PBlitzDataTransferService.h"
+
+@class BlitzRequestBuilder;
 
 NS_ASSUME_NONNULL_BEGIN
 

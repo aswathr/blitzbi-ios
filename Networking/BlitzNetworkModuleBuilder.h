@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BaseUrls.h>
-#import <BlitzServerHandler.h>
-#import <PBlitzDataTransferService.h>
-#import <BlitzNetworkDataTransferService.h>
+#import "PBlitzDataTransferService.h"
+
+@class BaseUrls;
+@class BlitzServerHandler;
+@class BlitzNetworkDataTransferService;
 
 NS_ASSUME_NONNULL_BEGIN
 

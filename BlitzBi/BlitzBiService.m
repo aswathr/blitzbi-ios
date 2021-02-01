@@ -6,7 +6,20 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzBiService.h>
+#import "BlitzBiService.h"
+#import "BaseUrls.h"
+#import "BlitzRequestBuilder.h"
+#import "BlitzDeviceRequest.h"
+#import "BlitzUserRequest.h"
+#import "PBlitzDataTransferService.h"
+#import "BlitzBiEventSendHandler.h"
+#import "BlitzNetworkModuleBuilder.h"
+#import "BlitzConstants.h"
+#import "BlitzBiEventHandlerBuilder.h"
+#import "BlitzDeviceUtils.h"
+#import "BlitzBiDataHandler.h"
+#import "BlitzPayerRequest.h"
+#import "BlitzTime.h"
 
 @interface BlitzBiService()
 - (void)checkForDeviceId:(NSString*)appId

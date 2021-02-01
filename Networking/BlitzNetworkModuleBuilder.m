@@ -6,7 +6,10 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzNetworkModuleBuilder.h>
+#import "BlitzNetworkModuleBuilder.h"
+#import "BaseUrls.h"
+#import "BlitzServerHandler.h"
+#import "BlitzNetworkDataTransferService.h"
 
 @implementation BlitzNetworkModuleBuilder
 - (void)setParams:(BaseUrls*)baseUrls serverHandler: (id <PBlitzServerHandler>)serverHandler {

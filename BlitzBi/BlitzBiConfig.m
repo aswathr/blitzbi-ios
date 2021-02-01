@@ -6,7 +6,7 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzBiConfig.h>
+#import "BlitzBiConfig.h"
 
 @implementation BlitzBiConfig
 - (instancetype)initWithBaseUrl:(NSString*) baseUrl {

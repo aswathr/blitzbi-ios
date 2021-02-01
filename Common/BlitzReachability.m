@@ -11,9 +11,11 @@
 #import <netdb.h>
 #import <sys/socket.h>
 #import <netinet/in.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <netinet/in.h>
 
 #import <CoreFoundation/CoreFoundation.h>
-#import <BlitzReachability.h>
+#import "BlitzReachability.h"
 
 NSString *kBlitzReachabilityChangedNotification = @"kBlitzNetworkReachabilityChangedNotification";
 

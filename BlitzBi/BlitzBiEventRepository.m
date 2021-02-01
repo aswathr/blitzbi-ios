@@ -6,7 +6,8 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzBiEventRepository.h>
+#import "BlitzBiEventRepository.h"
+#import "BlitzRequestBuilder.h"
 
 @interface BlitzBiEventRepository()
 - (NSMutableDictionary*) getRequestHeaders;

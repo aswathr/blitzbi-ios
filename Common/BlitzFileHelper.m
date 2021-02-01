@@ -6,7 +6,7 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzFileHelper.h>
+#import "BlitzFileHelper.h"
 
 @implementation BlitzFileHelper
 + (NSString *)fullFilePathInDocumentsDirectoryForFileName:(NSString *)fileName {
