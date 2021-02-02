@@ -6,7 +6,7 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzParser.h>
+#import "BlitzParser.h"
 #import <CommonCrypto/CommonCrypto.h>
 
 @implementation BlitzParser

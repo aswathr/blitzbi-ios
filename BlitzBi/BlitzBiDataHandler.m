@@ -5,7 +5,8 @@
 //  Created by Admin on 09/11/20.
 //
 
-#import <BlitzBiDataHandler.h>
+#import "BlitzBiDataHandler.h"
+#import "BlitzRequestBuilder.h"
 
 @implementation BlitzBiDataHandler
 - (instancetype)initWithBaseUrl:(NSString*)baseUrl

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BaseUrls.h>
+#import "BaseUrls.h"
 
 @implementation BaseUrls
 - (instancetype)init:(NSString *) baseUrl {

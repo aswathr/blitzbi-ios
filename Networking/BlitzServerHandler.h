@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BlitzHttpResponseListener.h>
-#import <BlitzKWConcurrentDictionary.h>
-#import <BlitzConstants.h>
+#import "BlitzHttpResponseListener.h"
+#import "BlitzKWConcurrentDictionary.h"
+#import "BlitzConstants.h"
+
+@class BlitzHttpResponseListener;
+@class BlitzKWConcurrentDictionary;
+@class BlitzConstants;
 
 @class BlitzRequestBuilder;
 

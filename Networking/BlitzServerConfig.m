@@ -6,7 +6,8 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzServerConfig.h>
+#import "BlitzServerConfig.h"
+#import "BaseUrls.h"
 
 @implementation BlitzServerConfig
 - (instancetype)init:(BaseUrls *) baseUrls {

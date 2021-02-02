@@ -6,8 +6,8 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzDeviceRequest.h>
-#import <BlitzDeviceUtils.h>
+#import "BlitzDeviceRequest.h"
+#import "BlitzDeviceUtils.h"
 
 @implementation BlitzDeviceRequest
 
