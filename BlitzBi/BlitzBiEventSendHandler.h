@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BlitzBiEventRepository.h>
-#import <BlitzRequestBuilder.h>
-#import <BlitzConstants.h>
-#import <BlitzBiConfig.h>
-#import <BlitzTime.h>
+
+@class BlitzBiEventRepository;
+@class BlitzRequestBuilder;
+@class BlitzConstants;
+@class BlitzBiConfig;
+@class BlitzTime;
 
 NS_ASSUME_NONNULL_BEGIN
 

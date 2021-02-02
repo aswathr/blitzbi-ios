@@ -6,7 +6,10 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzBiEventHandlerBuilder.h>
+#import "BlitzBiEventHandlerBuilder.h"
+#import "BlitzBiEventSendHandler.h"
+#import "BlitzFileHelper.h"
+#import "BlitzBiEventRepository.h"
 
 @implementation BlitzBiEventHandlerBuilder
 - (void)setParams:(NSNumber*)batchSize

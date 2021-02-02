@@ -6,8 +6,9 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzBi.h>
-#import <BlitzBiService.h>
+#import "BlitzBi.h"
+#import "BlitzBiService.h"
+#import "BlitzBiParameterConstants.h"
 
 @implementation BlitzBi
 + (void)initailiseWithAppId:(NSString*)appId

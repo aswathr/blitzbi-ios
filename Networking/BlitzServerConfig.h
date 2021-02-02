@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <BaseUrls.h>
-#import <PBlitzServerConfig.h>
+#import "PBlitzServerConfig.h"
+
+@class BaseUrls;
 
 NS_ASSUME_NONNULL_BEGIN
 

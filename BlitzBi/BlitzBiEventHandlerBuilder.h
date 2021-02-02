@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PBlitzDataTransferService.h>
-#import <BlitzBiEventSendHandler.h>
-#import <BlitzFileHelper.h>
+#import "PBlitzDataTransferService.h"
+
+@class BlitzFileHelper;
+@class BlitzBiEventSendHandler;
 
 NS_ASSUME_NONNULL_BEGIN
 

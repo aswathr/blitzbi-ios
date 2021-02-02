@@ -6,7 +6,7 @@
 //  Copyright © 2016 Blitz, Inc. All rights reserved.
 //
 
-#import <BlitzKWConcurrentDictionary.h>
+#import "BlitzKWConcurrentDictionary.h"
 
 @interface BlitzKWConcurrentDictionary() {
     dispatch_queue_t accessQueue;

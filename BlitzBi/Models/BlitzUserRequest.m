@@ -5,8 +5,8 @@
 //  Created by Admin on 09/11/20.
 //
 
-#import <BlitzUserRequest.h>
-#import <BlitzDeviceUtils.h>
+#import "BlitzUserRequest.h"
+#import "BlitzDeviceUtils.h"
 
 @implementation BlitzUserRequest
 - (instancetype)init:(NSString*)appId
