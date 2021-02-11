@@ -17,10 +17,12 @@
 @interface BlitzTime() {
     NSTimeInterval _timeout;
     NSTimeInterval _offset;
+    dispatch_queue_t serialQueue;
     NSUInteger _port;
     int _socket;
     NSString *_hostname;
     BOOL connected;
+    BOOL isSerialQueueJobSubmitted;
 }
 @end
 
@@ -40,10 +42,10 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
     if (self = [super init]) {
         _hostname = [hostname copy];
         _port = port;
-        _timeout = 5.0;
+        _timeout = 1.0;
         _socket = -1;
-        
         _offset = NAN;
+        serialQueue = dispatch_queue_create([@"bi_events_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -224,7 +226,20 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
 
 - (nullable NSDate *)dateWithError:(NSError *__autoreleasing _Nullable *_Nullable)error {
     @synchronized (self) {
-        return isfinite(_offset) || [self syncWithError:error] ? [NSDate dateWithTimeIntervalSinceNow:_offset] : nil;
+        if (isfinite(_offset)) {
+            return [NSDate dateWithTimeIntervalSinceNow:_offset];
+        }
+        else {
+            if (!isSerialQueueJobSubmitted) {
+                dispatch_async(serialQueue, ^{
+                    self->isSerialQueueJobSubmitted = YES;
+                    [self syncWithError:nil];
+                    self->isSerialQueueJobSubmitted = NO;
+                });
+            }
+            
+        }
+        return nil;
     }
 }
 

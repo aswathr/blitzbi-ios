@@ -81,6 +81,7 @@
     
     [self checkForDeviceId:appId :appToken];
     [self initializeBlitzTime];
+    [self getCurrentTime];
 }
 
 - (void)setAppSpecificIdentifier:(NSString*)identifier {
