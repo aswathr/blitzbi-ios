@@ -45,7 +45,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         _timeout = 1.0;
         _socket = -1;
         _offset = NAN;
-        serialQueue = dispatch_queue_create([@"bi_events_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
+        serialQueue = dispatch_queue_create([@"bi_events_time_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
