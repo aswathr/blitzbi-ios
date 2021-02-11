@@ -124,10 +124,10 @@
         if (!date) {
             date = [NSDate date];
         }
-        return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue];
+        return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue] * 1000;
     } @catch (NSException *exception) {
         NSLog(@"[BlitzBi] Error whlle getting formatted date.");
-        return [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] longValue];
+        return [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] longValue] * 1000;
     }
 }
 
