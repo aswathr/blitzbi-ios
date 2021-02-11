@@ -203,9 +203,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)sendEvents:(NSArray *)events {
     NSMutableArray *eventsCopy = [NSMutableArray new];
     for (NSDictionary *event in events) {
-        // When the event is being logged, client_event_time should be added.
-        [self addClientEventTime:event];
-        
         NSString *eventName = [event objectForKey:BLITZ_EVENT_NAME_TAG];
         if (eventName && eventName.length > 0) {
             [eventsCopy addObject:[event copy]];
@@ -214,6 +211,9 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     
     dispatch_async(self->serialQueue, ^{
         @synchronized (self) {
+            for (NSDictionary *event in eventsCopy) {
+                [self addClientEventTime:event];
+            }
             [self->pendingEvents addObjectsFromArray:eventsCopy];
         }
         [self archiveEvents];
