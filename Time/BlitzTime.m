@@ -20,9 +20,10 @@
     dispatch_queue_t serialQueue;
     NSUInteger _port;
     int _socket;
-    NSString *_hostname;
+    NSInteger ntpIndex;
     BOOL connected;
     BOOL isSerialQueueJobSubmitted;
+    NSArray<NSString *> *blitzSyncNtpServers;
 }
 @end
 
@@ -38,14 +39,15 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
     return ufixed64((uint32_t)tv.tv_sec + kSecondsFrom1900To1970, tv.tv_usec * (pow(2, 32) / USEC_PER_SEC));
 }
 
-- (instancetype)initWithHostname:(NSString *)hostname port:(NSUInteger)port {
+- (instancetype)init {
     if (self = [super init]) {
-        _hostname = [hostname copy];
-        _port = port;
+        _port = 123;
         _timeout = 1.0;
         _socket = -1;
         _offset = NAN;
         serialQueue = dispatch_queue_create([@"bi_events_time_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
+        blitzSyncNtpServers = [[NSArray alloc] initWithObjects:@"time.apple.com", @"time.google.com", @"time.cloudflare.com", @"time.facebook.com", @"time.windows.com", @"time.nist.gov", nil];
+        ntpIndex = 0;
     }
     return self;
 }
@@ -84,6 +86,10 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
 
 - (BOOL)connectWithError:(NSError *__autoreleasing _Nullable *_Nullable)error {
     @synchronized (self) {
+        if (ntpIndex >= blitzSyncNtpServers.count) {
+            return NO;
+        }
+        NSString *hostname = [blitzSyncNtpServers objectAtIndex:ntpIndex];
         if (_socket >= 0) {
             return YES;
         }
@@ -97,7 +103,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         NSString *port = [[NSString alloc] initWithFormat:@"%lu", (unsigned long) _port];
         
         // get address info.
-        int getaddrinfo_err = getaddrinfo(_hostname.UTF8String, port.UTF8String, &hints, &addrinfo);
+        int getaddrinfo_err = getaddrinfo(hostname.UTF8String, port.UTF8String, &hints, &addrinfo);
         if (getaddrinfo_err != 0) {
             if (error) {
                 NSString *errorDescription = [[NSString alloc] initWithUTF8String:gai_strerror(getaddrinfo_err)];
@@ -232,9 +238,12 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         else {
             if (!isSerialQueueJobSubmitted) {
                 dispatch_async(serialQueue, ^{
+                    //If ntpsync fails for all sync from http
                     self->isSerialQueueJobSubmitted = YES;
                     [self syncWithError:nil];
                     self->isSerialQueueJobSubmitted = NO;
+                    self->ntpIndex = self->ntpIndex + 1;
+                    
                 });
             }
             

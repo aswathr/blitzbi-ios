@@ -205,7 +205,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     for (NSDictionary *event in events) {
         NSString *eventName = [event objectForKey:BLITZ_EVENT_NAME_TAG];
         if (eventName && eventName.length > 0) {
-            [eventsCopy addObject:[event copy]];
+            [eventsCopy addObject:[event mutableCopy]];
         }
     }
     

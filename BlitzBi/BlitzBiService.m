@@ -213,7 +213,7 @@
 
 - (void)initializeBlitzTime {
     @try {
-        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+        self->server = [[BlitzTime alloc] init];
     } @catch (NSException *exception) {
         NSLog(@"[BlitzBi] Error whlle initialixing blitz time.");
     }

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-- (instancetype)initWithHostname:(NSString *)hostname port:(NSUInteger)port;
+- (instancetype)init;
 - (BOOL)connectWithError:(NSError *__autoreleasing _Nullable *_Nullable)error NS_REQUIRES_SUPER;
 - (void)disconnect NS_REQUIRES_SUPER;
 - (BOOL)syncWithError:(NSError *__autoreleasing _Nullable *_Nullable)error NS_REQUIRES_SUPER;
