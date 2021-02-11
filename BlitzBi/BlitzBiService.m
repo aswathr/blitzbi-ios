@@ -119,7 +119,11 @@
 
 - (long)getCurrentTime {
     @try {
-        return [[server dateWithError:nil] timeIntervalSince1970] * 1000;
+        NSDate *date = [server dateWithError:nil];
+        if (!date) {
+            date = [NSDate date];
+        }
+        return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue];
     } @catch (NSException *exception) {
         NSLog(@"[BlitzBi] Error whlle getting formatted date.");
         return [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] longValue];
