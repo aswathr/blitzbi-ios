@@ -122,7 +122,7 @@
         return [[server dateWithError:nil] timeIntervalSince1970] * 1000;
     } @catch (NSException *exception) {
         NSLog(@"[BlitzBi] Error whlle getting formatted date.");
-        return 0;
+        return [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] longValue];
     }
 }
 
@@ -208,7 +208,7 @@
 
 - (void)initializeBlitzTime {
     @try {
-        self->server = [[BlitzTime alloc] initWithHostname:@"time.google.com" port:123];
+        self->server = [[BlitzTime alloc] initWithHostname:@"time.apple.com" port:123];
     } @catch (NSException *exception) {
         NSLog(@"[BlitzBi] Error whlle initialixing blitz time.");
     }
