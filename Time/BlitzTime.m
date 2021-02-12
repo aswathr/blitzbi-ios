@@ -98,7 +98,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         }
         
         // setup hints.
-        struct addrinfo hints = {0}, *addrinfo = NULL;
+        struct addrinfo hints = {0}, *addrinfo = NULL, *addr = NULL;
         hints.ai_family = AF_UNSPEC; // getaddrinfo will resolve (AF_INET or AF_INET6)
         hints.ai_socktype = SOCK_DGRAM; // UDP
         
@@ -114,6 +114,12 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
                 *error = [NSError errorWithDomain:@"netdb" code:getaddrinfo_err userInfo:errorInfo];
             }
             return NO;
+        }
+        
+        for (addr = addrinfo; addr; addr = addr->ai_next) {
+            char host[NI_MAXHOST];
+            getnameinfo(addr->ai_addr, addr->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
+            NSLog(@"[BlitzBi][Time] Fetched port %s for hostname %@", host, hostname);
         }
         
         // create the socket.
