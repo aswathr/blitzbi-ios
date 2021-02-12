@@ -185,7 +185,7 @@
                         NSString *epochTime = [dictionary objectForKey:@"epochTime"];
                         NSTimeInterval epochTimeInterval = [epochTime doubleValue];
                         NSDate *tsServerNow = [NSDate dateWithTimeIntervalSince1970:epochTimeInterval];
-                        NSDate *tsClientNow = [NSDate date];
+                        NSDate *tsClientNow = [[NSDate alloc] init];
                         
                         NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
                         [self->server setOffset:offset];
