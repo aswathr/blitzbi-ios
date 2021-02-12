@@ -116,10 +116,12 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             return NO;
         }
         
-        for (addr = addrinfo; addr; addr = addr->ai_next) {
-            char host[NI_MAXHOST];
-            getnameinfo(addr->ai_addr, addr->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
-            NSLog(@"[BlitzBi][Time] Fetched port %s for hostname %@", host, hostname);
+        if (addrinfo) {
+            for (addr = addrinfo; addr; addr = addr->ai_next) {
+                char host[NI_MAXHOST];
+                getnameinfo(addr->ai_addr, addr->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
+                NSLog(@"[BlitzBi][Time] Fetched port %s for hostname %@", host, hostname);
+            }
         }
         
         // create the socket.
