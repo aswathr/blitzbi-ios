@@ -49,7 +49,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         _socket = -1;
         _offset = NAN;
         serialQueue = dispatch_queue_create([@"bi_events_time_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
-        blitzSyncNtpServers = [[NSArray alloc] initWithObjects:@"time.apple.com", @"time.google.com", @"time.cloudflare.com", @"time.facebook.com", @"time.windows.com", @"time.nist.gov", nil];
+        blitzSyncNtpServers = [[NSArray alloc] initWithObjects:@"time.apple.com", @"time.google.com", @"time.cloudflare.com", @"time.facebook.com", nil];
         ntpIndex = 0;
     }
     return self;
@@ -187,6 +187,8 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
     @synchronized (self) {
         if (![self connectWithError:error]) {
             NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            self->isSerialQueueJobSubmitted = NO;
+            self->ntpIndex = self->ntpIndex + 1;
             return NO;
         }
         
@@ -208,6 +210,8 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             }
             NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
             [self disconnect];
+            self->isSerialQueueJobSubmitted = NO;
+            self->ntpIndex = self->ntpIndex + 1;
             return NO;
         }
         
@@ -220,6 +224,8 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             }
             NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
             [self disconnect];
+            self->isSerialQueueJobSubmitted = NO;
+            self->ntpIndex = self->ntpIndex + 1;
             return NO;
         }
         
@@ -235,6 +241,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         };
         _offset = ((T[1] - T[0]) + (T[2] - T[3])) / 2.0;
         NSLog(@"[BlitzBi][Time] Fetched time success for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+        self->isSerialQueueJobSubmitted = NO;
         return YES;
     }
 }
@@ -258,8 +265,6 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
                     NSLog(@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
                     self->isSerialQueueJobSubmitted = YES;
                     [self syncWithError:nil];
-                    self->isSerialQueueJobSubmitted = NO;
-                    self->ntpIndex = self->ntpIndex + 1;
                 });
             }
         }
