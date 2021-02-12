@@ -89,7 +89,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
 
 - (BOOL)connectWithError:(NSError *__autoreleasing _Nullable *_Nullable)error {
     @synchronized (self) {
-        if (ntpIndex >= blitzSyncNtpServers.count) {
+        if ([self areAllNTPServerFetched]) {
             return NO;
         }
         NSString *hostname = [blitzSyncNtpServers objectAtIndex:ntpIndex];
@@ -194,7 +194,9 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
 - (BOOL)syncWithError:(NSError *__autoreleasing _Nullable *_Nullable)error {
     @synchronized (self) {
         if (![self connectWithError:error]) {
-            NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            if (![self areAllNTPServerFetched]) {
+                NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            }
             self->isSerialQueueJobSubmitted = NO;
             self->ntpIndex = self->ntpIndex + 1;
             return NO;
@@ -216,7 +218,9 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             if (error) {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:send_err userInfo:nil];
             }
-            NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            if (![self areAllNTPServerFetched]) {
+                NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            }
             [self disconnect];
             self->isSerialQueueJobSubmitted = NO;
             self->ntpIndex = self->ntpIndex + 1;
@@ -230,7 +234,9 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             if (error) {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:recv_err userInfo:nil];
             }
-            NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            if (![self areAllNTPServerFetched]) {
+                NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            }
             [self disconnect];
             self->isSerialQueueJobSubmitted = NO;
             self->ntpIndex = self->ntpIndex + 1;
@@ -248,7 +254,9 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             ufixed64_as_double(ntp_localtime_get_ufixed64()), // client receive time.
         };
         _offset = ((T[1] - T[0]) + (T[2] - T[3])) / 2.0;
-        NSLog(@"[BlitzBi][Time] Fetched time success for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+        if (![self areAllNTPServerFetched]) {
+            NSLog(@"[BlitzBi][Time] Fetched time success for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+        }
         self->isSerialQueueJobSubmitted = NO;
         return YES;
     }
@@ -270,7 +278,9 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         else if (![self areAllNTPServerFetched]) {
             if (!isSerialQueueJobSubmitted) {
                 dispatch_async(serialQueue, ^{
-                    NSLog(@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                    if (![self areAllNTPServerFetched]) {
+                        NSLog(@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                    }
                     self->isSerialQueueJobSubmitted = YES;
                     [self syncWithError:nil];
                 });
