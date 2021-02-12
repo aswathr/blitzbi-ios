@@ -277,11 +277,11 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         }
         else if (![self areAllNTPServerFetched]) {
             if (!isSerialQueueJobSubmitted) {
+                if (![self areAllNTPServerFetched]) {
+                    NSLog(@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                }
+                self->isSerialQueueJobSubmitted = YES;
                 dispatch_async(serialQueue, ^{
-                    if (![self areAllNTPServerFetched]) {
-                        NSLog(@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
-                    }
-                    self->isSerialQueueJobSubmitted = YES;
                     [self syncWithError:nil];
                 });
             }
