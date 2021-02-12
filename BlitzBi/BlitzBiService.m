@@ -189,12 +189,12 @@
                         
                         NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
                         [self->server setOffset:offset];
-                        NSLog(@"[BlitzBi][Time] Successfully fetched time with response %@", response);
+                        NSLog(@"[BlitzBi][Time] Successfully fetched time from getTimeStamp with response %@ and offser %f", jsonData, offset);
                         return;
                     }
                 }
             }
-            NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with response %@ and with error %@", response, err);
+            NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err);
         } @catch (NSException *err) {
             NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err);
         }
