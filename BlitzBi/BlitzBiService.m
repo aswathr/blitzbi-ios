@@ -174,6 +174,7 @@
 }
 
 - (void)getTimeStamp {
+    NSLog(@"[BlitzBi][Time] Started fetching  getTimeStamp");
     [self->dataHandler getTimeStamp:^(NSObject *response, NSError *err){
         @try {
             if (err == nil && response) {
@@ -188,6 +189,7 @@
                         
                         NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
                         [self->server setOffset:offset];
+                        NSLog(@"[BlitzBi][Time] Successfully fetched time with response %@", response);
                         return;
                     }
                 }
