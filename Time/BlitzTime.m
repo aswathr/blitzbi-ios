@@ -207,6 +207,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:send_err userInfo:nil];
             }
             NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            [self disconnect];
             return NO;
         }
         
@@ -218,6 +219,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:recv_err userInfo:nil];
             }
             NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            [self disconnect];
             return NO;
         }
         
