@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addCommonParamsWithKey:(NSString *)key
                       andValue:(NSString *)value;
 - (long)getCurrentTime;
+- (long)getCurrentTimeInternal;
+- (void)getTimeStamp;
 - (nullable NSString*) getParamForKey:(NSString*)key
                      withDefaultValue:(NSString*)defaultValue;
 

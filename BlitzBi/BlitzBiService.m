@@ -81,7 +81,7 @@
     
     [self checkForDeviceId:appId :appToken];
     [self initializeBlitzTime];
-    [self getCurrentTime];
+    [self getCurrentTimeInternal];
 }
 
 - (void)setAppSpecificIdentifier:(NSString*)identifier {
@@ -121,12 +121,24 @@
 - (long)getCurrentTime {
     @try {
         NSDate *date = [server dateWithError:nil];
+        if (date) {
+            return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue] * 1000;
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"[BlitzBi] Error whlle getting getCurrentTime.");
+    }
+    return 0;
+}
+
+- (long)getCurrentTimeInternal {
+    @try {
+        NSDate *date = [server dateWithError:nil];
         if (!date) {
             date = [NSDate date];
         }
         return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue] * 1000;
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error whlle getting formatted date.");
+        NSLog(@"[BlitzBi] Error whlle getting getCurrentTimeInternal.");
         return [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] longValue] * 1000;
     }
 }
@@ -152,6 +164,30 @@
                     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
                     if (err == nil && dictionary) {
                         self->paramsDictionary = dictionary;
+                    }
+                }
+            }
+        } @catch (NSException *err) {
+            NSLog(@"[BlitzBi] Error whlle getting params with error %@", err);
+        }
+    }];
+}
+
+- (void)getTimeStamp {
+    [self->dataHandler getTimeStamp:^(NSObject *response, NSError *err){
+        @try {
+            if (err == nil && response) {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                if (err == nil && jsonData) {
+                    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                    if (err == nil && dictionary) {
+                        NSString *epochTime = [dictionary objectForKey:@"epochTime"];
+                        NSTimeInterval epochTimeInterval = [epochTime doubleValue];
+                        NSDate *tsServerNow = [NSDate dateWithTimeIntervalSince1970:epochTimeInterval];
+                        NSDate *tsClientNow = [NSDate date];
+                        
+                        NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
+                        [self->server setOffset:offset];
                     }
                 }
             }

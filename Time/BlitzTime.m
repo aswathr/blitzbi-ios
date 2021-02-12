@@ -13,6 +13,7 @@
 #import <assert.h>
 #import <netdb.h>
 #import <sys/time.h>
+#import "BlitzBiService.h"
 
 @interface BlitzTime() {
     NSTimeInterval _timeout;
@@ -23,8 +24,10 @@
     NSInteger ntpIndex;
     BOOL connected;
     BOOL isSerialQueueJobSubmitted;
+    BOOL isBlitzServerEpochTimeJobSubmitted;
     NSArray<NSString *> *blitzSyncNtpServers;
 }
+- (BOOL)areAllNTPServerFetched;
 @end
 
 @implementation BlitzTime
@@ -66,7 +69,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             setsockopt(_socket, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
             int value = 1;
             setsockopt(_socket, SOL_SOCKET, SO_NOSIGPIPE, &value, sizeof(value));
-
+            
         }
         
     }
@@ -230,23 +233,34 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
     }
 }
 
+- (BOOL)areAllNTPServerFetched {
+    return ntpIndex >= blitzSyncNtpServers.count;
+}
+
+- (void)setOffset:(NSTimeInterval)offset {
+    self->_offset = offset;
+}
+
 - (nullable NSDate *)dateWithError:(NSError *__autoreleasing _Nullable *_Nullable)error {
     @synchronized (self) {
         if (isfinite(_offset)) {
             return [NSDate dateWithTimeIntervalSinceNow:_offset];
         }
-        else {
+        else if (![self areAllNTPServerFetched]) {
             if (!isSerialQueueJobSubmitted) {
                 dispatch_async(serialQueue, ^{
-                    //If ntpsync fails for all sync from http
                     self->isSerialQueueJobSubmitted = YES;
                     [self syncWithError:nil];
                     self->isSerialQueueJobSubmitted = NO;
                     self->ntpIndex = self->ntpIndex + 1;
-                    
                 });
             }
-            
+        }
+        else {
+            if (!isBlitzServerEpochTimeJobSubmitted) {
+                isBlitzServerEpochTimeJobSubmitted = YES;
+                [[BlitzBiService sharedService] getTimeStamp];
+            }
         }
         return nil;
     }

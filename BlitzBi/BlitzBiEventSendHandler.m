@@ -472,7 +472,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)addClientEventTime:(NSDictionary *)event{
     NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"YES"];
     if (isBlitzTime && [isBlitzTime boolValue]) {
-        [event setValue:[NSNumber numberWithLong:[[BlitzBiService sharedService] getCurrentTime]] forKey:@"client_event_time"];
+        [event setValue:[NSNumber numberWithLong:[[BlitzBiService sharedService] getCurrentTimeInternal]] forKey:@"client_event_time"];
     }
 }
 

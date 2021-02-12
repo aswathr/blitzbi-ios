@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)disconnect NS_REQUIRES_SUPER;
 - (BOOL)syncWithError:(NSError *__autoreleasing _Nullable *_Nullable)error NS_REQUIRES_SUPER;
 - (nullable NSDate *)dateWithError:(NSError *__autoreleasing _Nullable *_Nullable)error;
+- (void)setOffset:(NSTimeInterval)offset;
 
 NS_ASSUME_NONNULL_END
 

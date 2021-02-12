@@ -115,4 +115,18 @@
     
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
+
+- (void)getTimeStamp:(void(^)(NSObject *, NSError *))completionBlock {
+    NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
+    
+    BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
+    [requestBuilder setMethod:BLITZ_GET_METHOD];
+    [requestBuilder setBaseUrl:baseUrl];
+    [requestBuilder setPath:@"timeStamp"];
+    [requestBuilder setHeaders:headers];
+    [requestBuilder setReqType:APP_REQUEST];
+    [requestBuilder setContentType:@"application/json"];
+    
+    [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
+}
 @end

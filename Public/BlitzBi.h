@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
                       andValue:(NSString *)value;
 
 
-/// Description: Use this to get current time in millis.
+/// Description: Use this to get current time in millis. It will return 0 in case we are not able to fetch the currrent time in millis.
 + (long)getCurrentTime;
 
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
