@@ -188,6 +188,7 @@
                         
                         NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
                         [self->server setOffset:offset];
+                        NSLog(@"[BlitzBi][Time] Successfully fetched time with response %@", response);
                         return;
                     }
                 }
