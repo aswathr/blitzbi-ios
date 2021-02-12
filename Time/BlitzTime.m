@@ -49,7 +49,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         _socket = -1;
         _offset = NAN;
         serialQueue = dispatch_queue_create([@"bi_events_time_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
-        blitzSyncNtpServers = [[NSArray alloc] initWithObjects:@"time.apple.com", @"time.google.com", @"time.cloudflare.com", @"time.facebook.com", nil];
+        blitzSyncNtpServers = [[NSArray alloc] initWithObjects:@"time.apple.com", @"time.google.com", @"time.cloudflare.com", @"time.facebook.com", @"time.windows.com", @"time.nist.gov", nil];
         ntpIndex = 0;
     }
     return self;
