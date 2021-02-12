@@ -188,11 +188,13 @@
                         
                         NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
                         [self->server setOffset:offset];
+                        return;
                     }
                 }
             }
+            NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with response %@ and with error %@", response, err);
         } @catch (NSException *err) {
-            NSLog(@"[BlitzBi] Error whlle getting params with error %@", err);
+            NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err);
         }
     }];
 }

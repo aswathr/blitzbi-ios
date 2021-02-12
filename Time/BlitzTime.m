@@ -229,6 +229,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             ufixed64_as_double(ntp_localtime_get_ufixed64()), // client receive time.
         };
         _offset = ((T[1] - T[0]) + (T[2] - T[3])) / 2.0;
+        NSLog(@"[BlitzBi][Time] Fetched time success from %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
         return YES;
     }
 }
@@ -249,6 +250,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         else if (![self areAllNTPServerFetched]) {
             if (!isSerialQueueJobSubmitted) {
                 dispatch_async(serialQueue, ^{
+                    NSLog(@"[BlitzBi][Time] Fetching time from %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
                     self->isSerialQueueJobSubmitted = YES;
                     [self syncWithError:nil];
                     self->isSerialQueueJobSubmitted = NO;
@@ -258,6 +260,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         }
         else {
             if (!isBlitzServerEpochTimeJobSubmitted) {
+                NSLog(@"[BlitzBi][Time] Fetching time from %@", @"BlitzBi Server");
                 isBlitzServerEpochTimeJobSubmitted = YES;
                 [[BlitzBiService sharedService] getTimeStamp];
             }
