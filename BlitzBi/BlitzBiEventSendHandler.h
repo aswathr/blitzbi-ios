@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     dispatch_queue_t networkQueue;
     NSMutableArray<NSDictionary *> *pendingEvents;
     NSTimer *biEventFireTimer;
+    NSTimer *sessionTimeoutTimer;
     
     NSTimeInterval nextFlushTime;
     
