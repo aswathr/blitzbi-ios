@@ -29,9 +29,7 @@
 - (void)fireSessionStartEvent;
 - (void)fireSessionPauseEvent;
 - (void)startRepeatedTimerToAttemptFlush;
-- (void)startSessionTimerToAttemptTimeout;
 - (void)invalidateTimer;
-- (void)invalidateSessionTimer;
 - (void)timerTicked;
 - (void)onSessionTimedOut;
 - (void)flushEmergency;
@@ -75,6 +73,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         self->blitzSessionId = [BlitzDeviceUtils getSessionId];
         self->isBlockSubmittedToNetworkQueue = NO;
         self->sessionStartTimeStamp = 0;
+        self->sessionPauseTimeStamp = 0;
         self->adTracking = adTracking;
         
         self->serialQueue = dispatch_queue_create([@"bi_events_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
@@ -110,10 +109,10 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (void)onPause {
     NSLog(@"[BlitzBi] On Pause");
+    self->sessionPauseTimeStamp = [self getCurrentEpochTime];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self startRepeatedTimerToAttemptFlush];
-    [self startSessionTimerToAttemptTimeout];
     [self flushEmergency];
     [[BlitzBiService sharedService] disconnectBlitzTime];
 }
@@ -121,9 +120,13 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)onResume {
     NSLog(@"[BlitzBi] On Resume");
     self->sessionStartTimeStamp = [self getCurrentEpochTime];
+    
+    NSInteger timeoutInSeconds = [[[BlitzBiService sharedService] getParamForKey:@"sessionTimeoutInSeconds" withDefaultValue:@"240"] intValue];
+    if (self->sessionPauseTimeStamp != 0 && (self->sessionStartTimeStamp - self->sessionPauseTimeStamp) > timeoutInSeconds) {
+        [self onSessionTimedOut];
+    }
     [self fireSessionStartEvent];
     [self invalidateTimer];
-    [self invalidateSessionTimer];
 }
 
 - (void)onDestroy {
@@ -159,34 +162,18 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (void)startRepeatedTimerToAttemptFlush {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self->biEventFireTimer invalidate];
         
-        self->biEventFireTimer = [NSTimer scheduledTimerWithTimeInterval:forceSendAfterSeconds target:self selector:@selector(timerTicked) userInfo:nil repeats:YES];
+        self->biEventFireTimer = [NSTimer timerWithTimeInterval:forceSendAfterSeconds target:self selector:@selector(timerTicked) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self->biEventFireTimer forMode:NSRunLoopCommonModes];
     });
 }
 
 - (void)invalidateTimer {
     if (biEventFireTimer) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self->biEventFireTimer invalidate];
-        });
-    }
-}
-
-- (void)startSessionTimerToAttemptTimeout {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self->sessionTimeoutTimer invalidate];
-        
-        NSInteger timeoutInSeconds = [[[BlitzBiService sharedService] getParamForKey:@"sessionTimeoutInSeconds" withDefaultValue:@"240"] intValue];
-        self->sessionTimeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeoutInSeconds target:self selector:@selector(onSessionTimedOut) userInfo:nil repeats:NO];
-    });
-}
-
-- (void)invalidateSessionTimer {
-    if (sessionTimeoutTimer) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self->sessionTimeoutTimer invalidate];
         });
     }
 }
