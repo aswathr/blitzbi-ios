@@ -18,10 +18,10 @@
     return self;
 }
 
-- (void)updateDeviceId:(NSString*)appId
-                      :(NSString*)appToken
-                      :(NSData*) data
-                      :(void(^)(NSObject *, NSError *))completionBlock {
+- (void)updateBlitzDevice:(NSString*)appId
+                         :(NSString*)appToken
+                         :(NSData*) data
+                         :(void(^)(NSObject *, NSError *))completionBlock {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     [headers setValue:appId forKey:@"blitzAppId"];
     [headers setValue:appToken forKey:@"blitzAppToken"];
@@ -58,10 +58,10 @@
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
-- (void)updateBlitzUserId:(NSString*)appId
-                         :(NSString*)appToken
-                         :(NSData*) data
-                         :(void(^)(NSObject *, NSError *))completionBlock {
+- (void)updateBlitzUser:(NSString*)appId
+                       :(NSString*)appToken
+                       :(NSData*) data
+                       :(void(^)(NSObject *, NSError *))completionBlock {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     [headers setValue:appId forKey:@"blitzAppId"];
     [headers setValue:appToken forKey:@"blitzAppToken"];
@@ -90,6 +90,26 @@
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
     [requestBuilder setPath:@"app/user/updatePayerData"];
+    [requestBuilder setHeaders:headers];
+    [requestBuilder setHttpBody:data];
+    [requestBuilder setReqType:APP_REQUEST];
+    [requestBuilder setContentType:@"application/json"];
+    
+    [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
+}
+
+- (void)updateBlitzDeviceId:(NSString*)appId
+                      :(NSString*)appToken
+                      :(NSData*) data
+                      :(void(^)(NSObject *, NSError *))completionBlock {
+    NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
+    [headers setValue:appId forKey:@"blitzAppId"];
+    [headers setValue:appToken forKey:@"blitzAppToken"];
+    
+    BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
+    [requestBuilder setMethod:BLITZ_POST_METHOD];
+    [requestBuilder setBaseUrl:baseUrl];
+    [requestBuilder setPath:@"app/device/updateDeviceId"];
     [requestBuilder setHeaders:headers];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:APP_REQUEST];

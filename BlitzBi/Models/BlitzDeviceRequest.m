@@ -11,15 +11,17 @@
 
 @implementation BlitzDeviceRequest
 
-- (instancetype)init:(NSString*)appId
-                    :(NSString*)deviceId
-                    :(NSString*)specificDeviceId {
+- (instancetype)init:(NSString*)blitzAppId
+                    :(NSString*)blitzDeviceId
+                    :(nullable NSString*)appSpecificDeviceId
+                    :(nullable NSString*)deviceId {
     if (self = [super init]) {
-        blitzAppId = appId;
-        blitzDeviceId = deviceId;
-        appSpecificDeviceId = specificDeviceId;
-        installAppVersion = BlitzDeviceUtils.getAppVersion;
-        deviceType = BlitzDeviceUtils.getDeviceType;
+        self->blitzAppId = blitzAppId;
+        self->blitzDeviceId = blitzDeviceId;
+        self->appSpecificDeviceId = appSpecificDeviceId;
+        self->installAppVersion = BlitzDeviceUtils.getAppVersion;
+        self->deviceType = BlitzDeviceUtils.getDeviceType;
+        self->deviceId = deviceId;
     }
     return self;
 }
@@ -31,6 +33,7 @@
     [requestDict setValue:installAppVersion forKey:@"installAppVersion"];
     [requestDict setValue:deviceType forKey:@"deviceType"];
     [requestDict setValue:appSpecificDeviceId forKey:@"appSpecificDeviceId"];
+    [requestDict setValue:deviceId forKey:@"deviceId"];
     return requestDict;
 }
 @end

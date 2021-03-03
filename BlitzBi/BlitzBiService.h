@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* appSpecificDeviceIdentifier;
     NSString* blitzUserId;
     NSString* blitzPayerData;
+    NSString* deviceId;
     BaseUrls* baseUrls;
     id <PBlitzDataTransferService> biNetworkService;
     BlitzBiEventSendHandler* biBuilder;
@@ -47,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setAppSpecificIdentifier:(NSString*)deviceIdentifier;
 - (void)setBlitzUserId:(NSString*)userIdentifier;
 - (void)setBlitzPayerData:(NSString*)payerData;
+- (void)setDeviceId:(NSString*)deviceId;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 - (void)addCommonParamsWithKey:(NSString *)key

@@ -99,6 +99,11 @@
     [self updateBlitzPayerData];
 }
 
+- (void)setDeviceId:(NSString*)deviceId {
+    self->deviceId = deviceId;
+    [self updateBlitzDeviceId];
+}
+
 - (void)sendEvents:(NSArray*)events{
     if (events) {
         [biBuilder sendEvents:events];
@@ -218,7 +223,7 @@
 - (void)initializeDeviceId:(NSString*)appId
                           :(NSString*)appToken {
     NSString *deviceId = [[NSUUID UUID] UUIDString];
-    BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :nil];
+    BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :nil :nil];
     NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
     
     NSError *error;
@@ -227,7 +232,7 @@
         return;
     }
     
-    [self->dataHandler updateDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
+    [self->dataHandler updateBlitzDevice:appId :appToken :jsonData :^(NSObject *response, NSError *err){
         @try {
             if (err == nil && response) {
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
@@ -240,6 +245,7 @@
                             [self->biBuilder setBlitzdeviceId:appId :deviceId];
                             [self updateAppSpecificDeviceIdentifier];
                             [self updateBlitzUserId];
+                            [self updateBlitzDeviceId];
                             [self getAllParams:appId :appToken];
                         }
                     }
@@ -273,7 +279,7 @@
 - (void)updateAppSpecificDeviceIdentifier {
     NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if (deviceId && appSpecificDeviceIdentifier) {
-        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceIdentifier];
+        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceIdentifier :nil];
         NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
         
         NSError *error;
@@ -315,7 +321,7 @@
             return;
         }
         
-        [self->dataHandler updateBlitzUserId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
+        [self->dataHandler updateBlitzUser:appId :appToken :jsonData :^(NSObject *response, NSError *err){
             @try {
                 if (err == nil && response) {
                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
@@ -331,6 +337,37 @@
                 }
             } @catch (NSException *err) {
                 NSLog(@"[BlitzBi] Error while updating blitz user id with error %@", err);
+            }
+        }];
+    }
+}
+
+- (void)updateBlitzDeviceId {
+    NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
+    if (blitzDeviceId && deviceId) {
+        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceIdentifier :deviceId];
+        NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceRequestDict options:NSJSONWritingPrettyPrinted error:&error];
+        if (error) {
+            return;
+        }
+        
+        [self->dataHandler updateBlitzDeviceId:appId :appToken :jsonData :^(NSObject *response, NSError *err){
+            @try {
+                if (err == nil && response) {
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                    if (err == nil && jsonData) {
+                        NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                        if (err == nil && jsonDataDictionary) {
+                            return;
+                        }
+                    }
+                }
+                NSLog(@"[BlitzBi] Error while updating blitz device Id with error %@", err);
+            } @catch (NSException *err) {
+                NSLog(@"[BlitzBi] Error whlle updating blitz device Id with error %@", err);
             }
         }];
     }
