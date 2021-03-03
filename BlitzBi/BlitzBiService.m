@@ -247,12 +247,14 @@
                             [self updateBlitzUserId];
                             [self updateDeviceId];
                             [self getAllParams:appId :appToken];
+                            return;
                         }
                     }
                 }
             }
+            NSLog(@"[BlitzBi] Error whlle updating blitz device with error %@", err);
         } @catch (NSException *err) {
-            NSLog(@"[BlitzBi] Error whlle updating device Id with error %@", err);
+            NSLog(@"[BlitzBi] Error whlle updating blitz device with error %@", err);
         }
     }];
 }
