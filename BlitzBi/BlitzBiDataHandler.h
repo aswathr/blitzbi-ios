@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
                             :(NSString*)appToken
                             :(NSData*) data
                             :(void(^)(NSObject *, NSError *))completionBlock;
-- (void)updateBlitzDeviceId:(NSString*)appId
+- (void)updateDeviceId:(NSString*)appId
                       :(NSString*)appToken
                       :(NSData*) data
                       :(void(^)(NSObject *, NSError *))completionBlock;

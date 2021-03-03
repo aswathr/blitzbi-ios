@@ -98,7 +98,7 @@
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
-- (void)updateBlitzDeviceId:(NSString*)appId
+- (void)updateDeviceId:(NSString*)appId
                       :(NSString*)appToken
                       :(NSData*) data
                       :(void(^)(NSObject *, NSError *))completionBlock {
