@@ -9,14 +9,14 @@
 #import "BlitzDeviceUtils.h"
 
 @implementation BlitzUserRequest
-- (instancetype)init:(NSString*)appId
-                    :(NSString*)deviceId
-                    :(NSString*)userId {
+- (instancetype)init:(NSString*)blitzAppId
+                    :(NSString*)blitzDeviceId
+                    :(nullable NSString*)blitzUserId; {
     if (self = [super init]) {
-        blitzAppId = appId;
-        blitzDeviceId = deviceId;
-        blitzUserId = userId;
-        deviceType = BlitzDeviceUtils.getDeviceType;
+        self->blitzAppId = blitzAppId;
+        self->blitzDeviceId = blitzDeviceId;
+        self->blitzUserId = blitzUserId;
+        self->deviceType = BlitzDeviceUtils.getDeviceType;
     }
     return self;
 }

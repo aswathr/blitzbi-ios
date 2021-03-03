@@ -36,6 +36,10 @@
     [[BlitzBiService sharedService] setBlitzPayerData:payerData];
 }
 
++ (void)setDeviceId:(NSString*)deviceId {
+    [[BlitzBiService sharedService] setDeviceId:deviceId];
+}
+
 + (void)sendEvent:(NSDictionary*)event{
     [[BlitzBiService sharedService] sendEvent:event];
 }

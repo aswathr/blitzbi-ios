@@ -16,11 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* appSpecificDeviceId;
     NSString* installAppVersion;
     NSString* deviceType;
+    NSString* deviceId;
 }
 
-- (instancetype)init:(NSString*)appId
-                    :(NSString*)deviceId
-                    :(nullable NSString*)appSpecificDeviceId;
+- (instancetype)init:(NSString*)blitzAppId
+                    :(NSString*)blitzDeviceId
+                    :(nullable NSString*)appSpecificDeviceId
+                    :(nullable NSString*)deviceId;
 - (NSMutableDictionary*)dictionary;
 @end
 

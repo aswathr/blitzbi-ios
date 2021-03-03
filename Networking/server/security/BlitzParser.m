@@ -110,4 +110,16 @@
     return nil;
 }
 
++ (NSString*)sha256HashForText:(NSString*)text {
+    const char* utf8chars = [text UTF8String];
+    unsigned char result[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(utf8chars, (CC_LONG)strlen(utf8chars), result);
+    
+    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH*2];
+    for(int i = 0; i<CC_SHA256_DIGEST_LENGTH; i++) {
+        [ret appendFormat:@"%02x",result[i]];
+    }
+    return ret;
+}
+
 @end

@@ -20,22 +20,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBaseUrl:(NSString*)baseUrl
               andNetworkService:(id <PBlitzDataTransferService>)networkService;
 
-- (void)updateDeviceId:(NSString*)appId
-                      :(NSString*)appToken
-                      :(NSData*) data
-                      :(void(^)(NSObject *, NSError *))completionBlock;
+- (void)updateBlitzDevice:(NSString*)appId
+                         :(NSString*)appToken
+                         :(NSData*) data
+                         :(void(^)(NSObject *, NSError *))completionBlock;
 - (void)updateAppSpecificDeviceIdentifier:(NSString*)appId
                                          :(NSString*)appToken
                                          :(NSData*) data
                                          :(void(^)(NSObject *, NSError *))completionBlock;
-- (void)updateBlitzUserId:(NSString*)appId
-                         :(NSString*)appToken
-                         :(NSData*) data
-                         :(void(^)(NSObject *, NSError *))completionBlock;
+- (void)updateBlitzUser:(NSString*)appId
+                       :(NSString*)appToken
+                       :(NSData*) data
+                       :(void(^)(NSObject *, NSError *))completionBlock;
 - (void)updateBlitzPayerData:(NSString*)appId
                             :(NSString*)appToken
                             :(NSData*) data
                             :(void(^)(NSObject *, NSError *))completionBlock;
+- (void)updateDeviceId:(NSString*)appId
+                      :(NSString*)appToken
+                      :(NSData*) data
+                      :(void(^)(NSObject *, NSError *))completionBlock;
 - (void)getAllParams:(NSString*)appId
                     :(NSString*)appToken
                     :(void(^)(NSObject *, NSError *))completionBlock;

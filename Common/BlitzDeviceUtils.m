@@ -17,6 +17,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <AdSupport/ASIdentifierManager.h>
+#import "BlitzParser.h"
 
 #ifdef __IPHONE_11_0
 #import <DeviceCheck/DeviceCheck.h>
@@ -52,6 +53,14 @@
     return nil;
 }
 
++ (nullable NSString *)getBlitzPartnerDeviceId {
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] stringForKey: BLITZ_PARTNER_DEVICE_ID_KEY];
+    if (deviceId) {
+        return deviceId;
+    }
+    return nil;
+}
+
 + (nullable NSString *)getAppDeviceId {
     NSString *blitzDeviceId = [[NSUserDefaults standardUserDefaults] stringForKey: BLITZ_APP_DEVICE_ID_KEY];
     if (blitzDeviceId) {
@@ -79,6 +88,11 @@
 
 + (void)setBlitzDeviceId:(nonnull NSString *) deviceId {
     [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:BLITZ_DEVICE_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setBlitzPartnerDeviceId:(nonnull NSString *) deviceId {
+    [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:BLITZ_PARTNER_DEVICE_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

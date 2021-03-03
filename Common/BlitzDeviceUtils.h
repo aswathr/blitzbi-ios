@@ -14,9 +14,11 @@
 + (nonnull NSString*)getSessionId;
 + (nullable NSString*)getBlitzDeviceId;
 + (nullable NSString *)getAppDeviceId;
++ (nullable NSString *)getBlitzPartnerDeviceId;
 + (nullable NSString *)getBlitzUserId;
 + (nonnull NSDictionary *)getBlitzCommonParams;
 + (void)setBlitzDeviceId:(nonnull NSString*) deviceId;
++ (void)setBlitzPartnerDeviceId:(nonnull NSString *) deviceId;
 + (void)setAppDeviceId:(nonnull NSString *) appSpecificDeviceId;
 + (void)setBlitzUserId:(nonnull NSString *) appSpecificUserId;
 + (void)setBlitzCommonParam:(nonnull NSDictionary *) commonParams;
