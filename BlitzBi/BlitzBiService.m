@@ -279,9 +279,9 @@
 }
 
 - (void)updateAppSpecificDeviceIdentifier {
-    NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
-    if (deviceId && appSpecificDeviceIdentifier) {
-        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceIdentifier :nil];
+    NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
+    if (blitzDeviceId && appSpecificDeviceIdentifier) {
+        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :blitzDeviceId :appSpecificDeviceIdentifier :nil];
         NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
         
         NSError *error;
@@ -312,9 +312,9 @@
 }
 
 - (void)updateBlitzUserId {
-    NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
-    if (deviceId && blitzUserId) {
-        BlitzUserRequest *userRequest = [[BlitzUserRequest alloc] init:appId :deviceId :blitzUserId];
+    NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
+    if (blitzDeviceId && blitzUserId) {
+        BlitzUserRequest *userRequest = [[BlitzUserRequest alloc] init:appId :blitzDeviceId :blitzUserId];
         NSMutableDictionary *userRequestDict = [userRequest dictionary];
         
         NSError *error;
@@ -347,6 +347,13 @@
 - (void)updateDeviceId {
     NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if (blitzDeviceId && deviceId) {
+        NSString *blitzPartnerDeviceId = [BlitzDeviceUtils getBlitzPartnerDeviceId];
+        if (blitzPartnerDeviceId && [blitzPartnerDeviceId isEqualToString:deviceId]) {
+            return;
+        }
+        
+        [BlitzDeviceUtils setBlitzPartnerDeviceId:deviceId];
+        
         BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :blitzDeviceId :appSpecificDeviceIdentifier :deviceId];
         NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
         
@@ -381,8 +388,8 @@
         return;
     }
     
-    NSString *deviceId = [BlitzDeviceUtils getBlitzDeviceId];
-    if (deviceId && blitzUserId) {
+    NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
+    if (blitzDeviceId && blitzUserId) {
         BlitzPayerRequest *payerRequest = [[BlitzPayerRequest alloc] initWith:userId andPayerData:blitzPayerData];
         NSMutableDictionary *payerRequestDict = [payerRequest dictionary];
         
