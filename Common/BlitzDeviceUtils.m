@@ -134,8 +134,7 @@
 + (nonnull NSString *)getIDFA {
     @try {
         NSString *IDFA = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-        NSString *IDFA_SHA = [BlitzParser sha256HashForText:IDFA];
-        return IDFA_SHA ?: BLITZ_DEFAULT_IDFA ;
+        return IDFA ?: BLITZ_DEFAULT_IDFA ;
     } @catch (NSException *err) {
         NSLog(@"[BlitzBi] Error in getting iDFA with error %@", err);
         return BLITZ_DEFAULT_IDFA;
