@@ -12,4 +12,5 @@
 + (NSData *)parse:(NSString *)encryptedStr withDetailsOne:(NSString *)key andDetailsTwo:(NSString *)iv;
 + (NSData *)wrap:(NSString *)str withDetailsOne:(NSString *)key andDetailsTwo:(NSString *)iv;
 + (NSData *)wrapData:(NSData *)inputData withDetailsOne:(NSString *)key andDetailsTwo:(NSString *)iv;
++ (NSString*)sha256HashForText:(NSString*)text;
 @end
