@@ -345,7 +345,7 @@
 - (void)updateDeviceId {
     NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if (blitzDeviceId && deviceId) {
-        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :appSpecificDeviceIdentifier :deviceId];
+        BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :blitzDeviceId :appSpecificDeviceIdentifier :deviceId];
         NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
         
         NSError *error;
