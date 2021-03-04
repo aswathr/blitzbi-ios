@@ -74,7 +74,7 @@
     self->biNetworkService = [networkBuilder build];
     
     BlitzBiEventHandlerBuilder *handlerBuilder = [[BlitzBiEventHandlerBuilder alloc] init];
-    [handlerBuilder setParams:[NSNumber numberWithInt:60] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService withAdTracking:adTracking];
+    [handlerBuilder setParams:[NSNumber numberWithInt:20] withUrl:baseUrl withAppId:appId withAppToken:appToken withService:biNetworkService withAdTracking:adTracking];
     self->biBuilder = [handlerBuilder build];
     
     self->dataHandler = [[BlitzBiDataHandler alloc]initWithBaseUrl:baseUrl andNetworkService:biNetworkService];
