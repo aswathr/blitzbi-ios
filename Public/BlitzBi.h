@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Description: Use this to update payer data for the user.
 + (void)setBlitzPayerData:(NSString*)payerData;
 
-/// Description: Use this to update device Id for the device.
+/// Description: Use this to update partner device Id for the device.
 + (void)setPartnerDeviceId:(NSString*)deviceId;
 
 /// Description: Use this for logging custom event.
