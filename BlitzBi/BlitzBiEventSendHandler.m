@@ -32,10 +32,9 @@
 - (void)invalidateTimer;
 - (void)timerTicked;
 - (void)onSessionTimedOut;
-- (void)flushEmergency;
-- (void(^)(void))checkAndFlushAndArchiveBlock;
-- (void)flush;
-- (BOOL)checkAndFlush;
+- (void (^)(void))checkAndFlushAndArchiveBlock:(BOOL)isForced;
+- (void)flushWithIsForced:(BOOL)isForced;
+- (BOOL)checkAndFlushWithIsForced:(BOOL)isForced;
 - (BOOL)handleNetworkResponse:(NSObject *)response withError:(NSError *)error;
 - (void)archiveEvents;
 - (NSString*)eventsFilePath;
@@ -56,8 +55,8 @@
 
 @implementation BlitzBiEventSendHandler
 
-static NSInteger maxPendingCount = 200;
-static NSInteger forceSendAfterSeconds = 30;
+static NSInteger maxPendingCount = 20;
+static NSInteger forceSendAfterSeconds = 15;
 static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (instancetype)init:(NSNumber*)batchSize
@@ -112,8 +111,8 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     self->sessionPauseTimeStamp = [self getCurrentEpochTime];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
+    [self flushWithIsForced:YES];
     [self startRepeatedTimerToAttemptFlush];
-    [self flushEmergency];
     [[BlitzBiService sharedService] disconnectBlitzTime];
 }
 
@@ -131,10 +130,10 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (void)onDestroy {
     NSLog(@"[BlitzBi] On Destroy");
-    [self flushEmergency];
+    [self flushWithIsForced:YES];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
-    [self flushEmergency];
+    [self flushWithIsForced:YES];
 }
 
 - (long long)getCurrentEpochTime{
@@ -185,7 +184,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (void)timerTicked {
     NSLog(@"[BlitzBi] Timer Ticked");
-    [self flush];
+    [self flushWithIsForced:YES];
 }
 
 - (void)setBlitzdeviceId :(NSString*)appId
@@ -195,29 +194,19 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     self->isAppIdValidated = YES;
 }
 
-- (void)flushEmergency {
-    NSLog(@"[BlitzBi] Flushing all the events immediately without any response tracking");
-    NSMutableArray *eventsCopy;
-    @synchronized (self) {
-        eventsCopy = [self->pendingEvents mutableCopy];
-    }
-    while (eventsCopy.count > 0) {
-        NSUInteger batchSize = MIN(eventsCopy.count, maxPendingCount);
-        NSArray *batch = [eventsCopy subarrayWithRange:NSMakeRange(0, batchSize)];
-        
-        NSData *jsonData = [self getJSONDataForBatch:batch];
-        NSString *url = [biConfig base_URL];
-        
-        [self->eventRepository processJsonRequestWithoutResponse:url :jsonData :YES];
-        [eventsCopy removeObjectsInArray:batch];
-    }
+- (void)sendEvent:(NSDictionary *)eventDict {
+    [self sendEvent:eventDict withForcedFlush:NO];
 }
 
-- (void)sendEvent:(NSDictionary *)eventDict {
-    [self sendEvents:@[eventDict]];
+- (void)sendEvent:(NSDictionary *)eventDict withForcedFlush:(BOOL)isForced {
+    [self sendEvents:@[eventDict] withForcedFlush:isForced];
 }
 
 - (void)sendEvents:(NSArray *)events {
+    [self sendEvents:events withForcedFlush:NO];
+}
+
+- (void)sendEvents:(NSArray *)events withForcedFlush:(BOOL)isForced  {
     NSMutableArray *eventsCopy = [NSMutableArray new];
     for (NSDictionary *event in events) {
         NSString *eventName = [event objectForKey:BLITZ_EVENT_NAME_TAG];
@@ -234,40 +223,44 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
             [self->pendingEvents addObjectsFromArray:eventsCopy];
         }
         [self archiveEvents];
-        BOOL shouldFlush = [self shouldFlushEvents] && [self isAppIdAvailable];
+        BOOL shouldFlush = [self shouldFlushEvents] || isForced;
         if (shouldFlush) {
             if (!self->isBlockSubmittedToNetworkQueue) {
                 self->isBlockSubmittedToNetworkQueue = YES;
-                dispatch_async(self->networkQueue, [self checkAndFlushAndArchiveBlock]);
+                dispatch_async(self->networkQueue, [self checkAndFlushAndArchiveBlock:isForced]);
             }
         }
     });
 }
 
-- (void (^)(void))checkAndFlushAndArchiveBlock{
+- (void (^)(void))checkAndFlushAndArchiveBlock:(BOOL)isForced {
     return ^{
-        BOOL shouldArchive = [self checkAndFlush];
+        BOOL shouldArchive = [self checkAndFlushWithIsForced:isForced];
         if (shouldArchive) {
             [self archiveEvents];
         }
     };
 }
 
-- (void)flush {
+- (void)flushWithIsForced:(BOOL)isForced  {
     dispatch_async(self->serialQueue, ^{
-        BOOL shouldFlush = [self shouldFlushEvents] && [self isAppIdAvailable];
+        BOOL shouldFlush = [self shouldFlushEvents] || isForced;
         if (shouldFlush) {
             if (!self->isBlockSubmittedToNetworkQueue) {
                 self->isBlockSubmittedToNetworkQueue = YES;
-                dispatch_async(self->networkQueue, [self checkAndFlushAndArchiveBlock]);
+                dispatch_async(self->networkQueue, [self checkAndFlushAndArchiveBlock: isForced]);
             }
         }
     });
 }
 
-- (BOOL)checkAndFlush {
+- (BOOL)checkAndFlushWithIsForced:(BOOL)isForced {
     @try {
-        if (![self shouldFlushEvents] && [self isAppIdAvailable]) {
+        if (![self isAppIdAvailable]) {
+            return NO;
+        }
+        BOOL shouldFlush = [self shouldFlushEvents];
+        if (!isForced && !shouldFlush) {
             return NO;
         }
         
@@ -362,7 +355,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [self->pendingEvents removeObjectsInArray:defectiveEvents];
     }
     
-    [self flush];
+    [self flushWithIsForced:YES];
 }
 
 - (BOOL)archiveObject:(id)object withFilePath:(NSString *)filePath {
@@ -453,7 +446,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)setBatchSize:(NSNumber*)size {
     maxPendingCount = [size longValue];
 }
-
 
 - (NSMutableDictionary*) getCommonParams {
     NSMutableDictionary *biCommonParams = [[NSMutableDictionary alloc] init];
