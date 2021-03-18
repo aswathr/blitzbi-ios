@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BlitzBiService : NSObject {
     NSString* appId;
     NSString* appToken;
+    BOOL adTracking;
     NSString* baseUrl;
     NSString* appSpecificDeviceIdentifier;
     NSString* blitzUserId;

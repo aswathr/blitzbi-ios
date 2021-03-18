@@ -479,10 +479,9 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [biCommonParams setValue:@"" forKey:@"blitzUserId"];
     }
     
-    if (adTracking) {
+    if (adTracking)
         [biCommonParams setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
-        [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
-    }
+    [biCommonParams setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
     return biCommonParams;
 }
 

@@ -60,6 +60,7 @@
              :(BOOL)debugEnabled{
     self->appId = appId;
     self->appToken = appToken;
+    self->adTracking = adTracking;
     
     if (debugEnabled) {
         self->baseUrl = @"https://blitzbi-test.useblitz.com/";
@@ -225,6 +226,9 @@
     NSString *deviceId = [[NSUUID UUID] UUIDString];
     BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :deviceId :nil :nil];
     NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
+    if (adTracking)
+        [deviceRequestDict setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+    [deviceRequestDict setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceRequestDict options:NSJSONWritingPrettyPrinted error:&error];
