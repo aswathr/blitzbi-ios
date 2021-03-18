@@ -287,6 +287,9 @@
     if (blitzDeviceId && appSpecificDeviceIdentifier) {
         BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :blitzDeviceId :appSpecificDeviceIdentifier :nil];
         NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
+        if (adTracking)
+            [deviceRequestDict setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+        [deviceRequestDict setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
         
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceRequestDict options:NSJSONWritingPrettyPrinted error:&error];
@@ -320,6 +323,9 @@
     if (blitzDeviceId && blitzUserId) {
         BlitzUserRequest *userRequest = [[BlitzUserRequest alloc] init:appId :blitzDeviceId :blitzUserId];
         NSMutableDictionary *userRequestDict = [userRequest dictionary];
+        if (adTracking)
+            [userRequestDict setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+        [userRequestDict setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
         
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userRequestDict options:NSJSONWritingPrettyPrinted error:&error];
@@ -360,6 +366,9 @@
         
         BlitzDeviceRequest *deviceRequest = [[BlitzDeviceRequest alloc] init:appId :blitzDeviceId :appSpecificDeviceIdentifier :deviceId];
         NSMutableDictionary *deviceRequestDict = [deviceRequest dictionary];
+        if (adTracking)
+            [deviceRequestDict setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+        [deviceRequestDict setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
         
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceRequestDict options:NSJSONWritingPrettyPrinted error:&error];
@@ -396,6 +405,9 @@
     if (blitzDeviceId && blitzUserId) {
         BlitzPayerRequest *payerRequest = [[BlitzPayerRequest alloc] initWith:userId andPayerData:blitzPayerData];
         NSMutableDictionary *payerRequestDict = [payerRequest dictionary];
+        if (adTracking)
+            [payerRequestDict setValue:[BlitzDeviceUtils getIDFA] forKey:@"ifa"];
+        [payerRequestDict setValue:[BlitzDeviceUtils getIFV] forKey:@"ifv"];
         
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payerRequestDict options:NSJSONWritingPrettyPrinted error:&error];
