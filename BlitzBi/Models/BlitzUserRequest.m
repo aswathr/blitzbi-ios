@@ -16,6 +16,7 @@
         self->blitzAppId = blitzAppId;
         self->blitzDeviceId = blitzDeviceId;
         self->blitzUserId = blitzUserId;
+        self->installAppVersion = BlitzDeviceUtils.getAppVersion;
         self->deviceType = BlitzDeviceUtils.getDeviceType;
     }
     return self;
@@ -27,6 +28,7 @@
     [requestDict setValue:blitzDeviceId forKey:@"blitzDeviceId"];
     [requestDict setValue:deviceType forKey:@"deviceType"];
     [requestDict setValue:blitzUserId forKey:@"blitzUserId"];
+    [requestDict setValue:installAppVersion forKey:@"installAppVersion"];
     return requestDict;
 }
 @end

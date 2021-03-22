@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSString* blitzAppId;
     NSString* blitzDeviceId;
     NSString* blitzUserId;
+    NSString* installAppVersion;
     NSString* deviceType;
 }
 
