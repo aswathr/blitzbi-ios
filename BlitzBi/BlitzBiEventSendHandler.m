@@ -112,7 +112,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
     [self flushWithIsForced:YES];
-    [self startRepeatedTimerToAttemptFlush];
     [[BlitzBiService sharedService] disconnectBlitzTime];
 }
 
@@ -125,7 +124,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [self onSessionTimedOut];
     }
     [self fireSessionStartEvent];
-    [self invalidateTimer];
+    [self startRepeatedTimerToAttemptFlush];
 }
 
 - (void)onDestroy {
