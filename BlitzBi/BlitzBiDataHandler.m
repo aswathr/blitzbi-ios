@@ -29,7 +29,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
-    [requestBuilder setPath:@"app/device/update"];
+    [requestBuilder setPath:[@"app/{appId}/device/update" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:headers];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:APP_REQUEST];
@@ -49,7 +49,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
-    [requestBuilder setPath:@"app/device/update"];
+    [requestBuilder setPath:[@"app/{appId}/device/update" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:headers];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:APP_REQUEST];
@@ -69,7 +69,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
-    [requestBuilder setPath:@"app/user/update"];
+    [requestBuilder setPath:[@"app/{appId}/user/update" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:headers];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:APP_REQUEST];
@@ -89,7 +89,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
-    [requestBuilder setPath:@"app/user/updatePayerData"];
+    [requestBuilder setPath:[@"app/{appId}/user/updatePayerData" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:headers];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:APP_REQUEST];
@@ -109,7 +109,7 @@
     BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
     [requestBuilder setMethod:BLITZ_POST_METHOD];
     [requestBuilder setBaseUrl:baseUrl];
-    [requestBuilder setPath:@"app/device/updateDeviceId"];
+    [requestBuilder setPath:[@"app/{appId}/device/updateDeviceId" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
     [requestBuilder setHeaders:headers];
     [requestBuilder setHttpBody:data];
     [requestBuilder setReqType:APP_REQUEST];
