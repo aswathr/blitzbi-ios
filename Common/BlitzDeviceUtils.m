@@ -179,6 +179,7 @@
             return @"no_internet";
         }
         else if (internetStatus == ReachableViaWWAN) {
+#if !TARGET_OS_MACCATALYST
             CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
             NSString *connDetails = netinfo.currentRadioAccessTechnology;
             //Reference - http://stackoverflow.com/questions/7938650/ios-detect-3g-or-wifi
@@ -218,6 +219,7 @@
                 }
                 return connDetails ?: BLITZ_DEFAULT_CONN_DETAILS;
             }
+#endif
             return @"Xg";
         } else {
             return BLITZ_DEFAULT_CONN_DETAILS;
@@ -383,14 +385,14 @@
 
 + (nonnull NSString *)getCarrierName {
     @try {
+#if !TARGET_OS_MACCATALYST
         CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
         CTCarrier *carrier = [netinfo subscriberCellularProvider];
         if (carrier) {
             return [carrier carrierName] ?: BLITZ_DEFAULT_CARRIER_NAME;
         }
-        else {
-            return BLITZ_DEFAULT_CARRIER_NAME;
-        }
+#endif
+        return BLITZ_DEFAULT_CARRIER_NAME;
     } @catch (NSException *err) {
         NSLog(@"[BlitzBi] Error in getting Carrier name with error %@", err);
         return BLITZ_DEFAULT_CARRIER_NAME;
