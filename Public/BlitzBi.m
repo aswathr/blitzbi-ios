@@ -114,6 +114,13 @@
     [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
+NSUncaughtExceptionHandler *BlitzExceptionHandlerPtr = &BlitzExceptionHandler;
+
+volatile void BlitzExceptionHandler(NSException *exception) {
+    NSLog(@"Hellow World!! CRASH IS HERE");
+    [[BlitzBiService sharedService] performSelectorOnMainThread:@selector(handleException:) withObject:exception waitUntilDone:YES];
+}
+
 + (void)logClickedEventWithWidgetName:(NSString*)widgetName
                             andParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];
@@ -123,6 +130,9 @@
     [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
++ (void)setBlitzCrashHandler {
+    NSSetUncaughtExceptionHandler(BlitzExceptionHandlerPtr);
+}
 
 + (void)logGenericEventWithParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];

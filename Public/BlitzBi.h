@@ -84,10 +84,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)logGenericEventWithParams:(NSDictionary*)params;
 
+//Description: set this if you want to track crash event
++ (void)setBlitzCrashHandler;
 + (void)logCustomEventWithEventName:(NSString *)eventName
                     andStringParams:(NSDictionary<NSString *, NSString *> *)strParams
                        andIntParams:(NSDictionary<NSString *, NSNumber *> *)intParams
                      andFloatParams:(NSDictionary<NSString *,NSNumber *> *)floatParams;
+
+volatile void BlitzExceptionHandler(NSException *exception);
+extern NSUncaughtExceptionHandler *BlitzExceptionHandlerPtr;
 
 @end
 

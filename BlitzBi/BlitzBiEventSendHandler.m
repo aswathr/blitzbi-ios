@@ -28,6 +28,7 @@
 - (void)fireSessionLengthEvent;
 - (void)fireSessionStartEvent;
 - (void)fireSessionPauseEvent;
+- (void)fireAppCrashEvent;
 - (void)startRepeatedTimerToAttemptFlush;
 - (void)invalidateTimer;
 - (void)timerTicked;
@@ -99,7 +100,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onDestroy)
+                                             selector:@selector(onPause)
                                                  name:UIApplicationWillTerminateNotification
                                                object:nil];
 }
@@ -127,11 +128,16 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     [self startRepeatedTimerToAttemptFlush];
 }
 
+- (void)onAppCrash {
+    [self onDestroy];
+}
+
 - (void)onDestroy {
     NSLog(@"[BlitzBi] On Destroy");
     [self flushWithIsForced:YES];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
+    [self fireAppCrashEvent];
     [self flushWithIsForced:YES];
 }
 
@@ -150,6 +156,12 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 - (void)fireSessionStartEvent {
     NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
     [eventDict setValue:@"blitz_session_start" forKey:@"eventName"];
+    [self sendEvent:eventDict];
+}
+
+- (void)fireAppCrashEvent {
+    NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
+    [eventDict setValue:@"blitz_app_crash" forKey:@"eventName"];
     [self sendEvent:eventDict];
 }
 
