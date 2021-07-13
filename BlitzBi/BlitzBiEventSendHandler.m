@@ -134,10 +134,9 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 - (void)onDestroy {
     NSLog(@"[BlitzBi] On Destroy");
-    [self flushWithIsForced:YES];
+    [self fireAppCrashEvent];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
-    [self fireAppCrashEvent];
     [self flushWithIsForced:YES];
 }
 
@@ -160,9 +159,16 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (void)fireAppCrashEvent {
-    NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
-    [eventDict setValue:@"blitz_app_crash" forKey:@"eventName"];
-    [self sendEvent:eventDict];
+    @try {
+        NSMutableDictionary *eventDict = [[NSMutableDictionary alloc] init];
+        [eventDict setValue:@"blitz_app_crash" forKey:@"eventName"];
+        [self addClientEventTime:eventDict];
+        [self->pendingEvents addObject:eventDict];
+        [self archiveEvents];
+    } @catch (NSException *exception) {
+        NSLog(@"[BlitzBi] Error in fireAppCrashEvent.");
+        
+    }
 }
 
 - (void)fireSessionPauseEvent {
