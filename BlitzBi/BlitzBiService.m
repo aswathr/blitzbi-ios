@@ -124,6 +124,18 @@
     [BlitzDeviceUtils setBlitzCommonParam:commonParams];
 }
 
+
+- (void)handleException:(NSException *)exception {
+    [self onAppCrash];
+}
+
+
+- (void)onAppCrash {
+    if (biBuilder) {
+        [biBuilder onAppCrash];
+    }
+}
+
 - (long)getCurrentTime {
     @try {
         NSDate *date = [server dateWithError:nil];
