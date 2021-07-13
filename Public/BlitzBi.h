@@ -91,8 +91,6 @@ NS_ASSUME_NONNULL_BEGIN
                        andIntParams:(NSDictionary<NSString *, NSNumber *> *)intParams
                      andFloatParams:(NSDictionary<NSString *,NSNumber *> *)floatParams;
 
-volatile void BlitzExceptionHandler(NSException *exception);
-extern NSUncaughtExceptionHandler *BlitzExceptionHandlerPtr;
 
 @end
 
