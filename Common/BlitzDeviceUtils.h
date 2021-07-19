@@ -22,6 +22,7 @@
 + (void)setAppDeviceId:(nonnull NSString *) appSpecificDeviceId;
 + (void)setBlitzUserId:(nonnull NSString *) appSpecificUserId;
 + (void)setBlitzCommonParam:(nonnull NSDictionary *) commonParams;
++ (void)setBlitzAppReceipt:(nonnull NSString *)receipt;
 + (nonnull NSString*)getAppVersion;
 + (nonnull NSString*)getTimeZone;
 + (nonnull NSString*)getIDFA;
@@ -35,4 +36,5 @@
 + (nonnull NSString*)getAppTrackingEnabled;
 + (nonnull NSString*)getUserAgent;
 + (nonnull NSString*)getNotificationId;
++ (nullable NSString *)getBlitzAppReceipt;
 @end
