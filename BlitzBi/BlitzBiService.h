@@ -50,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setBlitzUserId:(NSString*)userIdentifier;
 - (void)setBlitzPayerData:(NSString*)payerData;
 - (void)setDeviceId:(NSString*)deviceId;
+- (void)tagPurchase:(NSString *)productId;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 - (void)addCommonParamsWithKey:(NSString *)key

@@ -294,6 +294,46 @@
     }
 }
 
+- (void)tagPurchase:(NSString *)productId {
+    @try {
+        NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
+        NSString *blitzUserId = [BlitzDeviceUtils getBlitzDeviceId];
+        
+        NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+        NSData *receiptData = [NSData dataWithContentsOfURL:receiptURL];
+        NSString *receipt = [receiptData base64EncodedStringWithOptions:0];
+        
+        NSMutableDictionary *requestDict = [[NSMutableDictionary alloc] init];
+        [requestDict setValue:blitzDeviceId forKey:@"appDeviceId"];
+        [requestDict setValue:blitzUserId forKey:@"appUserId"];
+        [requestDict setValue:productId forKey:@"productId"];
+        [requestDict setValue:receipt forKey:@"receipt"];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestDict options:NSJSONWritingPrettyPrinted error:&error];
+        if (error) {
+            return;
+        }
+        [self->dataHandler tagPurchaseWithAppId:appId withToken:appToken withData:jsonData andCallback:^(NSObject *response, NSError *err) {
+                    @try {
+                        if (err == nil && response) {
+                            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];
+                            if (err == nil && jsonData) {
+                                NSDictionary *jsonDataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+                                if (err == nil && jsonDataDictionary) {
+                                    
+                                }
+                            }
+                        }
+                    } @catch (NSException *ex) {
+                        NSLog(@"[BlitzBi] Error while tagging purchase with error %@", ex);
+                    }
+        }];
+    } @catch (NSException *ex) {
+        NSLog(@"[BlitzBi] Error while updating tagging purchase with error %@", ex);
+    }
+}
+
 - (void)updateAppSpecificDeviceIdentifier {
     NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
     if (blitzDeviceId && appSpecificDeviceIdentifier) {

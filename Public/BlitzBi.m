@@ -114,6 +114,17 @@
     [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
++ (void)tagPurchaseWithProductId:(NSString *)productId {
+    [[BlitzBiService sharedService] tagPurchase:productId];
+}
+
+
++ (NSString *)getReceipt {
+    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receiptData = [NSData dataWithContentsOfURL:receiptURL];
+    return [receiptData base64EncodedStringWithOptions:0];
+}
+
 
 volatile void BlitzExceptionHandler(NSException *exception) {
     NSLog(@"Hellow World!! CRASH IS HERE");
