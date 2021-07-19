@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBaseUrl:(NSString*)baseUrl
               andNetworkService:(id <PBlitzDataTransferService>)networkService;
 
-- (void)tagPurchaseWithAppId:(NSString*)appId withToken:(NSString *)appToken withData:(NSData*)data andCallback:(void(^)(NSObject *, NSError *))completionBlock;
+- (void)savePurchaseWithAppId:(NSString*)appId withToken:(NSString *)appToken withData:(NSData*)data andCallback:(void(^)(NSObject *, NSError *))completionBlock;
 
 - (void)updateBlitzDevice:(NSString*)appId
                          :(NSString*)appToken

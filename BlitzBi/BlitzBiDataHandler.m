@@ -39,7 +39,7 @@
 }
 
 
-- (void)tagPurchaseWithAppId:(NSString*)appId withToken:(NSString *)appToken withData:(NSData*)data andCallback:(void(^)(NSObject *, NSError *))completionBlock {
+- (void)savePurchaseWithAppId:(NSString*)appId withToken:(NSString *)appToken withData:(NSData*)data andCallback:(void(^)(NSObject *, NSError *))completionBlock {
     NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
     [headers setValue:appId forKey:@"blitzAppId"];
     [headers setValue:appToken forKey:@"blitzAppToken"];

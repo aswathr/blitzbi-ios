@@ -294,7 +294,7 @@
     }
 }
 
-- (void)tagPurchase:(NSString *)productId {
+- (void)savePurchase:(NSString *)productId {
     @try {
         NSString *blitzDeviceId = [BlitzDeviceUtils getBlitzDeviceId];
         NSString *blitzUserId = [BlitzDeviceUtils getBlitzUserId];
@@ -330,7 +330,7 @@
             if (error) {
                 return;
             }
-            [self->dataHandler tagPurchaseWithAppId:appId withToken:appToken withData:jsonData andCallback:^(NSObject *response, NSError *err) {
+            [self->dataHandler savePurchaseWithAppId:appId withToken:appToken withData:jsonData andCallback:^(NSObject *response, NSError *err) {
                         @try {
                             if (err == nil && response) {
                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response options:0 error:&err];

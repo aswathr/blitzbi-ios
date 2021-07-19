@@ -122,7 +122,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     
     NSString *receipt = [BlitzDeviceUtils getBlitzAppReceipt];
     if (receipt) {
-        NSTimer *purchaseTimer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(tagPurchase) userInfo:nil repeats:NO];
+        NSTimer *purchaseTimer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(savePurchase) userInfo:nil repeats:NO];
         [[NSRunLoop mainRunLoop] addTimer:purchaseTimer forMode:NSRunLoopCommonModes];
     }
     
@@ -132,6 +132,11 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     }
     [self fireSessionStartEvent];
     [self startRepeatedTimerToAttemptFlush];
+}
+
+
+- (void)savePurchase {
+    [[BlitzBiService sharedService] savePurchase:@"ALL_PRODUCT_ID"];
 }
 
 - (void)onAppCrash {
@@ -200,9 +205,6 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     }
 }
 
-- (void)tagPurchase {
-    [[BlitzBiService sharedService] tagPurchase:@"ALL_PRODUCT_ID"];
-}
 
 - (void)onSessionTimedOut {
     NSLog(@"[BlitzBi] Session timeout out. Setting new value for session Id.");

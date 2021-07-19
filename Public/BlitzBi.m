@@ -114,8 +114,8 @@
     [[BlitzBiService sharedService] sendEvent:eventsMap];
 }
 
-+ (void)tagPurchaseWithProductId:(NSString *)productId {
-    [[BlitzBiService sharedService] tagPurchase:productId];
++ (void)savePurchaseWithProductId:(NSString *)productId {
+    [[BlitzBiService sharedService] savePurchase:productId];
 }
 
 

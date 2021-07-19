@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Description: Use this to get current time in millis. It will return 0 in case we are not able to fetch the currrent time in millis.
 + (long)getCurrentTime;
 
-+ (void)tagPurchaseWithProductId:(NSString *)productId;
++ (void)savePurchaseWithProductId:(NSString *)productId;
 
 /// Description: Log this event once the user in your app completes registration flow. (example: sign up using email, phone, etc.).
 + (void)logCompleteRegistrationEventWithMethod:(NSString *)registrationMethod
