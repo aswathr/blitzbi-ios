@@ -26,6 +26,7 @@ static NSString * _Nonnull const BLITZ_DEVICE_ID_KEY  = @"BLITZ_DEVICE_ID_KEY";
 static NSString * _Nonnull const BLITZ_PARTNER_DEVICE_ID_KEY  = @"BLITZ_PARTNER_DEVICE_ID_KEY";
 static NSString * _Nonnull const BLITZ_COMMON_PARAM_KEY  = @"BLITZ_COMMON_PARAM_KEY";
 static NSString * _Nonnull const BLITZ_APP_DEVICE_ID_KEY  = @"BLITZ_APP_DEVICE_ID_KEY";
+static NSString * _Nonnull const BLITZ_APP_RECEIPT_KEY  = @"BLITZ_APP_RECEIPT_KEY";
 static NSString * _Nonnull const BLITZ_BLITZ_USER_ID_KEY  = @"BLITZ_BLITZ_USER_ID_KEY";
 static NSString * _Nonnull const BLITZ_EVENT_NAME_TAG = @"eventName";
 

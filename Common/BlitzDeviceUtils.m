@@ -101,6 +101,20 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (void)setBlitzAppReceipt:(nonnull NSString *)receipt {
+    [[NSUserDefaults standardUserDefaults] setObject:receipt forKey:BLITZ_APP_RECEIPT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (nullable NSString *)getBlitzAppReceipt {
+    NSString *receipt = [[NSUserDefaults standardUserDefaults] stringForKey: BLITZ_APP_RECEIPT_KEY];
+    if (receipt) {
+        return receipt;
+    }
+    return nil;
+}
+
+
 + (void)setBlitzUserId:(nonnull NSString *) appSpecificUserId {
     [[NSUserDefaults standardUserDefaults] setObject:appSpecificUserId forKey:BLITZ_BLITZ_USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];

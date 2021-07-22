@@ -38,6 +38,24 @@
     [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
 }
 
+
+- (void)savePurchaseWithAppId:(NSString*)appId withToken:(NSString *)appToken withData:(NSData*)data andCallback:(void(^)(NSObject *, NSError *))completionBlock {
+    NSMutableDictionary *headers = [[NSMutableDictionary alloc] init];
+    [headers setValue:appId forKey:@"blitzAppId"];
+    [headers setValue:appToken forKey:@"blitzAppToken"];
+    
+    BlitzRequestBuilder *requestBuilder = [[BlitzRequestBuilder alloc] init];
+    [requestBuilder setMethod:BLITZ_POST_METHOD];
+    [requestBuilder setBaseUrl:baseUrl];
+    [requestBuilder setPath:[@"app/{appId}/ios/purchase" stringByReplacingOccurrencesOfString:@"{appId}" withString:appId]];
+    [requestBuilder setHeaders:headers];
+    [requestBuilder setHttpBody:data];
+    [requestBuilder setReqType:APP_REQUEST];
+    [requestBuilder setContentType:@"application/json"];
+    
+    [self->biNetworkService executeServerCall:requestBuilder withCompletion:completionBlock];
+}
+
 - (void)updateAppSpecificDeviceIdentifier:(NSString*)appId
                                          :(NSString*)appToken
                                          :(NSData*) data
