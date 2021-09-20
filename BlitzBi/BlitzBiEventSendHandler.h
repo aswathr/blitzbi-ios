@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlitzBiEventSendHandler : NSObject {
     dispatch_queue_t serialQueue;
+    dispatch_queue_t functionQueue;
     dispatch_queue_t networkQueue;
     NSMutableArray<NSDictionary *> *pendingEvents;
     NSTimer *biEventFireTimer;
