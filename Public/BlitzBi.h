@@ -88,6 +88,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 //Description: set this if you want to track crash event
 + (void)setBlitzCrashHandler;
+
+//Description: Method to enable console logs of the SDK (by default the logs are disabled)
++(void)enableLogs;
+
+//Description: Method to disable console logs of the SDK (by default the logs are disabled, you may need it when you call enableLogs method)
++(void)disableLogs;
+
 + (void)logCustomEventWithEventName:(NSString *)eventName
                     andStringParams:(NSDictionary<NSString *, NSString *> *)strParams
                        andIntParams:(NSDictionary<NSString *, NSNumber *> *)intParams

@@ -20,6 +20,7 @@
 #import "BlitzBiDataHandler.h"
 #import "BlitzPayerRequest.h"
 #import "BlitzTime.h"
+#import "BlitzLogger.h"
 
 @interface BlitzBiService()
 - (void)checkForDeviceId:(NSString*)appId
@@ -54,10 +55,19 @@
     return self;
 }
 
+- (void)enableLogs {
+    blitzLogsEnabled = YES;
+}
+
+-(void)disableLogs {
+    blitzLogsEnabled = NO;
+}
+
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking
              :(BOOL)debugEnabled{
+    blitzLogsEnabled = NO;
     self->appId = appId;
     self->appToken = appToken;
     self->adTracking = adTracking;
@@ -143,7 +153,7 @@
             return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue] * 1000;
         }
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error whlle getting getCurrentTime.");
+        [BlitzLogger logMessage:@"[BlitzBi] Error whlle getting getCurrentTime."];
     }
     return 0;
 }
@@ -156,7 +166,7 @@
         }
         return [[NSNumber numberWithDouble:[date timeIntervalSince1970]] longValue] * 1000;
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error whlle getting getCurrentTimeInternal.");
+        [BlitzLogger logMessage:@"[BlitzBi] Error whlle getting getCurrentTimeInternal."];
         return [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] longValue] * 1000;
     }
 }
@@ -186,13 +196,13 @@
                 }
             }
         } @catch (NSException *err) {
-            NSLog(@"[BlitzBi] Error whlle getting params with error %@", err);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error whlle getting params with error %@", err]];
         }
     }];
 }
 
 - (void)getTimeStamp {
-    NSLog(@"[BlitzBi][Time] Started fetching  getTimeStamp");
+    [BlitzLogger logMessage:@"[BlitzBi][Time] Started fetching  getTimeStamp"];
     [self->dataHandler getTimeStamp:^(NSObject *response, NSError *err){
         @try {
             if (err == nil && response) {
@@ -207,14 +217,14 @@
                         
                         NSTimeInterval offset = [tsServerNow timeIntervalSinceDate:tsClientNow];
                         [self->server setOffset:offset];
-                        NSLog(@"[BlitzBi][Time] Successfully fetched time from getTimeStamp with response %@ and offser %f", jsonData, offset);
+                        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Successfully fetched time from getTimeStamp with response %@ and offser %f", jsonData, offset]];
                         return;
                     }
                 }
             }
-            NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err]];
         } @catch (NSException *err) {
-            NSLog(@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Error whlle getting getTimeStamp with error %@", err]];
         }
     }];
 }
@@ -228,7 +238,7 @@
             return defaultValue;
         }
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error while getting Param for key %@", key);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while getting Param for key %@", key]];
         return defaultValue;
     }
 }
@@ -268,9 +278,9 @@
                     }
                 }
             }
-            NSLog(@"[BlitzBi] Error whlle updating blitz device with error %@", err);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error whlle updating blitz device with error %@", err]];
         } @catch (NSException *err) {
-            NSLog(@"[BlitzBi] Error whlle updating blitz device with error %@", err);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error whlle updating blitz device with error %@", err]];
         }
     }];
 }
@@ -279,7 +289,7 @@
     @try {
         self->server = [[BlitzTime alloc] init];
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error whlle initialixing blitz time.");
+        [BlitzLogger logMessage:@"[BlitzBi] Error whlle initialixing blitz time."];
     }
 }
 
@@ -290,7 +300,7 @@
             [self->server disconnect];
         }
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error whlle disconnecting blitz time.");
+        [BlitzLogger logMessage:@"[BlitzBi] Error whlle disconnecting blitz time."];
     }
 }
 
@@ -342,12 +352,12 @@
                                 }
                             }
                         } @catch (NSException *ex) {
-                            NSLog(@"[BlitzBi] Error while tagging purchase with error %@", ex);
+                            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while tagging purchase with error %@", ex]];
                         }
             }];
         }
     } @catch (NSException *ex) {
-        NSLog(@"[BlitzBi] Error while updating tagging purchase with error %@", ex);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while tagging purchase with error %@", ex]];
     }
 }
 
@@ -381,7 +391,7 @@
                     }
                 }
             } @catch (NSException *err) {
-                NSLog(@"[BlitzBi] Error while updating app specific device identifier with error %@", err);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while updating app specific device identifier with error %@", err]];
             }
         }];
     }
@@ -417,7 +427,7 @@
                     }
                 }
             } @catch (NSException *err) {
-                NSLog(@"[BlitzBi] Error while updating blitz user id with error %@", err);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while updating blitz user id with error %@", err]];
             }
         }];
     }
@@ -456,9 +466,9 @@
                         }
                     }
                 }
-                NSLog(@"[BlitzBi] Error while updating blitz device Id with error %@", err);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while updating blitz device id with error %@", err]];
             } @catch (NSException *err) {
-                NSLog(@"[BlitzBi] Error whlle updating blitz device Id with error %@", err);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while updating blitz device id with error %@", err]];
             }
         }];
     }
@@ -495,9 +505,9 @@
                         }
                     }
                 }
-                NSLog(@"[BlitzBi] Error while updating blitz payer data with error %@", err);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while updating blitz payer data with error %@", err]];
             } @catch (NSException *err) {
-                NSLog(@"[BlitzBi] Error while updating blitz payer data with error %@", err);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error while updating blitz payer data with error %@", err]];
             }
         }];
     }

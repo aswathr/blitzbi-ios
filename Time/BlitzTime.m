@@ -14,6 +14,7 @@
 #import <netdb.h>
 #import <sys/time.h>
 #import "BlitzBiService.h"
+#import "BlitzLogger.h"
 
 @interface BlitzTime() {
     NSTimeInterval _timeout;
@@ -120,7 +121,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
             for (addr = addrinfo; addr; addr = addr->ai_next) {
                 char host[NI_MAXHOST];
                 getnameinfo(addr->ai_addr, addr->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
-                NSLog(@"[BlitzBi][Time] Fetched port %s for hostname %@", host, hostname);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Fetched port %s for hostname %@", host, hostname]];
             }
         }
         
@@ -195,7 +196,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
     @synchronized (self) {
         if (![self connectWithError:error]) {
             if (![self areAllNTPServerFetched]) {
-                NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]]];
             }
             self->isSerialQueueJobSubmitted = NO;
             self->ntpIndex = self->ntpIndex + 1;
@@ -219,7 +220,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:send_err userInfo:nil];
             }
             if (![self areAllNTPServerFetched]) {
-                NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]]];
             }
             [self disconnect];
             self->isSerialQueueJobSubmitted = NO;
@@ -235,7 +236,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:recv_err userInfo:nil];
             }
             if (![self areAllNTPServerFetched]) {
-                NSLog(@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Fetched time failed for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]]];
             }
             [self disconnect];
             self->isSerialQueueJobSubmitted = NO;
@@ -255,7 +256,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         };
         _offset = ((T[1] - T[0]) + (T[2] - T[3])) / 2.0;
         if (![self areAllNTPServerFetched]) {
-            NSLog(@"[BlitzBi][Time] Fetched time success for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Fetched time success for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]]];
         }
         self->isSerialQueueJobSubmitted = NO;
         return YES;
@@ -277,8 +278,8 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         }
         else if (![self areAllNTPServerFetched]) {
             if (!isSerialQueueJobSubmitted) {
-                if (![self areAllNTPServerFetched]) {
-                    NSLog(@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]);
+                if (![self areAllNTPServerFetched]) {                   
+                    [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Fetching time for %@", [self->blitzSyncNtpServers objectAtIndex:self->ntpIndex]]];
                 }
                 self->isSerialQueueJobSubmitted = YES;
                 dispatch_async(serialQueue, ^{
@@ -288,7 +289,7 @@ static ufixed64_t ntp_localtime_get_ufixed64() {
         }
         else {
             if (!isBlitzServerEpochTimeJobSubmitted) {
-                NSLog(@"[BlitzBi][Time] Fetching time for %@", @"BlitzBi Server");
+                [BlitzLogger logMessage:@"[BlitzBi][Time] Fetching time for BlitzBi Server"];
                 isBlitzServerEpochTimeJobSubmitted = YES;
                 [[BlitzBiService sharedService] getTimeStamp];
             }

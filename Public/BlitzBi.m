@@ -9,6 +9,7 @@
 #import "BlitzBi.h"
 #import "BlitzBiService.h"
 #import "BlitzBiParameterConstants.h"
+#import "BlitzLogger.h"
 
 @implementation BlitzBi
 + (void)initailiseWithAppId:(NSString*)appId
@@ -127,7 +128,6 @@
 
 
 volatile void BlitzExceptionHandler(NSException *exception) {
-    NSLog(@"Hellow World!! CRASH IS HERE");
     [[BlitzBiService sharedService] performSelectorOnMainThread:@selector(handleException:) withObject:exception waitUntilDone:YES];
 }
 
@@ -145,6 +145,16 @@ NSUncaughtExceptionHandler *BlitzExceptionHandlerPtr = &BlitzExceptionHandler;
 + (void)setBlitzCrashHandler {
     NSSetUncaughtExceptionHandler(BlitzExceptionHandlerPtr);
 }
+
++(void)enableLogs {
+    [[BlitzBiService sharedService] enableLogs];
+}
+
+
++(void)disableLogs {
+    [[BlitzBiService sharedService] disableLogs];
+}
+
 
 + (void)logGenericEventWithParams:(NSDictionary*)params {
     NSMutableDictionary *eventsMap = [[NSMutableDictionary alloc]init];

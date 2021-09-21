@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSDictionary *paramsDictionary;
 }
 + (BlitzBiService*)sharedService;
+- (void)enableLogs;
+- (void)disableLogs;
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking

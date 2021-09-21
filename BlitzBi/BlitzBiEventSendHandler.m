@@ -15,6 +15,7 @@
 #import "BlitzRequestBuilder.h"
 #import "BlitzConstants.h"
 #import "BlitzTime.h"
+#import "BlitzLogger.h"
 
 #define COMMON_FIELD_3 @"common_field_3"
 #define FILE_NAME @"filename"
@@ -108,7 +109,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 
 - (void)onPause {
-    NSLog(@"[BlitzBi] On Pause");
+    [BlitzLogger logMessage:@"[BlitzBi] On Pause"];
     self->sessionPauseTimeStamp = [self getCurrentEpochTime];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
@@ -117,7 +118,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (void)onResume {
-    NSLog(@"[BlitzBi] On Resume");
+    [BlitzLogger logMessage:@"[BlitzBi] On Resume"];
     self->sessionStartTimeStamp = [self getCurrentEpochTime];
     
     NSString *receipt = [BlitzDeviceUtils getBlitzAppReceipt];
@@ -144,7 +145,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 }
 
 - (void)onDestroy {
-    NSLog(@"[BlitzBi] On Destroy");
+    [BlitzLogger logMessage:@"[BlitzBi] On Destroy"];
     [self fireAppCrashEvent];
     [self fireSessionLengthEvent];
     [self fireSessionPauseEvent];
@@ -177,7 +178,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         [self->pendingEvents addObject:eventDict];
         [self archiveEvents];
     } @catch (NSException *exception) {
-        NSLog(@"[BlitzBi] Error in fireAppCrashEvent.");
+        [BlitzLogger logMessage:@"[BlitzBi] Error in fireAppCrashEvent."];
         
     }
 }
@@ -207,12 +208,12 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 
 - (void)onSessionTimedOut {
-    NSLog(@"[BlitzBi] Session timeout out. Setting new value for session Id.");
+    [BlitzLogger logMessage:@"[BlitzBi] Session timeout out. Setting new value for session Id."];
     self->blitzSessionId = [BlitzDeviceUtils getSessionId];
 }
 
 - (void)timerTicked {
-    NSLog(@"[BlitzBi] Timer Ticked");
+    [BlitzLogger logMessage:@"[BlitzBi] Timer Ticked"];
     [self flushWithIsForced:YES];
 }
 
@@ -299,7 +300,8 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         @synchronized (self) {
             eventsCopy = [self->pendingEvents mutableCopy];
         }
-        NSLog(@"[BlitzBi] Sending all the events with count %lu with blocking response tracking", (unsigned long)eventsCopy.count);
+        
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Sending all the events with count %lu with blocking response tracking", (unsigned long)eventsCopy.count]];
         while (eventsCopy.count > 0) {
             NSUInteger batchSize = MIN(eventsCopy.count, maxPendingCount);
             NSArray *batch = [eventsCopy subarrayWithRange:NSMakeRange(0, batchSize)];
@@ -315,7 +317,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                 [eventRepository processJsonRequest:url :jsonData :^(__attribute__((unused)) NSObject *response, NSError *err) {
                     if(err) {
                         didFail = YES;
-                        NSLog(@"[BlitzBi] Error in getting response from server for jsondata %@ with error %@", jsonData, err);
+                        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting response from server for jsondata %@ with error %@", jsonData, err]];
                     }
                     dispatch_semaphore_signal(semaphore);
                 }];
@@ -325,7 +327,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
                     break;
                 }
                 
-                NSLog(@"[BlitzBi] The batch containing %lu events sent successfully, going to remove it from pending events", (unsigned long)batch.count);
+                [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] The batch containing %lu events sent successfully, going to remove it from pending events", (unsigned long)batch.count]];
                 [eventsCopy removeObjectsInArray:batch];
                 @synchronized (self) {
                     [self->pendingEvents removeObjectsInArray:batch];
@@ -358,7 +360,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     @synchronized (self) {
         NSString *filePath = [self eventsFilePath];
         if (![self archiveObject:self->pendingEvents withFilePath:filePath]) {
-            NSLog(@"[BlitzBi] Could not archive pending events");
+            [BlitzLogger logMessage:@"[BlitzBi] Could not archive pending events"];
         }
     }
 }
@@ -408,7 +410,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         BOOL success = [url setResourceValue:[NSNumber numberWithBool:YES]
                                       forKey:NSURLIsExcludedFromBackupKey error:&error];
         if (!success) {
-            NSLog(@"[BlitzBi] Error in excluding %@ from backup %@", [url lastPathComponent], error);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in excluding %@ from backup %@", [url lastPathComponent], error]];
             NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
             [userInfo setObject:[url lastPathComponent] forKey:FILE_NAME];
         }
@@ -439,7 +441,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         if (![unarchivedData isKindOfClass:class]) {
             unarchivedData = nil;
         }
-        NSLog(@"[BlitzBi] Unarchived data from %@: %@", filePath, unarchivedData);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Unarchived data from %@: %@", filePath, unarchivedData]];
     }
     @catch (NSException *exception) {
         unarchivedData = nil;
@@ -510,7 +512,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     NSString *isBlitzTime = [[BlitzBiService sharedService] getParamForKey:@"isBlitzTime" withDefaultValue:@"YES"];
     if (isBlitzTime && [isBlitzTime boolValue]) {
         long currentTime = [[BlitzBiService sharedService] getCurrentTimeInternal];
-        NSLog(@"[BlitzBi][Time] Client event time is %ld", currentTime);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi][Time] Client event time is %ld", currentTime]];
         [event setValue:[NSNumber numberWithLong:currentTime] forKey:@"client_event_time"];
     }
 }
@@ -524,7 +526,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:biDictionary options:0 error:&error];
     
     if (jsonData == nil || error) {
-        NSLog(@"[BlitzBi] Error in getting json data for batch %@ with error %@", batch, error);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting json data for batch %@ with error %@", batch, error]];
     }
     return jsonData;
 }

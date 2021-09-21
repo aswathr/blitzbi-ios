@@ -18,6 +18,7 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <AdSupport/ASIdentifierManager.h>
 #import "BlitzParser.h"
+#import "BlitzLogger.h"
 
 #ifdef __IPHONE_11_0
 #import <DeviceCheck/DeviceCheck.h>
@@ -130,7 +131,7 @@
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         return version ?: BLITZ_DEFAULT_VERSION;
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting app version with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting app version with error %@", err]];
         return BLITZ_DEFAULT_VERSION;
     }
 }
@@ -140,7 +141,7 @@
         NSString* timeZoneName = [[NSTimeZone localTimeZone] localizedName:NSTimeZoneNameStyleStandard locale:[NSLocale currentLocale]];
         return timeZoneName ?: BLITZ_DEFAULT_TIMEZONE;
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting time zone with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting time zone with error %@", err]];
         return BLITZ_DEFAULT_TIMEZONE;
     }
 }
@@ -150,7 +151,7 @@
         NSString *IDFA = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
         return IDFA ?: BLITZ_DEFAULT_IDFA ;
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting iDFA with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting iDFA with error %@", err]];
         return BLITZ_DEFAULT_IDFA;
     }
 }
@@ -164,7 +165,7 @@
             return BLITZ_DEFAULT_IDFV;
         }
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting iDFV with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting iDFV with error %@", err]];
         return BLITZ_DEFAULT_IDFV;
     }
 }
@@ -176,7 +177,7 @@
         NSString *undottedNumber = [deviceOSVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
         return [NSNumber numberWithInt:[[@"" stringByAppendingString:undottedNumber] intValue]];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting OSID with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting OSID with error %@", err]];
         return BLITZ_DEFAULT_OSID;
     }
 }
@@ -239,7 +240,7 @@
             return BLITZ_DEFAULT_CONN_DETAILS;
         }
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting Connection Details with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting Connection Details with error %@", err]];
         return BLITZ_DEFAULT_CONN_DETAILS;
     }
 }
@@ -392,7 +393,7 @@
         }
         return deviceName ?: BLITZ_DEFAULT_DEVICE_NAME;
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting Device name with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting Device name with error %@", err]];
         return BLITZ_DEFAULT_DEVICE_NAME;
     }
 }
@@ -408,7 +409,7 @@
 #endif
         return BLITZ_DEFAULT_CARRIER_NAME;
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting Carrier name with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting Carrier name with error %@", err]];
         return BLITZ_DEFAULT_CARRIER_NAME;
     }
 }
@@ -421,7 +422,7 @@
             return @"false";
         }
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting AdTracking enabled with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting AdTracking enabled with error %@", err]];
         return BLITZ_DEFAULT_AD_TRACKING_ENABLED;
     }
 }
@@ -434,7 +435,7 @@
             return @"false";
         }
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting AppTracking enabled with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting AppTracking enabled with error %@", err]];
         return BLITZ_DEFAULT_APP_TRACKING_ENABLED;
     }
 }
@@ -443,7 +444,7 @@
     @try {
         return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [self appNameAndVersion], [self deviceName], [self deviceVersion], [self CFNetworkVersion], [self DarwinVersion]];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting user agent with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting useragent with error %@", err]];
         return BLITZ_DEFAULT_USER_AGENT;
     }
 }
@@ -454,7 +455,7 @@
         (void) uname(&u);
         return [NSString stringWithFormat:@"Darwin/%@", [NSString stringWithUTF8String:u.release]];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting darwin version with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting darwin version with error %@", err]];
         return BLITZ_DEFAULT_DARWIN_VERSION;
     }
 }
@@ -463,7 +464,7 @@
     @try {
         return [NSString stringWithFormat:@"CFNetwork/%@", [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"].infoDictionary[@"CFBundleShortVersionString"]];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting network version with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting network version with error %@", err]];
         return BLITZ_DEFAULT_NETWORK_VERSION;
     }
 }
@@ -474,7 +475,7 @@
         NSString *systemVersion = [UIDevice currentDevice].systemVersion;
         return [NSString stringWithFormat:@"%@/%@", systemName, systemVersion];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting device version with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting device version with error %@", err]];
         return BLITZ_DEFAULT_DEVICE_VERSION;
     }
 }
@@ -485,7 +486,7 @@
         uname(&systemInfo);
         return [NSString stringWithUTF8String:systemInfo.machine];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting deviceName with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting deviceName with error %@", err]];
         return BLITZ_DEFAULT_DEVICE_NAME;
     }
 }
@@ -496,7 +497,7 @@
         NSString* appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         return [NSString stringWithFormat:@"%@/%@", appName, appVersion];
     } @catch (NSException *err) {
-        NSLog(@"[BlitzBi] Error in getting appName and Version with error %@", err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Error in getting appName and version with error %@", err]];
         return BLITZ_DEFAULT_APP_NAME_AND_VERSION;
     }
 }

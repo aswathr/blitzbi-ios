@@ -13,6 +13,7 @@
 #import "BlitzConstants.h"
 #import "BlitzHttpResponseListener.h"
 #import "BlitzConstants.h"
+#import "BlitzLogger.h"
 
 @implementation BlitzServerHandler
 - (instancetype)init {
@@ -50,7 +51,7 @@
     NSString *reqId = request.requestId;
     
     if (request.reqType == APP_REQUEST|| request.reqType == PARALLEL_REQUEST) {
-        NSLog(@"[BlitzBi] Got response for APP_REQUEST -- %@, %@  - Error= %@", request.baseUrl, request.path, err);
+        [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Got response for APP_REQUEST -- %@, %@  - Error= %@", request.baseUrl, request.path, err]];
     }
 
     if (response == nil  || (err == nil && statusCode != 200)) {
@@ -76,7 +77,7 @@
             httpResponseCode = BLITZ_FORBIDDED_ERROR_CODE;
         }
         if (request.reqType == APP_REQUEST) {
-            NSLog(@"[BlitzBi] Got error from APP_REQUEST -- %@, %@", request.baseUrl, request.path);
+            [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Got error from APP_REQUEST -- %@, %@", request.baseUrl, request.path]];
         }
         
         NSNumber *errorCode = [NSNumber numberWithInteger:[err code]];
@@ -94,7 +95,7 @@
                 [blitzRequestRetry setObject:[NSNumber numberWithInteger:retry] forKey:reqId];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, BLITZ_DELAY_PER_RETRY), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^{
-                    NSLog(@"[BlitzBi] Will retry again, retry count being %li", (long)retry);
+                    [BlitzLogger logMessage:[NSString stringWithFormat:@"[BlitzBi] Will retry again, retry count being %li", (long)retry]];
                     [BlitzHttpExecutor executeRequest:request listener:self];
                 });
                 return;
