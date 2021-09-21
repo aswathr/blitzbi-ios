@@ -56,18 +56,18 @@
 }
 
 - (void)enableLogs {
-    blitzLogsEnabled = YES;
+    [BlitzLogger enableLogs];
 }
 
 -(void)disableLogs {
-    blitzLogsEnabled = NO;
+    [BlitzLogger disableLogs];
 }
 
 - (void)setUp:(NSString*)appId
              :(NSString*)appToken
              :(BOOL)adTracking
              :(BOOL)debugEnabled{
-    blitzLogsEnabled = NO;
+    [self disableLogs];
     self->appId = appId;
     self->appToken = appToken;
     self->adTracking = adTracking;

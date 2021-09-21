@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 
 
-static bool blitzLogsEnabled = NO;
-
 @interface BlitzLogger : NSObject
 + (void)logMessage:(NSString *)message;
++ (void)enableLogs;
++ (void)disableLogs;
 @end
 
