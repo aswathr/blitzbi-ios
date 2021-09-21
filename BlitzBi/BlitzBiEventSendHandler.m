@@ -77,6 +77,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         self->sessionPauseTimeStamp = 0;
         self->adTracking = adTracking;
         
+        self->functionQueue = dispatch_queue_create([@"bi_functions_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
         self->serialQueue = dispatch_queue_create([@"bi_events_sender_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
         
         self->networkQueue = dispatch_queue_create([@"bi_events_sender_network" UTF8String], DISPATCH_QUEUE_SERIAL);
@@ -109,35 +110,42 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
 
 
 - (void)onPause {
-    [BlitzLogger logMessage:@"[BlitzBi] On Pause"];
-    self->sessionPauseTimeStamp = [self getCurrentEpochTime];
-    [self fireSessionLengthEvent];
-    [self fireSessionPauseEvent];
-    [self flushWithIsForced:YES];
-    [[BlitzBiService sharedService] disconnectBlitzTime];
+    dispatch_async(self->functionQueue, ^{
+        [BlitzLogger logMessage:@"[BlitzBi] On Pause"];
+        self->sessionPauseTimeStamp = [self getCurrentEpochTime];
+        [self fireSessionLengthEvent];
+        [self fireSessionPauseEvent];
+        [self flushWithIsForced:YES];
+        [[BlitzBiService sharedService] disconnectBlitzTime];
+    });
+   
 }
 
 - (void)onResume {
-    [BlitzLogger logMessage:@"[BlitzBi] On Resume"];
-    self->sessionStartTimeStamp = [self getCurrentEpochTime];
-    
-    NSString *receipt = [BlitzDeviceUtils getBlitzAppReceipt];
-    if (receipt) {
-        NSTimer *purchaseTimer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(savePurchase) userInfo:nil repeats:NO];
-        [[NSRunLoop mainRunLoop] addTimer:purchaseTimer forMode:NSRunLoopCommonModes];
-    }
-    
-    NSInteger timeoutInSeconds = [[[BlitzBiService sharedService] getParamForKey:@"sessionTimeoutInSeconds" withDefaultValue:@"240"] intValue];
-    if (self->sessionPauseTimeStamp != 0 && (self->sessionStartTimeStamp - self->sessionPauseTimeStamp) > timeoutInSeconds) {
-        [self onSessionTimedOut];
-    }
-    [self fireSessionStartEvent];
-    [self startRepeatedTimerToAttemptFlush];
+    dispatch_async(self->functionQueue, ^{
+        [BlitzLogger logMessage:@"[BlitzBi] On Resume"];
+        self->sessionStartTimeStamp = [self getCurrentEpochTime];
+        
+        NSString *receipt = [BlitzDeviceUtils getBlitzAppReceipt];
+        if (receipt) {
+            NSTimer *purchaseTimer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(savePurchase) userInfo:nil repeats:NO];
+            [[NSRunLoop mainRunLoop] addTimer:purchaseTimer forMode:NSRunLoopCommonModes];
+        }
+        
+        NSInteger timeoutInSeconds = [[[BlitzBiService sharedService] getParamForKey:@"sessionTimeoutInSeconds" withDefaultValue:@"240"] intValue];
+        if (self->sessionPauseTimeStamp != 0 && (self->sessionStartTimeStamp - self->sessionPauseTimeStamp) > timeoutInSeconds) {
+            [self onSessionTimedOut];
+        }
+        [self fireSessionStartEvent];
+        [self startRepeatedTimerToAttemptFlush];
+    });
 }
 
 
 - (void)savePurchase {
-    [[BlitzBiService sharedService] savePurchase:@"ALL_PRODUCT_ID"];
+    dispatch_async(self->functionQueue, ^{
+        [[BlitzBiService sharedService] savePurchase:@"ALL_PRODUCT_ID"];
+    });
 }
 
 - (void)onAppCrash {
