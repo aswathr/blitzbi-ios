@@ -73,7 +73,7 @@ static NSString *const EVENTS_FILE_PATH = @"blitzbi-events.plist";
         self->biConfig = [[BlitzBiConfig alloc] initWithBaseUrl:baseUrl];
         self->blitzSessionId = [BlitzDeviceUtils getSessionId];
         self->isBlockSubmittedToNetworkQueue = NO;
-        self->sessionStartTimeStamp = 0;
+        self->sessionStartTimeStamp = [self getCurrentEpochTime];
         self->sessionPauseTimeStamp = 0;
         self->adTracking = adTracking;
         

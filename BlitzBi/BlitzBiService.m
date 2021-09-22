@@ -51,6 +51,7 @@
     self = [super init];
     if (self) {
         self->paramsDictionary = [[NSDictionary alloc] init];
+        self->serviceQueue = dispatch_queue_create([@"blitz_srvc_fns_serial" UTF8String], DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -302,6 +303,12 @@
     } @catch (NSException *exception) {
         [BlitzLogger logMessage:@"[BlitzBi] Error whlle disconnecting blitz time."];
     }
+}
+
+- (void)savePurchaseAsync:(NSString *)produtcId {
+    dispatch_async(self->functionQueue, ^{
+        [self savePurchase:produtcId];
+    });
 }
 
 - (void)savePurchase:(NSString *)productId {

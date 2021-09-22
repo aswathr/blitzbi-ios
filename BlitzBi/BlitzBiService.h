@@ -25,6 +25,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BlitzBiService : NSObject {
+    dispatch_queue_t serviceQueue;
     NSString* appId;
     NSString* appToken;
     BOOL adTracking;
@@ -53,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setBlitzPayerData:(NSString*)payerData;
 - (void)setDeviceId:(NSString*)deviceId;
 - (void)savePurchase:(NSString *)productId;
+- (void)savePurchaseAsync:(NSString *)produtcId;
 - (void)sendEvent:(NSDictionary*)eventDict;
 - (void)sendEvents:(NSArray*)events;
 - (void)addCommonParamsWithKey:(NSString *)key

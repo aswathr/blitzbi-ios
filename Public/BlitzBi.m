@@ -116,7 +116,7 @@
 }
 
 + (void)savePurchaseWithProductId:(NSString *)productId {
-    [[BlitzBiService sharedService] savePurchase:productId];
+    [[BlitzBiService sharedService] savePurchaseAsync:productId];
 }
 
 
