@@ -306,7 +306,7 @@
 }
 
 - (void)savePurchaseAsync:(NSString *)produtcId {
-    dispatch_async(self->functionQueue, ^{
+    dispatch_async(self->serviceQueue, ^{
         [self savePurchase:produtcId];
     });
 }
