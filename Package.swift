@@ -10,6 +10,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "BlitzBi",
+            type: .dynamic,
             targets: ["BlitzBi"]),
     ],
     dependencies: [
@@ -22,10 +23,19 @@ let package = Package(
         .target(
             name: "BlitzBi",
             dependencies: [],
-            path: "Sources/",
-            publicHeadersPath: "Public/",
-            cSettings: [.headerSearchPath("./**"),
-                        .headerSearchPath("./**/**"),
-                        .headerSearchPath("./**/**/**"),]),
+            path: ".",
+            sources: ["Sources"],
+            publicHeadersPath: "Sources/Public",
+            cSettings: [
+                .headerSearchPath("Sources/"),
+                .headerSearchPath("Sources/BlitzBi"),
+                .headerSearchPath("Sources/BlitzBi/Models"),
+                .headerSearchPath("Sources/Common"),
+                .headerSearchPath("Sources/Networking"),
+                .headerSearchPath("Sources/Networking/server"),
+                .headerSearchPath("Sources/Networking/server/security"),
+                .headerSearchPath("Sources/Public"),
+                .headerSearchPath("Sources/Time"),
+                       ]),
     ]
 )
