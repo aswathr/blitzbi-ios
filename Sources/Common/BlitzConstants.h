@@ -9,7 +9,6 @@
 #ifndef CommonConstant_h
 #define CommonConstant_h
 
-
 #import <UIKit/UIKit.h>
 
 static NSString * _Nonnull const BLITZ_CACHE_PREFIX_MACRO = @"cache_prefix_";

@@ -38,7 +38,7 @@ spec.author               = "Akash Chetty"
 spec.platform             = :ios, "9.0"
 spec.source               = { :git => "https://gitlab.useblitz.com/blitz/blitzbi-ios.git", :tag => "#{spec.version.to_s}" }
 spec.swift_version        = "4.2"
-spec.source_files         = "**/**/*.{h,m,swift}"
-spec.public_header_files  = "Public/*.h"
-spec.exclude_files        = "BlitzBi/BlitzBi/*.plist"
+spec.source_files         = "Sources/**/**/*.{h,m,swift}"
+spec.public_header_files  = "Sources/Public/*.h"
+spec.exclude_files        = "Sources/BlitzBi/BlitzBi/*.plist"
 end
